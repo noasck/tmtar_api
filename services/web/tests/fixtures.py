@@ -1,15 +1,16 @@
 import pytest
 
-from services.web.project import app, db
 
 @pytest.fixture
 def app():
+    from ..project import app
     return app
 
 @pytest.fixture
 def db(app):
+    from ..project import db
     with app.app_context():
         db.drop_all()
         db.create_all()
-        db.session.commit()
         yield db
+        db.session.commit()

@@ -1,0 +1,7 @@
+#!/home/you2ku/PycharmProjects/tmtar/venv3.7/bin/python
+import sys
+
+from flaskerize.parser import Flaskerize
+
+print("Flaskerizing...")
+Flaskerize(sys.argv)

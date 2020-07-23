@@ -6,3 +6,5 @@ flask-marshmallow==0.13.0
 flask-restplus==0.13.0
 marshmallow-sqlalchemy==0.23.1
 Werkzeug==1.0.1
+flask-accepts==0.17.3
+typing-extensions==3.7.4.2

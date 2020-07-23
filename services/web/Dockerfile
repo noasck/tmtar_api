@@ -1,12 +1,12 @@
-FROM python:3.6.11-slim-buster
+FROM python:3.7.8-slim-buster
 
-WORKDIR /usr/src/tmtart
+WORKDIR /usr/src/app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
-COPY requirements.txt /usr/src/tmtart/requirements.txt
+COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
-COPY . /usr/src/tmtart/
+COPY . /usr/src/app/

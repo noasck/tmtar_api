@@ -1,10 +1,29 @@
-import unittest
+from pytest import fixture
+
+from .model import Location
+from .schema import LocationSchema
+from .interface import ILocation
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+@fixture
+def schema() -> LocationSchema:
+    return LocationSchema()
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_LocationSchema_create(schema: LocationSchema):
+    assert schema
+
+
+def test_LocationSchema_works(schema: LocationSchema):
+    params: ILocation = schema.load(
+        {
+            'id': '123',
+            'name': 'test city',
+            'root': '1'
+        }
+    )
+    widget = Location(**params)
+
+    assert widget.id == 123
+    assert widget.name == 'test city'
+    assert widget.root == 1

@@ -1,0 +1,4 @@
+venv
+.idea
+web/.pytest_cache
+venv3.7

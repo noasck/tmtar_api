@@ -2,7 +2,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: pytest ./locations/service_test.py
+    command: pytest ./tmtar/locations/service_test.py
     volumes:
       - ./services/web/:/usr/src/app/
     ports:

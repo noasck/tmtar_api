@@ -1,5 +1,8 @@
-from ..project import db
+from ..project import FlaskApp
 from .interface import ILocation
+
+db = FlaskApp.Instance().database
+
 
 class Location(db.Model):
     '''Location Widget describes table

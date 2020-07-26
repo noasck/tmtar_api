@@ -1,18 +1,19 @@
-
-from ..project import db
 from typing import List, Union
 from .model import Location
+from ..project import FlaskApp
 from .interface import ILocation
 
+db = FlaskApp.Instance().database
 
-class LocationService():
+
+class LocationService:
     @staticmethod
     def get_all() -> List[Location]:
         return Location.query.all()
 
     @staticmethod
     def get_by_id(id: int) -> Location:
-        return Location.query.get(id)
+        return Location.query.get_or_404(id)
 
     @staticmethod
     def update(loc: Location, loc_upd: ILocation):
@@ -36,6 +37,17 @@ class LocationService():
             return LocationService.get_by_id(child.root)
         else:
             return None
+
+    @staticmethod
+    def get_roots() -> List[Location] or None:
+        return Location.query.filter_by(root='0').all()
+
+    @staticmethod
+    def search_by_name(str_to_search: str) -> List[Location] or None:
+        cities = LocationService.get_all()
+        l = lambda x: x.lower()
+        return [city for city in cities if l(city.name).find(l(str_to_search)) != -1]
+
 
     @staticmethod
     def get_children(parent_id: int) -> List[Location]:

@@ -1,4 +1,4 @@
-from ..project import db
+from services.web.tmtar.project import db
 
 
 class User(db.Model):

@@ -1,3 +1,4 @@
+from ..tests.fixtures import *
 from pytest import fixture
 from .model import Location
 from .interface import ILocation

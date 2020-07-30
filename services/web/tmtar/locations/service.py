@@ -31,8 +31,7 @@ class LocationService:
         return [id]
 
     @staticmethod
-    def get_parent(child_id: int) -> Union[Location, None]:
-        child = LocationService.get_by_id(child_id)
+    def get_parent(child: Location) -> Union[Location, None]:
         if child.root != 0:
             return LocationService.get_by_id(child.root)
         else:
@@ -47,7 +46,6 @@ class LocationService:
         cities = LocationService.get_all()
         l = lambda x: x.lower()
         return [city for city in cities if l(city.name).find(l(str_to_search)) != -1]
-
 
     @staticmethod
     def get_children(parent_id: int) -> List[Location]:

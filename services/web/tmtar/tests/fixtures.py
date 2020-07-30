@@ -1,6 +1,6 @@
 import pytest
 from ..project import create_app
-create_app(True)
+sign = create_app(True)
 
 @pytest.fixture
 def app():

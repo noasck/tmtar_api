@@ -12,11 +12,11 @@ from .interface import ILocation
 api = Namespace('locations', description='Ns with Location entity')
 
 
-@api.route('/', endpoint='my-resource-1')
+@api.route('/')
 class LocationResource(Resource):
     '''Locations'''
 
-    @responds(schema=LocationSchema, many=True)
+    @responds(schema=LocationSchema(many=True))
     def get(self) -> List[Location]:
         '''Get all locations'''
         return LocationService.get_roots()
@@ -28,9 +28,9 @@ class LocationResource(Resource):
 
         return LocationService.create(request.parsed_obj)
 
-@api.route('/<string:str_to_find>', endpoint='my-resource-2')
+@api.route('/<string:str_to_find>')
 @api.param('str_to_find', 'Part of location name to search')
-class WidgetSearchResource(Resource):
+class LocationSearchResource(Resource):
     '''Providing Location search'''
 
     def get(self, str_to_find: str) -> Response:
@@ -38,10 +38,10 @@ class WidgetSearchResource(Resource):
         locs = []
         for loc in LocationService.search_by_name(str_to_find):
             res = loc.name
-            nxt = LocationService.get_parent(loc.id)
+            nxt = LocationService.get_parent(loc)
             while nxt is not None:
-                res+= ' ,' + nxt.name
-                nxt = LocationService.get_parent(nxt.id)
+                res += ', ' + nxt.name
+                nxt = LocationService.get_parent(nxt)
             locs.append(res)
         if locs:
             return jsonify(dict(status='Match', locations=locs))
@@ -49,18 +49,18 @@ class WidgetSearchResource(Resource):
             return jsonify(dict(status="No match"))
 
 
-@api.route('/<int:locationId>', endpoint='my-resource-3')
+@api.route('/<int:locationId>')
 @api.param('locationId', 'Locations db ID')
-class WidgetIdResource(Resource):
+class LocationIdResource(Resource):
     @responds(schema=LocationSchema)
     def get(self, locationId: int ):
-        ''' get specific Location instance'''
+        ''' Get specific Location instance'''
 
         return LocationService.get_by_id(locationId)
 
-    @responds(schema=LocationSchema, many=True)
+    @responds(schema=LocationSchema(many=True))
     def post(self, locationId: int):
-        ''' Respond with children of Location instance'''
+        ''' Get children of Location instance'''
         return LocationService.get_children(locationId)
 
     def delete(self, locationId: int):
@@ -73,7 +73,7 @@ class WidgetIdResource(Resource):
     @accepts(schema=LocationSchema, api=api)
     @responds(schema=LocationSchema)
     def put(self, locationId: int):
-        '''Update Single Location'''
+        '''Update single Location'''
 
         changes: ILocation = request.parsed_obj
         loc: Location = LocationService.get_by_id(locationId)

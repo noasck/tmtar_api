@@ -63,9 +63,9 @@ class FlaskApp:
     @staticmethod
     def Instance(*args) -> WrappedFlaskApp:
         ''' :return instance of WrappedFlaskApp class with app and db '''
-        if not args and not FlaskApp.__instance:
-            from . import create_app
-            create_app(True)
+
+        print("calling #")
+
         if not FlaskApp.__instance:
             FlaskApp.__instance = FlaskApp.WrappedFlaskApp(*args)
             print(id(FlaskApp.__instance))

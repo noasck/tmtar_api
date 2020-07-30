@@ -61,8 +61,8 @@ def test_get_parent(db: SQLAlchemy):
     db.session.add(kv)
     db.session.commit()
 
-    assert LocationService.get_parent(kh.id) == LocationService.get_parent(kv.id) == uk
-    assert LocationService.get_parent(uk.id) is None
+    assert LocationService.get_parent(kh) == LocationService.get_parent(kv) == uk
+    assert LocationService.get_parent(uk) is None
 
 
 def test_get_children(db: SQLAlchemy):

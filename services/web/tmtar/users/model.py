@@ -1,4 +1,7 @@
-from services.web.tmtar.project import db
+from ..project import FlaskApp
+from .types import RoleType, SexType
+from .interface import IUser
+db = FlaskApp.Instance().database
 
 
 class User(db.Model):
@@ -9,6 +12,12 @@ class User(db.Model):
     email_hash = db.Column(db.String(255), nullable=False)
     age = db.Column(db.Integer, nullable=True)
     location_id = db.Column(db.Integer, nullable=True)
-    sex = db.Column(db.Integer, nullable=True)
-    role = db.Column(db.Integer, nullable=False, default=0)
+    sex = db.Column(db.Enum(SexType), nullable=True)
+    role = db.Column(db.Enum(RoleType), nullable=False, default=0)
     admin_location_id = db.Column(db.Integer, nullable=True)
+
+    def update(self, changes: IUser):
+        for key, val in changes.items():
+            if key != 'id' and key != 'email_hash':
+                setattr(self, key, val)
+        return self

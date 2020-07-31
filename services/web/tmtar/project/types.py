@@ -2,8 +2,9 @@ import enum
 
 
 class RoleType(enum.Enum):
-    COMMON = "common user"
+    COMMON = "common"
     ADMIN = "administrator"
+    ROOT = 'root'
 
 
 class SexType(enum.Enum):

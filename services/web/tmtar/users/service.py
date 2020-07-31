@@ -1,7 +1,7 @@
-from typing import List, Union
+from typing import List
 from .model import User
-from .types import RoleType
-from ..project import FlaskApp
+from ..project.types import RoleType
+from ..injectors.app import FlaskApp
 from .interface import IUser
 
 db = FlaskApp.Instance().database
@@ -42,5 +42,4 @@ class UserService:
             usr = User(email_hash=str(hash(email)), role=role)
             db.session.add(usr)
             db.session.commit()
-
         return usr

@@ -1,6 +1,6 @@
 from typing import List, Union
 from .model import Location
-from ..project import FlaskApp
+from ..injectors.app import FlaskApp
 from .interface import ILocation
 
 db = FlaskApp.Instance().database

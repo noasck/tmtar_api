@@ -4,7 +4,7 @@ sign = create_app(True)
 
 @pytest.fixture
 def app():
-    from ..project import FlaskApp
+    from ..injectors.app import FlaskApp
     return FlaskApp
 
 

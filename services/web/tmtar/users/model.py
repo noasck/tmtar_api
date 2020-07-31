@@ -1,5 +1,5 @@
-from ..project import FlaskApp
-from .types import RoleType, SexType
+from ..injectors.app import FlaskApp
+from ..project.types import RoleType, SexType
 from .interface import IUser
 db = FlaskApp.Instance().database
 

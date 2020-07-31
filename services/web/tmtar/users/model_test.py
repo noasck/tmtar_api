@@ -1,6 +1,6 @@
 from pytest import fixture
 from .model import User
-from .types import *
+from ..project.types import *
 
 @fixture
 def user() -> User:

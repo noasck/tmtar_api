@@ -1,10 +1,10 @@
-from ..tests.fixtures import db, app
+from ..tests.fixtures import *
 from flask_sqlalchemy import SQLAlchemy
 from typing import List
 from .model import User
 from .service import UserService
 from .interface import IUser
-from .types import RoleType, SexType
+from ..project.types import RoleType, SexType
 
 
 def test_get_all(db: SQLAlchemy):
@@ -28,13 +28,14 @@ def test_update(db: SQLAlchemy):
     db.session.add(u1)
     db.session.commit()
 
-    upd: IUser = IUser(email_hash=str(hash('new_email@mail.ex')), age=111)
+    upd: IUser = IUser(email_hash=str(hash('new_email@mail.ex')), age=111, sex=SexType.FEMALE)
     UserService.update(u1, upd)
 
     result: User = UserService.get_by_id(u1.id)
 
     assert result.email_hash == str(hash('example1@mail.ex'))
     assert result.age == 111
+    assert result.sex == SexType.FEMALE
 
 
 def test_delete_by_id(db: SQLAlchemy):
@@ -53,7 +54,7 @@ def test_delete_by_id(db: SQLAlchemy):
     assert u2 in result
 
 
-def test_create(db: SQLAlchemy):
+def test_get_or_new(db: SQLAlchemy):
 
     u1 = UserService.get_or_new_by_email('example3@mail.ex')
     u2 = UserService.get_or_new_by_email('example3@mail.ex')

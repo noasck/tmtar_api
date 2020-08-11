@@ -8,6 +8,7 @@ from .schema import LocationSchema
 from .service import LocationService
 from .model import Location
 from .interface import ILocation
+from ..project.access_control import root_required
 
 api = Namespace('locations', description='Ns with Location entity')
 
@@ -16,19 +17,20 @@ api = Namespace('locations', description='Ns with Location entity')
 class LocationResource(Resource):
     '''Locations'''
 
-    @responds(schema=LocationSchema(many=True))
+    @responds(schema=LocationSchema(many=True), api=api)
     def get(self) -> List[Location]:
         '''Get all locations'''
         return LocationService.get_roots()
 
     @accepts(schema=LocationSchema, api=api)
-    @responds(schema=LocationSchema)
+    @responds(schema=LocationSchema, api=api)
+    @root_required
     def post(self) -> Location:
         ''' Create Location with custom or default(0) parent'''
 
         return LocationService.create(request.parsed_obj)
 
-@api.route('/<string:str_to_find>')
+@api.route('/search/<string:str_to_find>')
 @api.param('str_to_find', 'Part of location name to search')
 class LocationSearchResource(Resource):
     '''Providing Location search'''
@@ -52,17 +54,19 @@ class LocationSearchResource(Resource):
 @api.route('/<int:locationId>')
 @api.param('locationId', 'Locations db ID')
 class LocationIdResource(Resource):
-    @responds(schema=LocationSchema)
+    @responds(schema=LocationSchema, api=api)
+    @root_required
     def get(self, locationId: int ):
         ''' Get specific Location instance'''
 
         return LocationService.get_by_id(locationId)
 
-    @responds(schema=LocationSchema(many=True))
+    @responds(schema=LocationSchema(many=True), api=api)
     def post(self, locationId: int):
         ''' Get children of Location instance'''
         return LocationService.get_children(locationId)
 
+    @root_required
     def delete(self, locationId: int):
         '''Delete single Location'''
 
@@ -71,7 +75,8 @@ class LocationIdResource(Resource):
         return jsonify(dict(status="Success", id=deleted_id))
 
     @accepts(schema=LocationSchema, api=api)
-    @responds(schema=LocationSchema)
+    @responds(schema=LocationSchema, api=api)
+    @root_required
     def put(self, locationId: int):
         '''Update single Location'''
 

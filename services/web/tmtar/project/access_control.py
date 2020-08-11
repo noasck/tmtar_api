@@ -9,10 +9,11 @@ def admin_required(endpoint):
     def wrapper(*args, **kwargs):
         verify_jwt_in_request()
         claims = get_jwt_claims()
-        if claims['role'] == RoleType.ADMIN:
-            endpoint(*args, **kwargs)
+        if claims['role'] == RoleType[1] or RoleType[2]:
+            return endpoint(*args, **kwargs)
         else:
             abort(403)
+    return wrapper
 
 
 def root_required(endpoint):
@@ -20,7 +21,8 @@ def root_required(endpoint):
     def wrapper(*args, **kwargs):
         verify_jwt_in_request()
         claims = get_jwt_claims()
-        if claims['role'] == RoleType.ROOT:
-            endpoint(*args, **kwargs)
+        if claims['role'] == RoleType[2]:
+            return endpoint(*args, **kwargs)
         else:
             abort(403)
+    return wrapper

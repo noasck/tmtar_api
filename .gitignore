@@ -3,3 +3,5 @@ venv
 web/.pytest_cache
 venv3.7
 *.pyc
+.env.prod.db
+.env.prod

@@ -1,6 +1,5 @@
 import pytest
-from ..project import create_app
-sign = create_app(True)
+from ..injectors.accessor import TokenFixture
 
 @pytest.fixture
 def app():
@@ -15,3 +14,7 @@ def db(app):
 @pytest.fixture
 def client(app):
     return app.Instance().client_app()
+
+@pytest.fixture
+def token(client):
+    return TokenFixture.get()(client)

@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from flask_restplus import Api
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 class FlaskApp:
@@ -12,14 +13,19 @@ class FlaskApp:
     class WrappedFlaskApp:
         def __init__(self, config: str, api_title: str, test: bool = False):
             self.__app = Flask(__name__)
+            self.__app.wsgi_app = ProxyFix(self.__app.wsgi_app)
             self.__app.config.from_object(config)
+            doc = "/"
+            if self.__app.config['FLASK_ENV'] == 'production':
+                doc = False
             self.__jwt = JWTManager(self.__app)
             self.__db = SQLAlchemy(self.__app)
+
 
             if test:
                 self.init_db()
 
-            self.__api = Api(self.__app, api_title)
+            self.__api = Api(self.__app, api_title, doc=doc)
             self.__ma = Marshmallow(self.__app)
 
         @property
@@ -35,6 +41,7 @@ class FlaskApp:
             register_routes(self.__api, self.__app)
 
         def init_db(self):
+            print('Initializing database')
             self.__db.session.remove()
             self.__db.drop_all()
             self.__db.create_all()
@@ -51,6 +58,10 @@ class FlaskApp:
         def run(self, **kwargs):
             self.__app.run(**kwargs)
 
+        @property
+        def app(self):
+            return self.__app
+
     __instance = None
 
     def __init__(self):
@@ -61,10 +72,9 @@ class FlaskApp:
     def Instance(*args) -> WrappedFlaskApp:
         ''' :return instance of WrappedFlaskApp class with app and db '''
 
-        print("calling #")
-
         if not FlaskApp.__instance:
             FlaskApp.__instance = FlaskApp.WrappedFlaskApp(*args)
-            print(id(FlaskApp.__instance))
-
+            from ..routes import register_routes
+            FlaskApp.__instance.register_routes(register_routes)
+            print('Routes imported successfully')
         return FlaskApp.__instance

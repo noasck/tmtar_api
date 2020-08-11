@@ -14,11 +14,11 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgresData:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=tmtar_user
       - POSTGRES_PASSWORD=dfgBNM3689
       - POSTGRES_DB=tmtar_dev
 
 volumes:
-  postgres_data:
+  postgresData:

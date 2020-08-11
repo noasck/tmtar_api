@@ -3,6 +3,7 @@ from .model import Location
 from ..injectors.app import FlaskApp
 from .interface import ILocation
 
+
 db = FlaskApp.Instance().database
 
 
@@ -61,3 +62,13 @@ class LocationService:
         db.session.commit()
 
         return loc
+
+    @staticmethod
+    def check_location_permission(location_id: int, user_id: int) -> bool:
+        loc = LocationService.get_by_id(location_id)
+        has_access = False
+        while loc is not None:
+            if loc.id == user_id:
+                has_access = True
+            loc = LocationService.get_parent(loc)
+        return has_access

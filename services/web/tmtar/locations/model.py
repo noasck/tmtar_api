@@ -5,8 +5,8 @@ db = FlaskApp.Instance().database
 
 
 class Location(db.Model):
-    '''Location Widget describes table
-    that includes geographic objects and their relations'''
+    """Location Widget describes table
+    that includes geographic objects and their relations"""
 
     __tablename__ = 'locations'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)

@@ -1,125 +1,141 @@
 from unittest.mock import patch
 from flask.testing import FlaskClient
-
-from ..tests.fixtures import client, app
-from .service import LocationService
-from .model import Location
-from .schema import LocationSchema
-from .interface import ILocation
+from ..tests.fixtures import client, app, token
+from .service import UserService
+from pytest import fixture
+from .model import User
+from .schema import UserSchema
+from .interface import IUser
 from . import BASE_ROUTE
+from ..project.types import *
+from flask_jwt_extended import get_jti
+from random import random
+
+def make_common_user(email: str, id=int(1000*random())) -> User:
+    return User(id=id,email_hash=str(hash(email)), sex=SexType[0], age=14, location_id=1, role=RoleType[0])
 
 
-def make_location(
-        id: int = 123, name: str = 'Test city', root: int = 0
-) -> Location:
-    return Location(id=id, name=name, root=root)
+def make_root_user() -> User:
+    return User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0], age=20, location_id=1, role=RoleType[2])
 
 
-def make_update(loc: Location, loc_upd: ILocation) -> Location:
-    new_loc = make_location(loc.id, loc_upd['name'], loc_upd['root'])
-    return new_loc
+def make_update(usr: User, usr_upd: IUser) -> User:
+    usr.update(usr_upd)
+    return usr
 
 
-class TestLocationResource:
+@patch.object(
+    UserService,
+    "get_or_new_by_email",
+    lambda email: make_root_user()
+)
+def create_token(client: FlaskClient):
+    with client:
+        result = client.get(f"/api/{BASE_ROUTE}/login/some_str_admin@mail.com").get_json()
+        return result['access_token']
+
+
+class TestUserLoginResource:
     @patch.object(
-        LocationService,
-        "get_roots",
-        lambda: [
-            make_location(123, name='Test city 1'),
-            make_location(234, 'Test city 2', 123)
-        ]
+        UserService,
+        "get_or_new_by_email",
+        lambda email: make_common_user(email)
     )
-    def test_get(self, client: FlaskClient):
+    def test_token(self, client: FlaskClient):
         with client:
-            result = client.get(f"/api/{BASE_ROUTE}", follow_redirects=True).get_json()
-            expected = (
-                LocationSchema(many=True)
-                .dump(
-                    [
-                        make_location(123, name='Test city 1'),
-                        make_location(234, 'Test city 2', 123)
-                    ]
-                )
+            result = client.get(f"/api/{BASE_ROUTE}/login/new-email@mail.com").get_json()
+            assert get_jti(result['access_token'])
+
+
+class TestUserResource:
+    @patch.object(
+        UserService,
+        "get_all",
+        lambda: [make_root_user(), make_common_user("sample-1@email.com"), make_common_user("sample-2@email.com")]
+    )
+    def test_get(self, client: FlaskClient, token: str):
+        with client:
+            result = client.get(f"/api/{BASE_ROUTE}/", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            expected = UserSchema(many=True).dump(
+                [
+                    make_root_user(), make_common_user("sample-1@email.com"), make_common_user("sample-2@email.com")
+                ]
             )
-            assert len(result) != 0
+            print(result)
             for i in result:
                 assert i in expected
 
+
     @patch.object(
-        LocationService, "create", lambda create_request: Location(**create_request)
+        UserService,
+        "get_by_id",
+        lambda id: make_root_user()
     )
-    def test_post(self, client: FlaskClient):
-        with client:
-
-            payload = dict(name='Test city')
-            result = client.post(f"/api/{BASE_ROUTE}/", json=payload).get_json()
-            expected = (
-                LocationSchema().dump(
-                    Location(name=payload["name"])
-                )
-            )
-            assert result == expected
-
-
-class TestLocationIdResource:
-    @patch.object(LocationService, "get_by_id",
-                  lambda id:
-                        make_location(id, name='Test city 1'),
-                  )
-    def test_get(self, client: FlaskClient):
-        with client:
-            result = client.get(f"/api/{BASE_ROUTE}/123", follow_redirects=True).get_json()
-            expected = (
-                LocationSchema()
-                .dump(
-                        make_location(123, name='Test city 1'),
-                )
-            )
-            assert result == expected
-
-    @patch.object(LocationService, "get_children", lambda id: [make_location(123, 'test', id)])
-    def test_post(self, client: FlaskClient):
-        with client:
-            result = client.post(f"/api/{BASE_ROUTE}/121").get_json()
-            expected = (
-                LocationSchema(many=True).dump(
-                    [
-                        make_location(id=123, name='test', root=121)
-                    ]
-                )
-            )
-            assert result == expected
-
-
-    @patch.object(LocationService, "delete_by_id", lambda id: id)
-    def test_delete(self, client: FlaskClient):
-        with client:
-            result = client.delete(f"/api/{BASE_ROUTE}/123").get_json()
-            expected = dict(status="Success", id=123)
-            assert result == expected
-
-    @patch.object(LocationService, "get_by_id", lambda id: make_location(id=id))
-    @patch.object(LocationService, "update", make_update)
-    def test_put(self, client: FlaskClient):
+    @patch.object(
+        UserService,
+        "update",
+        lambda usr, upd: make_update(usr, upd)
+    )
+    def test_put(self, client: FlaskClient, token):
         with client:
             result = client.put(
-                f"/api/{BASE_ROUTE}/123",
-                json={"name": "New city", "root": 122}
+                f"/api/{BASE_ROUTE}/",
+                headers={"Authorization": f"Bearer {token}"},
+                json={
+                    "location_id": 2,
+                    "age": 120
+                }
+            ).get_json()
+
+            expected = UserSchema().dump(
+                User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0], age=120, location_id=2, role=RoleType[2])
+            )
+
+            assert result == expected
+
+
+class TestUserIdResource:
+    @patch.object(UserService, "get_by_id",
+                  lambda id:
+                  make_common_user(email='str1', id=id),
+                  )
+    def test_get(self, client: FlaskClient, token: str):
+        with client:
+            result = client.get(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            expected = (
+                UserSchema()
+                .dump(
+                    make_common_user(email='str1', id=13),
+                )
+            )
+            assert result == expected
+
+    @patch.object(UserService, "delete_by_id", lambda id: id)
+    def test_delete(self, client: FlaskClient, token: str):
+        with client:
+            result = client.delete(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            expected = dict(status="Success", id=13)
+            assert result == expected
+
+    @patch.object(UserService, "get_by_id", lambda id: make_common_user(email='strstr', id=id))
+    @patch.object(UserService, "update", make_update)
+    def test_put(self, client: FlaskClient, token: str):
+        with client:
+            result = client.put(
+                f"/api/{BASE_ROUTE}/13",
+                headers={"Authorization": f"Bearer {token}"},
+                follow_redirects=True,
+                json={
+                    "location_id": 2,
+                    "age": 120
+                }
             ).get_json()
 
             expected = (
-                LocationSchema()
-                .dump(make_location(id=123, name="New city", root=122))
+                UserSchema()
+                .dump(
+                    User(id=13, email_hash=str(hash("strstr")), sex=SexType[0], age=120, location_id=2,
+                         role=RoleType[0])
+                )
             )
-
             assert result == expected
-
-
-class TestLocationSearchResource:
-    @patch.object(LocationService, "search_by_name", lambda str_to_find: [make_location(id=1, name=str_to_find, root=2)])
-    @patch.object(LocationService, "get_parent", lambda loc: make_location(id=loc.root, name="Parent Location", root=0) if loc.root != 0 else None)
-    def test_get(self, client: FlaskClient):
-        result = client.get(f"/api/{BASE_ROUTE}/Child Location").get_json()
-        expected = dict(status="Match", locations=["Child Location, Parent Location"])
-
-        assert result == expected

@@ -10,3 +10,4 @@ flask-accepts==0.17.3
 typing-extensions==3.7.4.2
 flask-jwt-extended==3.24.1
 marshmallow-enum==1.5.1
+gunicorn==20.0.4

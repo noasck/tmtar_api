@@ -24,20 +24,20 @@ def test_UserSchema_works(schema: UserSchema):
     params: IUser = schema.load(
         {
             'email_hash': str(hash("some_str")),
-            'sex': SexType.MALE,
+            'sex': SexType[0],
             'age': '14',
             'location_id': '1',
-            'role': RoleType.COMMON
+            'role': RoleType[0]
 
         }
     )
     widget = User(**params)
 
     assert widget.email_hash == str(hash("some_str"))
-    assert widget.sex == SexType.MALE
+    assert widget.sex == SexType[0]
     assert widget.age == 14
     assert widget.location_id == 1
-    assert widget.role == RoleType.COMMON
+    assert widget.role == RoleType[0]
 
 
 def test_UserInfoSchema_create(info_schema: UserInfoSchema):

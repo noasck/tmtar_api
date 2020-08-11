@@ -21,3 +21,26 @@ class LocationChecker:
         :return: isChild or this
         '''
         return LocationChecker.__checker_dependency(location_id, user_identity['admin_location_id'])
+
+    def __init__(self):
+        '''Singleton doesnt provide constructor'''
+        raise NotImplementedError()
+
+
+class TokenFixture:
+    '''Singleton to inject token fixture dependency'''
+
+    __token = None
+
+    @staticmethod
+    def inject_dependency(func):
+        '''Method that assigns internal static field to function'''
+        TokenFixture.__token = func
+
+    @staticmethod
+    def get():
+        return TokenFixture.__token
+
+    def __init__(self):
+        '''Singleton doesnt provide constructor'''
+        raise NotImplementedError()

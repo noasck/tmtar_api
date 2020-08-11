@@ -7,6 +7,6 @@ class IUser(TypedDict, total=False):
     email_hash: str
     age: int
     location_id: int
-    sex: SexType
-    role: RoleType
+    sex: str
+    role: str
     admin_location_id: int

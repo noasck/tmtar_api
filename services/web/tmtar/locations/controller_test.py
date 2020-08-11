@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from flask.testing import FlaskClient
 
-from ..tests.fixtures import client, app
+from ..tests.fixtures import *
 from .service import LocationService
 from .model import Location
 from .schema import LocationSchema
@@ -48,11 +48,11 @@ class TestLocationResource:
     @patch.object(
         LocationService, "create", lambda create_request: Location(**create_request)
     )
-    def test_post(self, client: FlaskClient):
+    def test_post(self, client: FlaskClient, token: str):
         with client:
 
             payload = dict(name='Test city')
-            result = client.post(f"/api/{BASE_ROUTE}/", json=payload).get_json()
+            result = client.post(f"/api/{BASE_ROUTE}/", json=payload, headers={"Authorization": f"Bearer {token}"}).get_json()
             expected = (
                 LocationSchema().dump(
                     Location(name=payload["name"])
@@ -66,9 +66,9 @@ class TestLocationIdResource:
                   lambda id:
                         make_location(id, name='Test city 1'),
                   )
-    def test_get(self, client: FlaskClient):
+    def test_get(self, client: FlaskClient, token: str):
         with client:
-            result = client.get(f"/api/{BASE_ROUTE}/123", follow_redirects=True).get_json()
+            result = client.get(f"/api/{BASE_ROUTE}/123", follow_redirects=True, headers={"Authorization": f"Bearer {token}"}).get_json()
             expected = (
                 LocationSchema()
                 .dump(
@@ -90,21 +90,20 @@ class TestLocationIdResource:
             )
             assert result == expected
 
-
     @patch.object(LocationService, "delete_by_id", lambda id: id)
-    def test_delete(self, client: FlaskClient):
+    def test_delete(self, client: FlaskClient, token: str):
         with client:
-            result = client.delete(f"/api/{BASE_ROUTE}/123").get_json()
+            result = client.delete(f"/api/{BASE_ROUTE}/123", headers={"Authorization": f"Bearer {token}"}).get_json()
             expected = dict(status="Success", id=123)
             assert result == expected
 
     @patch.object(LocationService, "get_by_id", lambda id: make_location(id=id))
     @patch.object(LocationService, "update", make_update)
-    def test_put(self, client: FlaskClient):
+    def test_put(self, client: FlaskClient, token: str):
         with client:
             result = client.put(
                 f"/api/{BASE_ROUTE}/123",
-                json={"name": "New city", "root": 122}
+                json={"name": "New city", "root": 122}, headers={"Authorization": f"Bearer {token}"}
             ).get_json()
 
             expected = (
@@ -119,7 +118,7 @@ class TestLocationSearchResource:
     @patch.object(LocationService, "search_by_name", lambda str_to_find: [make_location(id=1, name=str_to_find, root=2)])
     @patch.object(LocationService, "get_parent", lambda loc: make_location(id=loc.root, name="Parent Location", root=0) if loc.root != 0 else None)
     def test_get(self, client: FlaskClient):
-        result = client.get(f"/api/{BASE_ROUTE}/Child Location").get_json()
+        result = client.get(f"/api/{BASE_ROUTE}/search/Child Location").get_json()
         expected = dict(status="Match", locations=["Child Location, Parent Location"])
 
         assert result == expected

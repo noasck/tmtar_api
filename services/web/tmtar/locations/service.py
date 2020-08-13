@@ -13,8 +13,8 @@ class LocationService:
         return Location.query.all()
 
     @staticmethod
-    def get_by_id(id: int) -> Location:
-        return Location.query.get_or_404(id)
+    def get_by_id(location_id: int) -> Location:
+        return Location.query.get_or_404(location_id)
 
     @staticmethod
     def update(loc: Location, loc_upd: ILocation):
@@ -23,13 +23,13 @@ class LocationService:
         return loc
 
     @staticmethod
-    def delete_by_id(id: int) -> List[int]:
-        loc = Location.query.filter_by(id=id).first_or_404()
+    def delete_by_id(location_id: int) -> List[int]:
+        loc = Location.query.filter_by(id=location_id).first_or_404()
         if not loc:
             return []
         db.session.delete(loc)
         db.session.commit()
-        return [id]
+        return [location_id]
 
     @staticmethod
     def get_parent(child: Location) -> Union[Location, None]:
@@ -45,8 +45,11 @@ class LocationService:
     @staticmethod
     def search_by_name(str_to_search: str) -> List[Location] or None:
         cities = LocationService.get_all()
-        l = lambda x: x.lower()
-        return [city for city in cities if l(city.name).find(l(str_to_search)) != -1]
+
+        def lower(x: str):
+            return x.lower()
+
+        return [city for city in cities if lower(city.name).find(lower(str_to_search)) != -1]
 
     @staticmethod
     def get_children(parent_id: int) -> List[Location]:

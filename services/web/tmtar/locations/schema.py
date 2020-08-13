@@ -1,4 +1,4 @@
-from marshmallow import fields, Schema, validate
+from marshmallow import fields, Schema
 
 
 class LocationSchema(Schema):

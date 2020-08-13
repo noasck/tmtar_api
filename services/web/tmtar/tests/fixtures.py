@@ -1,6 +1,7 @@
 import pytest
 from ..injectors.accessor import TokenFixture
 
+
 @pytest.fixture
 def app():
     from ..injectors.app import FlaskApp
@@ -11,9 +12,11 @@ def app():
 def db(app):
     return app.Instance().init_db()
 
+
 @pytest.fixture
 def client(app):
     return app.Instance().client_app()
+
 
 @pytest.fixture
 def token(client):

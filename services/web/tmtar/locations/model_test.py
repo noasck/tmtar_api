@@ -1,4 +1,4 @@
-from ..tests.fixtures import *
+from ..tests.fixtures import * # noqa
 from pytest import fixture
 from .model import Location
 
@@ -10,5 +10,5 @@ def location() -> Location:
     )
 
 
-def test_Location_create(location: Location):
+def test_Location_create(location: Location): # noqa
     assert location

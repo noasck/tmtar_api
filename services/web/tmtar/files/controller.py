@@ -1,5 +1,5 @@
 from flask import send_from_directory
-from flask_restplus import Namespace, Resource, abort
+from flask_restx import Namespace, Resource, abort
 from flask_accepts import responds
 from flask.wrappers import Response # noqa
 from typing import List
@@ -9,7 +9,7 @@ from .service import FileService, AliasGenerator
 from .model import File
 from ..project.access_control import admin_required, root_required
 import werkzeug
-from flask_restplus import reqparse
+from flask_restx import reqparse
 import os
 from ..injectors.app import FlaskApp
 from werkzeug.utils import secure_filename
@@ -62,6 +62,7 @@ class FileNameResource(Resource):
 
     @api.response(200, "Returns file to download from storage media")
     def get(self, filename):
+        """Get file from the storage"""
         file = secure_filename(filename)
         return send_from_directory(app.config["MEDIA_FOLDER"], file)
 

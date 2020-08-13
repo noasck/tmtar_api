@@ -1,8 +1,8 @@
 from unittest.mock import patch
 from flask.testing import FlaskClient
-from ..tests.fixtures import client, app, token
+from ..tests.fixtures import client, app, token # noqa
 from .service import UserService
-from pytest import fixture
+from pytest import fixture # noqa
 from .model import User
 from .schema import UserSchema
 from .interface import IUser
@@ -10,13 +10,17 @@ from . import BASE_ROUTE
 from ..project.types import *
 from flask_jwt_extended import get_jti
 from random import random
+from datetime import datetime
 
-def make_common_user(email: str, id=int(1000*random())) -> User:
-    return User(id=id,email_hash=str(hash(email)), sex=SexType[0], age=14, location_id=1, role=RoleType[0])
+
+def make_common_user(email: str, id=int(1000*random())) -> User: # noqa
+    return User(id=id, email_hash=str(hash(email)), sex=SexType[0],
+                bdate=datetime.now().date(), location_id=1, role=RoleType[0])
 
 
 def make_root_user() -> User:
-    return User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0], age=20, location_id=1, role=RoleType[2])
+    return User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0],
+                bdate=datetime.now().date(), location_id=1, role=RoleType[2])
 
 
 def make_update(usr: User, usr_upd: IUser) -> User:
@@ -55,7 +59,8 @@ class TestUserResource:
     )
     def test_get(self, client: FlaskClient, token: str):
         with client:
-            result = client.get(f"/api/{BASE_ROUTE}/", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            result = client.get(f"/api/{BASE_ROUTE}/", headers={"Authorization": f"Bearer {token}"},
+                                follow_redirects=True).get_json()
             expected = UserSchema(many=True).dump(
                 [
                     make_root_user(), make_common_user("sample-1@email.com"), make_common_user("sample-2@email.com")
@@ -65,11 +70,10 @@ class TestUserResource:
             for i in result:
                 assert i in expected
 
-
     @patch.object(
         UserService,
         "get_by_id",
-        lambda id: make_root_user()
+        lambda id: make_root_user() # noqa
     )
     @patch.object(
         UserService,
@@ -83,12 +87,13 @@ class TestUserResource:
                 headers={"Authorization": f"Bearer {token}"},
                 json={
                     "location_id": 2,
-                    "age": 120
+                    "bdate": '2018-03-09'
                 }
             ).get_json()
 
             expected = UserSchema().dump(
-                User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0], age=120, location_id=2, role=RoleType[2])
+                User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0],
+                     bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2, role=RoleType[2])
             )
 
             assert result == expected
@@ -96,12 +101,13 @@ class TestUserResource:
 
 class TestUserIdResource:
     @patch.object(UserService, "get_by_id",
-                  lambda id:
-                  make_common_user(email='str1', id=id),
+                  lambda user_id:
+                  make_common_user(email='str1', id=user_id),
                   )
     def test_get(self, client: FlaskClient, token: str):
         with client:
-            result = client.get(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            result = client.get(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"},
+                                follow_redirects=True).get_json()
             expected = (
                 UserSchema()
                 .dump(
@@ -110,14 +116,15 @@ class TestUserIdResource:
             )
             assert result == expected
 
-    @patch.object(UserService, "delete_by_id", lambda id: id)
+    @patch.object(UserService, "delete_by_id", lambda user_id: user_id)
     def test_delete(self, client: FlaskClient, token: str):
         with client:
-            result = client.delete(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"}, follow_redirects=True).get_json()
+            result = client.delete(f"/api/{BASE_ROUTE}/13", headers={"Authorization": f"Bearer {token}"},
+                                   follow_redirects=True).get_json()
             expected = dict(status="Success", id=13)
             assert result == expected
 
-    @patch.object(UserService, "get_by_id", lambda id: make_common_user(email='strstr', id=id))
+    @patch.object(UserService, "get_by_id", lambda user_id: make_common_user(email='string', id=user_id))
     @patch.object(UserService, "update", make_update)
     def test_put(self, client: FlaskClient, token: str):
         with client:
@@ -127,14 +134,15 @@ class TestUserIdResource:
                 follow_redirects=True,
                 json={
                     "location_id": 2,
-                    "age": 120
+                    "bdate": '2018-03-09'
                 }
             ).get_json()
 
             expected = (
                 UserSchema()
                 .dump(
-                    User(id=13, email_hash=str(hash("strstr")), sex=SexType[0], age=120, location_id=2,
+                    User(id=13, email_hash=str(hash("string")), sex=SexType[0],
+                         bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2,
                          role=RoleType[0])
                 )
             )

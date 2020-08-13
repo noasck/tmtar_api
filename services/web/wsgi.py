@@ -1,6 +1,6 @@
-import os, sys
-from tmtar import *
-from tmtar.project import create_app
+import os, sys # noqa
+from tmtar import * # noqa
+from tmtar.project import create_app # noqa
 
 app = create_app(True).Instance().app
 

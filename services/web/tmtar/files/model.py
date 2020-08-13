@@ -6,7 +6,7 @@ db = FlaskApp.Instance().database
 class File(db.Model):
     """File Widget responsible for saving filenames"""
 
-    __tablename__ = 'files'
+    __tablename__ = 'files' # noqa
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     filename = db.Column(db.String(255), nullable=False, unique=True)
 

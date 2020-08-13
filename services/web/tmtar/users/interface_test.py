@@ -1,4 +1,4 @@
-from ..tests.fixtures import *
+from ..tests.fixtures import * # noqa
 from pytest import fixture
 from .model import User
 from .interface import IUser
@@ -6,7 +6,7 @@ from .interface import IUser
 
 @fixture
 def interface() -> IUser:
-    return IUser(email_hash=hash("some_str"), sex="male", age=14, location_id=1, role="common")
+    return IUser(email_hash=str(hash("some_str")), sex="male", bdate='2016-02-03', location_id=1, role="common")
 
 
 def test_interface_create(interface: IUser):

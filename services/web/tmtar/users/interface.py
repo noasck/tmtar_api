@@ -1,11 +1,10 @@
 from typing_extensions import TypedDict
-from ..project.types import RoleType, SexType
 
 
 class IUser(TypedDict, total=False):
     id: int
     email_hash: str
-    age: int
+    bdate: str
     location_id: int
     sex: str
     role: str

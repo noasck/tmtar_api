@@ -10,11 +10,11 @@ def schema() -> LocationSchema:
     return LocationSchema()
 
 
-def test_LocationSchema_create(schema: LocationSchema):
+def test_LocationSchema_create(schema: LocationSchema): # noqa
     assert schema
 
 
-def test_LocationSchema_works(schema: LocationSchema):
+def test_LocationSchema_works(schema: LocationSchema): # noqa
     params: ILocation = schema.load(
         {
             'id': '123',

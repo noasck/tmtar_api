@@ -13,8 +13,8 @@ class UserService:
         return User.query.all()
 
     @staticmethod
-    def get_by_id(id: int) -> User:
-        return User.query.get_or_404(id)
+    def get_by_id(user_id: int) -> User:
+        return User.query.get_or_404(user_id)
 
     @staticmethod
     def get_by_email(email: str) -> User:
@@ -27,13 +27,13 @@ class UserService:
         return loc
 
     @staticmethod
-    def delete_by_id(id: int) -> List[int]:
-        loc = User.query.filter_by(id=id).first_or_404()
+    def delete_by_id(user_id: int) -> List[int]:
+        loc = User.query.filter_by(id=user_id).first_or_404()
         if not loc:
             return []
         db.session.delete(loc)
         db.session.commit()
-        return [id]
+        return [user_id]
 
     @staticmethod
     def get_or_new_by_email(email: str):

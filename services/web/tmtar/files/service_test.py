@@ -1,4 +1,4 @@
-from ..tests.fixtures import db, app
+from ..tests.fixtures import db, app # noqa
 
 from flask_sqlalchemy import SQLAlchemy
 from typing import List

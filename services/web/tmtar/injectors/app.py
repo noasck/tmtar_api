@@ -1,14 +1,14 @@
-from . import *
+from . import * # noqa
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
-from flask_restplus import Api
+from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 class FlaskApp:
-    '''Wrapper for Flask App Instance'''
+    """Wrapper for Flask App Instance"""
 
     class WrappedFlaskApp:
         def __init__(self, config: str, api_title: str, test: bool = False):
@@ -21,7 +21,6 @@ class FlaskApp:
             self.__jwt = JWTManager(self.__app)
             self.__db = SQLAlchemy(self.__app)
 
-
             if test:
                 self.init_db()
 
@@ -33,11 +32,11 @@ class FlaskApp:
             return self.__jwt
 
         def register_routes(self, register_routes):
-            '''
+            """
             Executing function implements internal routing
             :param register_routes: lambda from route.py
             :return: None
-            '''
+            """
             register_routes(self.__api, self.__app)
 
         def init_db(self):
@@ -65,12 +64,12 @@ class FlaskApp:
     __instance = None
 
     def __init__(self):
-        ''' Singleton: not implemented'''
-        raise NotImplementedError('Singleton doesn\'t inmplements constructor initialization')
+        """ Singleton: not implemented"""
+        raise NotImplementedError('Singleton does not implements constructor initialization')
 
     @staticmethod
-    def Instance(*args) -> WrappedFlaskApp:
-        ''' :return instance of WrappedFlaskApp class with app and db '''
+    def Instance(*args) -> WrappedFlaskApp: # noqa
+        """:return: instance of WrappedFlaskApp class with app and db """
 
         if not FlaskApp.__instance:
             FlaskApp.__instance = FlaskApp.WrappedFlaskApp(*args)

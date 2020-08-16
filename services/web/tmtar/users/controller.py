@@ -31,6 +31,7 @@ class UserResource(Resource):
     @responds(schema=UserSchema, api=api)
     @jwt_required
     def put(self) -> Tuple[Response, int]:
+        """Update info of current User"""
         claim = get_jwt_claims()
         usr = UserService.get_by_id(claim['id'])
         changes: IUser = request.parsed_obj

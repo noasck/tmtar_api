@@ -13,7 +13,7 @@ class User(db.Model):
     bdate = db.Column(db.Date, nullable=True)
     location_id = db.Column(db.Integer, nullable=True)
     sex = db.Column(db.String, nullable=True)
-    role = db.Column(db.String, nullable=False, default=0)
+    role = db.Column(db.String, nullable=False, default="")
     admin_location_id = db.Column(db.Integer, nullable=True)
 
     def update(self, changes: IUser):

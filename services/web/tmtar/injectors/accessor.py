@@ -13,14 +13,14 @@ class LocationChecker:
         LocationChecker.__checker_dependency = func
 
     @staticmethod
-    def check(location_id: int, user_identity) -> bool:
+    def check(location_id: int, user_location_id: int) -> bool:
         """
         Check for childhood to access admin module
         :param location_id: Location db ID
-        :param user_identity: Serialized User instance
+        :param user_location_id: User admin_location_id from jwt
         :return: isChild or this
         """
-        return LocationChecker.__checker_dependency(location_id, user_identity['admin_location_id'])
+        return LocationChecker.__checker_dependency(location_id, user_location_id)
 
     def __init__(self):
         """Singleton doesnt provide constructor"""

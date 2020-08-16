@@ -67,11 +67,13 @@ class LocationService:
         return loc
 
     @staticmethod
-    def check_location_permission(location_id: int, user_id: int) -> bool:
+    def check_location_permission(location_id: int, accessed_location_id: int) -> bool:
         loc = LocationService.get_by_id(location_id)
         has_access = False
+        if accessed_location_id == 0:
+            return True
         while loc is not None:
-            if loc.id == user_id:
+            if loc.id == accessed_location_id:
                 has_access = True
             loc = LocationService.get_parent(loc)
         return has_access

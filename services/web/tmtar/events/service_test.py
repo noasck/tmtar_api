@@ -59,8 +59,13 @@ def test_delete_by_id(db: SQLAlchemy):
     assert e2 in res
 
 
+@patch.object(LocationChecker, "check", lambda *args: True)
 def
 
+
+
+
+//////////////
 
 def test_get_all(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)

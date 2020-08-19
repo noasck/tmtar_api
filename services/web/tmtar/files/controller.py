@@ -2,7 +2,7 @@ from flask import send_from_directory
 from flask_restx import Namespace, Resource, abort
 from flask_accepts import responds
 from flask.wrappers import Response # noqa
-from typing import List, Union, Tuple
+from typing import List
 
 from .schema import FileSchema
 from .service import FileService, AliasGenerator
@@ -71,4 +71,3 @@ class FileNameResource(Resource):
         """Delete File from storage"""
         if FileService.delete_by_filename(secure_filename(filename)):
             os.remove(os.path.join(app.config["MEDIA_FOLDER"], filename))
-

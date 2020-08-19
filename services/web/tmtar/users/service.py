@@ -36,10 +36,10 @@ class UserService:
         return [user_id]
 
     @staticmethod
-    def get_or_new_by_email(email: str):
+    def get_or_new_by_email(email: str, role=RoleType[0]):
         usr = UserService.get_by_email(email)
         if not usr:
-            usr = User(email_hash=str(hash(email)), role=RoleType[0])
+            usr = User(email_hash=str(hash(email)), role=role)
             db.session.add(usr)
             db.session.commit()
         return usr

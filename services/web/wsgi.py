@@ -8,6 +8,12 @@ db_init = bool(os.getenv('DB_INIT'))
 app = create_app(is_prod_text).Instance().app
 
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 # @app.route('/init_db', methods=['GET'])
 def init_db():
     db = FlaskApp.Instance().init_db()

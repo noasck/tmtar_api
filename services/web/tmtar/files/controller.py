@@ -2,7 +2,7 @@ from flask import send_from_directory
 from flask_restx import Namespace, Resource, abort
 from flask_accepts import responds
 from flask.wrappers import Response # noqa
-from typing import List
+from typing import List, Union, Tuple
 
 from .schema import FileSchema
 from .service import FileService, AliasGenerator

@@ -19,7 +19,7 @@ class EventService:
         return Event.query.get_or_404(location_id)
 
     @staticmethod
-    def get_specified(event_type, user_location_id, bdate: date = date(1960, 20, 20),
+    def get_specified(event_type, user_location_id, bdate: date = date(1960, 12, 20),
                       page: int = 1, sex: str = "all") -> List[Event]: # noqa
         """
         Method responsible for getting matching news by user private info.
@@ -60,7 +60,7 @@ class EventService:
         event = Event.query.filter_by(id=event_id).first_or_404()
         if not event:
             return []
-        if LocationChecker.check(event['location_id'], user_location_id):
+        if LocationChecker.check(event.location_id, user_location_id):
             db.session.delete(event)
             db.session.commit()
             return [event_id]

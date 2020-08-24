@@ -1,8 +1,12 @@
-from typing import List
-from .model import User
-from ..project.types import RoleType
-from ..injectors.app import FlaskApp
+import binascii
+import hashlib
+import os
+from typing import List, Optional
+
 from .interface import IUser
+from .model import User
+from ..injectors.app import FlaskApp
+from ..project.types import RoleType
 
 db = FlaskApp.Instance().database
 
@@ -17,8 +21,11 @@ class UserService:
         return User.query.get_or_404(user_id)
 
     @staticmethod
-    def get_by_email(email: str) -> User:
-        return User.query.filter_by(email_hash=str(hash(email))).one_or_none()
+    def get_by_email(email: str) -> Optional[User]:
+        for user in UserService.get_all():
+            if verify_email(user.email_hash, email):
+                return user
+        return None
 
     @staticmethod
     def update(loc: User, loc_upd: IUser):
@@ -39,7 +46,28 @@ class UserService:
     def get_or_new_by_email(email: str, role=RoleType[0]):
         usr = UserService.get_by_email(email)
         if not usr:
-            usr = User(email_hash=str(hash(email)), role=role)
+            usr = User(email_hash=hash_email(email), role=role)
             db.session.add(usr)
             db.session.commit()
         return usr
+
+
+def hash_email(password):
+    """Hash a password for storing."""
+    salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+    pwd_hash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),
+                                   salt, 100000)
+    pwd_hash = binascii.hexlify(pwd_hash)
+    return (salt + pwd_hash).decode('ascii')
+
+
+def verify_email(stored_password, provided_password):
+    """Verify a stored password against one provided by user"""
+    salt = stored_password[:64]
+    stored_password = stored_password[64:]
+    pwd_hash = hashlib.pbkdf2_hmac('sha512',
+                                   provided_password.encode('utf-8'),
+                                   salt.encode('ascii'),
+                                   100000)
+    pwd_hash = binascii.hexlify(pwd_hash).decode('ascii')
+    return pwd_hash == stored_password

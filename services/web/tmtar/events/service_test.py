@@ -12,39 +12,31 @@ from time import time
 time_now = int(time())
 
 
-@patch.object(LocationChecker, "check", lambda *args: True)
-def test_create():
-    event = IEvent(id=1, event_type=EventType[0], location_id=1, update_date=time_now, sex=SexType[0], min_age=12,
-                   max_age=100, title="Sample", short_description="""The plugin adds a random text generator, capable 
+def create_event(event_id=1, event_type=EventType[0], location_id=1, update_date=time_now, sex=SexType[0], min_age=12,
+                 max_age=100, title="Sample", short_description="""The plugin adds a random text generator, capable 
                  of creating witty texts in different genres. Created text can be inserted newly at the caret, 
                  or replace a selection.""", description=""" The plugin adds a random text generator, capable of 
                  creating witty texts in different genres. Created text can be inserted newly at the caret, 
                  or replace a selection. The plugin adds a random text generator, capable of creating witty 
                  texts in different genres. Created text can be inserted newly at the caret, or replace a selection.""",
-                   image_file_name='sample.png', active=True)
+                 image_file_name='sample.png', active=True) -> IEvent:
+    return IEvent(id=event_id, event_type=event_type, location_id=location_id, update_date=update_date,
+                  sex=sex, min_age=min_age, max_age=max_age, title=title, short_description=short_description,
+                  description=description, image_file_name=image_file_name, active=active)
+
+
+@patch.object(LocationChecker, "check", lambda *args: True)
+def test_create():
+    event = create_event()
 
     assert EventService.create(event, 42) == Event.query.get(1)
 
 
 @patch.object(LocationChecker, "check", lambda *args: True)
 def test_delete_by_id(db: SQLAlchemy):
-    e1: Event = Event(id=1, event_type=EventType[0], location_id=1, update_date=time_now, sex=SexType[0], min_age=12,
-                      max_age=100, title="Sample", short_description="""The plugin adds a random text generator, capable 
-                 of creating witty texts in different genres. Created text can be inserted newly at the caret, 
-                 or replace a selection.""", description=""" The plugin adds a random text generator, capable of 
-                 creating witty texts in different genres. Created text can be inserted newly at the caret, 
-                 or replace a selection. The plugin adds a random text generator, capable of creating witty 
-                 texts in different genres. Created text can be inserted newly at the caret, or replace a selection.""",
-                      image_file_name='sample.png', active=True)
+    e1: Event = Event(**create_event())
 
-    e2: Event = Event(id=2, event_type=EventType[0], location_id=1, update_date=time_now, sex=SexType[0], min_age=12,
-                      max_age=100, title="Sample", short_description="""The plugin adds a random text generator, capable 
-                 of creating witty texts in different genres. Created text can be inserted newly at the caret, 
-                 or replace a selection.""", description=""" The plugin adds a random text generator, capable of 
-                 creating witty texts in different genres. Created text can be inserted newly at the caret, 
-                 or replace a selection. The plugin adds a random text generator, capable of creating witty 
-                 texts in different genres. Created text can be inserted newly at the caret, or replace a selection.""",
-                      image_file_name='sample.png', active=True)
+    e2: Event = Event(**create_event(event_id=2))
 
     db.session.add(e1)
     db.session.add(e2)
@@ -57,6 +49,43 @@ def test_delete_by_id(db: SQLAlchemy):
     assert event_id == [1]
     assert e1 not in res
     assert e2 in res
+
+
+@patch.object(LocationChecker, "check", lambda *args: True)
+def test_update_by_id(db: SQLAlchemy):
+    e1: Event = Event(**create_event())
+
+    db.session.add(e1)
+    db.session.commit()
+
+    upd_event = IEvent(id=1, event_type=EventType[0], location_id=1, update_date=time_now, sex=SexType[1], min_age=15,
+                       max_age=100, title="Sample", short_description="""The plugin adds a newly at the caret, 
+                 or replace a selection.""", description=""" The plugin adds a random text generator, capable of 
+                 creating witty texts in Created text can be inserted newly at the caret, or replace a selection.""",
+                       image_file_name='sample.png', active=False)
+
+    EventService.update(e1, upd_event, 1)
+    db.session.commit()
+
+    assert e1.short_description == upd_event['short_description']
+    assert e1.sex == upd_event['sex']
+    assert e1.active == upd_event['active']
+
+
+def test_get_all(db: SQLAlchemy):
+    e1: Event = Event(**create_event(event_id=1))
+    e2: Event = Event(**create_event(event_id=2))
+
+    db.session.add(e1)
+    db.session.add(e2)
+    db.session.commit()
+
+    res = EventService.get_all()
+
+    assert e1 in res
+    assert e2 in res
+    assert len(res) == 2
+
 
 
 # @patch.object(LocationChecker, "check", lambda *args: True)

@@ -27,19 +27,22 @@ class LocationChecker:
         raise NotImplementedError()
 
 
-class TokenFixture:
+class Fixtures:
     """Singleton to inject token fixture dependency"""
 
-    __token = None
+    __token = dict()
 
     @staticmethod
     def inject_dependency(func):
         """Method that assigns internal static field to function"""
-        TokenFixture.__token = func
+        Fixtures.__token[func.__name__] = func
 
     @staticmethod
-    def get():
-        return TokenFixture.__token
+    def get(func_name: str):
+        try:
+            return Fixtures.__token[func_name]
+        except KeyError:
+            raise RuntimeError(func_name+" doesn't exist in this scope.")
 
     def __init__(self):
         """Singleton doesnt provide constructor"""

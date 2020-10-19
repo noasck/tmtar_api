@@ -5,7 +5,6 @@ from ..injectors.accessor import LocationChecker
 from .interface import IEvent
 from datetime import date
 
-
 db = FlaskApp.Instance().database
 
 
@@ -20,7 +19,7 @@ class EventService:
 
     @staticmethod
     def get_specified(event_type, user_location_id, bdate: date = date(1960, 12, 20),
-                      page: int = 1, sex: str = "all") -> List[Event]: # noqa
+                      page: int = 1, sex: str = "all") -> List[Event]:  # noqa
         """
         Method responsible for getting matching news by user private info.
         @param event_type: 'news' or 'sales' accepted
@@ -30,7 +29,7 @@ class EventService:
         @param sex: user sex 'male' or 'female'
         @return: List of matching events
         """
-        per_page = 10 # noqa
+        per_page = 10  # noqaX
 
         def calculate_age(born):
             today = date.today()
@@ -40,8 +39,8 @@ class EventService:
 
         def is_matching(event: Event):
             return (True if sex == "all" else event.sex == sex) and (event.max_age >= age >= event.min_age) \
-                   and LocationChecker.check(event.location_id, user_location_id) \
-                   if user_location_id is not None else True
+                   and (LocationChecker.check(event.location_id, user_location_id)
+                        if user_location_id is not None else True) and event.active
 
         events = Event.query.order_by(Event.update_date.desc()).filter(Event.event_type == event_type).all()
 
@@ -49,7 +48,7 @@ class EventService:
 
     @staticmethod
     def update(event: Event, event_upd: IEvent, user_location_id) -> Event or None:
-        if LocationChecker.check(event.event_type, user_location_id)\
+        if LocationChecker.check(event.event_type, user_location_id) \
                 and LocationChecker.check(event_upd['location_id'], user_location_id):
             event.update(event_upd)
             db.session.commit()

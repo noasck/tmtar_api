@@ -113,3 +113,14 @@ def test_search_by_name(db: SQLAlchemy):
     assert len(res1) == 3
     assert len(res3) == 2 and nk in res3 and pk in res3
     assert len(res4) == 0
+
+
+def test_create(db: SQLAlchemy):
+    new_loc: ILocation = {
+        "name": "Simple",
+        "root": 0
+    }
+
+    loc = LocationService.create(new_loc)
+    assert loc.id != 0
+    assert loc

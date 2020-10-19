@@ -1,5 +1,5 @@
 import pytest
-from ..injectors.accessor import TokenFixture
+from ..injectors.accessor import Fixtures
 
 
 @pytest.fixture
@@ -20,4 +20,4 @@ def client(app):
 
 @pytest.fixture
 def token(client):
-    return TokenFixture.get()(client)
+    return Fixtures.get("create_token")(client)

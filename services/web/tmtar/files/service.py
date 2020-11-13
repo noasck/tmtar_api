@@ -37,12 +37,7 @@ class FileService:
 
     @staticmethod
     def search_by_filename(str_to_search: str) -> List[File] or None:
-        files = FileService.get_all()
-
-        def lower(x: str) -> str:
-            return x.lower()
-
-        return [city for city in files if lower(city.filename).find(lower(str_to_search)) != -1]
+        return File.query.filter(File.filename.ilike(f"%{str_to_search}%")).all()
 
     @staticmethod
     def create(filename: str):

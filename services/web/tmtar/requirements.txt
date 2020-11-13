@@ -1,6 +1,6 @@
 Flask==1.1.2
 Flask-SQLAlchemy==2.4.4
-psycopg2-binary==2.8.4
+psycopg2-binary==2.8.6
 pytest==6.0.1
 flask-marshmallow==0.13.0
 flask-restx==0.2.0

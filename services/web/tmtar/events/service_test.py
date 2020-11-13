@@ -88,7 +88,7 @@ def test_get_all(db: SQLAlchemy):
 
 
 
-# @patch.object(LocationChecker, "check", lambda *args: True)
+# @patch.objects(LocationChecker, "check", lambda *args: True)
 # def
 #
 #

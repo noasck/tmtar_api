@@ -35,16 +35,10 @@ class LocationResource(Resource):
 class LocationSearchResource(Resource):
     """Providing Location search"""
 
+    @responds(schema=LocationSchema(many=True), api=api)
     def get(self, str_to_find: str) -> Response: # noqa
         """ Get tree of addresses by part of name"""
-        locs = []
-        for loc in LocationService.search_by_name(str_to_find):
-            res = loc.name
-            nxt = LocationService.get_parent(loc)
-            while nxt is not None:
-                res += ', ' + nxt.name
-                nxt = LocationService.get_parent(nxt)
-            locs.append(res)
+        locs = LocationService.search_by_name(str_to_find)
         if locs:
             return jsonify(dict(status='Match', locations=locs))
         else:

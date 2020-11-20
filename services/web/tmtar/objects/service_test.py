@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from typing import List
 from .model import Object
 from .service import ObjectService
+from .interface import IObject
 from pytest import fixture
 
 
@@ -18,7 +19,7 @@ def create_sample_objects(db: SQLAlchemy):
 
     o2 = Object(
         id=2,
-        name="Name",
+        name="name",
         target_image_file="lorem_ipsum",
         asset_file="lorem_ipsum",
         subzone_id=1
@@ -26,7 +27,7 @@ def create_sample_objects(db: SQLAlchemy):
 
     o3 = Object(
         id=3,
-        name="SNa S",
+        name="SampleName2",
         target_image_file="lorem_ipsum",
         asset_file="lorem_ipsum",
         subzone_id=2
@@ -66,6 +67,7 @@ def test_get_by_subzone_id(create_sample_objects: List[Object]):
     assert len(res1) == 2
     assert len(res2) == 1
     assert o1 in res1 and o2 in res1
+    assert o3 in res2
 
 
 def test_search_by_name(create_sample_objects: List[Object]):
@@ -75,7 +77,7 @@ def test_search_by_name(create_sample_objects: List[Object]):
     res2: List[Object] = ObjectService.search_by_name("N")
     res3: List[Object] = ObjectService.search_by_name("aa")
 
-    assert len(res1) == 2 and o1 in res1 and o2 in res1
+    assert len(res1) == 3 and o1 in res1 and o2 in res1 and o3 in res1
     assert len(res2) == 3
     assert not res3
 
@@ -89,3 +91,17 @@ def test_delete_by_id(create_sample_objects: List[Object]):
 
     assert len(result) == 2
     assert o1 in result and o3 in result
+
+
+def test_create(db: SQLAlchemy):
+    new_object: IObject = {
+        "name": "SampleName2",
+        "target_image_file": "lorem_ipsum",
+        "asset_file": "lorem_ipsum",
+        "subzone_id": 2
+    }
+
+    obj = ObjectService.create(new_object)
+
+    assert obj.id != 0
+    assert obj

@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 class LocationChecker:
     """Singleton to inject location dependency"""
 

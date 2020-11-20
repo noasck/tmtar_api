@@ -19,7 +19,7 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema(many=True), api=api)
     def get(self) -> List[Location]:
-        """Get all locations"""
+        """Get all locations roots."""
         return LocationService.get_roots()
 
     @accepts(schema=LocationSchema, api=api)
@@ -35,12 +35,13 @@ class LocationResource(Resource):
 class LocationSearchResource(Resource):
     """Providing Location search"""
 
-    @responds(schema=LocationSchema(many=True), api=api)
+    @api.doc(responses={200: """{"status": "Match",\n "locations": [Location Model object]}"""})
     def get(self, str_to_find: str) -> Response: # noqa
-        """ Get tree of addresses by part of name"""
-        locs = LocationService.search_by_name(str_to_find)
+        """Get matching locations"""
+        locs: List[Location] = LocationService.search_by_name(str_to_find)
         if locs:
-            return jsonify(dict(status='Match', locations=locs))
+            serialized_locations = LocationSchema().dump(locs, many=True)
+            return jsonify(dict(status='Match', locations=serialized_locations))
         else:
             return jsonify(dict(status="No match"))
 

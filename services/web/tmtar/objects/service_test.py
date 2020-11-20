@@ -93,7 +93,7 @@ def test_delete_by_id(create_sample_objects: List[Object]):
     assert o1 in result and o3 in result
 
 
-def test_create(db: SQLAlchemy):
+def test_create(db: SQLAlchemy): # noqa
     new_object: IObject = {
         "name": "SampleName2",
         "target_image_file": "lorem_ipsum",
@@ -104,4 +104,7 @@ def test_create(db: SQLAlchemy):
     obj = ObjectService.create(new_object)
 
     assert obj.id != 0
-    assert obj
+    assert obj.name == "SampleName2"
+    assert obj.subzone_id == 2
+    assert obj.asset_file == new_object['asset_file']
+    assert obj.target_image_file == new_object['target_image_file']

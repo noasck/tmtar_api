@@ -118,10 +118,11 @@ class TestLocationIdResource:
 class TestLocationSearchResource:
     @patch.object(LocationService, "search_by_name",
                   lambda str_to_find: [make_location(location_id=1, name=str_to_find, root=2)])
-    @patch.object(LocationService, "get_parent", lambda loc: make_location(location_id=loc.root, name="Parent Location",
-                                                                           root=0) if loc.root != 0 else None)
     def test_get(self, client: FlaskClient):
         result = client.get(f"/api/{BASE_ROUTE}/search/Child Location").get_json()
-        expected = dict(status="Match", locations=["Child Location, Parent Location"])
 
+        expected_locations = LocationSchema().dump([make_location(location_id=1, name="Child Location", root=2)],
+                                                   many=True)
+
+        expected = dict(status='Match', locations=expected_locations)
         assert result == expected

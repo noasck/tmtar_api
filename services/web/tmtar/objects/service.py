@@ -2,6 +2,8 @@ from typing import List
 from .model import Object
 from ..injectors.app import FlaskApp
 from .interface import IObject
+# from ..injectors.accessor import LocationChecker
+# from flask_restx import abort
 
 
 db = FlaskApp.Instance().database
@@ -43,6 +45,18 @@ class ObjectService:
         @return: list of all alike objects.
         """
         return Object.query.filter(Object.name.ilike(f"%{str_to_search}%")).all()
+
+    @staticmethod
+    def update(object_to_update: Object, object_updates: IObject) -> Object:
+        """
+        Updates distinct object.
+        @param object_to_update: object to retain new values.
+        @param object_updates: interface with new values
+        @return: updated_object
+        """
+        object_to_update.update(object_updates)
+        db.session.commit()
+        return object_to_update
 
     @staticmethod
     def create(new_object: IObject) -> Object:

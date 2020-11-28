@@ -35,26 +35,26 @@ class ObjectIdResource(Resource):
     """Provides Object manipulations by id"""
 
     @responds(schema=ObjectSchema, api=api)
-    def get(self, object_id: int) -> Object:
+    def get(self, objectId: int) -> Object:
         """Get specific Object instance by id"""
-        return ObjectService.get_by_id(object_id)
+        return ObjectService.get_by_id(objectId)
 
     @accepts(schema=ObjectSchema, api=api)
     @responds(schema=ObjectSchema, api=api)
     @admin_required
-    def put(self, object_id: int) -> Object:
+    def put(self, objectId: int) -> Object:
         """Updates Object by id"""
 
-        object_to_update = ObjectService.get_by_id(object_id)
+        object_to_update = ObjectService.get_by_id(objectId)
         changes: IObject = request.parsed_obj
         return ObjectService.update(object_to_update, changes)
 
     @api.doc(responses={200: "{\"status\": \"Success\", \"id\" = 1}"})
     @root_required
-    def delete(self, object_id: int):
+    def delete(self, objectId: int):
         """Delete single Object"""
 
-        deleted_id = ObjectService.delete_by_id(object_id)
+        deleted_id = ObjectService.delete_by_id(objectId)
         return jsonify(status="Success", id=deleted_id)
 
 @api.route('/subzone/<int:subzoneId>') # noqa
@@ -63,9 +63,9 @@ class ObjectSubzoneIdResource(Resource):
     """Provides objects manipulation by subzone id"""
 
     @responds(schema=ObjectSchema(many=True), api=api)
-    def get(self, subzone_id: int) -> List[Object]:
+    def get(self, subzoneId: int) -> List[Object]:
         """Get all Objects from specific subzone."""
-        return ObjectService.get_by_subzone_id(subzone_id)
+        return ObjectService.get_by_subzone_id(subzoneId)
 
 @api.route('/search/<string:str_to_find>') # noqa
 @api.param('str_to_find', 'Part of Object name to search')
@@ -78,6 +78,6 @@ class ObjectSearchResource(Resource):
         objects: List[Object] = ObjectService.search_by_name(str_to_find)
         if objects:
             serialized_objects = ObjectSchema().dump(objects, many=True)
-            return jsonify(dict(status='Match', locations=serialized_objects))
+            return jsonify(dict(status='Match', objects=serialized_objects))
         else:
             return jsonify(dict(status="No match"))

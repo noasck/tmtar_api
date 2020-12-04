@@ -83,57 +83,75 @@ class TestObjectIdResource:
     @patch.object(ObjectService, "get_by_id", lambda object_id: make_object(object_id=object_id))
     @patch.object(ObjectService, "update", make_update)
     def test_put(self, client: FlaskClient, token: str):
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # BUG: missing Authorization header --- use token fixture
         with client:
             result = client.put(
                 f"/api/{BASE_ROUTE}/7",
-                json={"name": "Test object 1", "id": 7, "target_image_file": "Image 1"}
+                json={"name": "Test object 1", "target_image_file": "Image 1",
+                      "asset_file": "asset file", "subzone_id": 0},
+                headers={"Authorization": f"Bearer {token}"}
             ).get_json()
 
             excepted = (
                 ObjectSchema()
-                .dump(make_object(object_id=7, name="Test object 1", target_image_file="Image 1"))
+                .dump(make_object(name="Test object 1", object_id=7, target_image_file="Image 1"))
             )
             assert result == excepted
 
     @patch.object(ObjectService, "delete_by_id",
                   lambda object_id: object_id)
     def test_delete(self, client: FlaskClient, token: str):
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # BUG: missing Authorization header --- use token fixture
         with client:
-            result = client.delete(f"/api/{BASE_ROUTE}/7").get_json()
+            result = client.delete(
+                f"/api/{BASE_ROUTE}/7",
+                headers={"Authorization": f"Bearer {token}"}
+            ).get_json()
             excepted = dict(status="Success", id=7)
         assert result == excepted
 
 
 class TestObjectSubzoneIdResource:
     @patch.object(ObjectService, "get_by_subzone_id",
-                  lambda subzone_id: [make_object(name="Test 1", subzone_id=3)])
+                  lambda subzone_id: [
+                      make_object(object_id=3, name="Test 1", subzone_id=3),
+                      make_object(object_id=77, asset_file='asset file', name="Test 2", subzone_id=3),
+                  ])
     def test_get(self, client: FlaskClient):
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # TODO: add some other objects to test on couple object parsing
         with client:
             result = client.get(f"/api/{BASE_ROUTE}/subzone/3").get_json()
-            expected = (
-                ObjectSchema(many=True).dump(
+            excepted = (
+                ObjectSchema(many=True)
+                .dump(
                     [
-                        make_object(name='Test 1', subzone_id=3)
+                        make_object(object_id=3, name="Test 1", subzone_id=3),
+                        make_object(object_id=77, asset_file='asset file', name="Test 2", subzone_id=3)
                     ]
                 )
             )
-            assert result == expected
+
+            assert len(excepted) == 2
+            for i in result:
+                assert i in excepted
 
 
 class TestObjectSearchResource:
     @patch.object(ObjectService, "search_by_name",
-                  lambda str_to_find: [make_object(object_id=3, name=str_to_find)])
+                  lambda str_to_find: [
+                      make_object(object_id=3, name="Object 2"),
+                      make_object(object_id=77, asset_file='File 77', name="object 2")
+                  ])
     def test_get(self, client: FlaskClient):
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        # TODO: add some other objects to test on couple object parsing
         result = client.get(f"/api/{BASE_ROUTE}/search/Object 2").get_json()
-        excepted_objects = ObjectSchema(many=True).dump([make_object(object_id=3, name="Object 2")])
+        excepted_objects = (
+            ObjectSchema(many=True)
+            .dump(
+                [
+                    make_object(object_id=3, name="Object 2"),
+                    make_object(object_id=77, asset_file='File 77', name="object 2")
+                ]
+            )
+        )
         excepted = dict(status="Match", objects=excepted_objects)
 
-        assert result == excepted
+        assert len(excepted["objects"]) == 2
+        for i in result:
+            assert i in excepted

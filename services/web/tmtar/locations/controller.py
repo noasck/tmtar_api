@@ -19,7 +19,7 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema(many=True), api=api)
     def get(self) -> List[Location]:
-        """Get all locations"""
+        """Get all locations roots."""
         return LocationService.get_roots()
 
     @accepts(schema=LocationSchema, api=api)
@@ -35,12 +35,13 @@ class LocationResource(Resource):
 class LocationSearchResource(Resource):
     """Providing Location search"""
 
-    @responds(schema=LocationSchema(many=True), api=api)
+    @api.doc(responses={200: """{"status": "Match",\n "locations": [Location Model object]}"""})
     def get(self, str_to_find: str) -> Response: # noqa
-        """ Get tree of addresses by part of name"""
-        locs = LocationService.search_by_name(str_to_find)
+        """Get matching locations"""
+        locs: List[Location] = LocationService.search_by_name(str_to_find)
         if locs:
-            return jsonify(dict(status='Match', locations=locs))
+            serialized_locations = LocationSchema().dump(locs, many=True)
+            return jsonify(dict(status='Match', locations=serialized_locations))
         else:
             return jsonify(dict(status="No match"))
 
@@ -54,11 +55,6 @@ class LocationIdResource(Resource):
         """ Get specific Location instance"""
 
         return LocationService.get_by_id(locationId)
-
-    @responds(schema=LocationSchema(many=True), api=api)
-    def post(self, locationId: int): # noqa
-        """ Get children of Location instance"""
-        return LocationService.get_children(locationId)
 
     @root_required
     def delete(self, locationId: int): # noqa
@@ -77,3 +73,20 @@ class LocationIdResource(Resource):
         changes: ILocation = request.parsed_obj
         loc: Location = LocationService.get_by_id(locationId)
         return LocationService.update(loc, changes)
+
+@api.route('/children/<int:locationId>')  # noqa
+@api.param('locationId', 'Location\'s db ID')
+class LocationParentIdResource(Resource):
+    @responds(schema=LocationSchema(many=True), api=api)
+    def get(self, locationId: int): # noqa
+        """ Get children of Location instance"""
+        return LocationService.get_children(locationId)
+
+
+@api.route('/parent/<int:childId>')  # noqa
+@api.param('childId', 'Location\'s db ID')
+class LocationChildrenIdResource(Resource):
+    @responds(schema=LocationSchema, api=api)
+    def get(self, childId: int):  # noqa
+        """ Get parent of Location instance"""
+        return LocationService.get_parent(LocationService.get_by_id(childId))

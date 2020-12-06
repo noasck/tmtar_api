@@ -27,6 +27,8 @@ class LocationService:
         loc = Location.query.filter_by(id=location_id).first_or_404()
         if not loc:
             return []
+        for child in LocationService.get_children(loc.id):
+            LocationService.delete_by_id(child.id)
         db.session.delete(loc)
         db.session.commit()
         return [location_id]
@@ -44,12 +46,7 @@ class LocationService:
 
     @staticmethod
     def search_by_name(str_to_search: str) -> List[Location] or None:
-        cities = LocationService.get_all()
-
-        def lower(x: str):
-            return x.lower()
-
-        return [city for city in cities if lower(city.name).find(lower(str_to_search)) != -1]
+        return Location.query.filter(Location.name.ilike(f"%{str_to_search}%")).all()
 
     @staticmethod
     def get_children(parent_id: int) -> List[Location]:

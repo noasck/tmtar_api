@@ -79,14 +79,27 @@ class TestLocationIdResource:
             assert result == expected
 
     @patch.object(LocationService, "get_children", lambda location_id: [make_location(123, 'test', location_id)])
-    def test_post(self, client: FlaskClient):
+    def test_get_children(self, client: FlaskClient):
         with client:
-            result = client.post(f"/api/{BASE_ROUTE}/121").get_json()
+            result = client.get(f"/api/{BASE_ROUTE}/children/121").get_json()
             expected = (
                 LocationSchema(many=True).dump(
                     [
                         make_location(location_id=123, name='test', root=121)
                     ]
+                )
+            )
+            print(result)
+            assert result == expected
+
+    @patch.object(LocationService, "get_by_id", lambda location_id: make_location(location_id, 'test', 22))
+    @patch.object(LocationService, "get_parent", lambda location: make_location(location.root, 'test', 11))
+    def test_get_parent(self, client: FlaskClient):
+        with client:
+            result = client.get(f"/api/locations/parent/121").get_json()
+            expected = (
+                LocationSchema().dump(
+                        make_location(location_id=22, name='test', root=11)
                 )
             )
             assert result == expected
@@ -118,10 +131,11 @@ class TestLocationIdResource:
 class TestLocationSearchResource:
     @patch.object(LocationService, "search_by_name",
                   lambda str_to_find: [make_location(location_id=1, name=str_to_find, root=2)])
-    @patch.object(LocationService, "get_parent", lambda loc: make_location(location_id=loc.root, name="Parent Location",
-                                                                           root=0) if loc.root != 0 else None)
     def test_get(self, client: FlaskClient):
         result = client.get(f"/api/{BASE_ROUTE}/search/Child Location").get_json()
-        expected = dict(status="Match", locations=["Child Location, Parent Location"])
 
+        expected_locations = LocationSchema().dump([make_location(location_id=1, name="Child Location", root=2)],
+                                                   many=True)
+
+        expected = dict(status='Match', locations=expected_locations)
         assert result == expected

@@ -1,4 +1,5 @@
 from ..injectors.app import FlaskApp
+from .interface import IObject
 
 db = FlaskApp.Instance().database
 
@@ -14,3 +15,9 @@ class Object(db.Model):
     target_image_file = db.Column(db.String(255), nullable=False)
     asset_file = db.Column(db.String(255), nullable=False)
     subzone_id = db.Column(db.Integer, nullable=False, index=True)
+
+    def update(self, changes: IObject):
+        for key, val in changes.items():
+            if key != 'id':
+                setattr(self, key, val)
+        return self

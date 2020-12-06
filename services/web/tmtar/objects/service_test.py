@@ -108,3 +108,18 @@ def test_create(db: SQLAlchemy): # noqa
     assert obj.subzone_id == 2
     assert obj.asset_file == new_object['asset_file']
     assert obj.target_image_file == new_object['target_image_file']
+
+
+def test_update(db: SQLAlchemy):
+    obj: Object = Object(id=5, name="Sample name", subzone_id=4,
+                         asset_file="File 4", target_image_file="Some File 3")
+    db.session.add(obj)
+    db.session.commit()
+
+    upd_obj: IObject = IObject(name="Sample name 3", asset_file="Another asset file")
+    ObjectService.update(obj, upd_obj)
+
+    result: Object = Object.query.get(obj.id)
+
+    assert result.name == 'Sample name 3'
+    assert result.asset_file == 'Another asset file'

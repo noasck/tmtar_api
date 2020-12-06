@@ -27,6 +27,23 @@ def test_get_all(db: SQLAlchemy):
     assert all((admin in results, u1 in results, u2 in results))
 
 
+def test_get_by_id(db: SQLAlchemy):
+    u1: User = User(id=1, email_hash=str(hash('example2@mail.ex')), role=RoleType[0],
+                    sex=SexType[1], location_id=1, bdate=datetime.now().date())
+    u2: User = User(id=2, email_hash=str(hash('example3@mail.ex')), role=RoleType[0],
+                    sex=SexType[0], location_id=2, bdate=datetime.now().date())
+
+    db.session.add(u1)
+    db.session.add(u2)
+    db.session.commit()
+
+    result1: User = UserService.get_by_id(1)
+    result2: User = UserService.get_by_id(2)
+
+    assert u1 == result1
+    assert u2 == result2
+
+
 def test_update(db: SQLAlchemy):
     u1: User = User(id=2, email_hash=str(hash('example1@mail.ex')), role=RoleType[0],
                     sex=SexType[1], location_id=1, bdate=datetime.now().date())

@@ -77,7 +77,7 @@ class UserLoginResource(Resource):
 
 @api.route('/<int:userId>') # noqa
 @api.param('userId', 'User db ID')
-class LocationIdResource(Resource):
+class UserIdResource(Resource):
 
     @responds(schema=UserSchema, api=api)
     @root_required

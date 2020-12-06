@@ -11,7 +11,7 @@ class FlaskApp:
     """Wrapper for Flask App Instance"""
 
     class WrappedFlaskApp:
-        def __init__(self, config: str, api_title: str, test: bool = False):
+        def __init__(self, config: str, api_title: str):
             self.__app = Flask(__name__)
             self.__app.wsgi_app = ProxyFix(self.__app.wsgi_app)
             self.__app.config.from_object(config)
@@ -20,9 +20,6 @@ class FlaskApp:
                 doc = False
             self.__jwt = JWTManager(self.__app)
             self.__db = SQLAlchemy(self.__app)
-
-            if test:
-                self.init_db()
 
             self.__api = Api(self.__app, api_title, doc=doc)
             self.__ma = Marshmallow(self.__app)
@@ -40,7 +37,7 @@ class FlaskApp:
             register_routes(self.__api, self.__app)
 
         def init_db(self):
-            print('Initializing database')
+            self.__app.logger.info('Initializing database')
             self.__db.session.remove()
             self.__db.drop_all()
             self.__db.create_all()
@@ -75,5 +72,5 @@ class FlaskApp:
             FlaskApp.__instance = FlaskApp.WrappedFlaskApp(*args)
             from ..routes import register_routes
             FlaskApp.__instance.register_routes(register_routes)
-            print('Routes imported successfully')
+            FlaskApp.__instance.app.logger.info('Routes imported successfully')
         return FlaskApp.__instance

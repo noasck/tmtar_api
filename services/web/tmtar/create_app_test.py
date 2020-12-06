@@ -3,7 +3,7 @@ from pytest import fixture
 from .project import create_app
 from .injectors.app import FlaskApp
 
-app = create_app(True).Instance()
+app = create_app().Instance()
 
 
 @fixture

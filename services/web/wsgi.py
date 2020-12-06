@@ -21,7 +21,7 @@ def start_app():
         db = FlaskApp.Instance().init_db()
         app.logger.info(f"Database initialized successfully with {id(db)}")
     for res, email in seed_db(['denter425@gmail.com', 'jjok730@gmail.com']):
-        app.logger.info(f"Successfully seeded {} root user", email)
+        app.logger.info(f"Successfully seeded {res} root user", email)
     app.run(host='0.0.0.0', debug=True)
 
 

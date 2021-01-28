@@ -89,7 +89,6 @@ class TestLocationIdResource:
                     ]
                 )
             )
-            print(result)
             assert result == expected
 
     @patch.object(LocationService, "get_by_id", lambda location_id: make_location(location_id, 'test', 22))

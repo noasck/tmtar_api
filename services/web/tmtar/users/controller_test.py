@@ -66,7 +66,6 @@ class TestUserResource:
                     make_root_user(), make_common_user("sample-1@email.com"), make_common_user("sample-2@email.com")
                 ]
             )
-            print(result)
             for i in result:
                 assert i in expected
 

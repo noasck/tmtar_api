@@ -4,7 +4,7 @@ from flask_restx import Namespace, Resource
 from flask.wrappers import Response
 from typing import List
 
-from .schema import LocationSchema
+from .schema import LocationSchema, LocationUpdateSchema
 from .service import LocationService
 from .model import Location
 from .interface import ILocation
@@ -64,7 +64,7 @@ class LocationIdResource(Resource):
 
         return jsonify(dict(status="Success", id=deleted_id))
 
-    @accepts(schema=LocationSchema, api=api)
+    @accepts(schema=LocationUpdateSchema, api=api)
     @responds(schema=LocationSchema, api=api)
     @root_required
     def put(self, locationId: int): # noqa

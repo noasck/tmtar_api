@@ -1,7 +1,7 @@
 from pytest import fixture
 
 from .model import Location
-from .schema import LocationSchema
+from .schema import LocationSchema, LocationUpdateSchema
 from .interface import ILocation
 
 
@@ -29,3 +29,18 @@ def test_LocationSchema_works(schema: LocationSchema): # noqa
     assert widget.root == 1
 
 
+def test_LocationUpdateSchema_create(schema: LocationUpdateSchema): # noqa
+    assert schema
+
+
+def test_LocationUpdateSchema(schema: LocationUpdateSchema): # noqa
+    params:  ILocation = schema.load(
+        {
+            'id': '12',
+            'name': 'test city'
+        }
+    )
+    widget = Location(**params)
+
+    assert widget.id == 12
+    assert widget.name == 'test city'

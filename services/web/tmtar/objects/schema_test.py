@@ -4,6 +4,7 @@ from .model import Object
 from .interface import IObject
 from .schema import ObjectSchema
 
+
 @fixture
 def schema() -> ObjectSchema:
     return ObjectSchema()
@@ -14,7 +15,7 @@ def test_ObjectSchema_create(schema: ObjectSchema): # noqa
 def test_ObjectSchema_works(schema: ObjectSchema): # noqa
     params: IObject = schema.load(
         {
-            'id' : "1",
+            'id': "1",
             'name': "SampleName",
             'target_image_file': "lorem_ipsum",
             'asset_file': "lorem_ipsum",

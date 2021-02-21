@@ -8,7 +8,7 @@ from .schema import LocationSchema, LocationUpdateSchema
 from .service import LocationService
 from .model import Location
 from .interface import ILocation
-from ..project.access_control import root_required
+from ..project.builders.access_control import access_restriction
 
 api = Namespace('locations', description='Ns with Location entity')
 
@@ -17,14 +17,14 @@ api = Namespace('locations', description='Ns with Location entity')
 class LocationResource(Resource):
     """Locations"""
 
-    @responds(schema=LocationSchema(many=True), api=api)
-    def get(self) -> List[Location]:
+    @responds(schema=LocationSchema(), api=api)
+    def get(self) -> Location:
         """Get all locations roots."""
-        return LocationService.get_roots()
+        return LocationService.get_root()
 
     @accepts(schema=LocationSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def post(self) -> Location:
         """ Create Location with custom or default(0) parent"""
 
@@ -50,13 +50,13 @@ class LocationSearchResource(Resource):
 @api.param('locationId', 'Locations db ID')
 class LocationIdResource(Resource):
     @responds(schema=LocationSchema, api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def get(self, locationId: int): # noqa
         """ Get specific Location instance"""
 
         return LocationService.get_by_id(locationId)
 
-    @root_required
+    @access_restriction(root_required=True)
     def delete(self, locationId: int): # noqa
         """Delete single Location"""
 
@@ -66,7 +66,7 @@ class LocationIdResource(Resource):
 
     @accepts(schema=LocationUpdateSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def put(self, locationId: int): # noqa
         """Update single Location"""
 

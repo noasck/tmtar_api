@@ -10,7 +10,7 @@ from flask_jwt_extended import (
     create_access_token, jwt_required, get_jwt_claims
 )
 from .controller_identity import *
-from ..project.access_control import root_required
+from ..project.builders.access_control import access_restriction
 
 api = Namespace('users', description='Ns responsible for User entity management and auth')
 
@@ -22,7 +22,7 @@ class UserResource(Resource):
     """Users"""
 
     @responds(schema=UserSchema(many=True), api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def get(self) -> List[User]:
         """Get all users"""
         return UserService.get_all()
@@ -80,13 +80,13 @@ class UserLoginResource(Resource):
 class UserIdResource(Resource):
 
     @responds(schema=UserSchema, api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def get(self, userId: int): # noqa
         """ Get specific User instance"""
 
         return UserService.get_by_id(userId)
 
-    @root_required
+    @access_restriction(root_required=True)
     def delete(self, userId: int): # noqa
         """Delete single User"""
 
@@ -96,7 +96,7 @@ class UserIdResource(Resource):
 
     @accepts(schema=UserSchema, api=api)
     @responds(schema=UserSchema, api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def put(self, userId: int): # noqa
         """Update single User"""
 

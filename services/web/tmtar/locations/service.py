@@ -1,10 +1,11 @@
 from typing import List, Union
 from .model import Location
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from .interface import ILocation
+from flask_restx import abort
 
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class LocationService:
@@ -41,8 +42,8 @@ class LocationService:
             return None
 
     @staticmethod
-    def get_roots() -> List[Location] or None:
-        return Location.query.filter_by(root='0').all()
+    def get_root() -> Location or None:
+        return Location.query.filter_by(name='root').first_or_404()
 
     @staticmethod
     def search_by_name(str_to_search: str) -> List[Location] or None:
@@ -54,10 +55,10 @@ class LocationService:
 
     @staticmethod
     def create(new_loc: ILocation):
-        loc = Location(
-            name=new_loc['name'],
-            root=new_loc['root']
-        )
+        try:
+            loc = Location(**new_loc)
+        except KeyError:
+            return abort(code=400, message="Root or name not set.")
         db.session.add(loc)
         db.session.commit()
 

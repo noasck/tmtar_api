@@ -1,3 +1,5 @@
+from ..tests.fixtures import * # noqa
+
 from .model import Event
 from .interface import IEvent
 from .schema import EventSchema

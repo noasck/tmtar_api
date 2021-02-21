@@ -1,3 +1,4 @@
+from ..tests.fixtures import * # noqa
 import time
 from pytest import fixture
 

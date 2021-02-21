@@ -1,14 +1,10 @@
-import binascii
-import hashlib
-import os
 from typing import List, Optional
 
 from .interface import IUser
 from .model import User
-from ..injectors.app import FlaskApp
-from ..project.types import RoleType
+from ..project.injector import Injector
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class UserService:
@@ -22,10 +18,7 @@ class UserService:
 
     @staticmethod
     def get_by_email(email: str) -> Optional[User]:
-        for user in UserService.get_all():
-            if verify_email(user.email_hash, email):
-                return user
-        return None
+        return User.query.filter_by(email=email).first()
 
     @staticmethod
     def update(loc: User, loc_upd: IUser):
@@ -43,31 +36,10 @@ class UserService:
         return [user_id]
 
     @staticmethod
-    def get_or_new_by_email(email: str, role=RoleType[0]):
+    def get_or_new_by_email(email: str):
         usr = UserService.get_by_email(email)
         if not usr:
-            usr = User(email_hash=hash_email(email), role=role)
+            usr = User(email=email)
             db.session.add(usr)
             db.session.commit()
         return usr
-
-
-def hash_email(password):
-    """Hash a password for storing."""
-    salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
-    pwd_hash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),
-                                   salt, 100000)
-    pwd_hash = binascii.hexlify(pwd_hash)
-    return (salt + pwd_hash).decode('ascii')
-
-
-def verify_email(stored_password, provided_password):
-    """Verify a stored password against one provided by user"""
-    salt = stored_password[:64]
-    stored_password = stored_password[64:]
-    pwd_hash = hashlib.pbkdf2_hmac('sha512',
-                                   provided_password.encode('utf-8'),
-                                   salt.encode('ascii'),
-                                   100000)
-    pwd_hash = binascii.hexlify(pwd_hash).decode('ascii')
-    return pwd_hash == stored_password

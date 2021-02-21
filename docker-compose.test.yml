@@ -2,7 +2,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: pytest ./tmtar --durations=0
+    command: pytest . --durations=0 --capture=no
     volumes:
       - ./services/web/:/usr/src/app/
     ports:
@@ -10,7 +10,7 @@ services:
     env_file:
       - ./.env.dev
   db:
-    image: postgres:12-alpine
+    image: postgres:latest
     ports:
     - 5432:5432
     volumes:

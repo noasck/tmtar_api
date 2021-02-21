@@ -1,10 +1,10 @@
 from typing import List
 from .model import File
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 import random
 import string
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class AliasGenerator:

@@ -1,23 +1,34 @@
 import pytest
-from ..injectors.accessor import Fixtures
+from ..project.injector import Injector
+from ..project.helpers.ext_loader import ModulesSetupLoader
+from wsgi import start_app # noqa
+
+
+try:
+    Injector().db
+except AttributeError:
+    start_app()
 
 
 @pytest.fixture
 def app():
-    from ..injectors.app import FlaskApp
-    return FlaskApp
+    return Injector().app
 
 
 @pytest.fixture
 def db(app):
-    return app.Instance().init_db()
+    db = Injector().db
+    ModulesSetupLoader.tables_db_init(app, db)
+    return db
 
 
 @pytest.fixture
 def client(app):
-    return app.Instance().client_app()
+    return app.test_client()
 
 
 @pytest.fixture
 def token(client):
-    return Fixtures.get("create_token")(client)
+    from ..users.controller_test import create_token
+
+    return create_token(client)

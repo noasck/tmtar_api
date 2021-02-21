@@ -27,3 +27,5 @@ def test_LocationSchema_works(schema: LocationSchema): # noqa
     assert widget.id == 123
     assert widget.name == 'test city'
     assert widget.root == 1
+
+

@@ -1,12 +1,12 @@
 from typing import List
 from .model import Object
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from .interface import IObject
 # from ..injectors.accessor import LocationChecker
 # from flask_restx import abort
 
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class ObjectService:

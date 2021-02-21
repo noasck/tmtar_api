@@ -1,11 +1,12 @@
 from typing import List
 from .model import Event
-from ..injectors.app import FlaskApp
-from ..injectors.accessor import LocationChecker
+from ..project.injector import Injector
 from .interface import IEvent
 from datetime import date
 
-db = FlaskApp.Instance().database
+LocationService = Injector().LocationService
+
+db = Injector().db
 
 
 class EventService:
@@ -39,7 +40,7 @@ class EventService:
 
         def is_matching(event: Event):
             return (True if sex == "all" else event.sex == sex) and (event.max_age >= age >= event.min_age) \
-                   and (LocationChecker.check(event.location_id, user_location_id)
+                   and (LocationService.check_location_permission(event.location_id, user_location_id)
                         if user_location_id is not None else True) and event.active
 
         events = Event.query.order_by(Event.update_date.desc()).filter(Event.event_type == event_type).all()
@@ -48,8 +49,8 @@ class EventService:
 
     @staticmethod
     def update(event: Event, event_upd: IEvent, user_location_id) -> Event or None:
-        if LocationChecker.check(event.event_type, user_location_id) \
-                and LocationChecker.check(event_upd['location_id'], user_location_id):
+        if LocationService.check_location_permission(event.event_type, user_location_id) \
+                and LocationService.check_location_permission(event_upd['location_id'], user_location_id):
             event.update(event_upd)
             db.session.commit()
             return event
@@ -59,7 +60,7 @@ class EventService:
         event = Event.query.filter_by(id=event_id).first_or_404()
         if not event:
             return []
-        if LocationChecker.check(event.location_id, user_location_id):
+        if LocationService.check_location_permission(event.location_id, user_location_id):
             db.session.delete(event)
             db.session.commit()
             return [event_id]
@@ -68,7 +69,7 @@ class EventService:
 
     @staticmethod
     def create(new_event: IEvent, user_location_id: int) -> Event or None:
-        if LocationChecker.check(new_event['location_id'], user_location_id):
+        if LocationService.check_location_permission(new_event['location_id'], user_location_id):
             event = Event(**new_event)
             db.session.add(event)
             db.session.commit()

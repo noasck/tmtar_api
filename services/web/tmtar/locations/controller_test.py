@@ -10,52 +10,45 @@ from . import BASE_ROUTE
 
 
 def make_location(
-        location_id: int = 123, name: str = 'Test city', root: int = 0
+        location_id: int = 123, name: str = 'Test city', root=1
 ) -> Location:
     return Location(id=location_id, name=name, root=root)
 
 
 def make_update(loc: Location, loc_upd: ILocation) -> Location:
-    new_loc = make_location(loc.id, loc_upd['name'], loc_upd['root'])
+    new_loc = make_location(loc.id, loc_upd['name'])
     return new_loc
 
 
 class TestLocationResource:
     @patch.object(
         LocationService,
-        "get_roots",
-        lambda: [
-            make_location(123, name='Test city 1'),
-            make_location(234, 'Test city 2', 123)
-        ]
+        "get_root",
+        lambda:
+            make_location(1, name='root', root=None)
     )
     def test_get(self, client: FlaskClient):
         with client:
             result = client.get(f"/api/{BASE_ROUTE}", follow_redirects=True).get_json()
             expected = (
-                LocationSchema(many=True)
+                LocationSchema()
                 .dump(
-                    [
-                        make_location(123, name='Test city 1'),
-                        make_location(234, 'Test city 2', 123)
-                    ]
+                        make_location(1, name='root', root=None)
                 )
             )
-            assert len(result) != 0
-            for i in result:
-                assert i in expected
+            assert result == expected
 
     @patch.object(
         LocationService, "create", lambda create_request: Location(**create_request)
     )
     def test_post(self, client: FlaskClient, token: str):
         with client:
-            payload = dict(name='Test city')
+            payload = dict(name='Test city', root=1)
             result = client.post(f"/api/{BASE_ROUTE}/", json=payload,
                                  headers={"Authorization": f"Bearer {token}"}).get_json()
             expected = (
                 LocationSchema().dump(
-                    Location(name=payload["name"])
+                    Location(name=payload["name"], root=payload["root"])
                 )
             )
             assert result == expected
@@ -116,12 +109,12 @@ class TestLocationIdResource:
         with client:
             result = client.put(
                 f"/api/{BASE_ROUTE}/123",
-                json={"name": "New city", "root": 122}, headers={"Authorization": f"Bearer {token}"}
+                json={"name": "New city"}, headers={"Authorization": f"Bearer {token}"}
             ).get_json()
 
             expected = (
                 LocationSchema()
-                .dump(make_location(location_id=123, name="New city", root=122))
+                .dump(make_location(location_id=123, name="New city"))
             )
 
             assert result == expected

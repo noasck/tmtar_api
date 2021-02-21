@@ -7,14 +7,14 @@ from typing import List
 from .schema import FileSchema
 from .service import FileService, AliasGenerator
 from .model import File
-from ..project.access_control import admin_required, root_required
+from ..project.builders.access_control import access_restriction
 import werkzeug
 from flask_restx import reqparse
 import os
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from werkzeug.utils import secure_filename
 
-app = FlaskApp.Instance().app
+app = Injector().app
 
 file_upload = reqparse.RequestParser()
 file_upload.add_argument('file',
@@ -31,14 +31,14 @@ class FileResource(Resource):
     """Files"""
 
     @responds(schema=FileSchema(many=True), api=api)
-    @root_required
+    @access_restriction(root_required=True)
     def get(self) -> List[File]:
         """Get all files list"""
         return FileService.get_all()
 
     @responds(schema=FileSchema, api=api)
     @api.expect(file_upload)
-    @admin_required
+    @access_restriction()
     def post(self):
         """Post new File to server media storage"""
         args = file_upload.parse_args()
@@ -66,7 +66,7 @@ class FileNameResource(Resource):
         file = secure_filename(filename)
         return send_from_directory(app.config["MEDIA_FOLDER"], file)
 
-    @root_required
+    @access_restriction(root_required=True)
     def delete(self, filename):
         """Delete File from storage"""
         if FileService.delete_by_filename(secure_filename(filename)):

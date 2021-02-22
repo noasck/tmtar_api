@@ -11,7 +11,7 @@ stages:
   - build
   - test
   - release
-  - cleanup
+
 before_script:
   - apk add --update py-pip &&
       pip install docker-compose
@@ -39,15 +39,11 @@ test:
     - docker
   stage: test
   script:
-    - cd services/web
-    - pip install tmtar/requirements.txt
-    - pytest ./tmtar --durations=0
+    - docker-compose -f docker-compose.test.yml up 
 
-cleanup_job:
-  tags:
-    - docker
-  stage: cleanup
+deploy:
+  stage: release
   script:
-    - docker rm -v build_data_$CI_PROJECT_ID_$CI_BUILD_REF
-    - docker rmi ci-project-build-$CI_PROJECT_ID:$CI_BUILD_REF
-  when: always
+    - docker-compose -f docker-compose.prod.yml down
+    - docker-compose -f docker-compose.prod.yml up -d
+    #- docker-compose -f docker-compose.prod.yml python manage.py db upgrade

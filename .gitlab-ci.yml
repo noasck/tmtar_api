@@ -1,4 +1,5 @@
 image: docker:stable
+privileged : true
 
 variables:
   SQL_HOST: 'db'

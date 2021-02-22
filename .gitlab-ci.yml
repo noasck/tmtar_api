@@ -12,29 +12,23 @@ stages:
   - test
   - release
   - cleanup
-
+before_script:
+  - apk add --update py-pip &&
+      pip install docker-compose
 build:
   tags: 
     - docker
   stage: build
   before_script:
-     - docker create
-      -v /build/deps
-      -v /build/_build
-      -v /build/rel
-      -v /root/.cache/rebar3/
-      --name build_data_$CI_PROJECT_ID_$CI_BUILD_REF busybox /bin/true
-  script:
     - export
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
+  script:
     #- docker pull registry.gitlab.com/baltazar1697/tmtar_api 
-    - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api --tag registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest .
-
+    - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF -tag registry.gitlab.com/baltazar1697/tmtar_api:latest .
+    
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
-
-    - docker run --volumes-from build_data_$CI_PROJECT_ID_$CI_BUILD_REF --rm -t ci-project-build-$CI_PROJECT_ID:$CI_BUILD_REF
-   
+    
   artifacts:
     paths:
       - services/web
@@ -43,15 +37,11 @@ build:
 test:
   tags:
     - docker
-    - postgres
   stage: test
   script:
-    - env
-    - docker run --rm
-      --link $POSTGRES_NAME:postgres
-      -e POSTGRES_HOST=$POSTGRES_HOST
-      -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      -e POSTGRES_USER=$POSTGRES_USER
+    - cd services/web
+    - pip install tmtar/requirements.txt
+    - pytest ./tmtar --durations=0
 
 cleanup_job:
   tags:

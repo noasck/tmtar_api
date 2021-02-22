@@ -1,11 +1,11 @@
 image: docker:latest
 
 variables:
-  SQL_HOST=db
-  SQL_PORT=5432
-  DATABASE=postgres
-  APP_FOLDER=/usr/src/app/tmtar
-  DB_INIT=True
+  SQL_HOST: 'db'
+  SQL_PORT: '5432'
+  DATABASE: 'postgres'
+  APP_FOLDER: '/usr/src/app/tmtar'
+  DB_INIT: 'True'
 
 stages:
   - build

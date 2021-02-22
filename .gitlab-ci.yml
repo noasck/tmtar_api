@@ -13,10 +13,6 @@ stages:
   - release
   - cleanup
 
-before_script:
-  - export
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
-
 build:
   tags: 
     - docker
@@ -29,6 +25,8 @@ build:
       -v /root/.cache/rebar3/
       --name build_data_$CI_PROJECT_ID_$CI_BUILD_REF busybox /bin/true
   script:
+    - export
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
     #- docker pull registry.gitlab.com/baltazar1697/tmtar_api 
     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api --tag registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest .
 

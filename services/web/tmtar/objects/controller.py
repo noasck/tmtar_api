@@ -24,7 +24,7 @@ class ObjectResource(Resource):
 
     @accepts(schema=ObjectSchema, api=api)
     @responds(schema=ObjectSchema, api=api)
-    @access_restriction()
+    @access_restriction(api=api)
     def post(self) -> Object:
         """Create new Object"""
         return ObjectService.create(request.parsed_obj)
@@ -41,7 +41,7 @@ class ObjectIdResource(Resource):
 
     @accepts(schema=ObjectSchema, api=api)
     @responds(schema=ObjectSchema, api=api)
-    @access_restriction()
+    @access_restriction(api=api)
     def put(self, objectId: int) -> Object:
         """Updates Object by id"""
 
@@ -50,7 +50,7 @@ class ObjectIdResource(Resource):
         return ObjectService.update(object_to_update, changes)
 
     @api.doc(responses={200: "{\"status\": \"Success\", \"id\" = 1}"})
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def delete(self, objectId: int):
         """Delete single Object"""
 

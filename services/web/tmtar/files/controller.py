@@ -31,14 +31,14 @@ class FileResource(Resource):
     """Files"""
 
     @responds(schema=FileSchema(many=True), api=api)
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def get(self) -> List[File]:
         """Get all files list"""
         return FileService.get_all()
 
     @responds(schema=FileSchema, api=api)
     @api.expect(file_upload)
-    @access_restriction()
+    @access_restriction(api=api)
     def post(self):
         """Post new File to server media storage"""
         args = file_upload.parse_args()
@@ -66,7 +66,7 @@ class FileNameResource(Resource):
         file = secure_filename(filename)
         return send_from_directory(app.config["MEDIA_FOLDER"], file)
 
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def delete(self, filename):
         """Delete File from storage"""
         if FileService.delete_by_filename(secure_filename(filename)):

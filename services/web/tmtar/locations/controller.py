@@ -19,12 +19,12 @@ class LocationResource(Resource):
 
     @responds(schema=LocationSchema(), api=api)
     def get(self) -> Location:
-        """Get all locations roots."""
+        """Get location's root node."""
         return LocationService.get_root()
 
     @accepts(schema=LocationSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def post(self) -> Location:
         """ Create Location with custom or default(0) parent"""
 
@@ -50,13 +50,13 @@ class LocationSearchResource(Resource):
 @api.param('locationId', 'Locations db ID')
 class LocationIdResource(Resource):
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def get(self, locationId: int): # noqa
         """ Get specific Location instance"""
 
         return LocationService.get_by_id(locationId)
 
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def delete(self, locationId: int): # noqa
         """Delete single Location"""
 
@@ -66,7 +66,7 @@ class LocationIdResource(Resource):
 
     @accepts(schema=LocationUpdateSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True)
+    @access_restriction(root_required=True, api=api)
     def put(self, locationId: int): # noqa
         """Update single Location"""
 

@@ -3,6 +3,7 @@ from flask_marshmallow import Marshmallow
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from ..builders.access_control import authorizations
 
 
 class ModulesSetupLoader:
@@ -31,7 +32,7 @@ class ModulesSetupLoader:
         doc = "/"
         if app.config['FLASK_ENV'] == 'production':
             doc = False
-        api = Api(app, app.config["API_TITLE"], doc=doc)
+        api = Api(app, app.config["API_TITLE"], doc=doc, authorizations=authorizations)
         return api
 
     @staticmethod
@@ -42,7 +43,6 @@ class ModulesSetupLoader:
         @param db: db connection instance.
         """
         from .seed_db import seed_db
-
         if app.config["INIT_DB"]:
             app.logger.info('Initializing database tables...')
             # TODO: dump database records for debug or preprocessing.

@@ -17,10 +17,10 @@ api = Namespace('locations', description='Ns with Location entity')
 class LocationResource(Resource):
     """Locations"""
 
-    @responds(schema=LocationSchema(), api=api)
-    def get(self) -> Location:
-        """Get location's root node."""
-        return LocationService.get_root()
+    @responds(schema=LocationSchema(many=True), api=api)
+    def get(self) -> List[Location]:
+        """Get all Locations instances."""
+        return LocationService.get_all()
 
     @accepts(schema=LocationSchema, api=api)
     @responds(schema=LocationSchema, api=api)

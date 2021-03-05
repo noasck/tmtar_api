@@ -23,17 +23,19 @@ def make_update(loc: Location, loc_upd: ILocation) -> Location:
 class TestLocationResource:
     @patch.object(
         LocationService,
-        "get_root",
+        "get_all",
         lambda:
-            make_location(1, name='root', root=None)
+            [make_location(1, name='root', root=None),
+             make_location(1, name='root', root=1)]
     )
     def test_get(self, client: FlaskClient):
         with client:
             result = client.get(f"/api/{BASE_ROUTE}", follow_redirects=True).get_json()
             expected = (
-                LocationSchema()
+                LocationSchema(many=True)
                 .dump(
-                        make_location(1, name='root', root=None)
+                        [make_location(1, name='root', root=None),
+                         make_location(1, name='root', root=1)]
                 )
             )
             assert result == expected

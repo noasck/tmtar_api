@@ -13,9 +13,6 @@ stages:
   - test
   - release
 
-before_script:
-  - apk add --update py-pip &&
-      pip install docker-compose
 build:
   tags: 
     - docker

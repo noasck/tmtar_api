@@ -1,5 +1,6 @@
 image: docker:stable
-services: dind
+services: 
+  - docker:dind
 
 variables:
   SQL_HOST: 'db'

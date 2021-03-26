@@ -26,7 +26,7 @@ build:
   script:
     #- docker pull registry.gitlab.com/baltazar1697/tmtar_api 
     #- docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF -tag registry.gitlab.com/baltazar1697/tmtar_api:latest .
-    - docker-compose -f docker-compose.yml up
+    - docker-compose -f docker-compose.yml build
     - docker push registry.gitlab.com/baltazar1697/tmtar_api
     #- docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     #- docker push registry.gitlab.com/baltazar1697/tmtar_api:latest

@@ -35,8 +35,6 @@ build:
     expire_in: never
 
 test:
-  tags:
-    - test
   stage: test
   before_script:
     - apk add --no-cache docker-compose

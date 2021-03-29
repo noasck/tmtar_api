@@ -37,6 +37,8 @@ test:
   before_script:
     - pip3 install pytest
   script:
+    - pwd
+    - ls
     - pytest ./tmtar --durations=0 --junitxml=report.xml
   allow_failure: true
   artifacts:

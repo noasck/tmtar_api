@@ -2,7 +2,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: pytest ./tmtar --durations=0
+    command: pytest ./tmtar --durations=0 --junitxml=report.xml
     volumes:
       - ./services/web/:/usr/src/app/
     ports:

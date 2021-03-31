@@ -13,18 +13,18 @@ stages:
   - test
   - release
 
-# build:
-#   stage: build
-#   image: docker:stable
-#   tags: 
-#     - docker
-#   before_script:
-#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
-#   script:
-#     - docker pull registry.gitlab.com/baltazar1697/tmtar_api 
-#     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
-#     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
-#     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
+build:
+  stage: build
+  image: docker:stable
+  tags: 
+    - docker
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
+  script:
+    - docker pull registry.gitlab.com/baltazar1697/tmtar_api 
+    - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
+    - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
+    - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
 
 test:
   stage: test

@@ -16,7 +16,7 @@ build:
   tags: 
     - docker
   services: 
-  - docker:dind
+    - docker:dind
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
   script:
@@ -27,6 +27,8 @@ build:
 test:
   stage: test
   image: python:3.9-slim
+  services: 
+    - docker:dind
   before_script:
     - pip3 install pytest docker-compose
   script:
@@ -42,6 +44,8 @@ test:
 deploy:
   stage: release
   image: python:3.9-slim
+  services: 
+    - docker:dind
   before_script:
     - pip3 install docker-compose
   script:

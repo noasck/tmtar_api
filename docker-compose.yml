@@ -10,7 +10,7 @@ services:
     env_file:
       - ./.env.dev
   db:
-    image: postgres:12-alpine
+    image: postgres:latest
     ports:
     - 5432:5432
     volumes:

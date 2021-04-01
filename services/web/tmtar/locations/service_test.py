@@ -7,9 +7,9 @@ from .interface import ILocation
 
 
 def create_test_locations(db):
-    uk: Location = Location(id=1, name='ukraine', root=0)
-    kh: Location = Location(id=2, name='kherson', root=1)
-    kv: Location = Location(id=3, name='kyiv', root=1)
+    uk: Location = Location(id=2, name='ukraine', root=1)
+    kh: Location = Location(id=3, name='kherson', root=2)
+    kv: Location = Location(id=4, name='kyiv', root=2)
 
     db.session.add(uk)
     db.session.add(kh)
@@ -24,12 +24,12 @@ def test_get_all(db: SQLAlchemy):
 
     results: List[Location] = LocationService.get_all()
 
-    assert len(results) == 3
+    assert len(results) == 4
     assert all((uk in results, kh in results, kv in results))
 
 
 def test_update(db: SQLAlchemy):
-    kv: Location = Location(id=3, name='kyiv')
+    kv: Location = Location(id=3, name='kyiv', root=1)
     db.session.add(kv)
     db.session.commit()
 
@@ -53,7 +53,7 @@ def test_delete_by_id(db: SQLAlchemy):
 
     result = Location.query.all()
 
-    assert len(result) == 1
+    assert len(result) == 2
     assert kv in result
 
 
@@ -61,13 +61,13 @@ def test_get_parent(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)
 
     assert LocationService.get_parent(kh) == LocationService.get_parent(kv) == uk
-    assert LocationService.get_parent(uk) is None
+    assert LocationService.get_parent(uk).name == "root"
 
 
 def test_get_children(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)
 
-    nk = Location(id=4, name='nova каховка', root=3)
+    nk = Location(id=5, name='nova каховка', root=4)
 
     db.session.add(nk)
     db.session.commit()
@@ -80,25 +80,24 @@ def test_get_children(db: SQLAlchemy):
     assert nk in LocationService.get_children(kv.id) and len(LocationService.get_children(kv.id)) == 1
 
 
-def test_get_roots(db: SQLAlchemy):
+def test_get_root(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)
-    nk = Location(id=4, name='nova каховка', root=3)
-    pk = Location(id=5, name='nova каховка')
+    nk = Location(id=5, name='nova каховка', root=4)
+    pk = Location(id=6, name='nova кахо вка', root=None)
 
     db.session.add(nk)
     db.session.add(pk)
     db.session.commit()
 
-    result: List[Location] = LocationService.get_roots()
+    result: Location = LocationService.get_root()
 
-    assert len(result) == 2
-    assert pk in result and uk in result
+    assert result.name == "root"
 
 
 def test_search_by_name(db: SQLAlchemy):
     create_test_locations(db)
-    nk = Location(id=4, name='nova каховка', root=3)
-    pk = Location(id=5, name='NoVa Каховка')
+    nk = Location(id=5, name='nova каховка', root=4)
+    pk = Location(id=6, name='NoVa Каховка')
 
     db.session.add(nk)
     db.session.add(pk)
@@ -118,7 +117,8 @@ def test_search_by_name(db: SQLAlchemy):
 def test_create(db: SQLAlchemy):
     new_loc: ILocation = {
         "name": "Simple",
-        "root": 0
+        "root": 1,
+        "id": 2
     }
 
     loc = LocationService.create(new_loc)

@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from typing import List
 
 from .model import Event
-from .service import EventService, LocationChecker
+from .service import EventService, LocationService
 from .interface import IEvent
 from ..project.types import EventType, SexType
 from time import time
@@ -25,14 +25,14 @@ def create_event(event_id=1, event_type=EventType[0], location_id=1, update_date
                   description=description, image_file_name=image_file_name, active=active)
 
 
-@patch.object(LocationChecker, "check", lambda *args: True)
+@patch.object(LocationService, "check_location_permission", lambda *args: True)
 def test_create():
     event = create_event()
 
     assert EventService.create(event, 42) == Event.query.get(1)
 
 
-@patch.object(LocationChecker, "check", lambda *args: True)
+@patch.object(LocationService, "check_location_permission", lambda *args: True)
 def test_delete_by_id(db: SQLAlchemy):
     e1: Event = Event(**create_event())
 
@@ -51,7 +51,7 @@ def test_delete_by_id(db: SQLAlchemy):
     assert e2 in res
 
 
-@patch.object(LocationChecker, "check", lambda *args: True)
+@patch.object(LocationService, "check_location_permission", lambda *args: True)
 def test_update_by_id(db: SQLAlchemy):
     e1: Event = Event(**create_event())
 

@@ -1,9 +1,9 @@
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from time import time
 from ..project.types import SexType
 from .interface import IEvent
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class Event(db.Model):

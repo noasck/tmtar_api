@@ -1,7 +1,7 @@
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from .interface import IObject
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class Object(db.Model):

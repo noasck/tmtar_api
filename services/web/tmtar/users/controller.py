@@ -3,6 +3,9 @@ from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource, abort
 from flask.wrappers import Response
 from typing import List, Tuple
+from flask_cors import cross_origin
+
+
 from .schema import UserSchema, UserInfoSchema # noqa
 from .service import UserService
 from .interface import IUser
@@ -12,7 +15,7 @@ from flask_jwt_extended import (
 from .controller_identity import *
 from ..project.builders.access_control import access_restriction
 
-api = Namespace('users', description='Ns responsible for User entity management and auth')
+api = Namespace('users', description='Ns responsible for User entity management and auth', decorators=[cross_origin()])
 
 #: TODO: google auth
 

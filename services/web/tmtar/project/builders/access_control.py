@@ -28,7 +28,7 @@ def access_restriction(root_required: bool = False, api: Namespace = None) -> Ca
             except (ValueError, TypeError, JWTExtendedException):
                 # TODO: make more detailed JWTExtendedException response
                 return abort(403, "Restricted. Access denied.")
-            if root_required and admin_location_id != 0:
+            if root_required and admin_location_id != 1:
                 return abort(403, "Restricted. Access denied.")
             return endpoint(*args, **kwargs)
         return wrapper

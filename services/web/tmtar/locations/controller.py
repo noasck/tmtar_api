@@ -2,6 +2,7 @@ from flask import request, jsonify
 from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 from flask.wrappers import Response
+from flask_cors import cross_origin
 from typing import List
 
 from .schema import LocationSchema, LocationUpdateSchema
@@ -10,7 +11,7 @@ from .model import Location
 from .interface import ILocation
 from ..project.builders.access_control import access_restriction
 
-api = Namespace('locations', description='Ns with Location entity')
+api = Namespace('locations', description='Ns with Location entity', decorators=[cross_origin()])
 
 
 @api.route('/')
@@ -50,7 +51,6 @@ class LocationSearchResource(Resource):
 @api.param('locationId', 'Locations db ID')
 class LocationIdResource(Resource):
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True, api=api)
     def get(self, locationId: int): # noqa
         """ Get specific Location instance"""
 

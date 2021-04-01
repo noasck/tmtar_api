@@ -51,7 +51,6 @@ class ModulesSetupLoader:
             db.session.commit()
             db.create_all()
             db.session.commit()
-            db.session.commit()
 
             for email in seed_db():
                 app.logger.info(f"Successfully seeded {email} root user.")

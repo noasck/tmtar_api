@@ -10,6 +10,11 @@ def schema() -> LocationSchema:
     return LocationSchema()
 
 
+@fixture
+def update_schema() -> LocationUpdateSchema:
+    return LocationUpdateSchema()
+
+
 def test_LocationSchema_create(schema: LocationSchema): # noqa
     assert schema
 
@@ -29,12 +34,12 @@ def test_LocationSchema_works(schema: LocationSchema): # noqa
     assert widget.root == 1
 
 
-def test_LocationUpdateSchema_create(schema: LocationUpdateSchema): # noqa
-    assert schema
+def test_LocationUpdateSchema_create(update_schema: LocationUpdateSchema): # noqa
+    assert update_schema
 
 
-def test_LocationUpdateSchema(schema: LocationUpdateSchema): # noqa
-    params:  ILocation = schema.load(
+def test_LocationUpdateSchema(update_schema: LocationUpdateSchema): # noqa
+    params:  ILocation = update_schema.load(
         {
             'id': '12',
             'name': 'test city'

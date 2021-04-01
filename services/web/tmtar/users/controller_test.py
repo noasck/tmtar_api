@@ -20,7 +20,7 @@ def make_common_user(email: str, id=int(1000*random())) -> User: # noqa
 
 def make_root_user() -> User:
     return User(id=1, email=str(hash("some_str_admin")), sex=SexType[0],
-                bdate=datetime.now().date(), location_id=1, admin_location_id=0)
+                bdate=datetime.now().date(), location_id=1, admin_location_id=1)
 
 
 def make_update(usr: User, usr_upd: IUser) -> User:
@@ -93,7 +93,7 @@ class TestUserResource:
             expected = UserSchema().dump(
                 User(id=1, email=str(hash("some_str_admin")), sex=SexType[0],
                      bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2,
-                     admin_location_id=0)
+                     admin_location_id=1)
             )
 
             assert result == expected

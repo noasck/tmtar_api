@@ -56,11 +56,12 @@ class AppModule:
             # Adding /health route
             MLoader.configure_health_route(self.app)
 
+            # Registering all modules
+            register_routes(app=self.app, api=api)
+
             # Adding CORS policy
             register_cors(self.app)
 
-            # Registering all modules
-            register_routes(app=self.app, api=api)
             self.app.logger.info('Application initialization finished!')
 
             Injector().inject(True, "configured")

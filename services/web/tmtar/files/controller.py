@@ -10,6 +10,8 @@ from .model import File
 from ..project.builders.access_control import access_restriction
 import werkzeug
 from flask_restx import reqparse
+from flask_cors import cross_origin
+
 import os
 from ..project.injector import Injector
 from werkzeug.utils import secure_filename
@@ -23,7 +25,7 @@ file_upload.add_argument('file',
                          required=True,
                          help='Source file')
 
-api = Namespace('files', description='Ns contains media control routes')
+api = Namespace('files', description='Ns contains media control routes', decorators=[cross_origin()])
 
 
 @api.route('/')

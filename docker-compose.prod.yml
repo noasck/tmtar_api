@@ -4,7 +4,7 @@ services:
     build:
       context: ./services/web
       dockerfile: Dockerfile.prod
-    command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    command: gunicorn --bind 0.0.0.0:5000 "wsgi:start_app()"
     volumes:
       - media_volume:/home/app/web/project/tmtar/media
     expose:
@@ -13,6 +13,9 @@ services:
       - ./.env.prod
     depends_on:
       - db
+    networks:
+      - api
+
   db:
     image: postgres:latest
     ports:
@@ -21,6 +24,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.prod.db
+    networks:
+      - api
 
   nginx:
     build: ./services/nginx
@@ -30,7 +35,12 @@ services:
       - 1337:80
     depends_on:
       - web
+    networks:
+      - api
 
 volumes:
   postgres_data:
   media_volume:
+
+networks:
+  api:

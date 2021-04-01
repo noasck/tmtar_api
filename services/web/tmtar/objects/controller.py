@@ -3,6 +3,7 @@ from flask_accepts import accepts, responds
 from flask_restx import Namespace, Resource
 from flask.wrappers import Response
 from typing import List
+from flask_cors import cross_origin
 
 from .schema import ObjectSchema
 from .service import ObjectService
@@ -10,7 +11,7 @@ from .model import Object
 from .interface import IObject
 from ..project.builders.access_control import access_restriction
 
-api = Namespace("objects", description="Ns with Object entity")
+api = Namespace("objects", description="Ns with Object entity", decorators=[cross_origin()])
 
 
 @api.route('/')

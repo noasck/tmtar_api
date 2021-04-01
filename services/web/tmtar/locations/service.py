@@ -55,10 +55,7 @@ class LocationService:
 
     @staticmethod
     def create(new_loc: ILocation):
-        try:
-            loc = Location(**new_loc)
-        except KeyError:
-            return abort(code=400, message="Root or name not set.")
+        loc = Location(**new_loc)
         db.session.add(loc)
         db.session.commit()
 

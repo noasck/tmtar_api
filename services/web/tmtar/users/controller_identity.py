@@ -1,8 +1,8 @@
-from ..injectors.app import FlaskApp
+from ..project.injector import Injector
 from .model import User
 from .schema import UserSchema
 
-jwt = FlaskApp.Instance().jwt
+jwt = Injector().jwt
 
 
 @jwt.user_claims_loader
@@ -27,4 +27,4 @@ def verify_token(token: str) -> str:
 
 @jwt.user_identity_loader
 def user_identity_lookup(user: User) -> str:
-    return user.email_hash
+    return user.email

@@ -1,7 +1,8 @@
-from ..injectors.app import FlaskApp
+from ..tests.conftest import * # noqa
+from ..project.injector import Injector
 from .interface import ILocation
 
-db = FlaskApp.Instance().database
+db = Injector().db
 
 
 class Location(db.Model):
@@ -11,7 +12,8 @@ class Location(db.Model):
     __tablename__ = 'locations'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    root = db.Column(db.Integer, default=0)
+    root = db.Column(db.Integer, db.ForeignKey('locations.id'), nullable=True)
+    children = db.relationship("Location")
 
     def update(self, changes: ILocation):
         for key, val in changes.items():

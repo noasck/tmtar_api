@@ -14,13 +14,13 @@ from datetime import datetime
 
 
 def make_common_user(email: str, id=int(1000*random())) -> User: # noqa
-    return User(id=id, email_hash=str(hash(email)), sex=SexType[0],
-                bdate=datetime.now().date(), location_id=1, role=RoleType[0])
+    return User(id=id, email=str(hash(email)), sex=SexType[0],
+                bdate=datetime.now().date(), location_id=1)
 
 
 def make_root_user() -> User:
-    return User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0],
-                bdate=datetime.now().date(), location_id=1, role=RoleType[2])
+    return User(id=1, email=str(hash("some_str_admin")), sex=SexType[0],
+                bdate=datetime.now().date(), location_id=1, admin_location_id=0)
 
 
 def make_update(usr: User, usr_upd: IUser) -> User:
@@ -91,8 +91,9 @@ class TestUserResource:
             ).get_json()
 
             expected = UserSchema().dump(
-                User(id=1, email_hash=str(hash("some_str_admin")), sex=SexType[0],
-                     bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2, role=RoleType[2])
+                User(id=1, email=str(hash("some_str_admin")), sex=SexType[0],
+                     bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2,
+                     admin_location_id=0)
             )
 
             assert result == expected
@@ -140,9 +141,8 @@ class TestUserIdResource:
             expected = (
                 UserSchema()
                 .dump(
-                    User(id=13, email_hash=str(hash("string")), sex=SexType[0],
-                         bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2,
-                         role=RoleType[0])
+                    User(id=13, email=str(hash("string")), sex=SexType[0],
+                         bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(), location_id=2)
                 )
             )
             assert result == expected

@@ -6,7 +6,7 @@ from .interface import IUser
 
 @fixture
 def interface() -> IUser:
-    return IUser(email_hash=str(hash("some_str")), sex="male", bdate='2016-02-03', location_id=1, role="common")
+    return IUser(email=str(hash("some_str")), sex="male", bdate='2016-02-03', location_id=1)
 
 
 def test_interface_create(interface: IUser):

@@ -16,7 +16,6 @@ stages:
 
 build:
   stage: build
-
   tags: 
     - docker
   before_script:
@@ -26,6 +25,16 @@ build:
     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
+
+flakehell:
+  stage: test
+  image: python:3.7-slim
+  script:
+    - pip3 install flakehell
+    - flakehell lint --format=gitlab --output-file flakehell.json
+  artifacts:
+    reports:
+      codequality: flakehell.json
 
 test:
   stage: test
@@ -44,7 +53,6 @@ test:
 
 deploy:
   stage: release
-
   before_script:
     - apk add --no-cache docker-compose
   script:

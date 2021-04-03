@@ -1,16 +1,18 @@
 from typing import List
-from .model import Object
+
 from ..project.injector import Injector
 from .interface import IObject
+from .model import Object
+
 # from ..injectors.accessor import LocationChecker
 # from flask_restx import abort
 
-
-db = Injector().db
+db = Injector.db
 
 
 class ObjectService:
     """ Service of object instance. """
+
     @staticmethod
     def get_all() -> List[Object]:
         """
@@ -44,7 +46,8 @@ class ObjectService:
         @param str_to_search: part of name (case insensitive).
         @return: list of all alike objects.
         """
-        return Object.query.filter(Object.name.ilike(f"%{str_to_search}%")).all()
+        return Object.query.filter(
+            Object.name.ilike(f"%{str_to_search}%")).all()
 
     @staticmethod
     def update(object_to_update: Object, object_updates: IObject) -> Object:
@@ -65,12 +68,10 @@ class ObjectService:
         @param new_object: dict of input parameters to create object.
         @return: created Object in dv
         """
-        obj = Object(
-            name=new_object['name'],
-            target_image_file=new_object['target_image_file'],
-            asset_file=new_object['asset_file'],
-            subzone_id=new_object['subzone_id']
-        )
+        obj = Object(name=new_object['name'],
+                     target_image_file=new_object['target_image_file'],
+                     asset_file=new_object['asset_file'],
+                     subzone_id=new_object['subzone_id'])
         db.session.add(obj)
         db.session.commit()
 

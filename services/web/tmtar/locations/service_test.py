@@ -1,9 +1,11 @@
-from ..tests.fixtures import db, app # noqa
-from flask_sqlalchemy import SQLAlchemy
 from typing import List
+
+from flask_sqlalchemy import SQLAlchemy
+
+from ..tests.fixtures import app, db  # noqa
+from .interface import ILocation
 from .model import Location
 from .service import LocationService
-from .interface import ILocation
 
 
 def create_test_locations(db):
@@ -60,11 +62,12 @@ def test_delete_by_id(db: SQLAlchemy):
 def test_get_parent(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)
 
-    assert LocationService.get_parent(kh) == LocationService.get_parent(kv) == uk
+    assert LocationService.get_parent(kh) == LocationService.get_parent(
+        kv) == uk
     assert LocationService.get_parent(uk).name == "root"
 
 
-def test_get_children(db: SQLAlchemy):
+def test_get_children_works(db: SQLAlchemy):
     uk, kh, kv = create_test_locations(db)
 
     nk = Location(id=5, name='nova каховка', root=4)
@@ -72,12 +75,13 @@ def test_get_children(db: SQLAlchemy):
     db.session.add(nk)
     db.session.commit()
 
-    result: List[Location] = LocationService.get_children(uk.id)
+    result: List[Location] = LocationService.get_children(uk)
 
     assert len(result) == 2
     assert kh in result and kv in result
-    assert len(LocationService.get_children(kh.id)) == 0
-    assert nk in LocationService.get_children(kv.id) and len(LocationService.get_children(kv.id)) == 1
+    assert len(LocationService.get_children(kh)) == 0
+    assert nk in LocationService.get_children(kv) and len(
+        LocationService.get_children(kv)) == 1
 
 
 def test_get_root(db: SQLAlchemy):
@@ -115,11 +119,7 @@ def test_search_by_name(db: SQLAlchemy):
 
 
 def test_create(db: SQLAlchemy):
-    new_loc: ILocation = {
-        "name": "Simple",
-        "root": 1,
-        "id": 2
-    }
+    new_loc: ILocation = {"name": "Simple", "root": 1, "id": 2}
 
     loc = LocationService.create(new_loc)
     assert loc.id != 0

@@ -1,17 +1,20 @@
-from flask import request, jsonify
-from flask_accepts import accepts, responds
-from flask_restx import Namespace, Resource
-from flask.wrappers import Response
 from typing import List
-from flask_cors import cross_origin
 
+from flask import jsonify, request
+from flask.wrappers import Response
+from flask_accepts import accepts, responds
+from flask_cors import cross_origin
+from flask_restx import Namespace, Resource
+
+from ..project.builders.access_control import access_restriction
+from .interface import IObject
+from .model import Object
 from .schema import ObjectSchema
 from .service import ObjectService
-from .model import Object
-from .interface import IObject
-from ..project.builders.access_control import access_restriction
 
-api = Namespace("objects", description="Ns with Object entity", decorators=[cross_origin()])
+api = Namespace("objects",
+                description="Ns with Object entity",
+                decorators=[cross_origin()])
 
 
 @api.route('/')
@@ -30,7 +33,8 @@ class ObjectResource(Resource):
         """Create new Object"""
         return ObjectService.create(request.parsed_obj)
 
-@api.route('/<int:objectId>') # noqa
+
+@api.route('/<int:objectId>')  # noqa
 @api.param('objectId', 'object db ID')
 class ObjectIdResource(Resource):
     """Provides Object manipulations by id"""
@@ -58,7 +62,8 @@ class ObjectIdResource(Resource):
         deleted_id = ObjectService.delete_by_id(objectId)
         return jsonify(status="Success", id=deleted_id)
 
-@api.route('/subzone/<int:subzoneId>') # noqa
+
+@api.route('/subzone/<int:subzoneId>')  # noqa
 @api.param('subzoneId', 'subzone db ID')
 class ObjectSubzoneIdResource(Resource):
     """Provides objects manipulation by subzone id"""
@@ -68,13 +73,16 @@ class ObjectSubzoneIdResource(Resource):
         """Get all Objects from specific subzone."""
         return ObjectService.get_by_subzone_id(subzoneId)
 
-@api.route('/search/<string:str_to_find>') # noqa
+
+@api.route('/search/<string:str_to_find>')  # noqa
 @api.param('str_to_find', 'Part of Object name to search')
 class ObjectSearchResource(Resource):
     """Providing Object search"""
 
-    @api.doc(responses={200: """{"status": "Match",\n "objects": [Object Model list]}"""})
-    def get(self, str_to_find: str) -> Response: # noqa
+    @api.doc(responses={
+        200: """{"status": "Match",\n "objects": [Object Model list]}"""
+    })
+    def get(self, str_to_find: str) -> Response:  # noqa
         """Get matching objects"""
         objects: List[Object] = ObjectService.search_by_name(str_to_find)
         if objects:

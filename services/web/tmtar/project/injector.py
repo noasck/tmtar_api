@@ -9,6 +9,7 @@ class MetaInjector(type):
     def inject(cls, instance, to: str = 'name'):
         """
         Assign internal static field to instance link.
+
         :param instance: instance to save in database.
         :type instance: any
         :param to: name of instance.
@@ -23,6 +24,7 @@ class MetaInjector(type):
     def __getattr__(cls, instance_name: str):
         """
         Return saved in static field instance.
+
         :param instance_name: name of instance.
         :type instance_name: str
         :return: required function or instance.

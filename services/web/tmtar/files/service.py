@@ -21,7 +21,9 @@ class AliasGenerator(object):
     ) -> str:
         """Return a random string for file alias."""
         return ''.join(
-            random.choice(allowed_chars) for _ in range(str_size)
+            random.choice(  # noqa: S311
+                allowed_chars,
+            ) for _ in range(str_size)
         )
 
 
@@ -32,6 +34,7 @@ class FileService(AbstractService[File, IFile]):
     def model(cls):
         """
         Resolve File model class.
+
         :return: File Type.
         :rtype: type
         """

@@ -59,6 +59,7 @@ class ModulesSetupLoader(object):
     def tables_db_init(cls, app: Flask, db: SQLAlchemy) -> None:
         """
         Recreate database.
+
         :param app: main Flask app.
         :type app: Flask
         :param db: db connection instance.
@@ -85,6 +86,7 @@ class ModulesSetupLoader(object):
     def configure_health_route(cls, app: Flask):
         """
         Add /health route to check server status.
+
         :param app: main Flask app.
         """
         @app.route('/health', methods=['GET'])

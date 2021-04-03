@@ -11,6 +11,7 @@ def wrap_exception(
 ):
     """
     Wrap route to handle exceptions.
+
     :param endpoint: route endpoint.
     :type endpoint: Callable
     :param status: http status

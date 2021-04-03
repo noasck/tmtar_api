@@ -12,6 +12,7 @@ class LocationService(AbstractService[Location, ILocation]):
     def model(cls):
         """
         Resolve Location model class.
+
         :return: Location Type.
         :rtype: type
         """
@@ -57,6 +58,7 @@ class LocationService(AbstractService[Location, ILocation]):
     def get_children(cls, parent: Location) -> List[Location]:
         """
         Get all children of certain Location instance.
+
         :param parent: current instance
         :type parent: Location
         :return: children of current instance
@@ -72,6 +74,7 @@ class LocationService(AbstractService[Location, ILocation]):
     ) -> bool:
         """
         Check permissions of user by location.
+
         :param location_id: id of user rbac location.
         :type location_id: int
         :param accessed_location_id: Location of required object.

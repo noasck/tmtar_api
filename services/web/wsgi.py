@@ -11,7 +11,8 @@ from tmtar.project import AppModule  # noqa: F401, E402
 def start_app() -> Flask:
     """
     App class Factory method.
-    @return: main flask app object
+
+    :return: main flask app object
     """
     return AppModule().configure()
 

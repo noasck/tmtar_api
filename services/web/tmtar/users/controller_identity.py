@@ -9,6 +9,7 @@ jwt = Injector.jwt
 def user_based_token(user: User):
     """
     Serialize single User entity data to JWT.
+
     :param user: User instance
     :return: serialized User Instance
     """
@@ -19,6 +20,7 @@ def user_based_token(user: User):
 def verify_token(token: str) -> str:
     """
     Mock google and fb auth.
+
     :param token: email
     :return: email
     """

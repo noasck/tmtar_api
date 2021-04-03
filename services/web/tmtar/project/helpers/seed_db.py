@@ -7,13 +7,13 @@ def seed_db():  # noqa: D103
     # TODO: encrypt field and hide in config
     db = Injector.db
     u1: User = User(
-        id=228,
+        id=1,
         email=str('denter425@gmail.com'),
         location_id=1,
         admin_location_id=1,
     )
     u2: User = User(
-        id=1337,
+        id=2,
         email=str('jjok730@gmail.com'),
         location_id=1,
         admin_location_id=1,

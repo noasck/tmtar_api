@@ -21,6 +21,7 @@ class AbstractService(ABC, Generic[Model, Interface]):
     def get_all(cls) -> List[Model]:
         """
         Get all Model instances from database.
+
         :return: all existing Model instances.
         :rtype: List[Model]
         """
@@ -30,6 +31,7 @@ class AbstractService(ABC, Generic[Model, Interface]):
     def get_by_id(cls, instance_id: int) -> Model:
         """
         Get Model instance with specific id.
+
         :param instance_id: id of required instance.
         :type instance_id: int
         :return: Model instance with specific id
@@ -41,6 +43,7 @@ class AbstractService(ABC, Generic[Model, Interface]):
     def update(cls, instance: Model, instance_upd: Interface) -> Model:
         """
         Update specific Model instance with Interface.
+
         :param instance: db instance to update.
         :type instance: Model
         :param instance_upd: new values of fields
@@ -56,6 +59,7 @@ class AbstractService(ABC, Generic[Model, Interface]):
     def delete_by_id(cls, instance_id: int) -> int:
         """
         Delete certain Model instance by id.
+
         :param instance_id: db Model instance id.
         :type instance_id: int
         :return: deleted instance id.
@@ -70,6 +74,7 @@ class AbstractService(ABC, Generic[Model, Interface]):
     def create(cls, new_instance: Interface) -> Model:
         """
         Create new instance.
+
         :param new_instance: new instance fields
         :type new_instance: Interface
         :return: new Model instance.

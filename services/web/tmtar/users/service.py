@@ -12,6 +12,7 @@ class UserService(AbstractService[User, IUser]):
     def model(cls):
         """
         Resolve Location model class.
+
         :return: Location Type.
         :rtype: type
         """
@@ -21,6 +22,7 @@ class UserService(AbstractService[User, IUser]):
     def get_by_email(cls, email: str) -> Optional[User]:
         """
         Get certain User by email.
+
         :param email: user's email
         :type email: str
         :return: matched user
@@ -32,6 +34,7 @@ class UserService(AbstractService[User, IUser]):
     def get_or_new_by_email(cls, email: str):
         """
         Get existing or create new User by received email.
+
         :param email: logged in users email
         :type email: str
         :return: User instance

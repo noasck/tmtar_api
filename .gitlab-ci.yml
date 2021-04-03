@@ -31,8 +31,9 @@ flakehell:
   tags:
     - docker
   image: python:3.7-slim
+  before_script:
+    - pip3 install flakehell wemake-python-styleguide
   script:
-    - pip3 install flakehell
     - flakehell lint --format=gitlab --output-file flakehell.json
   artifacts:
     reports:

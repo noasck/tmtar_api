@@ -1,21 +1,26 @@
-from flask import request, jsonify
-from flask_accepts import accepts, responds
-from flask_restx import Namespace, Resource
-from flask.wrappers import Response
 from typing import List
 
+from flask import jsonify, request
+from flask_accepts import accepts, responds
+from flask_cors import cross_origin
+from flask_restx import Namespace, Resource
+
+from ..project.builders.access_control import access_restriction
+from .interface import ILocation
+from .model import Location
 from .schema import LocationSchema, LocationUpdateSchema
 from .service import LocationService
-from .model import Location
-from .interface import ILocation
-from ..project.builders.access_control import access_restriction
 
-api = Namespace('locations', description='Ns with Location entity')
+api = Namespace(
+    'locations',
+    description='Ns with Location entity',
+    decorators=[cross_origin()],
+)
 
 
 @api.route('/')
 class LocationResource(Resource):
-    """Locations"""
+    """Locations."""
 
     @responds(schema=LocationSchema(many=True), api=api)
     def get(self) -> List[Location]:
@@ -26,67 +31,63 @@ class LocationResource(Resource):
     @responds(schema=LocationSchema, api=api)
     @access_restriction(root_required=True, api=api)
     def post(self) -> Location:
-        """ Create Location with custom or default(0) parent"""
-
+        """Create Location with custom or default(0) parent."""
         return LocationService.create(request.parsed_obj)
 
-@api.route('/search/<string:str_to_find>') # noqa
+
+@api.route('/search/<string:str_to_find>')
 @api.param('str_to_find', 'Part of location name to search')
 class LocationSearchResource(Resource):
-    """Providing Location search"""
+    """Providing Location search."""
 
-    @api.doc(responses={200: """{"status": "Match",\n "locations": [Location Model object]}"""})
-    def get(self, str_to_find: str) -> Response: # noqa
-        """Get matching locations"""
+    @api.doc(responses={
+        200: '{"status": "Match",\n "locations": [Location Model object]}',
+        404: '{"status": "No match"}',
+    })
+    def get(self, str_to_find: str):
+        """Get matching locations."""
         locs: List[Location] = LocationService.search_by_name(str_to_find)
         if locs:
             serialized_locations = LocationSchema().dump(locs, many=True)
-            return jsonify(dict(status='Match', locations=serialized_locations))
-        else:
-            return jsonify(dict(status="No match"))
+            return jsonify(
+                {'status': 'Match', 'locations': serialized_locations},
+            )
+        return jsonify({'status': 'No match'}), 404
 
 
-@api.route('/<int:locationId>') # noqa
-@api.param('locationId', 'Locations db ID')
+@api.route('/<int:location_id>')
+@api.param('location_id', 'Locations db ID')
 class LocationIdResource(Resource):
+
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True, api=api)
-    def get(self, locationId: int): # noqa
-        """ Get specific Location instance"""
-
-        return LocationService.get_by_id(locationId)
+    def get(self, location_id: int):
+        """Get specific Location instance."""
+        return LocationService.get_by_id(location_id)
 
     @access_restriction(root_required=True, api=api)
-    def delete(self, locationId: int): # noqa
-        """Delete single Location"""
+    def delete(self, location_id: int):
+        """Delete single Location."""
+        deleted_id = LocationService.delete_by_id(location_id)
 
-        deleted_id = LocationService.delete_by_id(locationId)
-
-        return jsonify(dict(status="Success", id=deleted_id))
+        return jsonify({'status': 'Success', 'id': deleted_id})
 
     @accepts(schema=LocationUpdateSchema, api=api)
     @responds(schema=LocationSchema, api=api)
     @access_restriction(root_required=True, api=api)
-    def put(self, locationId: int): # noqa
-        """Update single Location"""
-
+    def put(self, location_id: int):
+        """Update single Location."""
         changes: ILocation = request.parsed_obj
-        loc: Location = LocationService.get_by_id(locationId)
+        loc: Location = LocationService.get_by_id(location_id)
         return LocationService.update(loc, changes)
 
-@api.route('/children/<int:locationId>')  # noqa
-@api.param('locationId', 'Location\'s db ID')
-class LocationParentIdResource(Resource):
-    @responds(schema=LocationSchema(many=True), api=api)
-    def get(self, locationId: int): # noqa
-        """ Get children of Location instance"""
-        return LocationService.get_children(locationId)
 
-
-@api.route('/parent/<int:childId>')  # noqa
-@api.param('childId', 'Location\'s db ID')
+@api.route('/parent/<int:location_id>')
+@api.param('location_id', "Location's db ID")
 class LocationChildrenIdResource(Resource):
+
     @responds(schema=LocationSchema, api=api)
-    def get(self, childId: int):  # noqa
-        """ Get parent of Location instance"""
-        return LocationService.get_parent(LocationService.get_by_id(childId))
+    def get(self, location_id: int):
+        """Get parent of Location instance."""
+        return LocationService.get_parent(
+            LocationService.get_by_id(location_id),
+        )

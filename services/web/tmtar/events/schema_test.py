@@ -1,11 +1,12 @@
-from ..tests.fixtures import * # noqa
-
-from .model import Event
-from .interface import IEvent
-from .schema import EventSchema
-from pytest import fixture
 from time import time
+
+from pytest import fixture
+
 from ..project.types import *
+from ..tests.fixtures import *  # noqa
+from .interface import IEvent
+from .model import Event
+from .schema import EventSchema
 
 time_now = str(int(time()))
 
@@ -21,16 +22,25 @@ def test_schema_create(schema: EventSchema):
 
 def test_schema_works(schema: EventSchema):
     params: IEvent = schema.load(
-        dict(id='1', event_type=EventType[0], location_id='1', update_date=time_now, sex=SexType[0], min_age='12',
-             max_age='100', title="Sample", short_description="""The plugin adds a random text generator, capable 
+        dict(
+            id='1',
+            event_type=EventType[0],
+            location_id='1',
+            update_date=time_now,
+            sex=SexType[0],
+            min_age='12',
+            max_age='100',
+            title="Sample",
+            short_description="""The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 
-                     or replace a selection.""", description=""" The plugin adds a random text generator, capable of 
+                     or replace a selection.""",
+            description=""" The plugin adds a random text generator, capable of 
                      creating witty texts in different genres. Created text can be inserted newly at the caret, 
                      or replace a selection. The plugin adds a random text generator, capable of creating witty 
                      texts in different genres. 
                      Created text can be inserted newly at the caret, or replace a selection.""",
-             image_file_name='sample.png', active='True')
-    )
+            image_file_name='sample.png',
+            active='True'))
 
     event: Event = Event(**params)
 

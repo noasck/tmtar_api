@@ -1,47 +1,58 @@
-from typing import List
-from .model import File
-from ..project.injector import Injector
 import random
 import string
+from typing import List
 
-db = Injector().db
+from ..project.abstract.abstract_service import AbstractService
+from ..project.injector import Injector
+from .interface import IFile
+from .model import File
 
-
-class AliasGenerator:
-    """Generates alias for filename"""
-
-    @staticmethod
-    def random_string_generator(str_size: int = 40, allowed_chars=string.ascii_letters) -> str:
-        """ returns a random string for file alias"""
-        return ''.join(random.choice(allowed_chars) for _ in range(str_size))
+db = Injector.db
 
 
-class FileService:
-    @staticmethod
-    def get_all() -> List[File]:
-        return File.query.all()
+class AliasGenerator(object):
+    """Generates alias for filename."""
 
-    @staticmethod
-    def get_by_id(file_id: int) -> File:
-        return File.query.get_or_404(file_id)
+    @classmethod
+    def random_string_generator(
+        cls,
+        str_size: int = 40,
+        allowed_chars=string.ascii_letters,
+    ) -> str:
+        """Return a random string for file alias."""
+        return ''.join(
+            random.choice(  # noqa: S311
+                allowed_chars,
+            ) for _ in range(str_size)
+        )
 
-    @staticmethod
-    def delete_by_filename(filename: str) -> List[int]:
-        loc = File.query.filter_by(filename=filename).first_or_404()
-        if not loc:
-            return []
-        file_id = loc.id
-        db.session.delete(loc)
-        db.session.commit()
-        return [file_id]
 
-    @staticmethod
-    def search_by_filename(str_to_search: str) -> List[File] or None:
-        return File.query.filter(File.filename.ilike(f"%{str_to_search}%")).all()
+class FileService(AbstractService[File, IFile]):
+    """Class implements File db operations."""
 
-    @staticmethod
-    def create(filename: str):
-        file = File(filename=filename)
-        db.session.add(file)
-        db.session.commit()
-        return file
+    @classmethod
+    def model(cls):
+        """
+        Resolve File model class.
+
+        :return: File Type.
+        :rtype: type
+        """
+        return File
+
+    @classmethod
+    def delete_by_filename(cls, filename: str) -> List[int]:
+        """Delete specific File by filename."""
+        file_instance = cls.model().query.filter_by(
+            filename=filename,
+        ).first_or_404()
+        cls._db.session.delete(file_instance)
+        cls._db.session.commit()
+        return file_instance
+
+    @classmethod
+    def search_by_filename(cls, str_to_search: str) -> List[File] or None:
+        """Search specific File by substring of filename."""
+        return File.query.filter(
+            File.filename.ilike(f'%{str_to_search}%'),
+        ).all()

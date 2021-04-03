@@ -1,13 +1,14 @@
-from ..project.injector import Injector
 from time import time
+
+from ..project.injector import Injector
 from ..project.types import SexType
 from .interface import IEvent
 
-db = Injector().db
+db = Injector.db
 
 
 class Event(db.Model):
-    """Event Widget contain news and sales"""
+    """Event Widget contain news and sales."""
 
     __tablename__ = 'events'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -24,6 +25,7 @@ class Event(db.Model):
     active = db.Column(db.Boolean, default=True, nullable=False, index=True)
 
     def update(self, changes: IEvent):
-        for key, val in changes.items():
-            setattr(self, key, val)
+        """Update certain record."""
+        for key, new_value in changes.items():
+            setattr(self, key, new_value)
         return self

@@ -1,71 +1,87 @@
 from typing import List, Union
-from .model import Location
-from ..project.injector import Injector
+
+from ..project.abstract.abstract_service import AbstractService
 from .interface import ILocation
-from flask_restx import abort
+from .model import Location
 
 
-db = Injector().db
+class LocationService(AbstractService[Location, ILocation]):
+    """Class implements Location db operations."""
 
+    @classmethod
+    def model(cls):
+        """
+        Resolve Location model class.
 
-class LocationService:
-    @staticmethod
-    def get_all() -> List[Location]:
-        return Location.query.all()
+        :return: Location Type.
+        :rtype: type
+        """
+        return Location
 
-    @staticmethod
-    def get_by_id(location_id: int) -> Location:
-        return Location.query.get_or_404(location_id)
+    @classmethod
+    def get_parent(cls, child: Location) -> Union[Location, None]:
+        """
+        Get root of the Location instance.
 
-    @staticmethod
-    def update(loc: Location, loc_upd: ILocation):
-        loc.update(loc_upd)
-        db.session.commit()
-        return loc
+        :param child: current node.
+        :type child: Location
+        :return: Root location of current instance.
+        :rtype: Union[Location, None]
+        """
+        return child.parent
 
-    @staticmethod
-    def delete_by_id(location_id: int) -> List[int]:
-        loc = Location.query.filter_by(id=location_id).first_or_404()
-        if not loc:
-            return []
-        for child in LocationService.get_children(loc.id):
-            LocationService.delete_by_id(child.id)
-        db.session.delete(loc)
-        db.session.commit()
-        return [location_id]
+    @classmethod
+    def get_root(cls) -> Union[Location, None]:
+        """
+        Get seeded root Location.
 
-    @staticmethod
-    def get_parent(child: Location) -> Union[Location, None]:
-        if child.root != 0:
-            return LocationService.get_by_id(child.root)
-        else:
-            return None
-
-    @staticmethod
-    def get_root() -> Location or None:
+        :return: root Location
+        :rtype: Union[Location, None]
+        """
         return Location.query.filter_by(name='root').first_or_404()
 
-    @staticmethod
-    def search_by_name(str_to_search: str) -> List[Location] or None:
-        return Location.query.filter(Location.name.ilike(f"%{str_to_search}%")).all()
+    @classmethod
+    def search_by_name(cls, str_to_search: str) -> Union[List[Location], None]:
+        """
+        Find Locations with matching substring of name.
 
-    @staticmethod
-    def get_children(parent_id: int) -> List[Location]:
-        return Location.query.filter_by(root=parent_id).all()
+        :param str_to_search: substring - case insensitive.
+        :type str_to_search: str
+        :return: list of matching Locations or None.
+        :rtype: Union[List[Location], None]
+        """
+        return Location.query.filter(
+            Location.name.ilike(f'%{str_to_search}%'),
+        ).all()
 
-    @staticmethod
-    def create(new_loc: ILocation):
-        try:
-            loc = Location(**new_loc)
-        except KeyError:
-            return abort(code=400, message="Root or name not set.")
-        db.session.add(loc)
-        db.session.commit()
+    @classmethod
+    def get_children(cls, parent: Location) -> List[Location]:
+        """
+        Get all children of certain Location instance.
 
-        return loc
+        :param parent: current instance
+        :type parent: Location
+        :return: children of current instance
+        :rtype: List[Location]
+        """
+        return parent.children
 
-    @staticmethod
-    def check_location_permission(location_id: int, accessed_location_id: int) -> bool:
+    @classmethod
+    def check_location_permission(
+        cls,
+        location_id: int,
+        accessed_location_id: int,
+    ) -> bool:
+        """
+        Check permissions of user by location.
+
+        :param location_id: id of user rbac location.
+        :type location_id: int
+        :param accessed_location_id: Location of required object.
+        :type accessed_location_id: int
+        :return: if user have permission to access.
+        :rtype: bool
+        """
         loc = LocationService.get_by_id(location_id)
         has_access = False
         if accessed_location_id == 0:

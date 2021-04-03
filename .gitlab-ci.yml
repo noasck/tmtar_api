@@ -28,8 +28,7 @@ build:
 
 flakehell:
   stage: test
-  tags:
-    - docker
+
   image: python:3.7-slim
   before_script:
     - pip3 install flakehell wemake-python-styleguide

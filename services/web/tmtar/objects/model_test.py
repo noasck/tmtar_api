@@ -1,6 +1,6 @@
-from ..tests.fixtures import * # noqa
 from pytest import fixture
 
+from ..tests.fixtures import *  # noqa
 from .model import Object
 
 
@@ -8,10 +8,10 @@ from .model import Object
 def new_object() -> Object:
     return Object(
         name="SampleName",
-        target_image_file="jksdgf34778r8erg", # noqa
-        asset_file="soidfhskjdnfksd", # noqa
-        subzone_id=1
-    )
+        target_image_file="jksdgf34778r8erg",  # noqa
+        asset_file="soidfhskjdnfksd",  # noqa
+        subzone_id=1)
 
-def test_Object_create(new_object: Object): # noqa
+
+def test_Object_create(new_object: Object):  # noqa
     assert new_object

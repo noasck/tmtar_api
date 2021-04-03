@@ -1,49 +1,71 @@
+from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-from ..builders.access_control import authorizations
 
 
-class ModulesSetupLoader:
+class ModulesSetupLoader(object):
     """Setups all app modules."""
 
-    @staticmethod
-    def configure_jwt(app: Flask) -> JWTManager:
-        """Configuring JSON web token plugin."""
+    _authorizations = {
+        'admin': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+        },
+        'root': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+        },
+        'loggedIn': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+        },
+    }
+
+    @classmethod
+    def configure_jwt(cls, app: Flask) -> JWTManager:
+        """Configure JSON web token plugin."""
         return JWTManager(app)
 
-    @staticmethod
-    def configure_db(app: Flask) -> SQLAlchemy:
-        """Configuring SQLAlchemy ORM plugin."""
-        db = SQLAlchemy(app)
-        return db
+    @classmethod
+    def configure_db(cls, app: Flask) -> SQLAlchemy:
+        """Configure SQLAlchemy ORM plugin."""
+        return SQLAlchemy(app)
 
-    @staticmethod
-    def configure_ma(app: Flask) -> Marshmallow:
-        """Configuring Marshmallow plugin."""
-        ma = Marshmallow(app)
-        return ma
+    @classmethod
+    def configure_ma(cls, app: Flask) -> Marshmallow:
+        """Configure Marshmallow plugin."""
+        return Marshmallow(app)
 
-    @staticmethod
-    def configure_api(app: Flask) -> Api:
-        """Configuring Flask RestX plugin."""
-        doc = "/"
+    @classmethod
+    def configure_api(cls, app: Flask) -> Api:
+        """Configure Flask RestX plugin."""
+        doc = '/'
         if app.config['FLASK_ENV'] == 'production':
             doc = False
-        api = Api(app, app.config["API_TITLE"], doc=doc, authorizations=authorizations)
-        return api
 
-    @staticmethod
-    def tables_db_init(app: Flask, db: SQLAlchemy) -> None:
+        return Api(
+            app,
+            app.config['API_TITLE'],
+            doc=doc,
+            authorizations=cls._authorizations,
+        )
+
+    @classmethod
+    def tables_db_init(cls, app: Flask, db: SQLAlchemy) -> None:
         """
-        Recreates database.
-        @param app: main Flask app.
-        @param db: db connection instance.
+        Recreate database.
+        :param app: main Flask app.
+        :type app: Flask
+        :param db: db connection instance.
+        :type db: SQLAlchemy
         """
         from .seed_db import seed_db
-        if app.config["INIT_DB"]:
+        if app.config['INIT_DB']:
             app.logger.info('Initializing database tables...')
             # TODO: dump database records for debug or preprocessing.
             db.session.remove()
@@ -53,18 +75,18 @@ class ModulesSetupLoader:
             db.session.commit()
 
             for email in seed_db():
-                app.logger.info(f"Successfully seeded {email} root user.")
+                app.logger.info(f'Successfully seeded {email} root user.')
 
             app.logger.info('Initializing database tables - OK.')
         else:
             app.logger.info('Skipping init db tables...')
 
-    @staticmethod
-    def configure_health_route(app: Flask):
+    @classmethod
+    def configure_health_route(cls, app: Flask):
         """
-        Adds /health route to check server status.
-        @param app: main Flask app.
+        Add /health route to check server status.
+        :param app: main Flask app.
         """
         @app.route('/health', methods=['GET'])
         def health():
-            return "Healthy"
+            return 'Healthy'

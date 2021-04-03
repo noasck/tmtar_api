@@ -2,7 +2,7 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: pytest . --durations=0 --capture=no
+    command: pytest . --durations=0 --capture=no -v
     volumes:
       - ./services/web/:/usr/src/app/
     ports:

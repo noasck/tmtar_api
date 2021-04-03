@@ -1,7 +1,7 @@
 from ..project.injector import Injector
 from .interface import IObject
 
-db = Injector().db
+db = Injector.db
 
 
 class Object(db.Model):

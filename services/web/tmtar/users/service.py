@@ -1,45 +1,45 @@
-from typing import List, Optional
+from typing import Optional
 
+from ..project.abstract.abstract_service import AbstractService
 from .interface import IUser
 from .model import User
-from ..project.injector import Injector
-
-db = Injector().db
 
 
-class UserService:
-    @staticmethod
-    def get_all() -> List[User]:
-        return User.query.all()
+class UserService(AbstractService[User, IUser]):
+    """Class implements Location db operations."""
 
-    @staticmethod
-    def get_by_id(user_id: int) -> User:
-        return User.query.get_or_404(user_id)
+    @classmethod
+    def model(cls):
+        """
+        Resolve Location model class.
+        :return: Location Type.
+        :rtype: type
+        """
+        return User
 
-    @staticmethod
-    def get_by_email(email: str) -> Optional[User]:
+    @classmethod
+    def get_by_email(cls, email: str) -> Optional[User]:
+        """
+        Get certain User by email.
+        :param email: user's email
+        :type email: str
+        :return: matched user
+        :rtype: str
+        """
         return User.query.filter_by(email=email).first()
 
-    @staticmethod
-    def update(loc: User, loc_upd: IUser):
-        loc.update(loc_upd)
-        db.session.commit()
-        return loc
-
-    @staticmethod
-    def delete_by_id(user_id: int) -> List[int]:
-        loc = User.query.filter_by(id=user_id).first_or_404()
-        if not loc:
-            return []
-        db.session.delete(loc)
-        db.session.commit()
-        return [user_id]
-
-    @staticmethod
-    def get_or_new_by_email(email: str):
+    @classmethod
+    def get_or_new_by_email(cls, email: str):
+        """
+        Get existing or create new User by received email.
+        :param email: logged in users email
+        :type email: str
+        :return: User instance
+        :rtype: str
+        """
         usr = UserService.get_by_email(email)
         if not usr:
             usr = User(email=email)
-            db.session.add(usr)
-            db.session.commit()
+            cls._db.session.add(usr)
+            cls._db.session.commit()
         return usr

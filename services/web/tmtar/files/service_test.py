@@ -1,7 +1,9 @@
-from ..tests.fixtures import db, app # noqa
+from typing import List
 
 from flask_sqlalchemy import SQLAlchemy
-from typing import List
+
+from ..tests.fixtures import app, db  # noqa
+from .interface import IFile
 from .model import File
 from .service import FileService
 
@@ -69,7 +71,7 @@ def test_search_by_filename(db: SQLAlchemy):
 
 
 def test_create(db: SQLAlchemy):
-    file = FileService.create("filename")
+    file = FileService.create(IFile(id=1, filename="filename"))
     result = File.query.all()
 
     assert result

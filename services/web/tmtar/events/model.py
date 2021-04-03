@@ -1,9 +1,10 @@
-from ..project.injector import Injector
 from time import time
+
+from ..project.injector import Injector
 from ..project.types import SexType
 from .interface import IEvent
 
-db = Injector().db
+db = Injector.db
 
 
 class Event(db.Model):

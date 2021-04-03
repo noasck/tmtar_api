@@ -16,7 +16,7 @@ class MetaInjector(type):
         :raises NameError: if instance name is incorrect.
         """
         if re.match('[a-zA-Z_][a-zA-Z_0-9]*', to):
-            MetaInjector.__storage[to] = instance
+            MetaInjector._storage[to] = instance  # noqa: WPS437
         else:
             raise NameError(to, " can't be the name of injected instance.")
 
@@ -29,7 +29,7 @@ class MetaInjector(type):
         :raises AttributeError: if instance name is incorrect.
         """
         try:
-            return MetaInjector.__storage[instance_name]
+            return MetaInjector._storage[instance_name]  # noqa: WPS437
         except KeyError:
             raise AttributeError(instance_name, " wasn't injected.")
 

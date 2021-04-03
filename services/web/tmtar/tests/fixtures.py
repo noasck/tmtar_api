@@ -1,11 +1,11 @@
 import pytest
-from wsgi import start_app  # noqa
+from wsgi import start_app
 
 from ..project.helpers.ext_loader import ModulesSetupLoader
 from ..project.injector import Injector
 
 try:
-    Injector.db
+    Injector.db  # noqa: WPS428
 except AttributeError:
     start_app()
 

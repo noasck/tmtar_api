@@ -1,11 +1,15 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate, MigrateCommand
 from flask_restx import Api
+from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
+from ..builders.singleton import singleton
 
-class ModulesSetupLoader(object):
+
+class ModulesSetup(object):
     """Setups all app modules."""
 
     _authorizations = {
@@ -17,6 +21,7 @@ class ModulesSetupLoader(object):
         'root': {
             'type': 'apiKey',
             'in': 'header',
+
             'name': 'Authorization',
         },
         'loggedIn': {
@@ -27,21 +32,25 @@ class ModulesSetupLoader(object):
     }
 
     @classmethod
+    @singleton('jwt')
     def configure_jwt(cls, app: Flask) -> JWTManager:
         """Configure JSON web token plugin."""
         return JWTManager(app)
 
     @classmethod
+    @singleton('db')
     def configure_db(cls, app: Flask) -> SQLAlchemy:
         """Configure SQLAlchemy ORM plugin."""
         return SQLAlchemy(app)
 
     @classmethod
+    @singleton('ma')
     def configure_ma(cls, app: Flask) -> Marshmallow:
         """Configure Marshmallow plugin."""
         return Marshmallow(app)
 
     @classmethod
+    @singleton('api')
     def configure_api(cls, app: Flask) -> Api:
         """Configure Flask RestX plugin."""
         doc = '/'
@@ -56,33 +65,6 @@ class ModulesSetupLoader(object):
         )
 
     @classmethod
-    def tables_db_init(cls, app: Flask, db: SQLAlchemy) -> None:
-        """
-        Recreate database.
-
-        :param app: main Flask app.
-        :type app: Flask
-        :param db: db connection instance.
-        :type db: SQLAlchemy
-        """
-        from .seed_db import seed_db
-        if app.config['INIT_DB']:
-            app.logger.info('Initializing database tables...')
-            # TODO: dump database records for debug or preprocessing.
-            db.session.remove()
-            db.drop_all()
-            db.session.commit()
-            db.create_all()
-            db.session.commit()
-
-            for email in seed_db():
-                app.logger.info(f'Successfully seeded {email} root user.')
-
-            app.logger.info('Initializing database tables - OK.')
-        else:
-            app.logger.info('Skipping init db tables...')
-
-    @classmethod
     def configure_health_route(cls, app: Flask):
         """
         Add /health route to check server status.
@@ -92,3 +74,15 @@ class ModulesSetupLoader(object):
         @app.route('/health', methods=['GET'])
         def health():
             return 'Healthy'
+
+    @classmethod
+    def configure_fm(cls, app, db):
+        """Create Flask-Migrate plugin."""
+        return Migrate(app, db)
+
+    @classmethod
+    def configure_manager(cls, app: Flask) -> Manager:
+        """Configure Flask-Script plugin Manager."""
+        manager = Manager(app)
+        manager.add_command('db', MigrateCommand)
+        return manager

@@ -1,13 +1,13 @@
 from flask import Flask
-from flask_jwt_extended import JWTManager
-from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 from flask_restx import Api
+from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from ..routes import register_routes
-from .helpers.cors_headers import register_cors
-from .helpers.ext_loader import ModulesSetupLoader as MLoader
+from .builders.database_loader import DatabaseSetup as DLoader
+from .builders.extension_loader import ModulesSetup as MLoader
 from .injector import Injector
 
 
@@ -23,41 +23,35 @@ class AppModule(object):
             app = Flask(__name__)
             app.config.from_object(config)
             app.logger.info('Application created successfully!')
+            app.wsgi_app = ProxyFix(app.wsgi_app)
+
             self.app = app
-
-    def configure(self):
-        """Configure main modules and extensions."""
-        try:
-            Injector.configured is True  # noqa: B015,WPS428
-        except (AssertionError, AttributeError):
-            self.app.wsgi_app = ProxyFix(self.app.wsgi_app)
-
-            # Extensions modules
-            jwt: JWTManager = MLoader.configure_jwt(self.app)
-            db: SQLAlchemy = MLoader.configure_db(self.app)
-            api: Api = MLoader.configure_api(self.app)
-            ma: Marshmallow = MLoader.configure_ma(self.app)
-
-            Injector.inject(db, to='db')
-            Injector.inject(jwt, to='jwt')
-            Injector.inject(ma, to='ma')
-            Injector.inject(api, to='api')
             Injector.inject(self.app, to='app')
 
-            # DB tables initialization
-            MLoader.tables_db_init(self.app, db)
+            self._configure_plugins()
 
-            # Adding /health route
-            MLoader.configure_health_route(self.app)
+    def _configure_plugins(self):
+        """Configure main modules and extensions."""
+        # Extensions modules
+        MLoader.configure_jwt(self.app)
+        db: SQLAlchemy = MLoader.configure_db(self.app)
+        api: Api = MLoader.configure_api(self.app)
+        MLoader.configure_ma(self.app)
 
-            # Registering all modules
-            register_routes(api=api)
+        # Adding /health route
+        MLoader.configure_health_route(self.app)
 
-            # Adding CORS policy
-            register_cors(self.app)
+        # Registering all modules
+        register_routes(api=api)
 
-            self.app.logger.info('Application initialization finished!')
+        # Adding CORS policy
+        CORS(self.app)
 
-            Injector.inject(instance=True, to='configured')
+        # Register migrations and CLI
+        MLoader.configure_fm(self.app, db)
+        self.manager: Manager = MLoader.configure_manager(self.app)
 
-        return self.app
+        # Register database brute CLI commands
+        DLoader.add_cli(self.app, db, self.manager)
+
+        self.app.logger.info('Application initialization finished!')

@@ -60,6 +60,11 @@ docker-compose run web python manage.py set_up
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
+
 #### Pre-commit checks:
 - Styleguide: **OK** (0 warnings)
 - Tests: **OK** (72/72 passed)
+
+#### Warning
+Source code moved to GitLab repository. Contact ```@noasck```
+

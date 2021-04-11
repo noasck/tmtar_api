@@ -2,13 +2,14 @@ from ..project.injector import Injector
 from .model import User
 from .schema import UserSchema
 
-jwt = Injector().jwt
+jwt = Injector.jwt
 
 
 @jwt.user_claims_loader
 def user_based_token(user: User):
     """
-    Function that serialize single User entity data to JWT
+    Serialize single User entity data to JWT.
+
     :param user: User instance
     :return: serialized User Instance
     """
@@ -18,7 +19,8 @@ def user_based_token(user: User):
 #: TEST: Delete
 def verify_token(token: str) -> str:
     """
-    Mocking google and fb auth
+    Mock google and fb auth.
+
     :param token: email
     :return: email
     """
@@ -27,4 +29,5 @@ def verify_token(token: str) -> str:
 
 @jwt.user_identity_loader
 def user_identity_lookup(user: User) -> str:
+    """Define identity user field."""
     return user.email

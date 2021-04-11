@@ -1,68 +1,57 @@
-from flask_jwt_extended import JWTManager
-from flask_marshmallow import Marshmallow
+from flask import Flask
+from flask_cors import CORS
 from flask_restx import Api
+from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.middleware.proxy_fix import ProxyFix
-from flask import Flask
-
-from .helpers.ext_loader import ModulesSetupLoader as MLoader
-from .helpers.cors_headers import register_cors
-from .injector import Injector
 
 from ..routes import register_routes
+from .builders.database_loader import DatabaseSetup as DLoader
+from .builders.extension_loader import ModulesSetup as MLoader
+from .injector import Injector
 
 
-class AppModule:
-    """
-    Class providing application initialization.
-    """
+class AppModule(object):
+    """Class providing application initialization."""
+
     def __init__(self):
+        """App module initialized with app config and Flask instance."""
         try:
-            self.app = Injector().app
-            self.app.logger.info('Using previously created application!')
+            self.app = Injector.app
         except AttributeError:
-            config = "tmtar.project.config.Config"
+            config = 'tmtar.project.config.Config'
             app = Flask(__name__)
             app.config.from_object(config)
             app.logger.info('Application created successfully!')
+            app.wsgi_app = ProxyFix(app.wsgi_app)
+
             self.app = app
+            Injector.inject(self.app, to='app')
 
-    """Configure the application."""
+            self._configure_plugins()
 
-    def configure(self):
-        """
-        Main configurations.
-        """
-        try:
-            assert Injector().configured
-        except (AssertionError, AttributeError):
-            self.app.wsgi_app = ProxyFix(self.app.wsgi_app)
+    def _configure_plugins(self):
+        """Configure main modules and extensions."""
+        # Extensions modules
+        MLoader.configure_jwt(self.app)
+        db: SQLAlchemy = MLoader.configure_db(self.app)
+        api: Api = MLoader.configure_api(self.app)
+        MLoader.configure_ma(self.app)
 
-            # Extensions modules
-            jwt: JWTManager = MLoader.configure_jwt(self.app)
-            db: SQLAlchemy = MLoader.configure_db(self.app)
-            api: Api = MLoader.configure_api(self.app)
-            ma: Marshmallow = MLoader.configure_ma(self.app)
+        # Adding /health route
+        MLoader.configure_health_route(self.app)
 
-            Injector().inject(db, to="db")
-            Injector().inject(jwt, to="jwt")
-            Injector().inject(ma, to="ma")
-            Injector().inject(api, to="api")
-            Injector().inject(self.app, to="app")
+        # Registering all modules
+        register_routes(api=api)
 
-            # DB tables initialization
-            MLoader.tables_db_init(self.app, db)
+        # Adding CORS policy
+        CORS(self.app)
 
-            # Adding /health route
-            MLoader.configure_health_route(self.app)
+        # Register migrations and CLI
+        MLoader.configure_fm(self.app, db)
+        self.manager: Manager = MLoader.configure_manager(self.app)
 
-            # Adding CORS policy
-            register_cors(self.app)
+        # Register database brute CLI commands
+        DLoader.add_cli(self.app, db, self.manager)
 
-            # Registering all modules
-            register_routes(app=self.app, api=api)
-            self.app.logger.info('Application initialization finished!')
-
-            Injector().inject(True, "configured")
-
-        return self.app
+        self.app.logger.info('Application initialization finished!')

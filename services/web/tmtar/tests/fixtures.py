@@ -1,24 +1,26 @@
 import pytest
-from ..project.injector import Injector
-from ..project.helpers.ext_loader import ModulesSetupLoader
-from wsgi import start_app # noqa
+from wsgi import start_app
 
+from ..project.builders.database_loader import DatabaseSetup
+from ..project.injector import Injector
 
 try:
-    Injector().db
+    Injector.db  # noqa: WPS428
 except AttributeError:
     start_app()
 
 
 @pytest.fixture
 def app():
-    return Injector().app
+    return Injector.app
 
 
 @pytest.fixture
 def db(app):
-    db = Injector().db
-    ModulesSetupLoader.tables_db_init(app, db)
+    db = Injector.db
+    DatabaseSetup.tear_down_db(app, db)
+    DatabaseSetup.set_up_db(app, db)
+    DatabaseSetup.seed_db(app, db)
     return db
 
 

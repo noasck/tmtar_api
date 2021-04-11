@@ -1,37 +1,33 @@
-from ..tests.fixtures import db, app # noqa
-from flask_sqlalchemy import SQLAlchemy
 from typing import List
+
+from flask_sqlalchemy import SQLAlchemy
+from pytest import fixture
+
+from ..tests.fixtures import app, db  # noqa
+from .interface import IObject
 from .model import Object
 from .service import ObjectService
-from .interface import IObject
-from pytest import fixture
 
 
 @fixture
 def create_sample_objects(db: SQLAlchemy):
-    o1 = Object(
-        id=1,
-        name="SampleName",
-        target_image_file="lorem_ipsum",
-        asset_file="lorem_ipsum",
-        subzone_id=1
-    )
+    o1 = Object(id=1,
+                name="SampleName",
+                target_image_file="lorem_ipsum",
+                asset_file="lorem_ipsum",
+                subzone_id=1)
 
-    o2 = Object(
-        id=2,
-        name="name",
-        target_image_file="lorem_ipsum",
-        asset_file="lorem_ipsum",
-        subzone_id=1
-    )
+    o2 = Object(id=2,
+                name="name",
+                target_image_file="lorem_ipsum",
+                asset_file="lorem_ipsum",
+                subzone_id=1)
 
-    o3 = Object(
-        id=3,
-        name="SampleName2",
-        target_image_file="lorem_ipsum",
-        asset_file="lorem_ipsum",
-        subzone_id=2
-    )
+    o3 = Object(id=3,
+                name="SampleName2",
+                target_image_file="lorem_ipsum",
+                asset_file="lorem_ipsum",
+                subzone_id=2)
 
     db.session.add(o1)
     db.session.add(o2)
@@ -85,7 +81,7 @@ def test_search_by_name(create_sample_objects: List[Object]):
 def test_delete_by_id(create_sample_objects: List[Object]):
     o1, o2, o3 = create_sample_objects
 
-    ind = ObjectService.delete_by_id(2) # noqa
+    ind = ObjectService.delete_by_id(2)  # noqa
 
     result = ObjectService.get_all()
 
@@ -93,7 +89,7 @@ def test_delete_by_id(create_sample_objects: List[Object]):
     assert o1 in result and o3 in result
 
 
-def test_create(db: SQLAlchemy): # noqa
+def test_create(db: SQLAlchemy):  # noqa
     new_object: IObject = {
         "name": "SampleName2",
         "target_image_file": "lorem_ipsum",
@@ -111,12 +107,16 @@ def test_create(db: SQLAlchemy): # noqa
 
 
 def test_update(db: SQLAlchemy):
-    obj: Object = Object(id=5, name="Sample name", subzone_id=4,
-                         asset_file="File 4", target_image_file="Some File 3")
+    obj: Object = Object(id=5,
+                         name="Sample name",
+                         subzone_id=4,
+                         asset_file="File 4",
+                         target_image_file="Some File 3")
     db.session.add(obj)
     db.session.commit()
 
-    upd_obj: IObject = IObject(name="Sample name 3", asset_file="Another asset file")
+    upd_obj: IObject = IObject(name="Sample name 3",
+                               asset_file="Another asset file")
     ObjectService.update(obj, upd_obj)
 
     result: Object = Object.query.get(obj.id)

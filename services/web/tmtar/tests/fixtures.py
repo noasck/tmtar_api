@@ -1,7 +1,7 @@
 import pytest
 from wsgi import start_app
 
-from ..project.helpers.ext_loader import ModulesSetupLoader
+from ..project.builders.database_loader import DatabaseSetup
 from ..project.injector import Injector
 
 try:
@@ -18,7 +18,9 @@ def app():
 @pytest.fixture
 def db(app):
     db = Injector.db
-    ModulesSetupLoader.tables_db_init(app, db)
+    DatabaseSetup.tear_down_db(app, db)
+    DatabaseSetup.set_up_db(app, db)
+    DatabaseSetup.seed_db(app, db)
     return db
 
 

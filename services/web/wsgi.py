@@ -14,7 +14,7 @@ def start_app() -> Flask:
 
     :return: main flask app object
     """
-    return AppModule().configure()
+    return AppModule().app
 
 
 if __name__ == '__main__':

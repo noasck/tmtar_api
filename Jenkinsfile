@@ -23,10 +23,10 @@ pipeline{
         stage('Build') {
             steps{
                 sh '''
-                export
-                docker pull registry.gitlab.com/baltazar1697/tmtar_api || true
-                docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/
-                docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
+                    export
+                    docker pull registry.gitlab.com/baltazar1697/tmtar_api || true
+                    docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/
+                    docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
                    '''
             }
         }
@@ -38,6 +38,8 @@ pipeline{
         }
             steps{
                 sh 'pip3 install flakehell wemake-python-styleguide'
+                sleep 30
+                sh 'flakehell lint --format=gitlab --output-file flakehell.json'
             }
         }
         stage('Tests'){

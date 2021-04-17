@@ -1,29 +1,31 @@
 pipeline{
-    agent {
-        docker{
-            image ' docker:stable '
-            registryUrl 'registry.gitlab.com/baltazar1697/tmtar_api'
-            //args  ' -v $HOME/.jcache'
-            }
+    agent none {
     environment {
         CI_REGISTRY_USER = 'baltazar1697'
         TOKEN = '2_DTzgQvcMT_9C_shZsD'
         }
     }
     stages {
-        stage('Before build') {  
+        stage('Before build') {
+            agent {
+                docker {
+                    image ' docker:stable '
+                    registryUrl 'registry.gitlab.com/baltazar1697/tmtar_api'
+                    //args  ' -v $HOME/.jcache'
+                }
+            }  
             steps {
-                    sh "docker login -u $CI_REGISTRY_USER -p $TOKEN registry.gitlab.com"
-                    echo "login successful"
+                sh "docker login -u $CI_REGISTRY_USER -p $TOKEN registry.gitlab.com"
+                echo "login successful"
             }
         }
         stage('Build') {
             steps {
-                    sh "export"
-                    sh "docker pull registry.gitlab.com/baltazar1697/tmtar_api || true"
-                    sh "docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/"
-                    sh "docker push registry.gitlab.com/baltazar1697/tmtar_api:latest"
-                    echo "build successful"
+                sh "export"
+                sh "docker pull registry.gitlab.com/baltazar1697/tmtar_api || true"
+                sh "docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/"
+                sh "docker push registry.gitlab.com/baltazar1697/tmtar_api:latest"
+                echo "build successful"
             }
         }
         stage('FLAKEHELL') {

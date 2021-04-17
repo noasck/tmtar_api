@@ -1,20 +1,17 @@
-pipeline{
+/* groovylint-disable CompileStatic */
+pipeline {
     agent none
-    environment {
-        CI_REGISTRY_USER = 'baltazar1697'
-        TOKEN = '2_DTzgQvcMT_9C_shZsD'
-        }
     stages {
         stage('Before build') {
             agent {
                 docker {
                     image ' docker:stable '
-                    registryUrl 'registry.gitlab.com/baltazar1697/tmtar_api'
-                    //args  ' -v $HOME/.jcache'
+                    registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
+                    registryCredentialsId 'RegisrtyID'
                 }
             }
             steps {
-                sh "docker login -u $CI_REGISTRY_USER -p $TOKEN registry.gitlab.com"
+                sh 'docker login registry.gitlab.com'
                 echo 'login successful'
             }
         }

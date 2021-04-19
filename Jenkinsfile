@@ -1,28 +1,34 @@
-/* groovylint-disable CompileStatic */
+/* groovylint-disable CompileStatic, DuplicateStringLiteral */
 pipeline {
-    agent none
+    agent any
+    parameters {
+        choice(
+            choices: ['only build' , 'build and push'],
+            description: '',
+            name: 'REQUESTED_ACTION')
+    }
+    environment {
+        REGISTRY = 'registry.gitlab.com/baltazar1697/tmtar_api'
+    }
     stages {
-        stage('Before build') {
+        stage('Build') {
             agent {
                 docker {
                     image ' docker:stable '
-                    registryUrl 'registry.gitlab.com'
+                    registryUrl '$REGISRTY'
                     registryCredentialsId 'RegisrtyID'
                 }
+            }
+            when {
+                expression { params.REQUESTED_ACTION == 'build and push' }
             }
             steps {
                 sh 'docker login registry.gitlab.com'
                 echo 'login successful'
-            }
-        }
-        stage('Build') {
-            steps {
                 sh 'export'
-                sh 'docker pull registry.gitlab.com/baltazar1697/tmtar_api || true'
-                sh '''docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api
-                -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/
-                '''
-                sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
+                sh 'docker pull $REGISTRY || true'
+                sh 'docker build --cache-from $REGISTRY -t $REGISTRY:latest services/web/'
+                sh 'docker push $REGISTRY:latest'
                 echo 'build successful'
             }
         }

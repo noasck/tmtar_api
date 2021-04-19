@@ -12,25 +12,32 @@ pipeline {
     }
     stages {
         stage('Build') {
-            agent {
-                docker {
-                    image ' docker:stable '
-                    registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
-                    registryCredentialsId 'RegisrtyID'
-                }
-            }
-            when {
-                expression { params.REQUESTED_ACTION == 'build and push' }
-            }
-            steps {
-                sh 'docker login registry.gitlab.com'
-                echo 'login successful'
-                sh 'export'
-                sh 'docker pull registry.gitlab.com/baltazar1697/tmtar_api || true'
-                sh 'docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/'
-                sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
-                echo 'build successful'
-            }
+            // agent {
+            //     docker {
+            //         image ' docker:stable '
+            //         registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
+            //         registryCredentialsId 'RegisrtyID'
+            //     }
+            // }
+            // when {
+            //     expression { params.REQUESTED_ACTION == 'build and push' }
+            // }
+            // steps {
+            //     sh 'docker login'
+            //     echo 'login successful'
+                
+            //     sh 'docker pull ${REGISTRY}'
+            //     sh 'docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/'
+            //     sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
+            //     echo 'build successful'
+            // }
+            docker.withRegistry('${REGISTRY}', 'RegisrtyID') {
+
+                def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+                /* Push the container to the custom Registry */
+                customImage.push()
+    }
         }
         stage('FLAKEHELL') {
             agent {

@@ -26,9 +26,9 @@ pipeline {
                 sh 'docker login registry.gitlab.com'
                 echo 'login successful'
                 sh 'export'
-                sh 'docker pull $REGISTRY || true'
-                sh 'docker build --cache-from $REGISTRY -t $REGISTRY:latest services/web/'
-                sh 'docker push $REGISTRY:latest'
+                sh 'docker pull registry.gitlab.com/baltazar1697/tmtar_api || true'
+                sh 'docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/'
+                sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
                 echo 'build successful'
             }
         }

@@ -15,7 +15,7 @@ pipeline {
             agent {
                 docker {
                     image ' docker:stable '
-                    registryUrl '$REGISRTY'
+                    registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
                     registryCredentialsId 'RegisrtyID'
                 }
             }

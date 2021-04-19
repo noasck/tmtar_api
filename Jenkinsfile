@@ -12,13 +12,13 @@ pipeline {
     }
     stages {
         stage('Build') {
-            // agent {
-            //     docker {
-            //         image ' docker:stable '
-            //         registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
-            //         registryCredentialsId 'RegisrtyID'
-            //     }
-            // }
+            agent {
+                docker {
+                    image ' docker:stable '
+                    //registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
+                    //registryCredentialsId 'RegisrtyID'
+                }
+            }
             // when {
             //     expression { params.REQUESTED_ACTION == 'build and push' }
             // }
@@ -31,14 +31,12 @@ pipeline {
             //     sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
             //     echo 'build successful'
             // }
-            docker.withRegistry('${REGISTRY}', 'RegisrtyID') {
-
-                def customImage = docker.build("my-image:${env.BUILD_ID}")
-
-                /* Push the container to the custom Registry */
-                customImage.push()
-    }
+            steps{
+                sh ' docker build -t ${env.BUILD_ID} services/web/ '
+                echo 'Building succeeded'
+            }
         }
+    
         stage('FLAKEHELL') {
             agent {
                 docker {

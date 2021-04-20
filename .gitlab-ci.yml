@@ -31,13 +31,9 @@ flakehell:
   allow_failure: true
   image: python:3.7-slim
   before_script:
-    - pip3 install flakehell wemake-python-styleguide
+    - pip3 install wemake-python-styleguide
   script:
-    - flakehell lint --format=gitlab --output-file flakehell.json
-  artifacts:
-    reports:
-      codequality: flakehell.json
-    expire_in: 1 day
+    - flake8 . 
 
 test:
   stage: test

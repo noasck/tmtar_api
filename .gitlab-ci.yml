@@ -25,15 +25,18 @@ build:
     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
+  only:
+    - master
 
-flakehell:
+codestyle-check:
   stage: test
-  allow_failure: true
   image: python:3.7-slim
   before_script:
     - pip3 install wemake-python-styleguide
   script:
     - flake8 . 
+  only:
+    - dev
 
 test:
   stage: test
@@ -48,6 +51,8 @@ test:
     reports:
       junit: services/web/report.xml 
     expire_in: 1 day
+  only:
+    - dev
 
 deploy:
   stage: release

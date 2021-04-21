@@ -35,8 +35,8 @@ pipeline {
             agent any
             steps {
                 sh "docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/"
-                sh "docker run ${REGISTRY}:testing"                
-                echo 'flakehell checked'
+                sh "docker run ${REGISTRY}:testing "                
+                echo 'Code checked'
             }
             // post {
             //     always {

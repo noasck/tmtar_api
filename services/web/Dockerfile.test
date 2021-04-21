@@ -12,10 +12,9 @@ COPY tmtar/requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install flake8 wemake-python-styleguide
 
-COPY ../../.flake8 /usr/src/app
+
 COPY . /usr/src/app/
 
-RUN ls
 CMD flake8 .
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

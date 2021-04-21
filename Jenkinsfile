@@ -30,13 +30,6 @@ pipeline {
                 echo 'Building succeeded'
             }
         }
-        stage('DB INIT & MIGRATE') {
-            steps {
-                sh 'docker-compose run web python manage.py db init'
-                sh 'docker-compose run web python manage.py db migrate'
-                sh 'docker-compose run web python manage.py db upgrade'
-            }
-        }
         stage('TESTS') {
             parallel{
                 stage('CODESTYLE-CHECK') {
@@ -52,13 +45,29 @@ pipeline {
                         sh 'docker-compose -f docker-compose.test.yml up -d '
                     }
                 
-                    post {
-                        always {
-                            junit '*.xml'
-                        }
-                    }
+                    // post {
+                    //     always {
+                    //         junit '*.xml'
+                    //     }
+                    // }
                 }
             }
         }
+        stage('DB INIT & MIGRATE') {
+            steps {
+                
+                script{
+                    try{
+                        sh 'docker-compose run web python manage.py db init'
+                    }
+                    catch (error) {
+                        echo "Exception. Migrations don't needed"
+                    }
+                }
+                sh 'docker-compose run web python manage.py db migrate'
+                sh 'docker-compose run web python manage.py db upgrade'
+            }
+        }
+        
     }
 }

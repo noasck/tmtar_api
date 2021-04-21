@@ -1,4 +1,3 @@
-/* groovylint-disable CompileStatic, DuplicateStringLiteral */
 pipeline {
     agent any
     // parameters {
@@ -23,11 +22,10 @@ pipeline {
             //     sh 'docker pull ${REGISTRY}'
             //     sh 'docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/'
             //     sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
-            //     echo 'build successful'
             // }
             steps{
-                sh " docker build -t ${REGISTRY}:latest services/web/ "
-                echo 'Building succeeded'
+                sh " docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/ "
+                echo '---------- Building testing image succeeded ----------'
             }
         }
         stage('TESTS') {
@@ -35,14 +33,14 @@ pipeline {
                 stage('CODESTYLE-CHECK') {
                     agent any
                     steps {
-                        sh "docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/"
                         sh "docker run ${REGISTRY}:testing "                
-                        echo 'Code checked'
+                        echo '---------- CODE CHECKED ----------'
                     }
                 }
                 stage('UNIT TESTS'){
                     steps {
-                        sh 'docker-compose -f docker-compose.test.yml up -d '
+                        sh 'docker-compose -f docker-compose.test.yml up --build -d '
+                        echo '---------- TESTS SUCCEED---------- '
                     }
                 
                     // post {
@@ -53,21 +51,19 @@ pipeline {
                 }
             }
         }
-        stage('DB INIT & MIGRATE') {
-            steps {
-                
-                script{
-                    try{
-                        sh 'docker-compose run web python manage.py db init'
-                    }
-                    catch (error) {
-                        echo "Exception. Migrations don't needed"
-                    }
-                }
-                sh 'docker-compose run web python manage.py db migrate'
-                sh 'docker-compose run web python manage.py db upgrade'
+        stage('PRODUCTION UP'){
+            agent any
+            steps{
+                sh "dc_build_prod -d"
             }
         }
-        
+        stage('DB MIGRATIONS') {
+            agent any
+            steps {
+                sh 'docker-compose run web python manage.py db migrate'
+                sh 'docker-compose run web python manage.py db upgrade'
+                echo '---------- DB MIGRATED ---------- '
+            }
+        }
     }
 }

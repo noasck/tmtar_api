@@ -30,20 +30,6 @@ pipeline {
                 echo 'Building succeeded'
             }
         }
-    
-        stage('CODESTYLE-CHECK') {
-            agent any
-            steps {
-                sh "docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/"
-                sh "docker run ${REGISTRY}:testing "                
-                echo 'Code checked'
-            }
-            // post {
-            //     always {
-            //         junit '*.json'
-            //     }
-            // }
-        }
         stage('DB INIT & MIGRATE') {
             steps {
                 sh 'docker-compose run web python manage.py db init'
@@ -52,12 +38,25 @@ pipeline {
             }
         }
         stage('TESTS') {
-            steps {
-                sh 'docker-compose -f docker-compose.test.yml up -d '
-            }
-            post {
-                always {
-                    junit '*.xml'
+            parallel{
+                stage('CODESTYLE-CHECK') {
+                    agent any
+                    steps {
+                        sh "docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/"
+                        sh "docker run ${REGISTRY}:testing "                
+                        echo 'Code checked'
+                    }
+                }
+                stage('UNIT TESTS'){
+                    steps {
+                        sh 'docker-compose -f docker-compose.test.yml up -d '
+                    }
+                
+                    post {
+                        always {
+                            junit '*.xml'
+                        }
+                    }
                 }
             }
         }

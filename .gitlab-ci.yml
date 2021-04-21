@@ -3,7 +3,6 @@ variables:
   SQL_PORT: '5432'
   DATABASE: 'postgres'
   APP_FOLDER: '/usr/src/app/tmtar'
-  DB_INIT: 'True'
 
 image: docker:stable
 services: 

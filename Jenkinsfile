@@ -39,7 +39,7 @@ pipeline {
                 }
                 stage('UNIT TESTS'){
                     steps {
-                        sh 'docker-compose -f docker-compose.test.yml up --build -d '
+                        sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                         echo '---------- TESTS SUCCEED---------- '
                     }
                 
@@ -54,7 +54,12 @@ pipeline {
         stage('PRODUCTION UP'){
             agent any
             steps{
-                sh "dc_build_prod -d"
+                sh '''
+                alias dc_down_test="docker-compose -f docker-compose.test.yml down"
+                dc_down_test
+                alias dc_build_prod="docker-compose -f docker-compose.prod.yml up --build"
+                dc_build_prod -d 
+                '''
             }
         }
         stage('DB MIGRATIONS') {

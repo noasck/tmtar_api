@@ -1,24 +1,18 @@
 /* groovylint-disable CompileStatic, DuplicateStringLiteral */
 pipeline {
     agent any
-    parameters {
-        choice(
-            choices: ['only build' , 'build and push'],
-            description: '',
-            name: 'REQUESTED_ACTION')
-    }
+    // parameters {
+    //     choice(
+    //         choices: ['only build' , 'build and push'],
+    //         description: '',
+    //         name: 'REQUESTED_ACTION')
+    // }
     environment {
         REGISTRY = 'registry.gitlab.com/baltazar1697/tmtar_api'
     }
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image ' docker:stable '
-                    //registryUrl 'https://registry.gitlab.com/baltazar1697/tmtar_api'
-                    //registryCredentialsId 'RegisrtyID'
-                }
-            }
+        stage('BUILD') {
+            agent any
             // when {
             //     expression { params.REQUESTED_ACTION == 'build and push' }
             // }
@@ -32,39 +26,33 @@ pipeline {
             //     echo 'build successful'
             // }
             steps{
-                sh ' docker build -t ${env.BUILD_ID} services/web/ '
+                sh " docker build -t ${REGISTRY}:latest services/web/ "
                 echo 'Building succeeded'
             }
         }
     
-        stage('FLAKEHELL') {
-            agent {
-                docker {
-                    image ' python:3.7 '
-                }
-            }
+        stage('CODESTYLE-CHECK') {
+            agent any
             steps {
-                sh 'pip3 install flakehell wemake-python-styleguide'
-                sleep 30
-                sh 'flakehell lint --format=gitlab --output-file flakehell.json'
+                sh "docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/"
+                sh "docker run ${REGISTRY}:testing"                
                 echo 'flakehell checked'
             }
-            post {
-                always {
-                    junit '*.json'
-                }
-            }
+            // post {
+            //     always {
+            //         junit '*.json'
+            //     }
+            // }
         }
-        stage('DB init & migrate') {
+        stage('DB INIT & MIGRATE') {
             steps {
                 sh 'docker-compose run web python manage.py db init'
                 sh 'docker-compose run web python manage.py db migrate'
                 sh 'docker-compose run web python manage.py db upgrade'
             }
         }
-        stage('Tests') {
+        stage('TESTS') {
             steps {
-                sh 'apk add --no-cache docker-compose '
                 sh 'docker-compose -f docker-compose.test.yml up -d '
             }
             post {

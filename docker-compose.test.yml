@@ -8,6 +8,7 @@ services:
     ports:
       - 5000:5000
     env_file:
+      - ./.env
       - ./.env.dev
     networks:
       - api
@@ -17,16 +18,16 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - postgresData:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=tmtar_user
       - POSTGRES_PASSWORD=dfgBNM3689
-      - POSTGRES_DB=tmtar_dev
+      - POSTGRES_DB=tmtar_test
     networks:
       - api
 
 volumes:
-  postgresData:
+  postgres_data:
 
 networks:
   api:

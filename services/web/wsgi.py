@@ -5,6 +5,7 @@ import werkzeug
 werkzeug.cached_property = werkzeug.utils.cached_property  # noqa: E402
 
 from flask import Flask  # noqa: E402
+
 from tmtar.project import AppModule  # noqa: F401, E402
 
 

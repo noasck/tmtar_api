@@ -3,7 +3,7 @@ from typing import List
 
 from flask_sqlalchemy import SQLAlchemy
 
-from ..project.types import RoleType, SexType
+from ..project.types import SexType
 from ..tests.fixtures import *  # noqa
 from .interface import IUser
 from .model import User

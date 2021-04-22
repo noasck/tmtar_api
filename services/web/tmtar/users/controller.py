@@ -10,7 +10,7 @@ from flask_restx import Namespace, Resource, abort
 
 from ..project.builders.access_control import access_restriction
 from .controller_identity import verify_token
-from .schema import UserInfoSchema, UserSchema
+from .schema import UserAdminLocationIdSchema, UserInfoSchema, UserSchema
 from .service import IUser, User, UserService
 
 api = Namespace(
@@ -68,8 +68,6 @@ class UserLoginResource(Resource):
             return jsonify(ret)
         return abort(403, message='Forbidden!')  # noqa: WPS432
 
-    # Todo: implement user fb-auth
-
 
 @api.route('/<int:user_id>')
 @api.param('userId', 'User db ID')
@@ -88,7 +86,7 @@ class UserIdResource(Resource):
 
         return jsonify({'status': 'Success', 'id': deleted_id})
 
-    @accepts(schema=UserSchema, api=api)
+    @accepts(schema=UserAdminLocationIdSchema, api=api)
     @responds(schema=UserSchema, api=api)
     @access_restriction(root_required=True, api=api)
     def put(self, user_id: int):

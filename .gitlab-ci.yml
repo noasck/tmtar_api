@@ -24,8 +24,7 @@ build:
     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
-  only:
-    - master
+
 
 codestyle-check:
   stage: test
@@ -35,7 +34,7 @@ codestyle-check:
   script:
     - flake8 . 
   only:
-    - dev
+    - api_dev
 
 test:
   stage: test
@@ -51,7 +50,7 @@ test:
       junit: services/web/report.xml 
     expire_in: 1 day
   only:
-    - dev
+    - api_dev
 
 deploy:
   stage: release

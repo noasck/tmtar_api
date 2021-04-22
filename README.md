@@ -3,8 +3,9 @@
 #### Useful aliases
 ``` bash
 alias dc_build_dev='docker-compose -f docker-compose.yml up --build'
-alias dc_build_test='docker-compose -f docker-compose.test.yml up --build'
+alias dc_build_test='docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit'
 alias dc_build_prod='docker-compose -f docker-compose.prod.yml up --build'
+
 
 alias dc_down_dev='docker-compose -f docker-compose.yml down --volumes --remove-orphans'
 alias dc_down_test='docker-compose -f docker-compose.test.yml down --volumes --remove-orphans'
@@ -28,18 +29,20 @@ There several ways to **set up database** with all tables needed.
 
 ### Alembic migrations
 You can use ```Flask-Migrate``` extension to set up tables:
-1. At the first run, perhaps you will need to initialize *Alembic* structure:
+1. At the first run, perhaps you will need to initialize *Alembic* structure: (**only for backend devs**)
 
 ``` bash
   docker-compose run web python manage.py db init
 ```
-
-2. For future runs, execute 3 commands:
+2. (*) You need to create and manually review migrations:
+```bash
+# Create migration:
+docker-compose run web python manage.py db upgrade
+```
+3. For future runs, execute 2 commands:
 
 ``` bash
 # Migrating scheme:
-docker-compose run web python manage.py db migrate
-# Upgrading database:
 docker-compose run web python manage.py db upgrade
 # Seed database:
 docker-compose run web python manage.py seed_db
@@ -66,5 +69,5 @@ docker-compose run web python manage.py set_up
 - Tests: **OK** (72/72 passed)
 
 #### Warning
-Source code moved to GitLab repository. Contact ```@noasck```
+Source code moved to GitLab repository. Contact ```@you2ku``` at **Telegram**.
 

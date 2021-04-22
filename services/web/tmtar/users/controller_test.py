@@ -14,12 +14,14 @@ from .model import User
 from .schema import UserSchema
 from .service import UserService
 
+dt = datetime.now().date()
 
-def make_common_user(email: str, id=int(1000 * random())) -> User:  # noqa
+
+def make_common_user(email: str, id=int(1000 * random()), bdate: int = dt) -> User:  # noqa
     return User(id=id,
-                email=str(hash(email)),
+                email=email,
                 sex=SexType[0],
-                bdate=datetime.now().date(),
+                bdate=bdate,
                 location_id=1)
 
 
@@ -147,14 +149,14 @@ class TestUserIdResource:
                                 },
                                 follow_redirects=True,
                                 json={
-                                    "location_id": 2,
-                                    "bdate": '2018-03-09'
+                                    "admin_location_id": '1'
                                 }).get_json()
 
             expected = (UserSchema().dump(
                 User(id=13,
-                     email=str(hash("string")),
+                     email='string',
                      sex=SexType[0],
-                     bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(),
-                     location_id=2)))
+                     bdate=dt,
+                     location_id=1,
+                     admin_location_id=1)))
             assert result == expected

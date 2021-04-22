@@ -2,14 +2,16 @@ version: '3.7'
 services:
   web:
     build: ./services/web
-    command: pytest ./tmtar --durations=0 --junitxml=report.xml
+    command: bash -c "
+      pytest ./tmtar --durations=0 --junitxml=report.xml
+      && flakehell lint --tee --output-file=codestyle.json ./services/"
     volumes:
       - ./services/web/:/usr/src/app/
     ports:
       - 5000:5000
     env_file:
-      - ./.env
-      - ./.env.dev
+      - ./env/.env
+      - ./env/.env.dev
     networks:
       - api
 

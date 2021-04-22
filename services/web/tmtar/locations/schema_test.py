@@ -32,12 +32,12 @@ def test_LocationSchema_works(schema: LocationSchema):  # noqa
     assert widget.root == 1
 
 
-def test_LocationUpdateSchema_create(
+def test_LocationUpdateSchema_create(   # noqa
         update_schema: LocationUpdateSchema):  # noqa
     assert update_schema
 
 
-def test_LocationUpdateSchema(update_schema: LocationUpdateSchema):  # noqa
+def test_LocationUpdateSchema_works(update_schema: LocationUpdateSchema):  # noqa
     params: ILocation = update_schema.load({'id': '12', 'name': 'test city'})
     widget = Location(**params)
 

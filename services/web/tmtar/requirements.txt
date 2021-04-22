@@ -13,3 +13,6 @@ Flask-Cors==3.0.10
 marshmallow-sqlalchemy==0.24.2
 Flask-Migrate==2.7.0
 Flask-Script==2.0.6
+flake8==3.9.0
+flakehell==0.9.0
+wemake-python-styleguide==0.15.2

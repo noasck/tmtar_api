@@ -48,28 +48,31 @@ class DatabaseSetup(object):
         """
         from ...locations.service import Location
         from ...users.model import User
-        u1: User = User(
-            id=4,
-            email=str('denter425@gmail.com'),
-            location_id=1,
-            admin_location_id=1,
-        )
-        u2: User = User(
-            id=5,
-            email=str('jjok730@gmail.com'),
-            location_id=1,
-            admin_location_id=1,
-        )
+        if Location.query.get(1) is None:
+            u1: User = User(
+                id=4,
+                email=str('denter425@gmail.com'),
+                location_id=1,
+                admin_location_id=1,
+            )
+            u2: User = User(
+                id=5,
+                email=str('jjok730@gmail.com'),
+                location_id=1,
+                admin_location_id=1,
+            )
 
-        root_location = Location(id=1, root=None, name='root')
+            root_location = Location(id=1, root=None, name='root')
 
-        db.session.add(u1)
-        db.session.add(u2)
-        db.session.add(root_location)
-        db.session.commit()
+            db.session.add(u1)
+            db.session.add(u2)
+            db.session.add(root_location)
+            db.session.commit()
 
-        for user in User.query.all():
-            app.logger.info(f'Successfully seeded {user.email} root user.')
+            for user in User.query.all():
+                app.logger.info(f'Successfully seeded {user.email} root user.')
+        else:
+            app.logger.info('Skipped database seeding.')
 
     @classmethod
     def add_cli(cls, app: Flask, db: SQLAlchemy, manager: Manager):

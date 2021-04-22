@@ -11,4 +11,7 @@ then
     echo "PostgreSQL started"
 fi
 
+python manage.py db upgrade
+python manage.py seed_db
+
 exec "$@"

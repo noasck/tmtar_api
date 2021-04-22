@@ -20,3 +20,7 @@ class UserInfoSchema(Schema):
     bdate = fields.Date(attribute='bdate')
     location_id = fields.Number(attribute='location_id')
     sex = fields.String(validate=validate.OneOf(SexType))
+
+
+class UserAdminLocationIdSchema(Schema):
+    admin_location_id = fields.Number(attribute='admin_location_id')

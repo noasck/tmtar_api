@@ -30,9 +30,14 @@ codestyle-check:
   stage: test
   image: python:3.7-slim
   before_script:
-    - pip3 install wemake-python-styleguide
+    - pip3 install wemake-python-styleguide flakehell
   script:
-    - flake8 . 
+    - flakehell lint --format=gitlab --output-file flakehell.json
+  artifacts:
+    reports:
+      codequality: flakehell.json
+    expire_in: 1 day
+ 
   only:
     - api_dev
 

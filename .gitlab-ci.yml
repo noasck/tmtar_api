@@ -32,12 +32,7 @@ codestyle-check:
   before_script:
     - pip3 install wemake-python-styleguide flakehell
   script:
-    - flakehell lint 
-  artifacts:
-    reports:
-      codequality: flakehell.json
-    expire_in: 1 day
- 
+    - flake8 . 
   only:
     - api_dev
 

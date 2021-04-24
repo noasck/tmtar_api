@@ -32,7 +32,7 @@ codestyle-check:
   before_script:
     - pip3 install wemake-python-styleguide flakehell
   script:
-    - flakehell lint --format=gitlab --output-file flakehell.json
+    - flakehell lint 
   artifacts:
     reports:
       codequality: flakehell.json

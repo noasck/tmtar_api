@@ -1,59 +1,51 @@
 pipeline {
     agent any
-    // parameters {
-    //     choice(
-    //         choices: ['only build' , 'build and push'],
-    //         description: '',
-    //         name: 'REQUESTED_ACTION')
-    // }
     environment {
         REGISTRY = 'registry.gitlab.com/baltazar1697/tmtar_api'
+        USERNAME = 'baltazar1697'
+        TOKEN = credentials('gitlab_reg_token')
     }
     stages {
+        stage('LOGIN'){
+            steps{
+                sh " docker login -u ${USERNAME} -p ${TOKEN} ${REGISTRY}"
+                echo '---------- LOGIN SUCCEED ----------'
+            }
+        }
         stage('BUILD') {
             agent any
-            // when {
-            //     expression { params.REQUESTED_ACTION == 'build and push' }
-            // }
-            // steps {
-            //     sh 'docker login'
-            //     echo 'login successful'
-                
-            //     sh 'docker pull ${REGISTRY}'
-            //     sh 'docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:latest services/web/'
-            //     sh 'docker push registry.gitlab.com/baltazar1697/tmtar_api:latest'
-            // }
             steps{
-                sh " docker build -f services/web/Dockerfile.test -t ${REGISTRY}:testing services/web/ "
-                echo '---------- Building testing image succeeded ----------'
+                when {
+                    branch 'master'
+                }
+                sh " docker pull ${REGISTRY} || true"
+                sh " docker build --cache-from ${REGISTRY} -f ./services/web/Dockerfile.prod-t ${REGISTRY}:latest services/web/ "
+                sh " docker push ${REGISTRY}:latest"
+                echo '---------- BUILDING PROD IMAGE SUCCEED ----------'
             }
         }
-        stage('TESTS') {
-            parallel{
-                stage('CODESTYLE-CHECK') {
-                    agent any
-                    steps {
-                        sh "docker run ${REGISTRY}:testing "                
-                        echo '---------- CODE CHECKED ----------'
-                    }
+        stage('UNIT TESTS'){
+            steps {
+                 when {
+                    branch 'api_dev' || 'ci/cd'
                 }
-                stage('UNIT TESTS'){
-                    steps {
-                        sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
-                        echo '---------- TESTS SUCCEED---------- '
-                    }
-                
-                    // post {
-                    //     always {
-                    //         junit '*.xml'
-                    //     }
-                    // }
-                }
+                sh 'ls'
+                sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
+                echo '---------- TESTS SUCCEED ---------- '
             }
+            // post {
+            //     always {
+            //         junit './tmtar/report.xml'
+            //     }
+            // }
         }
+        
         stage('PRODUCTION UP'){
             agent any
             steps{
+                when{
+                    branch 'master'
+                }
                 sh '''
                 alias dc_down_test="docker-compose -f docker-compose.test.yml down"
                 dc_down_test
@@ -65,6 +57,9 @@ pipeline {
         stage('DB MIGRATIONS') {
             agent any
             steps {
+                when {
+                    branch 'master'
+                }
                 sh 'docker-compose run web python manage.py db migrate'
                 sh 'docker-compose run web python manage.py db upgrade'
                 echo '---------- DB MIGRATED ---------- '

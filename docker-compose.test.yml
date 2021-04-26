@@ -3,8 +3,8 @@ services:
   web:
     build: ./services/web
     command: bash -c "
-      pytest ./tmtar --durations=0 --junitxml=report.xml
-      && flakehell lint --tee --output-file=codestyle.json ./services/"
+      flakehell lint --tee --output-file=codestyle.json ./services/ 
+      && pytest ./tmtar --durations=0 --junitxml=report.xml"
     volumes:
       - ./services/web/:/usr/src/app/
     ports:

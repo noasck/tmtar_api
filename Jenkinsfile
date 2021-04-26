@@ -14,10 +14,11 @@ pipeline {
         }
         stage('BUILD') {
             agent any
-            steps{
-                when {
+            when {
                     branch 'master'
                 }
+            steps{
+                
                 sh " docker pull ${REGISTRY} || true"
                 sh " docker build --cache-from ${REGISTRY} -f ./services/web/Dockerfile.prod-t ${REGISTRY}:latest services/web/ "
                 sh " docker push ${REGISTRY}:latest"
@@ -25,10 +26,11 @@ pipeline {
             }
         }
         stage('UNIT TESTS'){
-            steps {
-                 when {
+            when {
                     branch 'api_dev' || 'ci/cd'
                 }
+            steps {
+                 
                 sh 'ls'
                 sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
@@ -42,10 +44,11 @@ pipeline {
         
         stage('PRODUCTION UP'){
             agent any
-            steps{
-                when{
+            when{
                     branch 'master'
                 }
+            steps{
+                
                 sh '''
                 alias dc_down_test="docker-compose -f docker-compose.test.yml down"
                 dc_down_test
@@ -56,10 +59,11 @@ pipeline {
         }
         stage('DB MIGRATIONS') {
             agent any
-            steps {
-                when {
+            when {
                     branch 'master'
                 }
+            steps {
+                
                 sh 'docker-compose run web python manage.py db migrate'
                 sh 'docker-compose run web python manage.py db upgrade'
                 echo '---------- DB MIGRATED ---------- '

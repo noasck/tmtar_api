@@ -14,9 +14,9 @@ pipeline {
         }
         stage('BUILD') {
             agent any
-            // when {
-            //         branch 'master'
-            //     }
+            when {
+                    branch 'master'
+                }
             steps{
                 
                 sh " docker pull ${REGISTRY} "
@@ -31,13 +31,13 @@ pipeline {
             //         branch 'api_dev'
             // }
             steps {
-                sh 'ls'
-                sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
+                
+                sh 'docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
             }
             post {
-                always {
-                    junit './services/report.xml'
+                failure {
+                    junit './services/web/report.xml'
                 }
             }
         }

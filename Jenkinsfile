@@ -14,32 +14,32 @@ pipeline {
         }
         stage('BUILD') {
             agent any
-            when {
-                    branch 'master'
-                }
+            // when {
+            //         branch 'master'
+            //     }
             steps{
                 
-                sh " docker pull ${REGISTRY} || true"
-                sh " docker build --cache-from ${REGISTRY} -f ./services/web/Dockerfile.prod-t ${REGISTRY}:latest services/web/ "
-                sh " docker push ${REGISTRY}:latest"
+                sh " docker pull ${REGISTRY} "
+                sh " docker build --cache-from ${REGISTRY} -f ./services/web/Dockerfile.prod -t ${REGISTRY}:prod_ready services/web/ "
+                //sh " docker build -f ./services/web/Dockerfile.prod -t ${REGISTRY}:prod_ready services/web/ "
+                sh " docker push ${REGISTRY}:prod_ready"
                 echo '---------- BUILDING PROD IMAGE SUCCEED ----------'
             }
         }
         stage('UNIT TESTS'){
-            when {
-                    branch 'api_dev' || 'ci/cd'
-                }
+            // when {
+            //         branch 'api_dev'
+            // }
             steps {
-                 
                 sh 'ls'
                 sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
             }
-            // post {
-            //     always {
-            //         junit './tmtar/report.xml'
-            //     }
-            // }
+            post {
+                always {
+                    junit './services/report.xml'
+                }
+            }
         }
         
         stage('PRODUCTION UP'){

@@ -27,11 +27,10 @@ pipeline {
             }
         }
         stage('UNIT TESTS'){
-            // when {
-            //         branch 'api_dev'
-            // }
+            when {
+                    branch 'api_dev'
+            }
             steps {
-                
                 sh 'docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
             }
@@ -44,9 +43,9 @@ pipeline {
         
         stage('PRODUCTION UP'){
             agent any
-            when{
-                    branch 'master'
-                }
+            // when{
+            //         branch 'master'
+            //     }
             steps{
                 
                 sh '''
@@ -59,9 +58,9 @@ pipeline {
         }
         stage('DB MIGRATIONS') {
             agent any
-            when {
-                    branch 'master'
-                }
+            // when {
+            //         branch 'master'
+            //     }
             steps {
                 
                 sh 'docker-compose run web python manage.py db migrate'

@@ -1,7 +1,9 @@
 version: '3.7'
 services:
   web:
-    build: ./services/web
+    build: 
+      context: ./services/web
+      dockerfile: Dockerfile
     command: bash -c "
       flakehell lint --tee --output-file=codestyle.json ./services/ 
       && pytest ./tmtar --durations=0 --junitxml=report.xml"

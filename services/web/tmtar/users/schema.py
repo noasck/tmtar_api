@@ -23,4 +23,5 @@ class UserInfoSchema(Schema):
 
 
 class UserAdminLocationIdSchema(Schema):
-    admin_location_id = fields.Number(attribute='admin_location_id', required=True)
+    admin_location_id = fields.Number(attribute='admin_location_id',
+                                      required=True)

@@ -13,7 +13,7 @@ class UserSchema(Schema):
         default=SexType[2],
         required=False,
     )
-    admin_location_id = fields.Number(attribute='admin_location_id')
+    admin_location_id = fields.Number(attribute='admin_location_id', required=False)
 
 
 class UserInfoSchema(Schema):

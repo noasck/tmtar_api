@@ -3,3 +3,4 @@ venv
 web/.pytest_cache
 *.pyc
 .github
+pyproject.toml

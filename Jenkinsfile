@@ -14,9 +14,9 @@ pipeline {
         }
         stage('BUILD') {
             agent any
-            when {
-                    branch 'master'
-                }
+            // when {
+            //         branch 'master'
+            //     }
             steps{
                 
                 sh " docker pull ${REGISTRY} "
@@ -27,9 +27,9 @@ pipeline {
             }
         }
         stage('UNIT TESTS'){
-            when {
-                    branch 'api_dev'
-            }
+            // when {
+            //         branch 'api_dev'
+            // }
             steps {
                 sh 'docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
@@ -43,9 +43,9 @@ pipeline {
         
         stage('PRODUCTION UP'){
             agent any
-            when{
-                    branch 'master'
-                }
+            // when{
+            //         branch 'master'
+            //     }
             steps{
                 
                 sh '''
@@ -54,6 +54,7 @@ pipeline {
                 alias dc_build_prod="docker-compose -f docker-compose.prod.yml up --build"
                 dc_build_prod -d 
                 '''
+                echo "DEPLOYED, MAN, IT'S READY"
             }
         }
     }

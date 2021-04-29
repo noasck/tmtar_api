@@ -23,7 +23,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
       - ./create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
     env_file:
-      - ./env/.env.prod.db
+      - env/.env.db
 
   nginx:
     build: ./services/nginx

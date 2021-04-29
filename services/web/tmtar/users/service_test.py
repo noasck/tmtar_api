@@ -16,7 +16,7 @@ def test_get_all(db: SQLAlchemy):
                        sex=SexType[0],
                        location_id=1,
                        bdate=datetime.now().date(),
-                       admin_location_id=0)
+                       admin_location_id=1)
     u1: User = User(id=2,
                     email=str(hash('example2@mail.ex')),
                     sex=SexType[1],
@@ -25,7 +25,7 @@ def test_get_all(db: SQLAlchemy):
     u2: User = User(id=3,
                     email=str(hash('example3@mail.ex')),
                     sex=SexType[0],
-                    location_id=2,
+                    location_id=1,
                     bdate=datetime.now().date())
 
     db.session.add(admin)
@@ -48,7 +48,7 @@ def test_get_by_id(db: SQLAlchemy):
     u2: User = User(id=2,
                     email=str(hash('example3@mail.ex')),
                     sex=SexType[0],
-                    location_id=2,
+                    location_id=1,
                     bdate=datetime.now().date())
 
     db.session.add(u1)
@@ -92,7 +92,7 @@ def test_delete_by_id(db: SQLAlchemy):
     u2: User = User(id=3,
                     email=str(hash('example3@mail.ex')),
                     sex=SexType[1],
-                    location_id=2,
+                    location_id=1,
                     bdate=datetime.now().date())
 
     db.session.add(u1)

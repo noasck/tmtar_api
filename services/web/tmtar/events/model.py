@@ -13,7 +13,10 @@ class Event(db.Model):
     __tablename__ = 'events'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     event_type = db.Column(db.String(255), nullable=False, index=True)
-    location_id = db.Column(db.Integer, nullable=False)
+    location_id = db.Column(
+        db.Integer,
+        nullable=False
+    )
     update_date = db.Column(db.Integer, onupdate=int(time()))
     sex = db.Column(db.String, default=SexType[3])
     min_age = db.Column(db.Integer, default=0)
@@ -21,7 +24,11 @@ class Event(db.Model):
     title = db.Column(db.String, nullable=False)
     short_description = db.Column(db.Text, nullable=True)
     description = db.Column(db.Text, nullable=True)
-    image_file_name = db.Column(db.String, nullable=True)
+    image_file_name = db.Column(
+        db.String,
+        nullable=True,
+
+    )
     active = db.Column(db.Boolean, default=True, nullable=False, index=True)
 
     def update(self, changes: IEvent):

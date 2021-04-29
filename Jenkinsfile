@@ -54,6 +54,7 @@ pipeline {
                 alias dc_build_prod="docker-compose -f docker-compose.prod.yml up --build"
                 dc_build_prod -d 
                 '''
+                echo "DEPLOYED, MAN, IT'S READY"
             }
         }
     }

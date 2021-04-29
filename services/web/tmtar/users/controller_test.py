@@ -94,7 +94,7 @@ class TestUserResource:
                                     "Authorization": f"Bearer {token}"
                                 },
                                 json={
-                                    "location_id": 2,
+                                    "location_id": 1,
                                     "bdate": '2018-03-09'
                                 }).get_json()
 
@@ -103,7 +103,7 @@ class TestUserResource:
                      email=str(hash("some_str_admin")),
                      sex=SexType[0],
                      bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(),
-                     location_id=2,
+                     location_id=1,
                      admin_location_id=1))
 
             assert result == expected

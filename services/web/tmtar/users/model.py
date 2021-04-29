@@ -11,9 +11,17 @@ class User(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String, nullable=False)
     bdate = db.Column(db.Date, nullable=True)
-    location_id = db.Column(db.Integer, nullable=True)
+    location_id = db.Column(
+        db.Integer,
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
+        nullable=True,
+    )
     sex = db.Column(db.String, nullable=True)
-    admin_location_id = db.Column(db.Integer, nullable=True)
+    admin_location_id = db.Column(
+        db.Integer,
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
+        nullable=True,
+    )
 
     def update(self, changes: IUser):
         """Update certain record."""

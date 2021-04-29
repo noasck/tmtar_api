@@ -43,9 +43,9 @@ pipeline {
         
         stage('PRODUCTION UP'){
             agent any
-            // when{
-            //         branch 'master'
-            //     }
+            when{
+                    branch 'master'
+                }
             steps{
                 
                 sh '''
@@ -54,18 +54,6 @@ pipeline {
                 alias dc_build_prod="docker-compose -f docker-compose.prod.yml up --build"
                 dc_build_prod -d 
                 '''
-            }
-        }
-        stage('DB MIGRATIONS') {
-            agent any
-            // when {
-            //         branch 'master'
-            //     }
-            steps {
-                
-                sh 'docker-compose run web python manage.py db migrate'
-                sh 'docker-compose run web python manage.py db upgrade'
-                echo '---------- DB MIGRATED ---------- '
             }
         }
     }

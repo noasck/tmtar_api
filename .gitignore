@@ -4,3 +4,5 @@ web/.pytest_cache
 *.pyc
 .github
 pyproject.toml
+services/web/codestyle.json
+services/web/report.xml

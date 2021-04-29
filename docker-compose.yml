@@ -22,7 +22,7 @@ services:
     environment:
       - POSTGRES_USER=tmtar_user
       - POSTGRES_PASSWORD=dfgBNM3689
-      - POSTGRES_DB=tmtar_dev
+      - POSTGRES_DB=tmtar_prod
     networks:
       - api
 

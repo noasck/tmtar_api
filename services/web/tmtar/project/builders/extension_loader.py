@@ -71,7 +71,7 @@ class ModulesSetup(object):
 
         :param app: main Flask app.
         """
-        @app.route('/health', methods=['GET'])
+        @app.route('/api/health', methods=['GET'])
         def health():
             return 'Healthy'
 

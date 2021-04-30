@@ -27,9 +27,9 @@ pipeline {
             }
         }
         stage('UNIT TESTS'){
-            // when {
-            //         branch 'origin/api_dev'
-            // }
+            when {
+                    branch 'origin/api_dev'
+            }
             steps {
                 sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
@@ -43,9 +43,9 @@ pipeline {
         
         stage('PRODUCTION UP'){
             agent any
-            // when{
-            //         branch 'origin/master'
-            //     }
+            when{
+                    branch 'origin/master'
+                }
             steps{
                 
                 sh '''

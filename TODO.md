@@ -1,5 +1,6 @@
 То что осталось по бэкенду:
 
+-  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
 -  [x] M — add dependency injection for: fixtures, app, modules, service methods
 -  [x] M — remove seeding database
 -  [ ] M — add database backup and cache

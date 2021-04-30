@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from flask_cors import CORS
 from flask_restx import Api
@@ -20,6 +22,11 @@ class AppModule(object):
             self.app = Injector.app
         except AttributeError:
             config = 'tmtar.project.config.Config'
+            logging.basicConfig(
+                filename='access.log',
+                level=logging.DEBUG,
+                format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
+            )
             app = Flask(__name__)
             app.config.from_object(config)
             app.logger.info('Application created successfully!')

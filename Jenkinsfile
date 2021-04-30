@@ -14,9 +14,9 @@ pipeline {
         }
         stage('BUILD') {
             agent any
-            // when {
-            //         branch 'master'
-            //     }
+            when {
+                    branch 'origin/master'
+                }
             steps{
                 
                 sh " docker pull ${REGISTRY} "
@@ -28,15 +28,15 @@ pipeline {
         }
         stage('UNIT TESTS'){
             // when {
-            //         branch 'api_dev'
+            //         branch 'origin/api_dev'
             // }
             steps {
-                sh 'docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit '
+                sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
             }
             post {
                 failure {
-                    junit './services/web/report.xml'
+                    junit "./services/web/report.xml"
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         stage('PRODUCTION UP'){
             agent any
             // when{
-            //         branch 'master'
+            //         branch 'origin/master'
             //     }
             steps{
                 

@@ -1,11 +1,10 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_marshmallow import Marshmallow
-from flask_migrate import Migrate, MigrateCommand
 from flask_restx import Api
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
+from .database_loader import DatabaseSetup
 from .identity_providers import ProductionIdentityLoader, TestIdentityLoader
 from .singleton import singleton
 
@@ -42,7 +41,10 @@ class ModulesSetup(object):
     @singleton('db')
     def configure_db(cls, app: Flask) -> SQLAlchemy:
         """Configure SQLAlchemy ORM plugin."""
-        return SQLAlchemy(app)
+        db = SQLAlchemy(app)
+        DatabaseSetup.tear_down_db(app, db)
+        DatabaseSetup.set_up_db(app, db)
+        return db
 
     @classmethod
     @singleton('ma')
@@ -77,18 +79,6 @@ class ModulesSetup(object):
             return 'Healthy'
 
     @classmethod
-    def configure_fm(cls, app, db):
-        """Create Flask-Migrate plugin."""
-        return Migrate(app, db)
-
-    @classmethod
-    def configure_manager(cls, app: Flask) -> Manager:
-        """Configure Flask-Script plugin Manager."""
-        manager = Manager(app)
-        manager.add_command('db', MigrateCommand)
-        return manager
-
-    @classmethod
     def configure_identity(cls, app: Flask):
         """Configure identity provider."""
         if app.config.get('FLASK_ENV') == 'production':
@@ -97,3 +87,25 @@ class ModulesSetup(object):
             provider = TestIdentityLoader(app)
 
         return provider.get_verifier()
+
+    @classmethod
+    def configure_cli(cls, app: Flask, db: SQLAlchemy):
+        """
+        Register CLI commands for db manipulation.
+
+        :param app: main Flask app.
+        :type app: Flask
+        :param db: db connection instance.
+        :type db: SQLAlchemy
+        """
+
+        @app.cli.command("set_up")
+        def set_up():
+            """Create all ab tables and seed values."""
+            DatabaseSetup.set_up_db(app, db)
+            DatabaseSetup.seed_db(app, db)
+
+        @app.cli.command("tear_down")
+        def tear_down():
+            """Drop all ab tables."""
+            DatabaseSetup.tear_down_db(app, db)

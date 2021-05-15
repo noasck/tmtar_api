@@ -1,3 +1,28 @@
+## Versions
+
+### s.02 (Current) 
+
+#### Changes:
+
+1. ```api/users/login``` route: need to pass ```Authorization: Bearer ``` header with **Auth0** ```access_token```
+2. Important. No **need to manage database manually**.
+    1. Excluded *Migrations* from ```entrypoint```. That means, database is clear at every run.
+    2. ```drop_all/set_up``` in entrypoint. While not release version, database fully reinits at every build.
+    2. Fulfilled migration support for multiple databases has been added to *TODO-list*.
+    3. Deleted deprecated **Flask-Script** and **Flask-Migrate** in order to use pure **Alembic** for migrations.
+4. Deleted ```access.log```. All outputs are on the stdout. *TODO: look for a solution.*
+5. Changed **CLI** commands.
+#### Next up:
+
+- Token expiration.
+- Token exceptions handling.
+- Events instance and routes.
+
+### s.01
+All previous versions of API tagged as s.01
+
+-----------------------------------
+
 ## Deployment
 
 #### Useful aliases
@@ -60,14 +85,35 @@ docker-compose run web python manage.py tear_down
 docker-compose run web python manage.py set_up
 ```
 
+
+### Authorization
+Obtaining access token is one of basic tasks.
+#### Production
+1. Obtain **Auth0** ```access_token```.
+To do that, you need to be our team member in **Auth0** service.
+   
+2. Get our own API token. At this point, your request should be like (**curl** analogue): 
+``` bash
+curl --request GET \
+--url http://localhost:1337/api/users/login \
+--header 'authorization: Bearer paste_your_AUTH0_access_token'
+```
+
+#### Testing
+1. Get our own API token. At this point, your request should be like (**curl** analogue): 
+``` bash
+curl --request GET \
+--url http://localhost:1337/api/users/login \
+--header 'authorization: Bearer just_admins_identity'
+```
+Where ```admins_identity``` means your *root* identity - ```sub``` in testing environment.
+
 [![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
-
 #### Pre-commit checks:
 - Styleguide: **OK** (0 warnings)
-- Tests: **OK** (72/72 passed)
+- Tests: **OK** (73/73 passed)
 
-#### Warning
-Source code moved to GitLab repository. Contact ```@you2ku``` at **Telegram**.
-
+#### Contacts 
+```@you2ku``` at **Telegram**.

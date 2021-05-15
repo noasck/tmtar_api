@@ -64,7 +64,7 @@ class ProductionIdentityLoader(AbstractIdentityLoader):
                     {"message": "invalid_header"},
                     401,
                 )
-            return payload
+            return payload['sub']
 
         raise AuthError(
             {"message": "invalid_header"},

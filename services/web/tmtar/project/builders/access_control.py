@@ -7,6 +7,8 @@ from flask_jwt_extended import get_jwt_claims, jwt_required  # noqa: WPS318
 from flask_jwt_extended.exceptions import JWTExtendedException
 from flask_restx import Namespace, abort
 
+from ..exceptions import AuthError
+
 
 def access_restriction(
     root_required: bool = False,

@@ -17,9 +17,6 @@ def interface() -> IEvent:
         event_type=EventType[0],
         location_id=1,
         update_date=time_now,
-        sex=SexType[0],
-        min_age=12,
-        max_age=100,
         title="Sample",
         short_description="""The plugin adds a random text generator, capable 
                  of creating witty texts in different genres. Created text can be inserted newly at the caret, 

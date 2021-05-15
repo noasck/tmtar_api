@@ -19,30 +19,30 @@ class UserService(AbstractService[User, IUser]):
         return User
 
     @classmethod
-    def get_by_email(cls, email: str) -> Optional[User]:
+    def get_by_identity(cls, identity: str) -> Optional[User]:
         """
-        Get certain User by email.
+        Get certain User by identity.
 
-        :param email: user's email
-        :type email: str
+        :param identity: user's identity
+        :type identity: str
         :return: matched user
         :rtype: str
         """
-        return User.query.filter_by(email=email).first()
+        return User.query.filter_by(identity=identity).first()
 
     @classmethod
-    def get_or_new_by_email(cls, email: str):
+    def get_or_new_by_identity(cls, identity: str):
         """
-        Get existing or create new User by received email.
+        Get existing or create new User by received identity.
 
-        :param email: logged in users email
-        :type email: str
+        :param identity: logged in users identity
+        :type identity: str
         :return: User instance
         :rtype: str
         """
-        usr = UserService.get_by_email(email)
+        usr = UserService.get_by_identity(identity)
         if not usr:
-            usr = User(email=email)
+            usr = User(identity=identity)
             cls._db.session.add(usr)
             cls._db.session.commit()
         return usr

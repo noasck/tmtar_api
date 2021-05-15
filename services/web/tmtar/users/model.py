@@ -9,7 +9,7 @@ class User(db.Model):
 
     __tablename__ = 'users'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String, nullable=False)
+    identity = db.Column(db.String, nullable=False)
     bdate = db.Column(db.Date, nullable=True)
     location_id = db.Column(
         db.Integer,
@@ -26,6 +26,6 @@ class User(db.Model):
     def update(self, changes: IUser):
         """Update certain record."""
         for key, new_value in changes.items():
-            if key not in {'id', 'email'}:
+            if key not in {'id', 'identity'}:
                 setattr(self, key, new_value)
         return self

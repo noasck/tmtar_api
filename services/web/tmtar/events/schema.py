@@ -14,21 +14,13 @@ class EventSchema(Schema):
         attribute='update_date',
         validate=validate.Range(min=1597401274),
     )
-    sex = fields.String(
-        attribute='sex',
-        validate=validate.OneOf(SexType),
+    title = fields.String(
+        attribute='title',
+        required=True,
     )
-    min_age = fields.Integer(
-        attribute='min_age',
-        validate=validate.Range(min=0, max=100),
-    )
-    max_age = fields.Integer(
-        attribute='max_age',
-        validate=validate.Range(min=0, max=150),
-    )
-    title = fields.String(attribute='title')
     short_description = fields.String(
         attribute='short_description',
+        required=True,
     )
     description = fields.String(attribute='description')
     image_file_name = fields.String(attribute='image_file_name')

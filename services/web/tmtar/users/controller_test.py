@@ -17,9 +17,13 @@ from .service import UserService
 dt = datetime.now().date()
 
 
-def make_common_user(email: str, id=int(1000 * random()), bdate: int = dt) -> User:  # noqa
+def get_auth_header(token: str):
+    return {"Authorization": f"Bearer {token}"}
+
+
+def make_common_user(identity: str, id=int(1000 * random()), bdate: int = dt) -> User:  # noqa
     return User(id=id,
-                email=email,
+                identity=identity,
                 sex=SexType[0],
                 bdate=bdate,
                 location_id=1)
@@ -27,7 +31,7 @@ def make_common_user(email: str, id=int(1000 * random()), bdate: int = dt) -> Us
 
 def make_root_user() -> User:
     return User(id=1,
-                email=str(hash("some_str_admin")),
+                identity=str(hash("some_str_admin")),
                 sex=SexType[0],
                 bdate=datetime.now().date(),
                 location_id=1,
@@ -39,23 +43,23 @@ def make_update(usr: User, usr_upd: IUser) -> User:
     return usr
 
 
-@patch.object(UserService, "get_or_new_by_email",
-              lambda email: make_root_user())
+@patch.object(UserService, "get_or_new_by_identity",
+              lambda identity: make_root_user())
 def create_token(client: FlaskClient):
     with client:
         result = client.get(
-            f"/api/{BASE_ROUTE}/login/some_str_admin@mail.com").get_json()
+            f"/api/{BASE_ROUTE}/login", headers=get_auth_header('token_sample')).get_json()
         return result['access_token']
 
 
 class TestUserLoginResource:
 
-    @patch.object(UserService, "get_or_new_by_email",
-                  lambda email: make_common_user(email))
+    @patch.object(UserService, "get_or_new_by_identity",
+                  lambda identity: make_common_user(identity))
     def test_token(self, client: FlaskClient):
         with client:
             result = client.get(
-                f"/api/{BASE_ROUTE}/login/new-email@mail.com").get_json()
+                f"/api/{BASE_ROUTE}/login", headers=get_auth_header('token_sample')).get_json()
             assert get_jti(result['access_token'])
 
 
@@ -63,8 +67,8 @@ class TestUserResource:
 
     @patch.object(UserService, "get_all", lambda: [
         make_root_user(),
-        make_common_user("sample-1@email.com"),
-        make_common_user("sample-2@email.com")
+        make_common_user("sample-1@identity.com"),
+        make_common_user("sample-2@identity.com")
     ])
     def test_get(self, client: FlaskClient, token: str):
         with client:
@@ -75,8 +79,8 @@ class TestUserResource:
                                 follow_redirects=True).get_json()
             expected = UserSchema(many=True).dump([
                 make_root_user(),
-                make_common_user("sample-1@email.com"),
-                make_common_user("sample-2@email.com")
+                make_common_user("sample-1@identity.com"),
+                make_common_user("sample-2@identity.com")
             ])
             for i in result:
                 assert i in expected
@@ -100,7 +104,7 @@ class TestUserResource:
 
             expected = UserSchema().dump(
                 User(id=1,
-                     email=str(hash("some_str_admin")),
+                     identity=str(hash("some_str_admin")),
                      sex=SexType[0],
                      bdate=datetime.strptime('2018-03-09', '%Y-%m-%d').date(),
                      location_id=1,
@@ -114,7 +118,7 @@ class TestUserIdResource:
     @patch.object(
         UserService,
         "get_by_id",
-        lambda user_id: make_common_user(email='str1', id=user_id),
+        lambda user_id: make_common_user(identity='str1', id=user_id),
     )
     def test_get(self, client: FlaskClient, token: str):
         with client:
@@ -123,7 +127,7 @@ class TestUserIdResource:
                                     "Authorization": f"Bearer {token}"
                                 },
                                 follow_redirects=True).get_json()
-            expected = (UserSchema().dump(make_common_user(email='str1',
+            expected = (UserSchema().dump(make_common_user(identity='str1',
                                                            id=13),))
             assert result == expected
 
@@ -139,7 +143,7 @@ class TestUserIdResource:
             assert result == expected
 
     @patch.object(UserService, "get_by_id",
-                  lambda user_id: make_common_user(email='string', id=user_id))
+                  lambda user_id: make_common_user(identity='string', id=user_id))
     @patch.object(UserService, "update", make_update)
     def test_put(self, client: FlaskClient, token: str):
         with client:
@@ -154,7 +158,7 @@ class TestUserIdResource:
 
             expected = (UserSchema().dump(
                 User(id=13,
-                     email='string',
+                     identity='string',
                      sex=SexType[0],
                      bdate=dt,
                      location_id=1,

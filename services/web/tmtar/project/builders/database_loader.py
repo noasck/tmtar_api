@@ -51,13 +51,13 @@ class DatabaseSetup(object):
         if Location.query.get(1) is None:
             u1: User = User(
                 id=4,
-                email=str('denter425@gmail.com'),
+                identity='google-oauth2|112161506929078504169',
                 location_id=1,
                 admin_location_id=1,
             )
             u2: User = User(
                 id=5,
-                email=str('jjok730@gmail.com'),
+                identity='auth0|609fd1ff3872bb0068e63812',
                 location_id=1,
                 admin_location_id=1,
             )
@@ -70,7 +70,7 @@ class DatabaseSetup(object):
             db.session.commit()
 
             for user in User.query.all():
-                app.logger.info(f'Successfully seeded {user.email} root user.')
+                app.logger.info(f'Successfully seeded {user.identity} root user.')
         else:
             app.logger.info('Skipped database seeding.')
 

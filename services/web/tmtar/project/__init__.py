@@ -41,6 +41,9 @@ class AppModule(object):
         """Configure main modules and extensions."""
         # Extensions modules
         MLoader.configure_jwt(self.app)
+        # Inject auth provider
+        MLoader.configure_identity(self.app)
+
         db: SQLAlchemy = MLoader.configure_db(self.app)
         api: Api = MLoader.configure_api(self.app)
         MLoader.configure_ma(self.app)

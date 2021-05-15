@@ -12,3 +12,8 @@ class Config(object):
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')  # noqa: WPS115
     FLASK_ENV = os.getenv('FLASK_ENV')  # noqa: WPS115
     MEDIA_FOLDER = f"{os.getenv('APP_FOLDER')}/project/media"  # noqa: WPS115,WPS237,E501
+
+    if FLASK_ENV == 'production':
+        AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
+        ALGORITHMS = os.getenv('ALGORITHMS')
+        API_AUDIENCE = os.getenv('API_AUDIENCE')

@@ -1,3 +1,2 @@
-RoleType = ['common', 'administrator', 'root']
-SexType = ['male', 'female', 'undefined', 'all']
+SexType = ['male', 'female', 'other']
 EventType = ['news', 'sales']

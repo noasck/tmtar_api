@@ -41,7 +41,7 @@ def access_restriction(
                 verify_jwt_in_request()
                 claims = get_jwt_claims()
                 admin_location_id = int(claims['admin_location_id'])
-            except (ValueError, TypeError, JWTExtendedException):
+            except (ValueError, TypeError, JWTExtendedException, AuthError):
                 # TODO: make more detailed JWTExtendedException response
                 return abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
             if root_required and admin_location_id != 1:

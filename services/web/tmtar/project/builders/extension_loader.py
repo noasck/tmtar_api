@@ -6,7 +6,8 @@ from flask_restx import Api
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
-from ..builders.singleton import singleton
+from .identity_providers import ProductionIdentityLoader, TestIdentityLoader
+from .singleton import singleton
 
 
 class ModulesSetup(object):
@@ -86,3 +87,13 @@ class ModulesSetup(object):
         manager = Manager(app)
         manager.add_command('db', MigrateCommand)
         return manager
+
+    @classmethod
+    def configure_identity(cls, app: Flask):
+        """Configure identity provider."""
+        if app.config.get('FLASK_ENV') == 'production':
+            provider = ProductionIdentityLoader(app)
+        else:
+            provider = TestIdentityLoader(app)
+
+        return provider.get_verifier()

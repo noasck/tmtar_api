@@ -7,7 +7,7 @@ from .model import User
 
 @fixture
 def interface() -> IUser:
-    return IUser(email=str(hash("some_str")),
+    return IUser(identity=str(hash("some_str")),
                  sex="male",
                  bdate='2016-02-03',
                  location_id=1)

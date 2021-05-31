@@ -18,16 +18,12 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=tmtar_user
-      - POSTGRES_PASSWORD=dfgBNM3689
-      - POSTGRES_DB=tmtar_dev
+      - ./create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
+    env_file:
+      - env/.env.db
     networks:
       - api
 
-volumes:
-  postgres_data:
 
 networks:
   api:

@@ -15,7 +15,7 @@ pipeline {
         stage('BUILD') {
             agent any
             when {
-                    branch 'master'
+                    branch 'origin/master'
                 }
             steps{
                 
@@ -28,15 +28,15 @@ pipeline {
         }
         stage('UNIT TESTS'){
             when {
-                    branch 'api_dev'
+                    branch 'origin/api_dev'
             }
             steps {
-                sh 'docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit '
+                sh 'docker-compose -f docker-compose.test.yml up --abort-on-container-exit '
                 echo '---------- TESTS SUCCEED ---------- '
             }
             post {
                 failure {
-                    junit './services/web/report.xml'
+                    junit "./services/web/report.xml"
                 }
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         stage('PRODUCTION UP'){
             agent any
             when{
-                    branch 'master'
+                    branch 'origin/master'
                 }
             steps{
                 
@@ -54,6 +54,7 @@ pipeline {
                 alias dc_build_prod="docker-compose -f docker-compose.prod.yml up --build"
                 dc_build_prod -d 
                 '''
+                echo "DEPLOYED, MAN, IT'S READY"
             }
         }
     }

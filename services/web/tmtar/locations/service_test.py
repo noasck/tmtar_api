@@ -45,10 +45,14 @@ def test_update(db: SQLAlchemy):
 
 def test_delete_by_id(db: SQLAlchemy):
     kh: Location = Location(id=2, name='kherson', root=1)
-    kv: Location = Location(id=3, name='kyiv', root=1)
+    kv: Location = Location(id=3, name='kyiv', root=2)
+    kl: Location = Location(id=5, name='steek', root=1)
+    pv: Location = Location(id=4, name='peek', root=3)
 
     db.session.add(kh)
     db.session.add(kv)
+    db.session.add(kl)
+    db.session.add(pv)
     db.session.commit()
 
     LocationService.delete_by_id(kh.id)
@@ -56,7 +60,7 @@ def test_delete_by_id(db: SQLAlchemy):
     result = Location.query.all()
 
     assert len(result) == 2
-    assert kv in result
+    assert kl in result
 
 
 def test_get_parent(db: SQLAlchemy):

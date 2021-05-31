@@ -5,7 +5,7 @@ from ..project.types import SexType
 
 class UserSchema(Schema):
     id = fields.Number(attribute='id')
-    email = fields.String(attribute='email')
+    identity = fields.String(attribute='identity')
     bdate = fields.Date(attribute='bdate')
     location_id = fields.Number(attribute='location_id')
     sex = fields.String(
@@ -13,7 +13,7 @@ class UserSchema(Schema):
         default=SexType[2],
         required=False,
     )
-    admin_location_id = fields.Number(attribute='admin_location_id')
+    admin_location_id = fields.Number(attribute='admin_location_id', required=False)
 
 
 class UserInfoSchema(Schema):

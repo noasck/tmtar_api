@@ -3,9 +3,11 @@ from http import HTTPStatus
 from typing import Callable
 
 from flask_jwt_extended import verify_jwt_in_request  # noqa: WPS319
-from flask_jwt_extended import get_jwt_claims, jwt_required  # noqa: WPS318
+from flask_jwt_extended import get_jwt, jwt_required  # noqa: WPS318
 from flask_jwt_extended.exceptions import JWTExtendedException
 from flask_restx import Namespace, abort
+
+from ..exceptions import AuthError
 
 
 def access_restriction(
@@ -34,14 +36,14 @@ def access_restriction(
         """
 
         @api.doc(security='root' if root_required else 'admin')
-        @jwt_required
+        @jwt_required()
         @wraps(endpoint)
         def wrapper(*args, **kwargs):
             try:  # noqa: WPS229
                 verify_jwt_in_request()
-                claims = get_jwt_claims()
+                claims = get_jwt()
                 admin_location_id = int(claims['admin_location_id'])
-            except (ValueError, TypeError, JWTExtendedException):
+            except (ValueError, TypeError, JWTExtendedException, AuthError):
                 # TODO: make more detailed JWTExtendedException response
                 return abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
             if root_required and admin_location_id != 1:

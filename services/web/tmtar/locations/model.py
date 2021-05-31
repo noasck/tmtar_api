@@ -18,6 +18,7 @@ class Location(db.Model):
     children = db.relationship(
         'Location',
         backref=db.backref('parent', remote_side=[id]),
+        passive_deletes=True,
     )
 
     def update(self, changes: ILocation):

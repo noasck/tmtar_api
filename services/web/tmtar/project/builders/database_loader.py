@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -51,13 +50,13 @@ class DatabaseSetup(object):
         if Location.query.get(1) is None:
             u1: User = User(
                 id=4,
-                email=str('denter425@gmail.com'),
+                identity='google-oauth2|112161506929078504169',
                 location_id=1,
                 admin_location_id=1,
             )
             u2: User = User(
                 id=5,
-                email=str('jjok730@gmail.com'),
+                identity='auth0|609fd1ff3872bb0068e63812',
                 location_id=1,
                 admin_location_id=1,
             )
@@ -70,34 +69,6 @@ class DatabaseSetup(object):
             db.session.commit()
 
             for user in User.query.all():
-                app.logger.info(f'Successfully seeded {user.email} root user.')
+                app.logger.info(f'Successfully seeded {user.identity} root user.')
         else:
             app.logger.info('Skipped database seeding.')
-
-    @classmethod
-    def add_cli(cls, app: Flask, db: SQLAlchemy, manager: Manager):
-        """
-        Register CLI commands for db manipulation.
-
-        :param manager: Flask-Script manager.
-        :type manager: Manager
-        :param app: main Flask app.
-        :type app: Flask
-        :param db: db connection instance.
-        :type db: SQLAlchemy
-        """
-        @manager.command
-        def set_up():
-            """Create all ab tables and seed values."""
-            DatabaseSetup.set_up_db(app, db)
-            DatabaseSetup.seed_db(app, db)
-
-        @manager.command
-        def tear_down():
-            """Drop all ab tables."""
-            DatabaseSetup.tear_down_db(app, db)
-
-        @manager.command
-        def seed_db():
-            """Seed necessary records in."""
-            DatabaseSetup.seed_db(app, db)

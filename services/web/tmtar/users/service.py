@@ -38,7 +38,7 @@ class UserService(AbstractService[User, IUser]):
         :param identity: logged in users identity
         :type identity: str
         :return: User instance
-        :rtype: str
+        :rtype: User
         """
         usr = UserService.get_by_identity(identity)
         if not usr:

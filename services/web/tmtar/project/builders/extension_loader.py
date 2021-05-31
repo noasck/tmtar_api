@@ -29,6 +29,11 @@ class ModulesSetup(object):
             'in': 'header',
             'name': 'Authorization',
         },
+        'auth0_login': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization',
+        },
     }
 
     @classmethod
@@ -42,8 +47,9 @@ class ModulesSetup(object):
     def configure_db(cls, app: Flask) -> SQLAlchemy:
         """Configure SQLAlchemy ORM plugin."""
         db = SQLAlchemy(app)
-        DatabaseSetup.tear_down_db(app, db)
-        DatabaseSetup.set_up_db(app, db)
+        if app.config['FLASK_ENV'] in {'development', 'testing'}:
+            DatabaseSetup.tear_down_db(app, db)
+            DatabaseSetup.set_up_db(app, db)
         return db
 
     @classmethod
@@ -99,13 +105,13 @@ class ModulesSetup(object):
         :type db: SQLAlchemy
         """
 
-        @app.cli.command("set_up")
+        @app.cli.command('set_up')
         def set_up():
             """Create all ab tables and seed values."""
             DatabaseSetup.set_up_db(app, db)
             DatabaseSetup.seed_db(app, db)
 
-        @app.cli.command("tear_down")
+        @app.cli.command('tear_down')
         def tear_down():
             """Drop all ab tables."""
             DatabaseSetup.tear_down_db(app, db)

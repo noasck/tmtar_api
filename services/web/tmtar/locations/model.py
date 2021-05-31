@@ -18,7 +18,6 @@ class Location(db.Model):
     children = db.relationship(
         'Location',
         backref=db.backref('parent', remote_side=[id]),
-        # cascade="all, delete-orphan",
         passive_deletes=True,
     )
 

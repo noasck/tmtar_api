@@ -27,9 +27,6 @@ def test_schema_works(schema: EventSchema):
             event_type=EventType[0],
             location_id='1',
             update_date=time_now,
-            sex=SexType[0],
-            min_age='12',
-            max_age='100',
             title="Sample",
             short_description="""The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 
@@ -48,9 +45,6 @@ def test_schema_works(schema: EventSchema):
     assert event.event_type == EventType[0]
     assert event.location_id == 1
     assert event.update_date == int(time_now)
-    assert event.sex == SexType[0]
-    assert event.min_age == 12
-    assert event.max_age == 100
     assert event.title == "Sample"
     assert event.short_description == """The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 

@@ -28,7 +28,7 @@ build:
 
 codestyle-check:
   stage: test
-  image: python:3.7-slim
+  image: python:3.9.5-slim-buster
   before_script:
     - pip3 install wemake-python-styleguide flakehell
   script:

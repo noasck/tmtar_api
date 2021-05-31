@@ -12,18 +12,18 @@ from .service import UserService
 
 def test_get_all(db: SQLAlchemy):
     admin: User = User(id=1,
-                       email=str(hash('example1@mail.ex')),
+                       identity=str(hash('example1@mail.ex')),
                        sex=SexType[0],
                        location_id=1,
                        bdate=datetime.now().date(),
                        admin_location_id=1)
     u1: User = User(id=2,
-                    email=str(hash('example2@mail.ex')),
+                    identity=str(hash('example2@mail.ex')),
                     sex=SexType[1],
                     location_id=1,
                     bdate=datetime.now().date())
     u2: User = User(id=3,
-                    email=str(hash('example3@mail.ex')),
+                    identity=str(hash('example3@mail.ex')),
                     sex=SexType[0],
                     location_id=1,
                     bdate=datetime.now().date())
@@ -41,12 +41,12 @@ def test_get_all(db: SQLAlchemy):
 
 def test_get_by_id(db: SQLAlchemy):
     u1: User = User(id=1,
-                    email=str(hash('example2@mail.ex')),
+                    identity=str(hash('example2@mail.ex')),
                     sex=SexType[1],
                     location_id=1,
                     bdate=datetime.now().date())
     u2: User = User(id=2,
-                    email=str(hash('example3@mail.ex')),
+                    identity=str(hash('example3@mail.ex')),
                     sex=SexType[0],
                     location_id=1,
                     bdate=datetime.now().date())
@@ -64,33 +64,33 @@ def test_get_by_id(db: SQLAlchemy):
 
 def test_update(db: SQLAlchemy):
     u1: User = User(id=2,
-                    email=str(hash('example1@mail.ex')),
+                    identity=str(hash('example1@mail.ex')),
                     sex=SexType[1],
                     location_id=1,
                     bdate=datetime.now().date())
     db.session.add(u1)
     db.session.commit()
 
-    upd: IUser = IUser(email=str(hash('new_email@mail.ex')),
+    upd: IUser = IUser(identity=str(hash('new_identity@mail.ex')),
                        bdate='2016-07-04',
                        sex=SexType[1])
     UserService.update(u1, upd)
 
     result: User = UserService.get_by_id(u1.id)
 
-    assert result.email == str(hash('example1@mail.ex'))
+    assert result.identity == str(hash('example1@mail.ex'))
     assert result.bdate == datetime.strptime('2016-07-04', '%Y-%m-%d').date()
     assert result.sex == SexType[1]
 
 
 def test_delete_by_id(db: SQLAlchemy):
     u1: User = User(id=2,
-                    email=str(hash('example2@mail.ex')),
+                    identity=str(hash('example2@mail.ex')),
                     sex=SexType[0],
                     location_id=1,
                     bdate=datetime.now().date())
     u2: User = User(id=3,
-                    email=str(hash('example3@mail.ex')),
+                    identity=str(hash('example3@mail.ex')),
                     sex=SexType[1],
                     location_id=1,
                     bdate=datetime.now().date())
@@ -110,7 +110,7 @@ def test_delete_by_id(db: SQLAlchemy):
 
 def test_get_or_new():
 
-    u1 = UserService.get_or_new_by_email('example3@mail.ex')
-    u2 = UserService.get_or_new_by_email('example3@mail.ex')
+    u1 = UserService.get_or_new_by_identity('example3@mail.ex')
+    u2 = UserService.get_or_new_by_identity('example3@mail.ex')
 
     assert u1 == u2

@@ -1,14 +1,10 @@
-import logging
-
 from flask import Flask
 from flask_cors import CORS
 from flask_restx import Api
-from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from ..routes import register_routes
-from .builders.database_loader import DatabaseSetup as DLoader
 from .builders.extension_loader import ModulesSetup as MLoader
 from .injector import Injector
 
@@ -22,11 +18,6 @@ class AppModule(object):
             self.app = Injector.app
         except AttributeError:
             config = 'tmtar.project.config.Config'
-            logging.basicConfig(
-                filename='access.log',
-                level=logging.DEBUG,
-                format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
-            )
             app = Flask(__name__)
             app.config.from_object(config)
             app.logger.info('Application created successfully!')
@@ -41,6 +32,9 @@ class AppModule(object):
         """Configure main modules and extensions."""
         # Extensions modules
         MLoader.configure_jwt(self.app)
+        # Inject auth provider
+        MLoader.configure_identity(self.app)
+
         db: SQLAlchemy = MLoader.configure_db(self.app)
         api: Api = MLoader.configure_api(self.app)
         MLoader.configure_ma(self.app)
@@ -54,11 +48,7 @@ class AppModule(object):
         # Adding CORS policy
         CORS(self.app)
 
-        # Register migrations and CLI
-        MLoader.configure_fm(self.app, db)
-        self.manager: Manager = MLoader.configure_manager(self.app)
-
         # Register database brute CLI commands
-        DLoader.add_cli(self.app, db, self.manager)
+        MLoader.configure_cli(self.app, db)
 
         self.app.logger.info('Application initialization finished!')

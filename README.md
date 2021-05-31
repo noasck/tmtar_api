@@ -1,25 +1,17 @@
-## Versions
+## Basic information
 
-### s.02 (Current) 
+[![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
-#### Changes:
+#### Pre-commit checks:
+- Styleguide: **OK** (0 warnings)
+- Tests: **OK** (73/73 passed)
 
-1. ```api/users/login``` route: need to pass ```Authorization: Bearer ``` header with **Auth0** ```access_token```
-2. Important. No **need to manage database manually**.
-    1. Excluded *Migrations* from ```entrypoint```. That means, database is clear at every run.
-    2. ```drop_all/set_up``` in entrypoint. While not release version, database fully reinits at every build.
-    2. Fulfilled migration support for multiple databases has been added to *TODO-list*.
-    3. Deleted deprecated **Flask-Script** and **Flask-Migrate** in order to use pure **Alembic** for migrations.
-4. Deleted ```access.log```. All outputs are on the stdout. *TODO: look for a solution.*
-5. Changed **CLI** commands.
-#### Next up:
+#### Contacts 
+```@you2ku``` at **Telegram**.
 
-- Token expiration.
-- Token exceptions handling.
-- Events instance and routes.
-
-### s.01
-All previous versions of API tagged as s.01
+#### Changelog
+For more information about versions please check [Changelog](https://gitlab.com/baltazar1697/tmtar_api/-/blob/df4ac122e9b35c7aede9b49b489aeaaf03959b36/CHANGELOG.md)
 
 -----------------------------------
 
@@ -48,46 +40,32 @@ alias dc_down_prod='docker-compose -f docker-compose.prod.yml down --volumes --r
 - Up: ```dc_build_peod```
 - Down: ```dc_down_prod```
 
+### Accessing API
+In **development** you can use *Swagger OpenAPI* documentation to check routes you need and view namespaces, schemas, parameters, route's information.
+- **Development:** ```http://localhost:5000```.
+API itself:
+- **Production:** ```http://localhost:1337/api/```.
+- **Development:** ```http://localhost:5000/api/```.
+
 ## Database administration
 We use PostgreSQL as our major database. Project requires some tables and root records to be created for correct runnning.
 There several ways to **set up database** with all tables needed.
 
-### Alembic migrations
-You can use ```Flask-Migrate``` extension to set up tables:
-1. At the first run, perhaps you will need to initialize *Alembic* structure: (**only for backend devs**)
+### Production - Alembic migrations
 
-``` bash
-  docker-compose run web python manage.py db init
-```
-2. (*) You need to create and manually review migrations:
-```bash
-# Create migration:
-docker-compose run web python manage.py db upgrade
-```
-3. For future runs, execute 2 commands:
+You can use ```Flask-Migrate``` extension to set up tables **in production**:
 
-``` bash
-# Migrating scheme:
-docker-compose run web python manage.py db upgrade
-# Seed database:
-docker-compose run web python manage.py seed_db
-```
-... and restart full application.
+*--TBD--*
 
 ### Manual (forced) migrations
 You can recreate all tables manually by running 2 sequential commands inside the container. 
 But you should be prepared for troubles. This method is highly unstable and could call some exceptions.
 
-``` bash
-# drop all tables
-docker-compose run web python manage.py tear_down
-# create all tables
-docker-compose run web python manage.py set_up
-```
+*--TBD--*
 
 
-### Authorization
-Obtaining access token is one of basic tasks.
+## Authorization
+Obtaining access token is one of basic tasks while working with API.
 #### Production
 1. Obtain **Auth0** ```access_token```.
 To do that, you need to be our team member in **Auth0** service.
@@ -108,12 +86,3 @@ curl --request GET \
 ```
 Where ```admins_identity``` means your *root* identity - ```sub``` in testing environment.
 
-[![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-
-#### Pre-commit checks:
-- Styleguide: **OK** (0 warnings)
-- Tests: **OK** (73/73 passed)
-
-#### Contacts 
-```@you2ku``` at **Telegram**.

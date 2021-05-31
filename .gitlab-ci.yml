@@ -33,6 +33,9 @@ codestyle-check:
     - pip3 install wemake-python-styleguide>=0.15.2 flake8==3.9.0 flakehell>=0.9.0
   script:
     - flakehell lint --tee --output-file=codestyle.json ./services/
+  artifacts:
+    reports:
+      codequality: codestyle.json
   # only:
   #   - api_dev
 

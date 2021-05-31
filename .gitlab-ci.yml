@@ -33,8 +33,8 @@ codestyle-check:
     - pip3 install wemake-python-styleguide flakehell
   script:
     - flake8 ./services/web/
-  only:
-    - api_dev
+  # only:
+  #   - api_dev
 
 test:
   stage: test
@@ -49,8 +49,8 @@ test:
     reports:
       junit: services/web/report.xml 
     expire_in: 1 day
-  only:
-    - api_dev
+  # only:
+  #   - api_dev
 
 deploy:
   stage: release

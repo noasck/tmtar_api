@@ -30,11 +30,14 @@ codestyle-check:
   stage: test
   image: python:3.9.5-slim-buster
   before_script:
-    - pip3 install wemake-python-styleguide flakehell
+    - pip3 install wemake-python-styleguide>=0.15.2 flake8==3.9.0 flakehell>=0.9.0
   script:
-    - flake8 ./services/web/
-  only:
-    - api_dev
+    - flakehell lint -tee --output-file=codestyle.json ./services/
+  artifacts:
+    reports:
+      codequality: codestyle.json
+  # only:
+  #   - api_dev
 
 test:
   stage: test
@@ -49,8 +52,8 @@ test:
     reports:
       junit: services/web/report.xml 
     expire_in: 1 day
-  only:
-    - api_dev
+  # only:
+  #   - api_dev
 
 deploy:
   stage: release

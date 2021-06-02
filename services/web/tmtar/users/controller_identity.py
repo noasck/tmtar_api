@@ -18,7 +18,7 @@ def create_internal_jwt(user: User):
 
 
 def get_payload():
-    """Obtains the Access Token from the Authorization Header."""
+    """Obtain the Access Token from the Authorization Header."""
     auth = request.headers.get('Authorization', None)
     if not auth:
         raise AuthError(

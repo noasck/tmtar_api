@@ -8,6 +8,8 @@ from ..routes import register_routes
 from .builders.extension_loader import ModulesSetup as MLoader
 from .injector import Injector
 
+# TODO: remove logic from __init__ everywhere. It's a bad style.
+
 
 class AppModule(object):
     """Class providing application initialization."""

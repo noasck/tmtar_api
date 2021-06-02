@@ -30,9 +30,9 @@ codestyle-check:
   stage: test
   image: python:3.9.5-slim-buster
   before_script:
-    - pip3 install wemake-python-styleguide>=0.15.2 flake8==3.9.0 flakehell>=0.9.0
+    - pip3 install wemake-python-styleguide flake8
   script:
-    - flakehell lint -tee --output-file=codestyle.json ./services/
+    - flake8 --tee --output-file=codestyle.log .
   artifacts:
     reports:
       codequality: codestyle.json

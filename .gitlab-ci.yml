@@ -24,18 +24,22 @@ build:
     - docker build --cache-from registry.gitlab.com/baltazar1697/tmtar_api -t registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF --tag registry.gitlab.com/baltazar1697/tmtar_api:latest --tag registry.gitlab.com/baltazar1697/tmtar_api services/web/
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:$CI_BUILD_REF
     - docker push registry.gitlab.com/baltazar1697/tmtar_api:latest
-
+  only:
+    - master
 
 codestyle-check:
   stage: test
+  allow_failure: true
   image: python:3.9.5-slim-buster
   before_script:
     - pip3 install wemake-python-styleguide flake8
   script:
     - flake8 --tee --output-file=codestyle.log .
-  artifacts:
-    reports:
-      codequality: codestyle.json
+   artifacts:
+    when: always
+    paths:
+      - codestyle.log
+    expire_in: 1 week
   # only:
   #   - api_dev
 
@@ -64,5 +68,7 @@ deploy:
     # - docker-compose exec web python manage.py db upgrade
   after_script:
     - docker-compose down
+  needs:
+    - job: build
   only: 
     - master

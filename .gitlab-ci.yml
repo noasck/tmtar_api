@@ -35,7 +35,7 @@ codestyle-check:
     - pip3 install wemake-python-styleguide flake8
   script:
     - flake8 --tee --output-file=codestyle.log .
-   artifacts:
+  artifacts:
     when: always
     paths:
       - codestyle.log

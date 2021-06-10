@@ -3,6 +3,8 @@ from .interface import ILocation
 
 db = Injector.db
 
+# TODO: replace adjacency list with ltree.
+
 
 class Location(db.Model):
     """Include and describe geographic objects and their relations."""
@@ -18,6 +20,7 @@ class Location(db.Model):
     children = db.relationship(
         'Location',
         backref=db.backref('parent', remote_side=[id]),
+        passive_deletes=True,
     )
 
     def update(self, changes: ILocation):

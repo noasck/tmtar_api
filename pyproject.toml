@@ -1,0 +1,25 @@
+[tool.flakehell]
+accept_encodings = "utf-8"
+format = "gitlab"
+show_source = true
+statistics = false
+doctests = true
+max-raises = 5
+max-cognitive-average = 20
+enable_extensions = "G"
+max_line_length = 100
+exclude = [".git", "__pycache__", "*test.py", "fixtures.py", "events", "objects", "migrations"]
+max-complexity = 10
+strictness = "short"
+docstring_style = "sphinx"
+
+[tool.flakehell.plugins]
+"flake8-*" = ["+*"]
+mccabe = ["+*"]
+"pep8-naming" = ["+*"]
+pycodestyle = ["+*", "-W504"]
+pyflakes = ["+*"]
+"wemake-python-styleguide" = ["+*", "-WPS300", "-WPS412", "-WPS305", "-WPS433", "-WPS226", "-WPS213", "-WPS232", "-WPS430"]
+"flake8-bandit" = ["+*", "-S104"]
+"flake8-docstrings" = ["+*", "-D100", "-D104", "-D401", "-D101"]
+"flake8-rst-docstrings" = ["+*", "-RST303", "-RST304"]

@@ -1,6 +1,12 @@
 [flake8]
-ignore = S104,D100,WPS300,WPS412,D104,D101,WPS305,WPS433,WPS226,WPS213,WPS232,WPS231,WPS430
+ignore = S104,D100,WPS300,WPS412,D104,D101,WPS305,WPS433,WPS430
 exclude = .git,__pycache__,*test.py,fixtures.py,events,objects,migrations
-max-complexity = 10
 strictness=short
 docstring_style=sphinx
+max-raises = 5
+max_line_length = 100
+max-cognitive-score = 25
+max-cognitive-average = 15
+max-string-usages = 4
+per-file-ignores =
+    config.py:WPS115,WPS432

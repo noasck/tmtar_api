@@ -45,10 +45,14 @@ def test_update(db: SQLAlchemy):
 
 def test_delete_by_id(db: SQLAlchemy):
     kh: Location = Location(id=2, name='kherson', root=1)
-    kv: Location = Location(id=3, name='kyiv', root=1)
+    kv: Location = Location(id=3, name='kyiv', root=2)
+    kl: Location = Location(id=5, name='steek', root=1)
+    pv: Location = Location(id=4, name='peek', root=3)
 
     db.session.add(kh)
     db.session.add(kv)
+    db.session.add(kl)
+    db.session.add(pv)
     db.session.commit()
 
     LocationService.delete_by_id(kh.id)
@@ -56,7 +60,7 @@ def test_delete_by_id(db: SQLAlchemy):
     result = Location.query.all()
 
     assert len(result) == 2
-    assert kv in result
+    assert kl in result
 
 
 def test_get_parent(db: SQLAlchemy):
@@ -82,20 +86,6 @@ def test_get_children_works(db: SQLAlchemy):
     assert len(LocationService.get_children(kh)) == 0
     assert nk in LocationService.get_children(kv) and len(
         LocationService.get_children(kv)) == 1
-
-
-def test_get_root(db: SQLAlchemy):
-    uk, kh, kv = create_test_locations(db)
-    nk = Location(id=5, name='nova каховка', root=4)
-    pk = Location(id=6, name='nova кахо вка', root=None)
-
-    db.session.add(nk)
-    db.session.add(pk)
-    db.session.commit()
-
-    result: Location = LocationService.get_root()
-
-    assert result.name == "root"
 
 
 def test_search_by_name(db: SQLAlchemy):
@@ -124,3 +114,41 @@ def test_create(db: SQLAlchemy):
     loc = LocationService.create(new_loc)
     assert loc.id != 0
     assert loc
+
+
+def test_get_all_ancestors_id(db: SQLAlchemy):
+    uk, kh, kv = create_test_locations(db)
+    nk = Location(id=5, name='nova каховка', root=4)
+    pk = Location(id=6, name='NoVa Каховка', root=3)
+
+    db.session.add(nk)
+    db.session.add(pk)
+    db.session.commit()
+
+    assert LocationService.get_all_ancestors_id(6) == [6, 3, 2, 1]
+    assert LocationService.get_all_ancestors_id(5) == [5, 4, 2, 1]
+    assert LocationService.get_all_ancestors_id(2) == [2, 1]
+
+
+def test_get_all_successor_id(db: SQLAlchemy):
+    uk, kh, kv = create_test_locations(db)
+    nk = Location(id=5, name='nova каховка', root=4)
+    nk2 = Location(id=7, name='novasd каховка', root=4)
+    pk = Location(id=6, name='NoVa Каховка', root=3)
+
+    db.session.add(nk)
+    db.session.add(nk2)
+    db.session.add(pk)
+    db.session.commit()
+
+    res1 = LocationService.get_all_successor_id(1)
+    res2 = LocationService.get_all_successor_id(2)
+    res3 = LocationService.get_all_successor_id(3)
+    res4 = LocationService.get_all_successor_id(4)
+    res5 = LocationService.get_all_successor_id(5)
+
+    assert set(res1) == {1, 2, 3, 4, 5, 6, 7}
+    assert set(res2) == {2, 3, 4, 5, 6, 7}
+    assert set(res3) == {3, 6}
+    assert set(res4) == {4, 7, 5}
+    assert set(res5) == {5}

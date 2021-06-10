@@ -1,4 +1,5 @@
-То что осталось по бэкенду:
+## Backend
+
 
 -  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
 -  [x] M — add dependency injection for: fixtures, app, modules, service methods
@@ -13,6 +14,30 @@
 -  [x] S — remove email hashing
 -  [x] S — add relations between objects and fix tests
 -  [ ] S — fix objects access
+-  [x] D — add security headers (JWT) for flask_restX swagger documentation
+-  [ ] D — add validator for every field, validation exception handling, validation failing tests
+-  [ ] D — add unique and other database exception handling
+-  [ ] D — add unique and other database exception handling
+-  [x] D — fix preferred event
+-  [x] D — delete /user PUT route
+-  [x] D — add token expiration and JWT config.
+-  [x] D — provide auth0 authorization.
+-  [x] D — separate development\production auth.
+
+_____________________________________________________
+## Finish ASAP
+
+### Event instance:
+-  [x] service
+-  [x] service tests
+-  [ ] controller
+-  [ ] controller tests
+
+### File instance:
+-  [ ] controller tests
+
+### Zone:
+=======
 -  [x] D — add security headers (JWT) for flask_restx sqagger documentation
 -  [ ] D — add validator for every field, validation exception handling, validation failing tests
 -  [ ] D — add unique and other database exception handling
@@ -34,7 +59,7 @@ Event instance:
 File instance:
 -  [ ] controller tests
 
-Zone:
+### Zone:
 -  [ ] configure PostGIS
 -  [ ] model
 -  [ ] interface
@@ -45,7 +70,8 @@ Zone:
 -  [ ] controller
 -  [ ] controller tests
 
-Subzone:
+### Subzone:
+
 -  [ ] model
 -  [ ] interface
 -  [ ] schemes
@@ -57,5 +83,4 @@ Subzone:
 -  [ ] object relation
 -  [ ] object integration tests
 
-Большой блок:
-Monitoring service — distinct project on Python. Features: tracking, logs gathering, status\retry tracker, Telegram notifications.
+**Monitoring service** — distinct project on Python. Features: tracking, logs gathering, status\retry tracker, Telegram notifications.

@@ -1,0 +1,1722 @@
+./services/:0:1: E902 FileNotFoundError: [Errno 2] No such file or directory: './services/'
+/usr/src/app/services:0:1: E902 FileNotFoundError: [Errno 2] No such file or directory: '/usr/src/app/services'
+./wsgi.py:13:1: DAR201 Missing "Returns" in Docstring: - return
+./wsgi.py:23:1: S104 Possible binding to all interfaces.
+./tmtar/routes.py:1:1: D100 Missing docstring in public module
+./tmtar/routes.py:3:1: WPS300 Found local folder import
+./tmtar/routes.py:4:1: WPS300 Found local folder import
+./tmtar/routes.py:5:1: WPS300 Found local folder import
+./tmtar/routes.py:6:1: WPS300 Found local folder import
+./tmtar/routes.py:10:1: DAR101 Missing parameter(s) in Docstring: - api
+./tmtar/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/create_app_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/create_app_test.py:6:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/service_test.py:0:1: WPS411 Found empty module
+./tmtar/events/service_test.py:1:1: D100 Missing docstring in public module
+./tmtar/events/service_test.py:1:2: E800 Found commented out code
+./tmtar/events/service_test.py:2:2: E800 Found commented out code
+./tmtar/events/service_test.py:3:2: E800 Found commented out code
+./tmtar/events/service_test.py:5:2: E800 Found commented out code
+./tmtar/events/service_test.py:7:2: E800 Found commented out code
+./tmtar/events/service_test.py:9:2: E800 Found commented out code
+./tmtar/events/service_test.py:10:2: E800 Found commented out code
+./tmtar/events/service_test.py:11:2: E800 Found commented out code
+./tmtar/events/service_test.py:13:2: E800 Found commented out code
+./tmtar/events/service_test.py:17:2: E800 Found commented out code
+./tmtar/events/service_test.py:18:2: E800 Found commented out code
+./tmtar/events/service_test.py:19:2: E800 Found commented out code
+./tmtar/events/service_test.py:20:2: E800 Found commented out code
+./tmtar/events/service_test.py:21:2: E800 Found commented out code
+./tmtar/events/service_test.py:22:2: E800 Found commented out code
+./tmtar/events/service_test.py:23:2: E800 Found commented out code
+./tmtar/events/service_test.py:24:2: E800 Found commented out code
+./tmtar/events/service_test.py:26:80: E501 line too long (112 > 79 characters)
+./tmtar/events/service_test.py:29:80: E501 line too long (109 > 79 characters)
+./tmtar/events/service_test.py:30:80: E501 line too long (109 > 79 characters)
+./tmtar/events/service_test.py:31:80: E501 line too long (122 > 79 characters)
+./tmtar/events/service_test.py:32:2: E800 Found commented out code
+./tmtar/events/service_test.py:35:2: E800 Found commented out code
+./tmtar/events/service_test.py:36:2: E800 Found commented out code
+./tmtar/events/service_test.py:37:2: E800 Found commented out code
+./tmtar/events/service_test.py:38:2: E800 Found commented out code
+./tmtar/events/service_test.py:39:2: E800 Found commented out code
+./tmtar/events/service_test.py:40:2: E800 Found commented out code
+./tmtar/events/service_test.py:41:2: E800 Found commented out code
+./tmtar/events/service_test.py:42:2: E800 Found commented out code
+./tmtar/events/service_test.py:43:2: E800 Found commented out code
+./tmtar/events/service_test.py:44:2: E800 Found commented out code
+./tmtar/events/service_test.py:48:80: E501 line too long (81 > 79 characters)
+./tmtar/events/service_test.py:50:2: E800 Found commented out code
+./tmtar/events/service_test.py:52:2: E800 Found commented out code
+./tmtar/events/service_test.py:55:80: E501 line too long (81 > 79 characters)
+./tmtar/events/service_test.py:57:2: E800 Found commented out code
+./tmtar/events/service_test.py:59:2: E800 Found commented out code
+./tmtar/events/service_test.py:61:2: E800 Found commented out code
+./tmtar/events/service_test.py:62:2: E800 Found commented out code
+./tmtar/events/service_test.py:63:2: E800 Found commented out code
+./tmtar/events/service_test.py:65:2: E800 Found commented out code
+./tmtar/events/service_test.py:67:2: E800 Found commented out code
+./tmtar/events/service_test.py:69:2: E800 Found commented out code
+./tmtar/events/service_test.py:74:80: E501 line too long (81 > 79 characters)
+./tmtar/events/service_test.py:76:2: E800 Found commented out code
+./tmtar/events/service_test.py:78:2: E800 Found commented out code
+./tmtar/events/service_test.py:79:2: E800 Found commented out code
+./tmtar/events/service_test.py:81:2: E800 Found commented out code
+./tmtar/events/service_test.py:82:2: E800 Found commented out code
+./tmtar/events/service_test.py:83:2: E800 Found commented out code
+./tmtar/events/service_test.py:84:2: E800 Found commented out code
+./tmtar/events/service_test.py:85:2: E800 Found commented out code
+./tmtar/events/service_test.py:86:2: E800 Found commented out code
+./tmtar/events/service_test.py:87:2: E800 Found commented out code
+./tmtar/events/service_test.py:88:2: E800 Found commented out code
+./tmtar/events/service_test.py:89:2: E800 Found commented out code
+./tmtar/events/service_test.py:93:80: E501 line too long (119 > 79 characters)
+./tmtar/events/service_test.py:94:2: E800 Found commented out code
+./tmtar/events/service_test.py:97:2: E800 Found commented out code
+./tmtar/events/service_test.py:98:2: E800 Found commented out code
+./tmtar/events/service_test.py:100:2: E800 Found commented out code
+./tmtar/events/service_test.py:101:2: E800 Found commented out code
+./tmtar/events/service_test.py:102:2: E800 Found commented out code
+./tmtar/events/service_test.py:106:2: E800 Found commented out code
+./tmtar/events/service_test.py:107:2: E800 Found commented out code
+./tmtar/events/service_test.py:109:2: E800 Found commented out code
+./tmtar/events/service_test.py:110:2: E800 Found commented out code
+./tmtar/events/service_test.py:111:2: E800 Found commented out code
+./tmtar/events/service_test.py:113:2: E800 Found commented out code
+./tmtar/events/service_test.py:117:2: E800 Found commented out code
+./tmtar/events/service_test.py:129:2: E800 Found commented out code
+./tmtar/events/service_test.py:131:2: E800 Found commented out code
+./tmtar/events/service_test.py:133:2: E800 Found commented out code
+./tmtar/events/service_test.py:134:2: E800 Found commented out code
+./tmtar/events/service_test.py:138:2: E800 Found commented out code
+./tmtar/events/service_test.py:139:2: E800 Found commented out code
+./tmtar/events/service_test.py:140:2: E800 Found commented out code
+./tmtar/events/service_test.py:142:2: E800 Found commented out code
+./tmtar/events/service_test.py:143:2: E800 Found commented out code
+./tmtar/events/service_test.py:145:2: E800 Found commented out code
+./tmtar/events/service_test.py:147:2: E800 Found commented out code
+./tmtar/events/service_test.py:151:2: E800 Found commented out code
+./tmtar/events/service_test.py:152:2: E800 Found commented out code
+./tmtar/events/service_test.py:154:2: E800 Found commented out code
+./tmtar/events/service_test.py:155:2: E800 Found commented out code
+./tmtar/events/service_test.py:156:2: E800 Found commented out code
+./tmtar/events/service_test.py:158:2: E800 Found commented out code
+./tmtar/events/service_test.py:160:2: E800 Found commented out code
+./tmtar/events/service_test.py:162:2: E800 Found commented out code
+./tmtar/events/service_test.py:167:2: E800 Found commented out code
+./tmtar/events/service_test.py:169:2: E800 Found commented out code
+./tmtar/events/service_test.py:169:80: E501 line too long (85 > 79 characters)
+./tmtar/events/service_test.py:170:2: E800 Found commented out code
+./tmtar/events/service_test.py:174:2: E800 Found commented out code
+./tmtar/events/service_test.py:176:2: E800 Found commented out code
+./tmtar/events/service_test.py:178:2: E800 Found commented out code
+./tmtar/events/service_test.py:179:2: E800 Found commented out code
+./tmtar/events/service_test.py:181:2: E800 Found commented out code
+./tmtar/events/service_test.py:183:2: E800 Found commented out code
+./tmtar/events/service_test.py:185:2: E800 Found commented out code
+./tmtar/events/service_test.py:186:2: E800 Found commented out code
+./tmtar/events/service_test.py:186:80: E501 line too long (106 > 79 characters)
+./tmtar/events/service_test.py:190:2: E800 Found commented out code
+./tmtar/events/service_test.py:191:2: E800 Found commented out code
+./tmtar/events/service_test.py:192:2: E800 Found commented out code
+./tmtar/events/service_test.py:194:2: E800 Found commented out code
+./tmtar/events/service_test.py:195:2: E800 Found commented out code
+./tmtar/events/service_test.py:196:2: E800 Found commented out code
+./tmtar/events/service_test.py:198:2: E800 Found commented out code
+./tmtar/events/service_test.py:200:2: E800 Found commented out code
+./tmtar/events/service_test.py:205:2: E800 Found commented out code
+./tmtar/events/service_test.py:206:2: E800 Found commented out code
+./tmtar/events/service_test.py:207:2: E800 Found commented out code
+./tmtar/events/service_test.py:209:2: E800 Found commented out code
+./tmtar/events/service_test.py:210:2: E800 Found commented out code
+./tmtar/events/service_test.py:211:2: E800 Found commented out code
+./tmtar/events/service_test.py:213:2: E800 Found commented out code
+./tmtar/events/service_test.py:214:2: E800 Found commented out code
+./tmtar/events/service_test.py:215:2: E800 Found commented out code
+./tmtar/events/service_test.py:216:2: E800 Found commented out code
+./tmtar/events/service_test.py:218:2: E800 Found commented out code
+./tmtar/events/service_test.py:219:2: E800 Found commented out code
+./tmtar/events/service_test.py:220:2: E800 Found commented out code
+./tmtar/events/service_test.py:221:2: E800 Found commented out code
+./tmtar/events/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/events/schema_test.py:1:1: D100 Missing docstring in public module
+./tmtar/events/schema_test.py:5:1: F403 'from ..project.types import *' used; unable to detect undefined names
+./tmtar/events/schema_test.py:5:1: WPS300 Found local folder import
+./tmtar/events/schema_test.py:5:1: WPS347 Found vague import that may cause confusion: *
+./tmtar/events/schema_test.py:7:1: WPS300 Found local folder import
+./tmtar/events/schema_test.py:8:1: WPS300 Found local folder import
+./tmtar/events/schema_test.py:9:1: WPS300 Found local folder import
+./tmtar/events/schema_test.py:15:1: D103 Missing docstring in public function
+./tmtar/events/schema_test.py:19:1: D103 Missing docstring in public function
+./tmtar/events/schema_test.py:19:24: WPS442 Found outer scope names shadowing: schema
+./tmtar/events/schema_test.py:20:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:23:1: D103 Missing docstring in public function
+./tmtar/events/schema_test.py:23:1: WPS218 Found too many `assert` statements: 9 > 5
+./tmtar/events/schema_test.py:23:23: WPS442 Found outer scope names shadowing: schema
+./tmtar/events/schema_test.py:24:5: WPS110 Found wrong variable name: params
+./tmtar/events/schema_test.py:25:9: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/events/schema_test.py:27:24: F405 'EventType' may be undefined, or defined from star imports: ..project.types, ..tests.fixtures
+./tmtar/events/schema_test.py:30:19: Q000 Remove bad quotes
+./tmtar/events/schema_test.py:31:52: W291 trailing whitespace
+./tmtar/events/schema_test.py:32:80: E501 line too long (114 > 79 characters)
+./tmtar/events/schema_test.py:32:115: W291 trailing whitespace
+./tmtar/events/schema_test.py:34:56: W291 trailing whitespace
+./tmtar/events/schema_test.py:35:80: E501 line too long (111 > 79 characters)
+./tmtar/events/schema_test.py:35:112: W291 trailing whitespace
+./tmtar/events/schema_test.py:36:80: E501 line too long (111 > 79 characters)
+./tmtar/events/schema_test.py:36:112: W291 trailing whitespace
+./tmtar/events/schema_test.py:37:48: W291 trailing whitespace
+./tmtar/events/schema_test.py:38:80: E501 line too long (97 > 79 characters)
+./tmtar/events/schema_test.py:40:26: WPS319 Found bracket in wrong position
+./tmtar/events/schema_test.py:40:27: WPS319 Found bracket in wrong position
+./tmtar/events/schema_test.py:44:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:45:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:45:32: F405 'EventType' may be undefined, or defined from star imports: ..project.types, ..tests.fixtures
+./tmtar/events/schema_test.py:46:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:47:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:48:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:48:27: Q000 Remove bad quotes
+./tmtar/events/schema_test.py:49:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:49:36: WPS462 Wrong multiline string usage
+./tmtar/events/schema_test.py:49:52: W291 trailing whitespace
+./tmtar/events/schema_test.py:50:80: E501 line too long (114 > 79 characters)
+./tmtar/events/schema_test.py:50:115: W291 trailing whitespace
+./tmtar/events/schema_test.py:52:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:52:30: WPS462 Wrong multiline string usage
+./tmtar/events/schema_test.py:52:56: W291 trailing whitespace
+./tmtar/events/schema_test.py:53:80: E501 line too long (111 > 79 characters)
+./tmtar/events/schema_test.py:53:112: W291 trailing whitespace
+./tmtar/events/schema_test.py:54:80: E501 line too long (111 > 79 characters)
+./tmtar/events/schema_test.py:54:112: W291 trailing whitespace
+./tmtar/events/schema_test.py:55:48: W291 trailing whitespace
+./tmtar/events/schema_test.py:56:80: E501 line too long (96 > 79 characters)
+./tmtar/events/schema_test.py:57:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema_test.py:58:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/events/interface_test.py:1:1: D100 Missing docstring in public module
+./tmtar/events/interface_test.py:5:1: F401 '..project.types.SexType' imported but unused
+./tmtar/events/interface_test.py:5:1: WPS300 Found local folder import
+./tmtar/events/interface_test.py:7:1: WPS300 Found local folder import
+./tmtar/events/interface_test.py:8:1: WPS300 Found local folder import
+./tmtar/events/interface_test.py:14:1: D103 Missing docstring in public function
+./tmtar/events/interface_test.py:20:15: Q000 Remove bad quotes
+./tmtar/events/interface_test.py:21:52: W291 trailing whitespace
+./tmtar/events/interface_test.py:22:80: E501 line too long (110 > 79 characters)
+./tmtar/events/interface_test.py:22:111: W291 trailing whitespace
+./tmtar/events/interface_test.py:24:56: W291 trailing whitespace
+./tmtar/events/interface_test.py:25:80: E501 line too long (107 > 79 characters)
+./tmtar/events/interface_test.py:25:108: W291 trailing whitespace
+./tmtar/events/interface_test.py:26:80: E501 line too long (107 > 79 characters)
+./tmtar/events/interface_test.py:26:108: W291 trailing whitespace
+./tmtar/events/interface_test.py:27:80: E501 line too long (120 > 79 characters)
+./tmtar/events/interface_test.py:29:20: WPS319 Found bracket in wrong position
+./tmtar/events/interface_test.py:32:1: D103 Missing docstring in public function
+./tmtar/events/interface_test.py:32:27: WPS442 Found outer scope names shadowing: interface
+./tmtar/events/interface_test.py:33:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/interface_test.py:36:1: D103 Missing docstring in public function
+./tmtar/events/interface_test.py:36:26: WPS442 Found outer scope names shadowing: interface
+./tmtar/events/interface_test.py:38:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/schema.py:1:1: D100 Missing docstring in public module
+./tmtar/events/schema.py:3:1: F401 '..project.types.SexType' imported but unused
+./tmtar/events/schema.py:3:1: WPS300 Found local folder import
+./tmtar/events/schema.py:6:1: D101 Missing docstring in public class
+./tmtar/events/schema.py:15:37: WPS432 Found magic number: 1597401274
+./tmtar/events/model.py:0:1: WPS226 Found string constant over-use: CASCADE > 3
+./tmtar/events/model.py:1:1: D100 Missing docstring in public module
+./tmtar/events/model.py:5:1: WPS300 Found local folder import
+./tmtar/events/model.py:6:1: F401 '..project.types.SexType' imported but unused
+./tmtar/events/model.py:6:1: WPS300 Found local folder import
+./tmtar/events/model.py:7:1: WPS300 Found local folder import
+./tmtar/events/model.py:17:46: WPS432 Found magic number: 255
+./tmtar/events/model.py:26:45: WPS432 Found magic number: 200
+./tmtar/events/model.py:30:80: E501 line too long (80 > 79 characters)
+./tmtar/events/model.py:36:1: DAR101 Missing parameter(s) in Docstring: - changes
+./tmtar/events/model.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/events/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/events/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/events/model_test.py:1:1: D100 Missing docstring in public module
+./tmtar/events/model_test.py:5:1: F403 'from ..project.types import *' used; unable to detect undefined names
+./tmtar/events/model_test.py:5:1: WPS300 Found local folder import
+./tmtar/events/model_test.py:5:1: WPS347 Found vague import that may cause confusion: *
+./tmtar/events/model_test.py:7:1: WPS300 Found local folder import
+./tmtar/events/model_test.py:13:1: D103 Missing docstring in public function
+./tmtar/events/model_test.py:16:20: F405 'EventType' may be undefined, or defined from star imports: ..project.types, ..tests.fixtures
+./tmtar/events/model_test.py:19:15: Q000 Remove bad quotes
+./tmtar/events/model_test.py:20:52: W291 trailing whitespace
+./tmtar/events/model_test.py:21:80: E501 line too long (110 > 79 characters)
+./tmtar/events/model_test.py:21:111: W291 trailing whitespace
+./tmtar/events/model_test.py:23:56: W291 trailing whitespace
+./tmtar/events/model_test.py:24:80: E501 line too long (107 > 79 characters)
+./tmtar/events/model_test.py:24:108: W291 trailing whitespace
+./tmtar/events/model_test.py:25:80: E501 line too long (107 > 79 characters)
+./tmtar/events/model_test.py:25:108: W291 trailing whitespace
+./tmtar/events/model_test.py:26:80: E501 line too long (120 > 79 characters)
+./tmtar/events/model_test.py:28:20: WPS319 Found bracket in wrong position
+./tmtar/events/model_test.py:31:1: D103 Missing docstring in public function
+./tmtar/events/model_test.py:31:23: WPS442 Found outer scope names shadowing: event
+./tmtar/events/model_test.py:32:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/events/service.py:1:1: D100 Missing docstring in public module
+./tmtar/events/service.py:4:1: WPS300 Found local folder import
+./tmtar/events/service.py:5:1: WPS300 Found local folder import
+./tmtar/events/service.py:6:1: WPS300 Found local folder import
+./tmtar/events/service.py:7:1: WPS300 Found local folder import
+./tmtar/events/service.py:12:1: D101 Missing docstring in public class
+./tmtar/events/service.py:15:1: D205 1 blank line required between summary line and description
+./tmtar/events/service.py:16:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/events/service.py:23:5: E303 too many blank lines (2)
+./tmtar/events/service.py:24:5: WPS211 Found too many arguments: 6 > 5
+./tmtar/events/service.py:28:23: B008 Do not perform function calls in argument defaults.  The call is performed only once at function definition time. All calls to your function will reuse the result of that definition-time function call.  If this is intended, assign the function call to a module-level variable and use that variable as a default value.
+./tmtar/events/service.py:28:23: WPS404 Found complex default value
+./tmtar/events/service.py:28:28: WPS432 Found magic number: 1960
+./tmtar/events/service.py:28:34: WPS432 Found magic number: 12
+./tmtar/events/service.py:28:38: WPS432 Found magic number: 20
+./tmtar/events/service.py:30:20: Q000 Remove bad quotes
+./tmtar/events/service.py:32:1: D205 1 blank line required between summary line and description
+./tmtar/events/service.py:32:1: DAR101 Missing parameter(s) in Docstring: - bdate
+./tmtar/events/service.py:32:1: DAR101 Missing parameter(s) in Docstring: - event_type
+./tmtar/events/service.py:32:1: DAR101 Missing parameter(s) in Docstring: - page
+./tmtar/events/service.py:32:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/events/service.py:32:1: DAR101 Missing parameter(s) in Docstring: - sex
+./tmtar/events/service.py:32:1: DAR101 Missing parameter(s) in Docstring: - user_location_id
+./tmtar/events/service.py:47:9: F841 local variable 'per_page' is assigned to but never used
+./tmtar/events/service.py:49:9: WPS430 Found nested function: calculate_age
+./tmtar/events/service.py:52:46: WPS318 Found extra indentation
+./tmtar/events/service.py:52:68: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:56:9: WPS430 Found nested function: is_matching
+./tmtar/events/service.py:57:1: N400: Found backslash that is used for line breaking
+./tmtar/events/service.py:57:13: WPS221 Found line with high Jones Complexity: 17 > 14
+./tmtar/events/service.py:57:21: WPS509 Found incorrectly nested ternary
+./tmtar/events/service.py:57:36: Q000 Remove bad quotes
+./tmtar/events/service.py:57:70: WPS334 Found reversed complex comparison
+./tmtar/events/service.py:57:80: E501 line too long (109 > 79 characters)
+./tmtar/events/service.py:58:20: WPS318 Found extra indentation
+./tmtar/events/service.py:58:25: WPS509 Found incorrectly nested ternary
+./tmtar/events/service.py:58:80: E501 line too long (102 > 79 characters)
+./tmtar/events/service.py:59:25: WPS318 Found extra indentation
+./tmtar/events/service.py:59:66: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:59:80: E501 line too long (83 > 79 characters)
+./tmtar/events/service.py:62:43: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:67:1: D102 Missing docstring in public method
+./tmtar/events/service.py:67:5: WPS317 Found incorrect multi-line parameters
+./tmtar/events/service.py:67:5: WPS602 Found using `@staticmethod`
+./tmtar/events/service.py:68:16: WPS318 Found extra indentation
+./tmtar/events/service.py:68:32: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:69:1: N400: Found backslash that is used for line breaking
+./tmtar/events/service.py:69:9: WPS337 Found multiline conditions
+./tmtar/events/service.py:69:80: E501 line too long (90 > 79 characters)
+./tmtar/events/service.py:70:17: WPS318 Found extra indentation
+./tmtar/events/service.py:70:80: E501 line too long (106 > 79 characters)
+./tmtar/events/service.py:72:13: F821 undefined name 'db'
+./tmtar/events/service.py:76:1: D102 Missing docstring in public method
+./tmtar/events/service.py:76:5: WPS602 Found using `@staticmethod`
+./tmtar/events/service.py:80:9: WPS337 Found multiline conditions
+./tmtar/events/service.py:80:12: WPS317 Found incorrect multi-line parameters
+./tmtar/events/service.py:81:54: WPS318 Found extra indentation
+./tmtar/events/service.py:81:70: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:82:13: F821 undefined name 'db'
+./tmtar/events/service.py:83:13: F821 undefined name 'db'
+./tmtar/events/service.py:86:13: WPS503 Found useless returning `else` statement
+./tmtar/events/service.py:89:1: D102 Missing docstring in public method
+./tmtar/events/service.py:89:5: WPS602 Found using `@staticmethod`
+./tmtar/events/service.py:90:9: WPS337 Found multiline conditions
+./tmtar/events/service.py:90:12: WPS317 Found incorrect multi-line parameters
+./tmtar/events/service.py:91:54: WPS318 Found extra indentation
+./tmtar/events/service.py:91:70: WPS319 Found bracket in wrong position
+./tmtar/events/service.py:93:13: F821 undefined name 'db'
+./tmtar/events/service.py:94:13: F821 undefined name 'db'
+./tmtar/events/service.py:98:13: WPS503 Found useless returning `else` statement
+./tmtar/events/interface.py:1:1: D100 Missing docstring in public module
+./tmtar/events/interface.py:4:1: D101 Missing docstring in public class
+./tmtar/objects/service_test.py:0:1: WPS202 Found too many module members: 8 > 7
+./tmtar/objects/service_test.py:0:1: WPS226 Found string constant over-use: lorem_ipsum > 3
+./tmtar/objects/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/service_test.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/service_test.py:7:1: WPS300 Found local folder import
+./tmtar/objects/service_test.py:8:1: WPS300 Found local folder import
+./tmtar/objects/service_test.py:9:1: WPS300 Found local folder import
+./tmtar/objects/service_test.py:13:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:13:27: F811 redefinition of unused 'db' from line 6
+./tmtar/objects/service_test.py:13:27: WPS442 Found outer scope names shadowing: db
+./tmtar/objects/service_test.py:14:10: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service_test.py:15:17: WPS318 Found extra indentation
+./tmtar/objects/service_test.py:15:22: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:16:35: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:17:28: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:18:29: WPS319 Found bracket in wrong position
+./tmtar/objects/service_test.py:20:10: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service_test.py:21:17: WPS318 Found extra indentation
+./tmtar/objects/service_test.py:21:22: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:22:35: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:23:28: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:24:29: WPS319 Found bracket in wrong position
+./tmtar/objects/service_test.py:26:10: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service_test.py:27:17: WPS318 Found extra indentation
+./tmtar/objects/service_test.py:27:22: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:28:35: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:29:28: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:30:29: WPS319 Found bracket in wrong position
+./tmtar/objects/service_test.py:40:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:40:18: WPS442 Found outer scope names shadowing: create_sample_objects
+./tmtar/objects/service_test.py:43:5: WPS110 Found wrong variable name: result
+./tmtar/objects/service_test.py:45:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:46:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:49:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:49:20: WPS442 Found outer scope names shadowing: create_sample_objects
+./tmtar/objects/service_test.py:52:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:53:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:54:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:57:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:57:28: WPS442 Found outer scope names shadowing: create_sample_objects
+./tmtar/objects/service_test.py:63:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:64:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:65:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:66:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:69:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:69:1: WPS210 Found too many local variables: 6 > 5
+./tmtar/objects/service_test.py:69:25: WPS442 Found outer scope names shadowing: create_sample_objects
+./tmtar/objects/service_test.py:72:55: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:73:55: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:74:55: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:76:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:76:5: WPS221 Found line with high Jones Complexity: 16 > 14
+./tmtar/objects/service_test.py:77:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:78:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:81:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:81:23: WPS442 Found outer scope names shadowing: create_sample_objects
+./tmtar/objects/service_test.py:86:5: WPS110 Found wrong variable name: result
+./tmtar/objects/service_test.py:88:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:89:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:94:9: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:94:17: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:95:9: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:95:30: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:96:9: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:96:23: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:97:9: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:97:24: C812 missing trailing comma
+./tmtar/objects/service_test.py:100:5: WPS110 Found wrong variable name: obj
+./tmtar/objects/service_test.py:102:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:103:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:103:24: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:104:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:105:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:106:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:109:1: D103 Missing docstring in public function
+./tmtar/objects/service_test.py:109:17: F811 redefinition of unused 'db' from line 6
+./tmtar/objects/service_test.py:109:17: WPS442 Found outer scope names shadowing: db
+./tmtar/objects/service_test.py:110:5: WPS110 Found wrong variable name: obj
+./tmtar/objects/service_test.py:110:19: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service_test.py:111:26: WPS318 Found extra indentation
+./tmtar/objects/service_test.py:111:31: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:113:37: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:114:44: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:114:57: WPS319 Found bracket in wrong position
+./tmtar/objects/service_test.py:118:24: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service_test.py:118:37: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:119:32: WPS318 Found extra indentation
+./tmtar/objects/service_test.py:119:43: Q000 Remove bad quotes
+./tmtar/objects/service_test.py:119:63: WPS319 Found bracket in wrong position
+./tmtar/objects/service_test.py:122:5: WPS110 Found wrong variable name: result
+./tmtar/objects/service_test.py:124:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service_test.py:125:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:0:1: WPS226 Found string constant over-use: lorem_ipsum > 3
+./tmtar/objects/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/schema_test.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/schema_test.py:3:1: WPS300 Found local folder import
+./tmtar/objects/schema_test.py:4:1: WPS300 Found local folder import
+./tmtar/objects/schema_test.py:5:1: WPS300 Found local folder import
+./tmtar/objects/schema_test.py:9:1: D103 Missing docstring in public function
+./tmtar/objects/schema_test.py:14:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:18:5: WPS110 Found wrong variable name: params
+./tmtar/objects/schema_test.py:19:15: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:20:17: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:21:30: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:22:23: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:23:23: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:23:26: C812 missing trailing comma
+./tmtar/objects/schema_test.py:27:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:28:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:28:27: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:29:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:29:40: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:30:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema_test.py:30:33: Q000 Remove bad quotes
+./tmtar/objects/schema_test.py:31:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/interface_test.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/interface_test.py:4:1: WPS300 Found local folder import
+./tmtar/objects/interface_test.py:5:1: WPS300 Found local folder import
+./tmtar/objects/interface_test.py:9:1: D103 Missing docstring in public function
+./tmtar/objects/interface_test.py:11:14: Q000 Remove bad quotes
+./tmtar/objects/interface_test.py:14:21: WPS319 Found bracket in wrong position
+./tmtar/objects/interface_test.py:18:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/interface_test.py:23:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/schema.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/schema.py:4:1: D101 Missing docstring in public class
+./tmtar/objects/controller.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/controller.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/controller.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/controller.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/controller.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/controller.py:9:1: WPS300 Found local folder import
+./tmtar/objects/controller.py:10:1: WPS300 Found local folder import
+./tmtar/objects/controller.py:11:1: WPS300 Found local folder import
+./tmtar/objects/controller.py:12:1: WPS300 Found local folder import
+./tmtar/objects/controller.py:13:1: WPS300 Found local folder import
+./tmtar/objects/controller.py:15:7: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller.py:15:17: Q000 Remove bad quotes
+./tmtar/objects/controller.py:16:17: WPS318 Found extra indentation
+./tmtar/objects/controller.py:16:29: Q000 Remove bad quotes
+./tmtar/objects/controller.py:17:44: WPS319 Found bracket in wrong position
+./tmtar/objects/controller.py:22:1: D400 First line should end with a period
+./tmtar/objects/controller.py:27:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:33:1: D400 First line should end with a period
+./tmtar/objects/controller.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:40:1: D400 First line should end with a period
+./tmtar/objects/controller.py:43:20: N803 argument name 'objectId' should be lowercase
+./tmtar/objects/controller.py:44:1: D400 First line should end with a period
+./tmtar/objects/controller.py:45:1: DAR101 Missing parameter(s) in Docstring: - objectId
+./tmtar/objects/controller.py:45:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:50:20: N803 argument name 'objectId' should be lowercase
+./tmtar/objects/controller.py:51:1: D202 No blank lines allowed after function docstring
+./tmtar/objects/controller.py:51:1: D400 First line should end with a period
+./tmtar/objects/controller.py:51:1: D401 First line should be in imperative mood
+./tmtar/objects/controller.py:54:1: DAR101 Missing parameter(s) in Docstring: - objectId
+./tmtar/objects/controller.py:54:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:57:30: Q000 Remove bad quotes
+./tmtar/objects/controller.py:59:23: N803 argument name 'objectId' should be lowercase
+./tmtar/objects/controller.py:60:1: D202 No blank lines allowed after function docstring
+./tmtar/objects/controller.py:60:1: D400 First line should end with a period
+./tmtar/objects/controller.py:62:1: DAR101 Missing parameter(s) in Docstring: - objectId
+./tmtar/objects/controller.py:62:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:63:31: Q000 Remove bad quotes
+./tmtar/objects/controller.py:69:1: D400 First line should end with a period
+./tmtar/objects/controller.py:72:20: N803 argument name 'subzoneId' should be lowercase
+./tmtar/objects/controller.py:74:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:74:1: DAR101 Missing parameter(s) in Docstring: - subzoneId
+./tmtar/objects/controller.py:80:1: D400 First line should end with a period
+./tmtar/objects/controller.py:83:12: WPS462 Wrong multiline string usage
+./tmtar/objects/controller.py:83:14: WPS322 Found incorrect multi-line string
+./tmtar/objects/controller.py:83:73: C812 missing trailing comma
+./tmtar/objects/controller.py:86:1: D400 First line should end with a period
+./tmtar/objects/controller.py:87:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller.py:87:1: DAR101 Missing parameter(s) in Docstring: - str_to_find
+./tmtar/objects/controller.py:87:9: WPS110 Found wrong variable name: objects
+./tmtar/objects/controller.py:90:28: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/objects/controller.py:92:13: WPS503 Found useless returning `else` statement
+./tmtar/objects/controller.py:92:28: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/objects/controller.py:92:40: Q000 Remove bad quotes
+./tmtar/objects/model.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/model.py:1:1: WPS300 Found local folder import
+./tmtar/objects/model.py:2:1: WPS300 Found local folder import
+./tmtar/objects/model.py:12:32: WPS432 Found magic number: 255
+./tmtar/objects/model.py:13:45: WPS432 Found magic number: 255
+./tmtar/objects/model.py:14:38: WPS432 Found magic number: 255
+./tmtar/objects/model.py:18:1: DAR101 Missing parameter(s) in Docstring: - changes
+./tmtar/objects/model.py:18:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: asset file > 3
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: /api/ > 3
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: Test object 1 > 3
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: Image 1 > 3
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: Test 2 > 3
+./tmtar/objects/controller_test.py:0:1: WPS226 Found string constant over-use: Image 2 > 3
+./tmtar/objects/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/controller_test.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/controller_test.py:6:1: WPS300 Found local folder import
+./tmtar/objects/controller_test.py:7:1: WPS300 Found local folder import
+./tmtar/objects/controller_test.py:8:1: WPS300 Found local folder import
+./tmtar/objects/controller_test.py:9:1: WPS300 Found local folder import
+./tmtar/objects/controller_test.py:10:1: WPS300 Found local folder import
+./tmtar/objects/controller_test.py:13:1: D103 Missing docstring in public function
+./tmtar/objects/controller_test.py:13:1: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:14:17: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:15:35: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:16:28: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:17:36: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:18:12: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:19:19: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:22:40: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:25:1: D103 Missing docstring in public function
+./tmtar/objects/controller_test.py:25:17: WPS110 Found wrong variable name: obj
+./tmtar/objects/controller_test.py:26:18: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:26:18: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:27:30: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:28:74: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:29:5: WPS331 Found variables that are only used for `return`: new_object
+./tmtar/objects/controller_test.py:32:1: D101 Missing docstring in public class
+./tmtar/objects/controller_test.py:32:1: WPS306 Found class without a base class: TestObjectResource
+./tmtar/objects/controller_test.py:34:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:35:41: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:35:52: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:36:67: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:36:77: C812 missing trailing comma
+./tmtar/objects/controller_test.py:38:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:40:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:40:22: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:40:33: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:40:33: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:41:33: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:41:54: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:43:49: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:43:60: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:44:17: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:45:29: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:46:47: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:46:56: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:46:57: C812 missing trailing comma
+./tmtar/objects/controller_test.py:48:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:48:20: WPS507 Found useless `len()` compare
+./tmtar/objects/controller_test.py:49:17: WPS111 Found too short name: i < 2
+./tmtar/objects/controller_test.py:50:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:52:6: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:52:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:53:19: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:53:66: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:54:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:56:23: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/objects/controller_test.py:56:23: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:57:28: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:58:46: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:59:39: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:60:40: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:61:13: N400: Found backslash that is used for line breaking
+./tmtar/objects/controller_test.py:61:13: WPS221 Found line with high Jones Complexity: 21 > 14
+./tmtar/objects/controller_test.py:61:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:61:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:61:34: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:61:80: E501 line too long (116 > 79 characters)
+./tmtar/objects/controller_test.py:61:80: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:61:97: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:61:97: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:62:17: WPS348 Found a line that starts with a dot
+./tmtar/objects/controller_test.py:64:17: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:65:29: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:66:47: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:66:56: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:66:57: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:66:58: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:67:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:70:1: D101 Missing docstring in public class
+./tmtar/objects/controller_test.py:70:1: WPS306 Found class without a base class: TestObjectIdResource
+./tmtar/objects/controller_test.py:72:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:73:25: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:73:60: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:73:69: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:73:70: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:74:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:76:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:76:33: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:76:33: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:78:17: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:79:29: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:79:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:80:47: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:80:56: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:80:57: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:80:58: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:81:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:83:6: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:83:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:84:19: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:84:69: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:85:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:86:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:88:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:88:22: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:88:33: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:88:33: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:89:33: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:90:37: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:90:45: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:91:37: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:91:58: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:92:37: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:92:51: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:93:37: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:93:52: C812 missing trailing comma
+./tmtar/objects/controller_test.py:96:37: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:96:54: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:96:54: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:96:71: C812 missing trailing comma
+./tmtar/objects/controller_test.py:100:17: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:100:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:101:29: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:102:47: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:102:56: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:102:57: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:102:58: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:103:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:105:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:106:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:108:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:108:22: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:108:36: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:108:36: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:109:36: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:110:40: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:110:57: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:110:57: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:110:74: C812 missing trailing comma
+./tmtar/objects/controller_test.py:112:24: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/objects/controller_test.py:112:36: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:113:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:116:1: D101 Missing docstring in public class
+./tmtar/objects/controller_test.py:116:1: WPS306 Found class without a base class: TestObjectSubzoneIdResource
+./tmtar/objects/controller_test.py:118:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:119:39: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:121:23: WPS432 Found magic number: 77
+./tmtar/objects/controller_test.py:121:57: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:121:79: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:121:80: E501 line too long (80 > 79 characters)
+./tmtar/objects/controller_test.py:123:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:125:13: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:125:33: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:125:33: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:127:47: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:128:17: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/controller_test.py:128:39: WPS432 Found magic number: 77
+./tmtar/objects/controller_test.py:129:29: WPS318 Found extra indentation
+./tmtar/objects/controller_test.py:130:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:131:41: WPS319 Found bracket in wrong position
+./tmtar/objects/controller_test.py:131:42: C812 missing trailing comma
+./tmtar/objects/controller_test.py:134:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:135:17: WPS111 Found too short name: i < 2
+./tmtar/objects/controller_test.py:136:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:139:1: D101 Missing docstring in public class
+./tmtar/objects/controller_test.py:139:1: WPS306 Found class without a base class: TestObjectSearchResource
+./tmtar/objects/controller_test.py:141:34: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:142:39: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:143:31: WPS432 Found magic number: 77
+./tmtar/objects/controller_test.py:143:62: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:143:73: C812 missing trailing comma
+./tmtar/objects/controller_test.py:145:1: D102 Missing docstring in public method
+./tmtar/objects/controller_test.py:146:9: WPS110 Found wrong variable name: result
+./tmtar/objects/controller_test.py:146:29: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:146:29: WPS305 Found `f` string
+./tmtar/objects/controller_test.py:148:43: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:149:35: WPS432 Found magic number: 77
+./tmtar/objects/controller_test.py:149:66: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:149:77: C812 missing trailing comma
+./tmtar/objects/controller_test.py:151:20: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/objects/controller_test.py:151:32: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:153:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/controller_test.py:153:29: Q000 Remove bad quotes
+./tmtar/objects/controller_test.py:154:13: WPS111 Found too short name: i < 2
+./tmtar/objects/controller_test.py:155:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/objects/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/objects/__init__.py:1:14: Q000 Remove bad quotes
+./tmtar/objects/__init__.py:4:1: D103 Missing docstring in public function
+./tmtar/objects/__init__.py:4:31: Q000 Remove bad quotes
+./tmtar/objects/__init__.py:5:5: WPS433 Found nested import
+./tmtar/objects/__init__.py:5:5: WPS300 Found local folder import
+./tmtar/objects/__init__.py:7:40: Q000 Remove bad quotes
+./tmtar/objects/__init__.py:7:40: WPS305 Found `f` string
+./tmtar/objects/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/objects/model_test.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/model_test.py:4:1: WPS300 Found local folder import
+./tmtar/objects/model_test.py:8:1: D103 Missing docstring in public function
+./tmtar/objects/model_test.py:10:14: Q000 Remove bad quotes
+./tmtar/objects/model_test.py:13:21: WPS319 Found bracket in wrong position
+./tmtar/objects/model_test.py:17:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/objects/service.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/service.py:3:1: WPS300 Found local folder import
+./tmtar/objects/service.py:4:1: WPS300 Found local folder import
+./tmtar/objects/service.py:5:1: WPS300 Found local folder import
+./tmtar/objects/service.py:7:2: E800 Found commented out code
+./tmtar/objects/service.py:8:2: E800 Found commented out code
+./tmtar/objects/service.py:13:1: WPS306 Found class without a base class: ObjectService
+./tmtar/objects/service.py:14:1: D210 No whitespaces allowed surrounding docstring text
+./tmtar/objects/service.py:17:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:17:5: WPS605 Found method without arguments: get_all
+./tmtar/objects/service.py:18:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:19:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:25:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:26:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:27:1: DAR101 Missing parameter(s) in Docstring: - object_id
+./tmtar/objects/service.py:27:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:34:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:35:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:36:1: DAR101 Missing parameter(s) in Docstring: - subzone_id
+./tmtar/objects/service.py:43:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:44:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:44:1: D401 First line should be in imperative mood
+./tmtar/objects/service.py:45:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:45:1: DAR101 Missing parameter(s) in Docstring: - str_to_search
+./tmtar/objects/service.py:50:31: Q000 Remove bad quotes
+./tmtar/objects/service.py:50:31: WPS305 Found `f` string
+./tmtar/objects/service.py:50:52: WPS319 Found bracket in wrong position
+./tmtar/objects/service.py:53:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:54:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:54:1: D401 First line should be in imperative mood
+./tmtar/objects/service.py:55:1: DAR101 Missing parameter(s) in Docstring: - object_to_update
+./tmtar/objects/service.py:55:1: DAR101 Missing parameter(s) in Docstring: - object_updates
+./tmtar/objects/service.py:55:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:65:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:66:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:66:1: D401 First line should be in imperative mood
+./tmtar/objects/service.py:67:1: DAR101 Missing parameter(s) in Docstring: - new_object
+./tmtar/objects/service.py:67:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:71:9: WPS110 Found wrong variable name: obj
+./tmtar/objects/service.py:71:15: WPS317 Found incorrect multi-line parameters
+./tmtar/objects/service.py:72:22: WPS318 Found extra indentation
+./tmtar/objects/service.py:74:57: WPS319 Found bracket in wrong position
+./tmtar/objects/service.py:81:5: WPS602 Found using `@staticmethod`
+./tmtar/objects/service.py:82:1: D205 1 blank line required between summary line and description
+./tmtar/objects/service.py:82:1: D401 First line should be in imperative mood
+./tmtar/objects/service.py:83:1: DAR101 Missing parameter(s) in Docstring: - object_id
+./tmtar/objects/service.py:83:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/objects/service.py:87:9: WPS110 Found wrong variable name: obj
+./tmtar/objects/interface.py:1:1: D100 Missing docstring in public module
+./tmtar/objects/interface.py:4:1: D101 Missing docstring in public class
+./tmtar/files/service_test.py:0:1: WPS226 Found string constant over-use: sample1.txt > 3
+./tmtar/files/service_test.py:0:1: WPS226 Found string constant over-use: sample2.txt > 3
+./tmtar/files/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/files/service_test.py:1:1: D100 Missing docstring in public module
+./tmtar/files/service_test.py:6:1: WPS300 Found local folder import
+./tmtar/files/service_test.py:7:1: WPS300 Found local folder import
+./tmtar/files/service_test.py:8:1: WPS300 Found local folder import
+./tmtar/files/service_test.py:11:1: D103 Missing docstring in public function
+./tmtar/files/service_test.py:11:18: F811 redefinition of unused 'db' from line 5
+./tmtar/files/service_test.py:11:18: WPS442 Found outer scope names shadowing: db
+./tmtar/files/service_test.py:19:5: WPS110 Found wrong variable name: results
+./tmtar/files/service_test.py:21:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:22:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:25:1: D103 Missing docstring in public function
+./tmtar/files/service_test.py:25:20: F811 redefinition of unused 'db' from line 5
+./tmtar/files/service_test.py:25:20: WPS442 Found outer scope names shadowing: db
+./tmtar/files/service_test.py:36:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:37:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:40:1: D103 Missing docstring in public function
+./tmtar/files/service_test.py:40:29: F811 redefinition of unused 'db' from line 5
+./tmtar/files/service_test.py:40:29: WPS442 Found outer scope names shadowing: db
+./tmtar/files/service_test.py:50:5: WPS110 Found wrong variable name: result
+./tmtar/files/service_test.py:52:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:53:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:56:1: D103 Missing docstring in public function
+./tmtar/files/service_test.py:56:29: F811 redefinition of unused 'db' from line 5
+./tmtar/files/service_test.py:56:29: WPS442 Found outer scope names shadowing: db
+./tmtar/files/service_test.py:68:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:69:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:70:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:73:1: D103 Missing docstring in public function
+./tmtar/files/service_test.py:73:17: F811 redefinition of unused 'db' from line 5
+./tmtar/files/service_test.py:73:17: WPS442 Found outer scope names shadowing: db
+./tmtar/files/service_test.py:74:5: WPS110 Found wrong variable name: file
+./tmtar/files/service_test.py:74:52: Q000 Remove bad quotes
+./tmtar/files/service_test.py:75:5: WPS110 Found wrong variable name: result
+./tmtar/files/service_test.py:77:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service_test.py:78:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/files/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/files/schema_test.py:1:1: D100 Missing docstring in public module
+./tmtar/files/schema_test.py:3:1: WPS300 Found local folder import
+./tmtar/files/schema_test.py:4:1: WPS300 Found local folder import
+./tmtar/files/schema_test.py:8:1: D103 Missing docstring in public function
+./tmtar/files/schema_test.py:13:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/schema_test.py:17:5: WPS110 Found wrong variable name: params
+./tmtar/files/schema_test.py:20:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/schema_test.py:21:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/schema.py:1:1: D100 Missing docstring in public module
+./tmtar/files/schema.py:4:1: D101 Missing docstring in public class
+./tmtar/files/controller.py:0:1: WPS226 Found string constant over-use: file > 3
+./tmtar/files/controller.py:1:1: D100 Missing docstring in public module
+./tmtar/files/controller.py:11:1: WPS300 Found local folder import
+./tmtar/files/controller.py:12:1: WPS300 Found local folder import
+./tmtar/files/controller.py:13:1: WPS300 Found local folder import
+./tmtar/files/controller.py:14:1: WPS300 Found local folder import
+./tmtar/files/controller.py:44:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/controller.py:52:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/controller.py:64:1: D101 Missing docstring in public class
+./tmtar/files/controller.py:72:1: DAR101 Missing parameter(s) in Docstring: - filename
+./tmtar/files/controller.py:72:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/controller.py:78:1: DAR101 Missing parameter(s) in Docstring: - filename
+./tmtar/files/model.py:1:1: D100 Missing docstring in public module
+./tmtar/files/model.py:1:1: WPS300 Found local folder import
+./tmtar/files/model.py:14:1: DAR401 Missing exception(s) in Raises section: -r NotImplementedError
+./tmtar/files/controller_test.py:0:1: WPS411 Found empty module
+./tmtar/files/controller_test.py:1:1: D100 Missing docstring in public module
+./tmtar/files/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/files/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/files/__init__.py:5:1: DAR101 Missing parameter(s) in Docstring: - api
+./tmtar/files/__init__.py:5:1: DAR101 Missing parameter(s) in Docstring: - root
+./tmtar/files/__init__.py:13:5: WPS433 Found nested import
+./tmtar/files/__init__.py:13:5: WPS300 Found local folder import
+./tmtar/files/__init__.py:15:39: WPS305 Found `f` string
+./tmtar/files/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/files/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/files/model_test.py:1:1: D100 Missing docstring in public module
+./tmtar/files/model_test.py:4:1: WPS300 Found local folder import
+./tmtar/files/model_test.py:8:1: D103 Missing docstring in public function
+./tmtar/files/model_test.py:8:1: WPS110 Found wrong variable name: file
+./tmtar/files/model_test.py:13:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/files/service.py:1:1: D100 Missing docstring in public module
+./tmtar/files/service.py:5:1: WPS300 Found local folder import
+./tmtar/files/service.py:6:1: WPS300 Found local folder import
+./tmtar/files/service.py:7:1: WPS300 Found local folder import
+./tmtar/files/service.py:8:1: WPS300 Found local folder import
+./tmtar/files/service.py:22:1: DAR101 Missing parameter(s) in Docstring: - allowed_chars
+./tmtar/files/service.py:22:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/service.py:22:1: DAR101 Missing parameter(s) in Docstring: - str_size
+./tmtar/files/service.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/service.py:46:1: DAR101 Missing parameter(s) in Docstring: - filename
+./tmtar/files/service.py:46:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/service.py:56:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/files/service.py:56:1: DAR101 Missing parameter(s) in Docstring: - str_to_search
+./tmtar/files/service.py:57:33: WPS305 Found `f` string
+./tmtar/files/interface.py:1:1: D100 Missing docstring in public module
+./tmtar/files/interface.py:4:1: D101 Missing docstring in public class
+./tmtar/project/types.py:1:1: D100 Missing docstring in public module
+./tmtar/project/config.py:1:1: D100 Missing docstring in public module
+./tmtar/project/config.py:8:1: D101 Missing docstring in public class
+./tmtar/project/config.py:14:20: WPS305 Found `f` string
+./tmtar/project/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/project/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/project/__init__.py:7:1: WPS300 Found local folder import
+./tmtar/project/__init__.py:8:1: WPS300 Found local folder import
+./tmtar/project/__init__.py:9:1: WPS300 Found local folder import
+./tmtar/project/injector.py:1:1: D100 Missing docstring in public module
+./tmtar/project/injector.py:10:1: DAR101 Missing parameter(s) in Docstring: - instance
+./tmtar/project/injector.py:10:1: DAR101 Missing parameter(s) in Docstring: - to
+./tmtar/project/injector.py:10:1: DAR401 Missing exception(s) in Raises section: -r NameError
+./tmtar/project/injector.py:25:1: DAR101 Missing parameter(s) in Docstring: - instance_name
+./tmtar/project/injector.py:25:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/injector.py:25:1: DAR401 Missing exception(s) in Raises section: -r AttributeError
+./tmtar/project/exceptions.py:1:1: D100 Missing docstring in public module
+./tmtar/project/exceptions.py:5:1: DAR101 Missing parameter(s) in Docstring: - error
+./tmtar/project/exceptions.py:5:1: DAR101 Missing parameter(s) in Docstring: - status_code
+./tmtar/project/builders/singleton.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/singleton.py:4:1: WPS300 Found local folder import
+./tmtar/project/builders/singleton.py:8:1: DAR101 Missing parameter(s) in Docstring: - instance
+./tmtar/project/builders/singleton.py:8:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/singleton.py:17:5: WPS430 Found nested function: save_to_storage
+./tmtar/project/builders/singleton.py:18:1: DAR101 Missing parameter(s) in Docstring: - factory_method
+./tmtar/project/builders/singleton.py:18:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/project/builders/database_loader.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/database_loader.py:11:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/database_loader.py:11:1: DAR101 Missing parameter(s) in Docstring: - db
+./tmtar/project/builders/database_loader.py:26:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/database_loader.py:26:1: DAR101 Missing parameter(s) in Docstring: - db
+./tmtar/project/builders/database_loader.py:41:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/database_loader.py:41:1: DAR101 Missing parameter(s) in Docstring: - db
+./tmtar/project/builders/database_loader.py:48:9: WPS433 Found nested import
+./tmtar/project/builders/database_loader.py:48:9: WPS300 Found local folder import
+./tmtar/project/builders/database_loader.py:49:9: WPS433 Found nested import
+./tmtar/project/builders/database_loader.py:49:9: WPS300 Found local folder import
+./tmtar/project/builders/database_loader.py:72:33: WPS305 Found `f` string
+./tmtar/project/builders/database_loader.py:72:80: E501 line too long (82 > 79 characters)
+./tmtar/project/builders/identity_providers.py:0:1: WPS226 Found string constant over-use: kid > 3
+./tmtar/project/builders/identity_providers.py:0:1: WPS226 Found string constant over-use: message > 3
+./tmtar/project/builders/identity_providers.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/identity_providers.py:7:1: WPS300 Found local folder import
+./tmtar/project/builders/identity_providers.py:8:1: WPS300 Found local folder import
+./tmtar/project/builders/identity_providers.py:9:1: WPS300 Found local folder import
+./tmtar/project/builders/identity_providers.py:16:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/identity_providers.py:22:5: WPS238 Found too many raises in a function: 4 > 3
+./tmtar/project/builders/identity_providers.py:22:5: WPS231 Found function with too much cognitive complexity: 17 > 12
+./tmtar/project/builders/identity_providers.py:24:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/identity_providers.py:24:1: DAR101 Missing parameter(s) in Docstring: - token
+./tmtar/project/builders/identity_providers.py:24:1: DAR401 Missing exception(s) in Raises section: -r AuthError
+./tmtar/project/builders/identity_providers.py:32:80: E501 line too long (89 > 79 characters)
+./tmtar/project/builders/identity_providers.py:55:80: E501 line too long (84 > 79 characters)
+./tmtar/project/builders/identity_providers.py:80:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/identity_providers.py:89:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/identity_providers.py:89:1: DAR101 Missing parameter(s) in Docstring: - token
+./tmtar/project/builders/access_control.py:0:1: WPS232 Found module cognitive complexity that is too high: 11.7 > 8
+./tmtar/project/builders/access_control.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/access_control.py:10:1: WPS300 Found local folder import
+./tmtar/project/builders/access_control.py:13:1: WPS231 Found function with too much cognitive complexity: 18 > 12
+./tmtar/project/builders/access_control.py:16:1: DAR101 Missing parameter(s) in Docstring: - api
+./tmtar/project/builders/access_control.py:16:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/access_control.py:16:1: DAR101 Missing parameter(s) in Docstring: - root_required
+./tmtar/project/builders/access_control.py:28:5: WPS430 Found nested function: admin_required
+./tmtar/project/builders/access_control.py:29:1: DAR101 Missing parameter(s) in Docstring: - endpoint
+./tmtar/project/builders/access_control.py:29:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/exception_handlers.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/exception_handlers.py:11:1: DAR101 Missing parameter(s) in Docstring: - endpoint
+./tmtar/project/builders/exception_handlers.py:11:1: DAR101 Missing parameter(s) in Docstring: - exception
+./tmtar/project/builders/exception_handlers.py:11:1: DAR101 Missing parameter(s) in Docstring: - message
+./tmtar/project/builders/exception_handlers.py:11:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/exception_handlers.py:11:1: DAR101 Missing parameter(s) in Docstring: - status
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: type > 3
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: in > 3
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: name > 3
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: apiKey > 3
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: header > 3
+./tmtar/project/builders/extension_loader.py:0:1: WPS226 Found string constant over-use: Authorization > 3
+./tmtar/project/builders/extension_loader.py:1:1: D100 Missing docstring in public module
+./tmtar/project/builders/extension_loader.py:7:1: WPS300 Found local folder import
+./tmtar/project/builders/extension_loader.py:8:1: WPS300 Found local folder import
+./tmtar/project/builders/extension_loader.py:9:1: WPS300 Found local folder import
+./tmtar/project/builders/extension_loader.py:44:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:44:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/extension_loader.py:50:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:50:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/extension_loader.py:60:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:60:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/extension_loader.py:66:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:66:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/extension_loader.py:79:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:84:9: WPS430 Found nested function: health
+./tmtar/project/builders/extension_loader.py:90:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:90:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/builders/extension_loader.py:100:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/builders/extension_loader.py:100:1: DAR101 Missing parameter(s) in Docstring: - db
+./tmtar/project/builders/extension_loader.py:109:9: WPS430 Found nested function: set_up
+./tmtar/project/builders/extension_loader.py:115:9: WPS430 Found nested function: tear_down
+./tmtar/project/abstract/abstract_service.py:1:1: D100 Missing docstring in public module
+./tmtar/project/abstract/abstract_service.py:4:1: WPS300 Found local folder import
+./tmtar/project/abstract/abstract_service.py:23:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/abstract_service.py:33:1: DAR101 Missing parameter(s) in Docstring: - instance_id
+./tmtar/project/abstract/abstract_service.py:33:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/abstract_service.py:45:1: DAR101 Missing parameter(s) in Docstring: - instance
+./tmtar/project/abstract/abstract_service.py:45:1: DAR101 Missing parameter(s) in Docstring: - instance_upd
+./tmtar/project/abstract/abstract_service.py:45:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/abstract_service.py:61:1: DAR101 Missing parameter(s) in Docstring: - instance_id
+./tmtar/project/abstract/abstract_service.py:61:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/abstract_service.py:76:1: DAR101 Missing parameter(s) in Docstring: - new_instance
+./tmtar/project/abstract/abstract_service.py:76:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/project/abstract/abstract_identity_loader.py:1:1: D100 Missing docstring in public module
+./tmtar/project/abstract/abstract_identity_loader.py:6:1: WPS300 Found local folder import
+./tmtar/project/abstract/abstract_identity_loader.py:15:1: DAR101 Missing parameter(s) in Docstring: - app
+./tmtar/project/abstract/abstract_identity_loader.py:19:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/project/abstract/abstract_identity_loader.py:24:1: DAR101 Missing parameter(s) in Docstring: - token
+./tmtar/tests/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/tests/conftest.py:0:1: WPS411 Found empty module
+./tmtar/tests/conftest.py:1:1: D100 Missing docstring in public module
+./tmtar/tests/fixtures.py:1:1: D100 Missing docstring in public module
+./tmtar/tests/fixtures.py:2:1: I003 isort expected 1 blank line in imports, found 0
+./tmtar/tests/fixtures.py:4:1: WPS300 Found local folder import
+./tmtar/tests/fixtures.py:5:1: WPS300 Found local folder import
+./tmtar/tests/fixtures.py:14:1: D103 Missing docstring in public function
+./tmtar/tests/fixtures.py:19:1: D103 Missing docstring in public function
+./tmtar/tests/fixtures.py:19:8: WPS442 Found outer scope names shadowing: app
+./tmtar/tests/fixtures.py:20:5: WPS442 Found outer scope names shadowing: db
+./tmtar/tests/fixtures.py:28:1: D103 Missing docstring in public function
+./tmtar/tests/fixtures.py:28:12: WPS442 Found outer scope names shadowing: app
+./tmtar/tests/fixtures.py:33:1: D103 Missing docstring in public function
+./tmtar/tests/fixtures.py:33:11: WPS442 Found outer scope names shadowing: client
+./tmtar/tests/fixtures.py:34:5: WPS433 Found nested import
+./tmtar/tests/fixtures.py:34:5: WPS300 Found local folder import
+./tmtar/users/service_test.py:0:1: WPS226 Found string constant over-use: example3@mail.ex > 3
+./tmtar/users/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/service_test.py:1:1: D100 Missing docstring in public module
+./tmtar/users/service_test.py:6:1: WPS300 Found local folder import
+./tmtar/users/service_test.py:8:1: WPS300 Found local folder import
+./tmtar/users/service_test.py:9:1: WPS300 Found local folder import
+./tmtar/users/service_test.py:10:1: WPS300 Found local folder import
+./tmtar/users/service_test.py:13:1: D103 Missing docstring in public function
+./tmtar/users/service_test.py:14:19: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:15:24: WPS318 Found extra indentation
+./tmtar/users/service_test.py:19:43: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:20:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:21:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:24:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:25:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:26:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:29:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:36:5: WPS110 Found wrong variable name: results
+./tmtar/users/service_test.py:38:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:39:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:42:1: D103 Missing docstring in public function
+./tmtar/users/service_test.py:43:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:44:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:47:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:48:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:49:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:52:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:61:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:62:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:65:1: D103 Missing docstring in public function
+./tmtar/users/service_test.py:66:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:67:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:70:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:74:18: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:75:24: WPS318 Found extra indentation
+./tmtar/users/service_test.py:76:38: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:79:5: WPS110 Found wrong variable name: result
+./tmtar/users/service_test.py:81:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:82:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:83:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:86:1: D103 Missing docstring in public function
+./tmtar/users/service_test.py:87:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:88:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:91:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:92:16: WPS317 Found incorrect multi-line parameters
+./tmtar/users/service_test.py:93:21: WPS318 Found extra indentation
+./tmtar/users/service_test.py:96:48: WPS319 Found bracket in wrong position
+./tmtar/users/service_test.py:104:5: WPS110 Found wrong variable name: result
+./tmtar/users/service_test.py:106:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:107:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:108:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/service_test.py:111:1: D103 Missing docstring in public function
+./tmtar/users/service_test.py:116:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/schema_test.py:1:1: D100 Missing docstring in public module
+./tmtar/users/schema_test.py:5:1: WPS300 Found local folder import
+./tmtar/users/schema_test.py:7:1: WPS300 Found local folder import
+./tmtar/users/schema_test.py:8:1: WPS300 Found local folder import
+./tmtar/users/schema_test.py:9:1: WPS300 Found local folder import
+./tmtar/users/schema_test.py:13:1: D103 Missing docstring in public function
+./tmtar/users/schema_test.py:18:1: D103 Missing docstring in public function
+./tmtar/users/schema_test.py:23:1: D103 Missing docstring in public function
+./tmtar/users/schema_test.py:27:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:31:5: WPS110 Found wrong variable name: params
+./tmtar/users/schema_test.py:32:30: Q000 Remove bad quotes
+./tmtar/users/schema_test.py:39:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:39:40: Q000 Remove bad quotes
+./tmtar/users/schema_test.py:40:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:41:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:41:46: Q000 Remove bad quotes
+./tmtar/users/schema_test.py:41:60: Q000 Remove bad quotes
+./tmtar/users/schema_test.py:42:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:46:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema_test.py:50:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/interface_test.py:1:1: D100 Missing docstring in public module
+./tmtar/users/interface_test.py:4:1: WPS300 Found local folder import
+./tmtar/users/interface_test.py:5:1: WPS300 Found local folder import
+./tmtar/users/interface_test.py:9:1: D103 Missing docstring in public function
+./tmtar/users/interface_test.py:10:12: WPS317 Found incorrect multi-line parameters
+./tmtar/users/interface_test.py:10:36: Q000 Remove bad quotes
+./tmtar/users/interface_test.py:11:18: WPS318 Found extra indentation
+./tmtar/users/interface_test.py:11:22: Q000 Remove bad quotes
+./tmtar/users/interface_test.py:13:31: WPS319 Found bracket in wrong position
+./tmtar/users/interface_test.py:16:1: D103 Missing docstring in public function
+./tmtar/users/interface_test.py:16:27: WPS442 Found outer scope names shadowing: interface
+./tmtar/users/interface_test.py:17:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/interface_test.py:20:1: D103 Missing docstring in public function
+./tmtar/users/interface_test.py:20:26: WPS442 Found outer scope names shadowing: interface
+./tmtar/users/interface_test.py:22:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/schema.py:1:1: D100 Missing docstring in public module
+./tmtar/users/schema.py:3:1: WPS300 Found local folder import
+./tmtar/users/schema.py:6:1: D101 Missing docstring in public class
+./tmtar/users/schema.py:16:80: E501 line too long (84 > 79 characters)
+./tmtar/users/schema.py:19:1: D101 Missing docstring in public class
+./tmtar/users/schema.py:25:1: D101 Missing docstring in public class
+./tmtar/users/schema.py:26:80: E501 line too long (83 > 79 characters)
+./tmtar/users/controller.py:1:1: D100 Missing docstring in public module
+./tmtar/users/controller.py:10:1: WPS300 Found local folder import
+./tmtar/users/controller.py:11:1: WPS300 Found local folder import
+./tmtar/users/controller.py:12:1: WPS300 Found local folder import
+./tmtar/users/controller.py:13:1: WPS300 Found local folder import
+./tmtar/users/controller.py:14:1: WPS300 Found local folder import
+./tmtar/users/controller.py:38:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:48:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:66:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:78:1: D101 Missing docstring in public class
+./tmtar/users/controller.py:85:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:85:1: DAR101 Missing parameter(s) in Docstring: - user_id
+./tmtar/users/controller.py:89:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:89:1: DAR101 Missing parameter(s) in Docstring: - user_id
+./tmtar/users/controller.py:100:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller.py:100:1: DAR101 Missing parameter(s) in Docstring: - user_id
+./tmtar/users/model.py:0:1: WPS226 Found string constant over-use: CASCADE > 3
+./tmtar/users/model.py:1:1: D100 Missing docstring in public module
+./tmtar/users/model.py:1:1: WPS300 Found local folder import
+./tmtar/users/model.py:2:1: WPS300 Found local folder import
+./tmtar/users/model.py:27:1: DAR101 Missing parameter(s) in Docstring: - changes
+./tmtar/users/model.py:27:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller_test.py:0:1: WPS201 Found module with too many imports: 13 > 12
+./tmtar/users/controller_test.py:0:1: WPS202 Found too many module members: 8 > 7
+./tmtar/users/controller_test.py:0:1: WPS226 Found string constant over-use: Authorization > 3
+./tmtar/users/controller_test.py:0:1: WPS226 Found string constant over-use: Bearer  > 3
+./tmtar/users/controller_test.py:0:1: WPS226 Found string constant over-use: /api/ > 3
+./tmtar/users/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/controller_test.py:1:1: D100 Missing docstring in public module
+./tmtar/users/controller_test.py:9:1: F403 'from ..project.types import *' used; unable to detect undefined names
+./tmtar/users/controller_test.py:9:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:9:1: WPS347 Found vague import that may cause confusion: *
+./tmtar/users/controller_test.py:11:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:12:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:13:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:14:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:15:1: WPS300 Found local folder import
+./tmtar/users/controller_test.py:20:1: D103 Missing docstring in public function
+./tmtar/users/controller_test.py:20:21: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:20:21: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:21:13: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:21:30: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:21:30: WPS305 Found `f` string
+./tmtar/users/controller_test.py:25:12: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:26:17: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:27:21: F405 'SexType' may be undefined, or defined from star imports: ..project.types
+./tmtar/users/controller_test.py:29:30: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:32:1: D103 Missing docstring in public function
+./tmtar/users/controller_test.py:33:12: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:34:17: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:34:35: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:35:21: F405 'SexType' may be undefined, or defined from star imports: ..project.types
+./tmtar/users/controller_test.py:38:36: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:41:1: D103 Missing docstring in public function
+./tmtar/users/controller_test.py:46:2: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:46:28: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:47:15: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:47:48: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:48:1: D103 Missing docstring in public function
+./tmtar/users/controller_test.py:48:18: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:48:18: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:50:9: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:51:13: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:51:13: WPS305 Found `f` string
+./tmtar/users/controller_test.py:51:80: E501 line too long (91 > 79 characters)
+./tmtar/users/controller_test.py:51:80: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:55:1: D101 Missing docstring in public class
+./tmtar/users/controller_test.py:55:1: WPS306 Found class without a base class: TestUserLoginResource
+./tmtar/users/controller_test.py:57:6: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:57:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:58:19: WPS506 Found useless lambda declaration
+./tmtar/users/controller_test.py:58:19: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:58:62: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:59:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:59:26: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:59:26: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:61:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:62:17: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:62:17: WPS305 Found `f` string
+./tmtar/users/controller_test.py:62:80: E501 line too long (95 > 79 characters)
+./tmtar/users/controller_test.py:62:84: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:63:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_test.py:66:1: D101 Missing docstring in public class
+./tmtar/users/controller_test.py:66:1: WPS306 Found class without a base class: TestUserResource
+./tmtar/users/controller_test.py:68:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:70:26: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:71:26: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:71:50: C812 missing trailing comma
+./tmtar/users/controller_test.py:73:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:73:24: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:73:24: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:73:45: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:73:45: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:75:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:75:22: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:75:33: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:75:33: WPS305 Found `f` string
+./tmtar/users/controller_test.py:76:33: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:77:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:77:54: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:77:54: WPS305 Found `f` string
+./tmtar/users/controller_test.py:77:71: C812 missing trailing comma
+./tmtar/users/controller_test.py:79:54: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:82:34: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:83:34: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:83:58: C812 missing trailing comma
+./tmtar/users/controller_test.py:85:17: WPS111 Found too short name: i < 2
+./tmtar/users/controller_test.py:86:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_test.py:90:9: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:93:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:93:42: WPS506 Found useless lambda declaration
+./tmtar/users/controller_test.py:93:80: E501 line too long (80 > 79 characters)
+./tmtar/users/controller_test.py:94:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:94:24: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:94:24: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:94:45: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:94:45: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:96:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:96:22: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:96:33: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:96:33: WPS305 Found `f` string
+./tmtar/users/controller_test.py:97:33: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:98:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:98:54: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:98:54: WPS305 Found `f` string
+./tmtar/users/controller_test.py:98:71: C812 missing trailing comma
+./tmtar/users/controller_test.py:101:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:102:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:102:58: C812 missing trailing comma
+./tmtar/users/controller_test.py:106:17: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:107:22: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:107:40: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:108:26: F405 'SexType' may be undefined, or defined from star imports: ..project.types
+./tmtar/users/controller_test.py:111:41: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:111:42: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:113:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_test.py:116:1: D101 Missing docstring in public class
+./tmtar/users/controller_test.py:116:1: WPS306 Found class without a base class: TestUserIdResource
+./tmtar/users/controller_test.py:120:9: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:123:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:123:24: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:123:24: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:123:45: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:123:45: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:125:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:125:22: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:125:33: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:125:33: WPS305 Found `f` string
+./tmtar/users/controller_test.py:126:33: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:127:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:127:54: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:127:54: WPS305 Found `f` string
+./tmtar/users/controller_test.py:127:71: C812 missing trailing comma
+./tmtar/users/controller_test.py:129:54: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:130:43: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:131:60: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:131:63: WPS432 Found magic number: 13
+./tmtar/users/controller_test.py:131:65: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:131:67: C819 trailing comma prohibited
+./tmtar/users/controller_test.py:131:67: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:131:68: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:132:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_test.py:134:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:135:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:135:27: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:135:27: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:135:48: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:135:48: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:137:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:137:22: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:137:36: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:137:36: WPS305 Found `f` string
+./tmtar/users/controller_test.py:138:36: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:139:40: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:139:57: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:139:57: WPS305 Found `f` string
+./tmtar/users/controller_test.py:139:74: C812 missing trailing comma
+./tmtar/users/controller_test.py:141:57: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:142:24: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/users/controller_test.py:142:36: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:142:50: WPS432 Found magic number: 13
+./tmtar/users/controller_test.py:143:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_test.py:145:6: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:145:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:146:19: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:146:80: E501 line too long (82 > 79 characters)
+./tmtar/users/controller_test.py:146:82: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:147:32: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:148:1: D102 Missing docstring in public method
+./tmtar/users/controller_test.py:148:24: F811 redefinition of unused 'client' from line 10
+./tmtar/users/controller_test.py:148:24: WPS442 Found outer scope names shadowing: client
+./tmtar/users/controller_test.py:148:45: F811 redefinition of unused 'token' from line 10
+./tmtar/users/controller_test.py:148:45: WPS442 Found outer scope names shadowing: token
+./tmtar/users/controller_test.py:150:13: WPS110 Found wrong variable name: result
+./tmtar/users/controller_test.py:150:22: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:150:33: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:150:33: WPS305 Found `f` string
+./tmtar/users/controller_test.py:151:33: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:152:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:152:54: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:152:54: WPS305 Found `f` string
+./tmtar/users/controller_test.py:152:71: C812 missing trailing comma
+./tmtar/users/controller_test.py:156:37: Q000 Remove bad quotes
+./tmtar/users/controller_test.py:156:61: C812 missing trailing comma
+./tmtar/users/controller_test.py:160:17: WPS317 Found incorrect multi-line parameters
+./tmtar/users/controller_test.py:160:25: WPS432 Found magic number: 13
+./tmtar/users/controller_test.py:161:22: WPS318 Found extra indentation
+./tmtar/users/controller_test.py:162:26: F405 'SexType' may be undefined, or defined from star imports: ..project.types
+./tmtar/users/controller_test.py:165:41: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:165:42: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:165:43: WPS319 Found bracket in wrong position
+./tmtar/users/controller_test.py:166:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/users/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/users/__init__.py:5:1: DAR101 Missing parameter(s) in Docstring: - api
+./tmtar/users/__init__.py:5:1: DAR101 Missing parameter(s) in Docstring: - root
+./tmtar/users/__init__.py:13:5: WPS433 Found nested import
+./tmtar/users/__init__.py:13:5: WPS300 Found local folder import
+./tmtar/users/__init__.py:15:42: WPS305 Found `f` string
+./tmtar/users/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/users/model_test.py:1:1: D100 Missing docstring in public module
+./tmtar/users/model_test.py:5:1: F403 'from ..project.types import *' used; unable to detect undefined names
+./tmtar/users/model_test.py:5:1: WPS300 Found local folder import
+./tmtar/users/model_test.py:5:1: WPS347 Found vague import that may cause confusion: *
+./tmtar/users/model_test.py:7:1: WPS300 Found local folder import
+./tmtar/users/model_test.py:11:1: D103 Missing docstring in public function
+./tmtar/users/model_test.py:12:12: WPS317 Found incorrect multi-line parameters
+./tmtar/users/model_test.py:12:35: Q000 Remove bad quotes
+./tmtar/users/model_test.py:13:17: WPS318 Found extra indentation
+./tmtar/users/model_test.py:13:21: F405 'SexType' may be undefined, or defined from star imports: ..project.types, ..tests.conftest
+./tmtar/users/model_test.py:15:30: WPS319 Found bracket in wrong position
+./tmtar/users/model_test.py:18:1: D103 Missing docstring in public function
+./tmtar/users/model_test.py:18:23: WPS442 Found outer scope names shadowing: user
+./tmtar/users/model_test.py:19:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/users/controller_identity.py:1:1: D100 Missing docstring in public module
+./tmtar/users/controller_identity.py:6:1: WPS300 Found local folder import
+./tmtar/users/controller_identity.py:7:1: WPS300 Found local folder import
+./tmtar/users/controller_identity.py:8:1: WPS300 Found local folder import
+./tmtar/users/controller_identity.py:9:1: WPS300 Found local folder import
+./tmtar/users/controller_identity.py:15:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller_identity.py:15:1: DAR101 Missing parameter(s) in Docstring: - user
+./tmtar/users/controller_identity.py:21:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/controller_identity.py:21:1: DAR401 Missing exception(s) in Raises section: -r AuthError
+./tmtar/users/controller_identity.py:53:1: W391 blank line at end of file
+./tmtar/users/service.py:1:1: D100 Missing docstring in public module
+./tmtar/users/service.py:3:1: WPS300 Found local folder import
+./tmtar/users/service.py:4:1: WPS300 Found local folder import
+./tmtar/users/service.py:5:1: WPS300 Found local folder import
+./tmtar/users/service.py:14:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/service.py:24:1: DAR101 Missing parameter(s) in Docstring: - identity
+./tmtar/users/service.py:24:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/service.py:36:1: DAR101 Missing parameter(s) in Docstring: - identity
+./tmtar/users/service.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/users/interface.py:1:1: D100 Missing docstring in public module
+./tmtar/users/interface.py:4:1: D101 Missing docstring in public class
+./tmtar/locations/service_test.py:0:1: WPS202 Found too many module members: 9 > 7
+./tmtar/locations/service_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/service_test.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/service_test.py:6:1: WPS300 Found local folder import
+./tmtar/locations/service_test.py:7:1: WPS300 Found local folder import
+./tmtar/locations/service_test.py:8:1: WPS300 Found local folder import
+./tmtar/locations/service_test.py:11:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:11:27: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:11:27: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:24:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:24:18: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:24:18: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:27:5: WPS110 Found wrong variable name: results
+./tmtar/locations/service_test.py:29:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:30:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:33:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:33:17: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:33:17: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:41:5: WPS110 Found wrong variable name: result
+./tmtar/locations/service_test.py:43:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:46:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:46:23: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:46:23: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:60:5: WPS110 Found wrong variable name: result
+./tmtar/locations/service_test.py:62:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:63:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:66:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:66:21: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:66:21: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:69:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:70:11: WPS319 Found bracket in wrong position
+./tmtar/locations/service_test.py:71:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:71:51: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:74:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:74:29: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:74:29: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:82:5: WPS110 Found wrong variable name: result
+./tmtar/locations/service_test.py:84:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:85:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:86:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:86:12: WPS507 Found useless `len()` compare
+./tmtar/locations/service_test.py:87:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:88:41: WPS319 Found bracket in wrong position
+./tmtar/locations/service_test.py:91:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:91:1: WPS210 Found too many local variables: 6 > 5
+./tmtar/locations/service_test.py:91:19: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:91:19: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:100:5: WPS110 Found wrong variable name: result
+./tmtar/locations/service_test.py:102:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:102:27: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:105:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:105:1: WPS210 Found too many local variables: 6 > 5
+./tmtar/locations/service_test.py:105:25: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:105:25: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:114:59: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:115:59: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:116:59: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:117:59: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:119:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:119:32: WPS111 Found too short name: x < 2
+./tmtar/locations/service_test.py:120:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:121:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:122:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:122:12: WPS507 Found useless `len()` compare
+./tmtar/locations/service_test.py:125:1: D103 Missing docstring in public function
+./tmtar/locations/service_test.py:125:17: F811 redefinition of unused 'db' from line 5
+./tmtar/locations/service_test.py:125:17: WPS442 Found outer scope names shadowing: db
+./tmtar/locations/service_test.py:126:27: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:126:35: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:126:45: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:126:56: Q000 Remove bad quotes
+./tmtar/locations/service_test.py:129:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service_test.py:130:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:0:1: WPS226 Found string constant over-use: test city > 3
+./tmtar/locations/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/schema_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/schema_test.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/schema_test.py:3:1: WPS300 Found local folder import
+./tmtar/locations/schema_test.py:4:1: WPS300 Found local folder import
+./tmtar/locations/schema_test.py:5:1: WPS300 Found local folder import
+./tmtar/locations/schema_test.py:9:1: D103 Missing docstring in public function
+./tmtar/locations/schema_test.py:14:1: D103 Missing docstring in public function
+./tmtar/locations/schema_test.py:19:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:23:5: WPS110 Found wrong variable name: params
+./tmtar/locations/schema_test.py:26:20: C812 missing trailing comma
+./tmtar/locations/schema_test.py:30:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:30:25: WPS432 Found magic number: 123
+./tmtar/locations/schema_test.py:31:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:32:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:37:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:41:5: WPS110 Found wrong variable name: params
+./tmtar/locations/schema_test.py:44:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema_test.py:44:25: WPS432 Found magic number: 12
+./tmtar/locations/schema_test.py:45:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/interface_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/interface_test.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/interface_test.py:4:1: WPS300 Found local folder import
+./tmtar/locations/interface_test.py:5:1: WPS300 Found local folder import
+./tmtar/locations/interface_test.py:9:1: D103 Missing docstring in public function
+./tmtar/locations/interface_test.py:10:33: Q000 Remove bad quotes
+./tmtar/locations/interface_test.py:14:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/interface_test.py:19:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/schema.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/schema.py:4:1: D101 Missing docstring in public class
+./tmtar/locations/schema.py:14:1: D101 Missing docstring in public class
+./tmtar/locations/controller.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/controller.py:8:1: WPS300 Found local folder import
+./tmtar/locations/controller.py:9:1: WPS300 Found local folder import
+./tmtar/locations/controller.py:10:1: WPS300 Found local folder import
+./tmtar/locations/controller.py:11:1: WPS300 Found local folder import
+./tmtar/locations/controller.py:12:1: WPS300 Found local folder import
+./tmtar/locations/controller.py:28:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:37:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:49:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:49:1: DAR101 Missing parameter(s) in Docstring: - str_to_find
+./tmtar/locations/controller.py:60:1: D101 Missing docstring in public class
+./tmtar/locations/controller.py:65:1: DAR101 Missing parameter(s) in Docstring: - location_id
+./tmtar/locations/controller.py:65:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:70:1: DAR101 Missing parameter(s) in Docstring: - location_id
+./tmtar/locations/controller.py:70:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:81:1: DAR101 Missing parameter(s) in Docstring: - location_id
+./tmtar/locations/controller.py:81:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller.py:86:1: D101 Missing docstring in public class
+./tmtar/locations/controller.py:91:1: DAR101 Missing parameter(s) in Docstring: - location_id
+./tmtar/locations/controller.py:91:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/model.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/model.py:1:1: WPS300 Found local folder import
+./tmtar/locations/model.py:2:1: WPS300 Found local folder import
+./tmtar/locations/model.py:25:1: DAR101 Missing parameter(s) in Docstring: - changes
+./tmtar/locations/model.py:25:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/controller_test.py:0:1: WPS226 Found string constant over-use: /api/ > 3
+./tmtar/locations/controller_test.py:0:1: WPS226 Found string constant over-use: root > 3
+./tmtar/locations/controller_test.py:0:1: WPS226 Found string constant over-use: Authorization > 3
+./tmtar/locations/controller_test.py:0:1: WPS226 Found string constant over-use: Bearer  > 3
+./tmtar/locations/controller_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/controller_test.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/controller_test.py:6:1: WPS300 Found local folder import
+./tmtar/locations/controller_test.py:7:1: WPS300 Found local folder import
+./tmtar/locations/controller_test.py:8:1: WPS300 Found local folder import
+./tmtar/locations/controller_test.py:9:1: WPS300 Found local folder import
+./tmtar/locations/controller_test.py:10:1: WPS300 Found local folder import
+./tmtar/locations/controller_test.py:13:1: D103 Missing docstring in public function
+./tmtar/locations/controller_test.py:13:1: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:14:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:15:25: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:19:1: D103 Missing docstring in public function
+./tmtar/locations/controller_test.py:21:5: WPS331 Found variables that are only used for `return`: new_loc
+./tmtar/locations/controller_test.py:24:1: D101 Missing docstring in public class
+./tmtar/locations/controller_test.py:24:1: WPS306 Found class without a base class: TestLocationResource
+./tmtar/locations/controller_test.py:26:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:28:46: C812 missing trailing comma
+./tmtar/locations/controller_test.py:30:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:32:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:32:22: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:32:33: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:32:33: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:33:33: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:33:54: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:36:54: C812 missing trailing comma
+./tmtar/locations/controller_test.py:38:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:40:6: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:40:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:41:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:41:68: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:42:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:44:23: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/locations/controller_test.py:45:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:45:22: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:45:34: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:45:34: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:46:34: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:48:38: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:48:55: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:48:55: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:48:72: C812 missing trailing comma
+./tmtar/locations/controller_test.py:51:39: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:51:61: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:51:69: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:51:70: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:52:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:55:1: D101 Missing docstring in public class
+./tmtar/locations/controller_test.py:55:1: WPS306 Found class without a base class: TestLocationIdResource
+./tmtar/locations/controller_test.py:59:9: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:62:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:64:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:64:22: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:64:33: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:64:33: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:65:33: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:67:37: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:67:54: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:67:54: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:67:71: C812 missing trailing comma
+./tmtar/locations/controller_test.py:70:31: WPS432 Found magic number: 123
+./tmtar/locations/controller_test.py:70:56: C819 trailing comma prohibited
+./tmtar/locations/controller_test.py:70:56: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:70:57: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:71:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:74:80: E501 line too long (82 > 79 characters)
+./tmtar/locations/controller_test.py:77:2: E800 Found commented out code
+./tmtar/locations/controller_test.py:78:2: E800 Found commented out code
+./tmtar/locations/controller_test.py:80:2: E800 Found commented out code
+./tmtar/locations/controller_test.py:82:6: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:82:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:83:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:83:74: WPS432 Found magic number: 22
+./tmtar/locations/controller_test.py:83:77: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:84:6: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:84:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:85:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:85:73: WPS432 Found magic number: 11
+./tmtar/locations/controller_test.py:85:76: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:86:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:88:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:88:33: F541 f-string is missing placeholders
+./tmtar/locations/controller_test.py:88:33: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:88:33: WPS237 Found a too complex `f` string
+./tmtar/locations/controller_test.py:88:33: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:90:43: WPS432 Found magic number: 22
+./tmtar/locations/controller_test.py:90:65: WPS432 Found magic number: 11
+./tmtar/locations/controller_test.py:90:68: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:90:69: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:91:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:93:6: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:93:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:94:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:94:50: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:95:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:97:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:97:22: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:97:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:97:36: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:98:36: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:99:40: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:99:57: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:99:57: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:99:74: C812 missing trailing comma
+./tmtar/locations/controller_test.py:101:24: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/locations/controller_test.py:101:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:101:50: WPS432 Found magic number: 123
+./tmtar/locations/controller_test.py:102:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:104:6: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:104:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:105:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:105:77: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:106:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:107:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:109:13: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:109:22: WPS317 Found incorrect multi-line parameters
+./tmtar/locations/controller_test.py:109:33: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:109:33: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:110:33: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:111:37: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:111:45: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:111:55: C812 missing trailing comma
+./tmtar/locations/controller_test.py:114:37: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:114:54: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:114:54: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:114:71: C812 missing trailing comma
+./tmtar/locations/controller_test.py:118:43: WPS432 Found magic number: 123
+./tmtar/locations/controller_test.py:118:53: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:118:64: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:118:65: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:120:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/controller_test.py:123:1: D101 Missing docstring in public class
+./tmtar/locations/controller_test.py:123:1: WPS306 Found class without a base class: TestLocationSearchResource
+./tmtar/locations/controller_test.py:125:36: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:126:19: WPS318 Found extra indentation
+./tmtar/locations/controller_test.py:126:75: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:127:1: D102 Missing docstring in public method
+./tmtar/locations/controller_test.py:128:9: WPS110 Found wrong variable name: result
+./tmtar/locations/controller_test.py:129:13: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:129:13: WPS305 Found `f` string
+./tmtar/locations/controller_test.py:129:55: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:132:48: Q000 Remove bad quotes
+./tmtar/locations/controller_test.py:133:22: WPS319 Found bracket in wrong position
+./tmtar/locations/controller_test.py:135:20: C408 Unnecessary dict call - rewrite as a literal.
+./tmtar/locations/controller_test.py:136:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/__init__.py:0:1: WPS412 Found `__init__.py` module with logic
+./tmtar/locations/__init__.py:1:1: D104 Missing docstring in public package
+./tmtar/locations/__init__.py:3:1: WPS300 Found local folder import
+./tmtar/locations/__init__.py:9:1: DAR101 Missing parameter(s) in Docstring: - api
+./tmtar/locations/__init__.py:9:1: DAR101 Missing parameter(s) in Docstring: - root
+./tmtar/locations/__init__.py:17:5: WPS433 Found nested import
+./tmtar/locations/__init__.py:17:5: WPS300 Found local folder import
+./tmtar/locations/__init__.py:19:42: WPS305 Found `f` string
+./tmtar/locations/__init__.py:21:5: WPS433 Found nested import
+./tmtar/locations/__init__.py:21:5: WPS300 Found local folder import
+./tmtar/locations/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/model_test.py:0:1: WPS400 Found wrong magic comment: noqa
+./tmtar/locations/model_test.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/model_test.py:4:1: WPS300 Found local folder import
+./tmtar/locations/model_test.py:8:1: D103 Missing docstring in public function
+./tmtar/locations/model_test.py:9:26: Q000 Remove bad quotes
+./tmtar/locations/model_test.py:13:1: S101 Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.
+./tmtar/locations/service.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/service.py:3:1: WPS300 Found local folder import
+./tmtar/locations/service.py:4:1: WPS300 Found local folder import
+./tmtar/locations/service.py:5:1: WPS300 Found local folder import
+./tmtar/locations/service.py:14:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/service.py:24:1: DAR101 Missing parameter(s) in Docstring: - child
+./tmtar/locations/service.py:24:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/service.py:36:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/service.py:46:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/service.py:46:1: DAR101 Missing parameter(s) in Docstring: - str_to_search
+./tmtar/locations/service.py:54:33: WPS305 Found `f` string
+./tmtar/locations/service.py:60:1: DAR101 Missing parameter(s) in Docstring: - parent
+./tmtar/locations/service.py:60:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/service.py:75:1: DAR101 Missing parameter(s) in Docstring: - accessed_location_id
+./tmtar/locations/service.py:75:1: DAR101 Missing parameter(s) in Docstring: - location_id
+./tmtar/locations/service.py:75:1: DAR201 Missing "Returns" in Docstring: - return
+./tmtar/locations/interface.py:1:1: D100 Missing docstring in public module
+./tmtar/locations/interface.py:4:1: D101 Missing docstring in public class
+./tmtar/users/controller_identity.py:53:1: W391 blank line at end of file
+./tmtar/users/controller_identity.py:52:1: W391 blank line at end of file
+./tmtar/project/exceptions.py:18:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:21:1: D205 1 blank line required between summary line and description
+./tmtar/project/exceptions.py:21:1: D400 First line should end with a period
+./tmtar/project/config.py:16:5: WPS115 Found upper-case constant in a class: PROPAGATE_EXCEPTIONS
+./tmtar/project/config.py:22:9: WPS115 Found upper-case constant in a class: JWT_ACCESS_TOKEN_EXPIRES
+./tmtar/project/config.py:22:54: WPS432 Found magic number: 15
+./tmtar/project/config.py:23:9: WPS115 Found upper-case constant in a class: JWT_REFRESH_TOKEN_EXPIRES
+./tmtar/project/config.py:25:9: WPS115 Found upper-case constant in a class: JWT_ACCESS_TOKEN_EXPIRES
+./tmtar/project/config.py:26:9: WPS115 Found upper-case constant in a class: JWT_REFRESH_TOKEN_EXPIRES
+./tmtar/project/builders/identity_providers.py:30:1: DAR402 Excess exception(s) in Raises section: +r AuthError
+./tmtar/project/builders/access_control.py:13:1: WPS212 Found too many return statements: 6 > 5
+./tmtar/project/builders/access_control.py:13:1: WPS231 Found function with too much cognitive complexity: 21 > 20
+./tmtar/project/builders/access_control.py:49:13: WPS111 Found too short name: e < 2
+./tmtar/locations/service.py:8:1: WPS214 Found too many methods: 8 > 7
+./tmtar/locations/service.py:53:13: WPS503 Found useless returning `else` statement
+./tmtar/locations/service.py:71:15: WPS507 Found useless `len()` compare
+./tmtar/locations/service.py:74:16: WPS507 Found useless `len()` compare
+./tmtar/locations/service.py:141:1: W391 blank line at end of file
+./tmtar/locations/service.py:53:13: WPS503 Found useless returning `else` statement
+./tmtar/locations/service.py:74:13: WPS504 Found negated condition
+./tmtar/locations/service.py:131:1: W391 blank line at end of file
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:5:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:5:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:25:1: W391 blank line at end of file

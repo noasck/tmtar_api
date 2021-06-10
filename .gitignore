@@ -1,7 +1,8 @@
 venv
 .idea
 web/.pytest_cache
-venv3.7
 *.pyc
-.env.prod.db
-.env.prod
+.github
+services/web/codestyle.json
+services/web/report.xml
+services/web/access.log

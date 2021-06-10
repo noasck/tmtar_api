@@ -1,14 +1,20 @@
 version: '3.7'
 services:
   web:
-    build: ./services/web
-    command: pytest . --durations=0 --capture=no -v
+    build: 
+      context: ./services/web
+      dockerfile: Dockerfile
+    command: bash -c "
+      flake8 --tee --output-file=codestyle.log .
+      && pytest ./tmtar -v --durations=0 --junitxml=report.xml"
     volumes:
       - ./services/web/:/usr/src/app/
+      - ./.flake8:/usr/src/app/.flake8
     ports:
       - 5000:5000
     env_file:
-      - ./.env.dev
+      - ./env/.env
+      - ./env/.env.dev
     networks:
       - api
 
@@ -17,16 +23,11 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - postgresData:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=tmtar_user
-      - POSTGRES_PASSWORD=dfgBNM3689
-      - POSTGRES_DB=tmtar_dev
+      - ./create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
+    env_file:
+      - env/.env.db
     networks:
       - api
-
-volumes:
-  postgresData:
 
 networks:
   api:

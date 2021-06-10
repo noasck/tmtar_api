@@ -1,3 +1,9 @@
+from http import HTTPStatus
+
+from flask import request
+from flask_jwt_extended import create_access_token
+
+from ..project.exceptions import AuthError
 from ..project.injector import Injector
 from .model import User
 from .schema import UserSchema
@@ -5,29 +11,32 @@ from .schema import UserSchema
 jwt = Injector.jwt
 
 
-@jwt.user_claims_loader
-def user_based_token(user: User):
-    """
-    Serialize single User entity data to JWT.
-
-    :param user: User instance
-    :return: serialized User Instance
-    """
-    return UserSchema().dump(user)
+def create_internal_jwt(user: User):
+    """Create API internal JWT access token."""
+    user_dumped = UserSchema().dump(user)
+    return create_access_token(user.identity, additional_claims=user_dumped)
 
 
-#: TEST: Delete
-def verify_token(token: str) -> str:
-    """
-    Mock google and fb auth.
+def get_payload():
+    """Obtain the Access Token from the Authorization Header."""
+    auth = request.headers.get('Authorization', None)
+    if not auth:
+        raise AuthError(
+            'Authorization header is expected',
+            HTTPStatus.UNAUTHORIZED.value,
+        )
 
-    :param token: email
-    :return: email
-    """
-    return token.strip()
+    parts = auth.split()
 
+    if len(parts) == 1:
+        raise AuthError(
+            'Token is missing',
+            HTTPStatus.UNAUTHORIZED.value,
+        )
+    elif parts[0].lower() != 'bearer' or len(parts) > 2:
+        raise AuthError(
+            'Authorization header is invalid',
+            HTTPStatus.UNAUTHORIZED.value,
+        )
 
-@jwt.user_identity_loader
-def user_identity_lookup(user: User) -> str:
-    """Define identity user field."""
-    return user.email
+    return parts[1]

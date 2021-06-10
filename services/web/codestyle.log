@@ -1693,3 +1693,30 @@
 ./tmtar/locations/interface.py:4:1: D101 Missing docstring in public class
 ./tmtar/users/controller_identity.py:53:1: W391 blank line at end of file
 ./tmtar/users/controller_identity.py:52:1: W391 blank line at end of file
+./tmtar/project/exceptions.py:18:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:21:1: D205 1 blank line required between summary line and description
+./tmtar/project/exceptions.py:21:1: D400 First line should end with a period
+./tmtar/project/config.py:16:5: WPS115 Found upper-case constant in a class: PROPAGATE_EXCEPTIONS
+./tmtar/project/config.py:22:9: WPS115 Found upper-case constant in a class: JWT_ACCESS_TOKEN_EXPIRES
+./tmtar/project/config.py:22:54: WPS432 Found magic number: 15
+./tmtar/project/config.py:23:9: WPS115 Found upper-case constant in a class: JWT_REFRESH_TOKEN_EXPIRES
+./tmtar/project/config.py:25:9: WPS115 Found upper-case constant in a class: JWT_ACCESS_TOKEN_EXPIRES
+./tmtar/project/config.py:26:9: WPS115 Found upper-case constant in a class: JWT_REFRESH_TOKEN_EXPIRES
+./tmtar/project/builders/identity_providers.py:30:1: DAR402 Excess exception(s) in Raises section: +r AuthError
+./tmtar/project/builders/access_control.py:13:1: WPS212 Found too many return statements: 6 > 5
+./tmtar/project/builders/access_control.py:13:1: WPS231 Found function with too much cognitive complexity: 21 > 20
+./tmtar/project/builders/access_control.py:49:13: WPS111 Found too short name: e < 2
+./tmtar/locations/service.py:8:1: WPS214 Found too many methods: 8 > 7
+./tmtar/locations/service.py:53:13: WPS503 Found useless returning `else` statement
+./tmtar/locations/service.py:71:15: WPS507 Found useless `len()` compare
+./tmtar/locations/service.py:74:16: WPS507 Found useless `len()` compare
+./tmtar/locations/service.py:141:1: W391 blank line at end of file
+./tmtar/locations/service.py:53:13: WPS503 Found useless returning `else` statement
+./tmtar/locations/service.py:74:13: WPS504 Found negated condition
+./tmtar/locations/service.py:131:1: W391 blank line at end of file
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:5:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:5:1: D400 First line should end with a period
+./tmtar/project/exceptions.py:5:1: D204 1 blank line required after class docstring
+./tmtar/project/exceptions.py:25:1: W391 blank line at end of file

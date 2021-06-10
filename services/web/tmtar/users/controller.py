@@ -23,8 +23,6 @@ api = Namespace(
     decorators=[cross_origin()],
 )
 
-#: TODO: google auth
-
 
 @api.route('/')
 class UserResource(Resource):

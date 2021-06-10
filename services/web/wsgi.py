@@ -4,7 +4,6 @@ import werkzeug
 
 # monkey patching
 werkzeug.cached_property = werkzeug.utils.cached_property  # noqa: E402
-flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func  # noqa: E402, WPS437, E501
 
 from tmtar.project import AppModule  # noqa: F401, E402
 

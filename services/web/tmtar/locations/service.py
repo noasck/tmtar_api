@@ -31,14 +31,49 @@ class LocationService(AbstractService[Location, ILocation]):
         return child.parent
 
     @classmethod
-    def get_root(cls) -> Union[Location, None]:
+    def get_all_ancestors_id(cls, location_id: int) -> List[int]:
         """
-        Get seeded root Location.
+        Get all parent's ids of the Location instance.
 
-        :return: root Location
-        :rtype: Union[Location, None]
+        :param location_id: certain node Location id.
+        :type location_id: int
+        :return: List of all ancestors ids for current location.
+        :rtype: List[int]
         """
-        return Location.query.filter_by(name='root').first_or_404()
+        # TODO: adjust to LTree realization
+        node = cls.get_by_id(location_id)
+        if node is not None:
+            ids = [node.id]
+            current = node.parent
+            while current is not None:
+                ids.append(current.id)
+                current = current.parent
+            return ids
+        return []
+
+    @classmethod
+    def get_all_successor_id(
+        cls,
+        location_id: int,
+    ) -> List[int]:
+        """
+        Get all child's ids of the Location instance.
+
+        :param location_id: certain node Location id.
+        :type location_id: int
+        :return: List of all successors' ids for current location.
+        :rtype: List[int]
+        """
+        node = cls.get_by_id(location_id)
+        queue = [node]
+        successors_ids = []
+        while queue:
+            child: Location = queue.pop()
+            child_children: List[Location] = child.children
+            if child_children:
+                queue.extend(child_children)
+            successors_ids.append(child.id)
+        return successors_ids
 
     @classmethod
     def search_by_name(cls, str_to_search: str) -> Union[List[Location], None]:
@@ -67,7 +102,7 @@ class LocationService(AbstractService[Location, ILocation]):
         return parent.children
 
     @classmethod
-    def check_location_permission(
+    def has_permission(
         cls,
         location_id: int,
         accessed_location_id: int,

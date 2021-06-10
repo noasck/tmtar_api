@@ -1,9 +1,12 @@
-class AuthError(Exception):
-    """Authorization Exception."""
+from abc import ABC
+
+
+class InternalAPIException(ABC, Exception):
+    """Internal API Error Base class."""
 
     def __init__(self, error, status_code):
         """
-        Init Auth Exception.
+        Init API Exception.
 
         :param error: error message
         :type error: str
@@ -12,3 +15,11 @@ class AuthError(Exception):
         """
         self.error = error
         self.status_code = status_code
+
+
+class AuthError(InternalAPIException):
+    """Authorization Exception."""
+
+
+class LocationAccessError(InternalAPIException):
+    """Exception during accessing."""

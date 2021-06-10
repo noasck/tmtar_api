@@ -22,10 +22,7 @@ def get_payload():
     auth = request.headers.get('Authorization', None)
     if not auth:
         raise AuthError(
-            {
-                'code': 'authorization_header_missing',
-                'message': 'Authorization header is expected',
-            },
+            'Authorization header is expected',
             HTTPStatus.UNAUTHORIZED.value,
         )
 
@@ -33,18 +30,12 @@ def get_payload():
 
     if len(parts) == 1:
         raise AuthError(
-            {
-                'code': 'invalid_header',
-                'message': 'Token is missing',
-            },
+            'Token is missing',
             HTTPStatus.UNAUTHORIZED.value,
         )
     elif parts[0].lower() != 'bearer' or len(parts) > 2:
         raise AuthError(
-            {
-                'code': 'invalid_header',
-                'message': 'Authorization header is invalid',
-            },
+            'Authorization header is invalid',
             HTTPStatus.UNAUTHORIZED.value,
         )
 

@@ -27,7 +27,7 @@ class ProductionIdentityLoader(AbstractIdentityLoader):
         :type token: str.
         :return: payload sub.
         :rtype: str
-        :raises AuthError: incorrect token provided.
+        :raise AuthError: incorrect token provided.
         """
         jwks = requests.get('https://{0}/.well-known/jwks.json'.format(self.auth_domain))
         unverified_header = jwt.get_unverified_header(token)
@@ -51,24 +51,27 @@ class ProductionIdentityLoader(AbstractIdentityLoader):
                     issuer='https://{0}/'.format(self.auth_domain),
                 )
             except jwt.ExpiredSignatureError:
-                raise AuthError(
-                    {'message': 'token_expired', 'description': 'token is expired'},
-                    HTTPStatus.UNAUTHORIZED.value,
-                )
+                self.raise_exception('token is expired')
             except jwt.JWTClaimsError:
-                raise AuthError(
-                    {'message': 'invalid_claims'},
-                    HTTPStatus.UNAUTHORIZED.value,
-                )
+                self.raise_exception('invalid claims')
             except Exception:
-                raise AuthError(
-                    {'message': 'invalid_header'},
-                    HTTPStatus.UNAUTHORIZED.value,
-                )
+                self.raise_exception('invalid header')
+
             return payload['sub']
 
+        self.raise_exception('invalid header')
+
+    @classmethod
+    def raise_exception(cls, message: str) -> None:
+        """
+        Raise Auth Exception with UNAUTHORIZED code.
+
+        :param message: message to inform user.
+        :type message: str
+        :raises AuthError: incorrect token provided.
+        """
         raise AuthError(
-            {'message': 'invalid_header'},
+            message,
             HTTPStatus.UNAUTHORIZED.value,
         )
 

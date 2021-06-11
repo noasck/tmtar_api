@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, validate
 
-from ..project.types import EventType, SexType
+from ..project.types import EventType
 
 
 class EventSchema(Schema):
@@ -12,7 +12,7 @@ class EventSchema(Schema):
     location_id = fields.Integer(attribute='location_id')
     update_date = fields.Integer(
         attribute='update_date',
-        validate=validate.Range(min=1597401274),
+        validate=validate.Range(min=0),
     )
     title = fields.String(
         attribute='title',

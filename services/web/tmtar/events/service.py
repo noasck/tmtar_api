@@ -59,17 +59,17 @@ class SecureEventService(object):
         ).order_by(Event.update_date.desc()).paginate(page, per_page, error_out=False).items
 
     @classmethod
-    def update(
+    def update_by_id(
         cls,
-        event: Event,
+        event_id: int,
         event_upd: IEvent,
         user_admin_location_id: int,
     ) -> Event:
         """
-        Safely update specific event with dict.
+        Safely update specific event by id with dict.
 
-        :param event: event to update.
-        :type event: Event
+        :param event_id: event db id to update.
+        :type event_id: int
         :param event_upd: new fields
         :type event_upd: IEvent
         :param user_admin_location_id: [0] user db admin location id.
@@ -78,6 +78,8 @@ class SecureEventService(object):
         :rtype: Event
         :raises LocationAccessError: if user don't have necessary permissions.
         """
+        event = _EventService.get_by_id(event_id)
+
         if not LocationService.has_permission(event.location_id, user_admin_location_id):
             raise LocationAccessError(
                 error="You don't have permissions to access this location!",
@@ -94,17 +96,14 @@ class SecureEventService(object):
         return _EventService.update(event, event_upd)
 
     @classmethod
-    def get_rw_accessible(
+    def get_all(
         cls,
-        event_type,
         user_admin_location_id,
         page: int = 1,
     ):
         """
         Get all accessible events for certain admin location id.
 
-        :param event_type: 'news' or 'sales' accepted
-        :type event_type: str
         :param user_admin_location_id: admin location id from User instance.
         :type user_admin_location_id: int
         :param page: pagination page number.
@@ -119,7 +118,6 @@ class SecureEventService(object):
 
         return Event.query.filter(
             Event.location_id.in_(appropriated_locations),
-            Event.event_type == event_type,
         ).order_by(Event.update_date.desc()).paginate(page, per_page, error_out=False).items
 
     @classmethod

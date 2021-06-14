@@ -4,11 +4,12 @@ from flask import jsonify, request
 from flask.wrappers import Response
 from flask_accepts import accepts, responds
 from flask_cors import cross_origin
-from flask_jwt_extended import get_jwt, jwt_required  # noqa: WPS319
+from flask_jwt_extended import get_jwt  # noqa: WPS319
 from flask_restx import Namespace, Resource, abort
 
 from ..project.builders.access_control import access_restriction
 from ..project.injector import Injector
+from ..project.types import Role
 from .controller_identity import create_internal_jwt, get_payload
 from .schema import UserAdminLocationIdSchema, UserInfoSchema, UserSchema
 from .service import IUser, User, UserService
@@ -29,7 +30,7 @@ class UserResource(Resource):
     """Users."""
 
     @responds(schema=UserSchema(many=True), api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def get(self) -> List[User]:
         """Get all users."""
         return UserService.get_all()
@@ -37,7 +38,7 @@ class UserResource(Resource):
     @accepts(schema=UserInfoSchema, api=api)
     @responds(schema=UserSchema, api=api)
     @api.doc(security='loggedIn')
-    @jwt_required()
+    @access_restriction(required_role=Role.user, api=api)
     def put(self) -> Tuple[Response, int]:
         """Update info of current User."""
         claim = get_jwt()
@@ -76,12 +77,12 @@ class UserLoginResource(Resource):
 class UserIdResource(Resource):
 
     @responds(schema=UserSchema, api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def get(self, user_id: int):
         """Get specific User instance."""
         return UserService.get_by_id(user_id)
 
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def delete(self, user_id: int):
         """Delete single User."""
         deleted_id = UserService.delete_by_id(user_id)
@@ -90,7 +91,7 @@ class UserIdResource(Resource):
 
     @accepts(schema=UserAdminLocationIdSchema, api=api)
     @responds(schema=UserSchema, api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def put(self, user_id: int):
         """Update single User."""
         changes: IUser = request.parsed_obj

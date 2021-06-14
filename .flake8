@@ -8,5 +8,6 @@ max_line_length = 100
 max-cognitive-score = 25
 max-cognitive-average = 15
 max-string-usages = 4
+max-imports=15
 per-file-ignores =
     config.py:WPS115,WPS432

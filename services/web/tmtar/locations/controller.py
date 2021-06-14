@@ -6,6 +6,7 @@ from flask_cors import cross_origin
 from flask_restx import Namespace, Resource
 
 from ..project.builders.access_control import access_restriction
+from ..project.types import Role
 from .interface import ILocation
 from .model import Location
 from .schema import LocationSchema, LocationUpdateSchema
@@ -29,7 +30,7 @@ class LocationResource(Resource):
 
     @accepts(schema=LocationSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def post(self) -> Location:
         """Create Location with custom or default(0) parent."""
         return LocationService.create(request.parsed_obj)
@@ -64,7 +65,7 @@ class LocationIdResource(Resource):
         """Get specific Location instance."""
         return LocationService.get_by_id(location_id)
 
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def delete(self, location_id: int):
         """Delete single Location."""
         deleted_id = LocationService.delete_by_id(location_id)
@@ -73,7 +74,7 @@ class LocationIdResource(Resource):
 
     @accepts(schema=LocationUpdateSchema, api=api)
     @responds(schema=LocationSchema, api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def put(self, location_id: int):
         """Update single Location."""
         changes: ILocation = request.parsed_obj

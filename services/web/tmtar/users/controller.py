@@ -4,7 +4,8 @@ from flask import jsonify, request
 from flask.wrappers import Response
 from flask_accepts import accepts, responds
 from flask_cors import cross_origin
-from flask_jwt_extended import get_jwt  # noqa: WPS319
+from flask_jwt_extended import (create_refresh_token, get_jwt, get_jwt_identity,  # noqa: WPS319
+                                jwt_required)
 from flask_restx import Namespace, Resource, abort
 
 from ..project.builders.access_control import access_restriction
@@ -56,7 +57,7 @@ class UserLoginResource(Resource):
     @api.doc(responses={
         403: 'Invalid identity',
         401: 'Invalid token',
-        200: '{status: OK, access_token: token}',
+        200: '{status: OK, access_token: token, refresh_token: token}',
     })
     @api.doc(security='auth0_login')
     def get(self):
@@ -66,7 +67,31 @@ class UserLoginResource(Resource):
         if identity:
             usr = UserService.get_or_new_by_identity(identity)
             access_token = create_internal_jwt(user=usr)
-            ret = {'status': 'OK', 'access_token': access_token}
+            ret = {
+                'status': 'OK',
+                'access_token': access_token,
+                'refresh_token': create_refresh_token(identity),
+            }
+
+            return jsonify(ret)
+        return abort(403, message='Forbidden!')  # noqa: WPS432
+
+    @api.doc(responses={
+        403: 'Invalid identity',
+        401: 'Invalid token',
+        200: '{status: OK, access_token: token, refresh_token: token}',
+    })
+    @jwt_required(refresh=True)
+    def post(self):
+        """Refresh token."""
+        identity = get_jwt_identity()
+        if identity:
+            usr = UserService.get_or_new_by_identity(identity)
+            access_token = create_internal_jwt(user=usr)
+            ret = {
+                'status': 'OK',
+                'access_token': access_token,
+            }
 
             return jsonify(ret)
         return abort(403, message='Forbidden!')  # noqa: WPS432

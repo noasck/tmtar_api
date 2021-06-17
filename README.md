@@ -5,7 +5,7 @@
 
 #### Pre-commit checks:
 - Styleguide: **OK** (0 warnings)
-- Tests: **OK** (73/73 passed)
+- Tests: **OK** (82/73 passed)
 
 #### Contacts 
 ```@you2ku``` at **Telegram**.
@@ -43,6 +43,7 @@ alias dc_down_prod='docker-compose -f docker-compose.prod.yml down --volumes --r
 ### Accessing API
 In **development** you can use *Swagger OpenAPI* documentation to check routes you need and view namespaces, schemas, parameters, route's information.
 - **Development:** ```http://localhost:5000```.
+
 API itself:
 - **Production:** ```http://localhost:1337/api/```.
 - **Development:** ```http://localhost:5000/api/```.
@@ -76,6 +77,21 @@ curl --request GET \
 --url http://localhost:1337/api/users/login \
 --header 'authorization: Bearer paste_your_AUTH0_access_token'
 ```
+You'll get an access token and refresh token as following:
+``` json
+{
+  "access_token": "...",
+  "refresh_token": "...",
+  "status": "OK"
+}
+```
+In case token is invalid or expired, you receive the *401 UNAUTHORIZED* with following body:
+```json
+{
+  "msg": "Token has expired"
+}
+```
+To refresh token you need to make a request like:
 
 #### Testing
 1. Get our own API token. At this point, your request should be like (**curl** analogue): 

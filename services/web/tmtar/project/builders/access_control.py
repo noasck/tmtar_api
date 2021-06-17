@@ -48,7 +48,7 @@ def access_restriction(
             try:  # noqa: WPS229
                 verify_jwt_in_request()
                 claims = get_jwt()
-                if required_role in {Role.root, Role.user}:
+                if required_role in {Role.root, Role.admin}:
                     admin_location_id = int(claims['admin_location_id'])
             except (ValueError, TypeError, JWTExtendedException):
                 # TODO: make more detailed JWTExtendedException response

@@ -114,7 +114,7 @@ class TestSecuredEventUpdate:
         db.session.add(event)
         db.session.commit()
 
-        SecureEventService.update(event, event_upd, 1)
+        SecureEventService.update_by_id(event.id, event_upd, 1)
         events = Event.query.all()
 
         assert len(events) == 1
@@ -130,7 +130,7 @@ class TestSecuredEventUpdate:
         db.session.commit()
 
         try:
-            SecureEventService.update(event, event_upd, 1)
+            SecureEventService.update_by_id(event.id, event_upd, 1)
         except LocationAccessError:
             assert True
 
@@ -144,7 +144,7 @@ class TestSecuredEventUpdate:
         db.session.add(event)
         db.session.commit()
 
-        SecureEventService.update(event, event_upd, 1)
+        SecureEventService.update_by_id(event.id, event_upd, 1)
         events = Event.query.all()
 
         assert len(events) == 1
@@ -165,7 +165,7 @@ class TestSecuredEventUpdate:
         db.session.commit()
 
         try:
-            SecureEventService.update(event, event_upd, 42)
+            SecureEventService.update_by_id(event.id, event_upd, 42)
         except LocationAccessError:
             assert True
 
@@ -180,17 +180,15 @@ def test_safe_get_all(db: SQLAlchemy, sample_file: File):
 
     e1 = Event(**create_event(location_id=2, event_type=event_type_to_find))
     e2 = Event(**create_event(location_id=2, active=False))
-    e3 = Event(**create_event(location_id=2, event_type=event_type_to_ignore))
     e4 = Event(**create_event(location_id=3))
 
     eg1 = Event(**create_event(location_id=1, event_type=event_type_to_find))
     eg3 = Event(**create_event(location_id=1, active=False))
-    eg2 = Event(**create_event(location_id=1, event_type=event_type_to_ignore))
 
-    db.session.add_all([e1, e2, e3, e4, eg1, eg2, eg3])
+    db.session.add_all([e1, e2, e4, eg1, eg3])
     db.session.commit()
 
-    result = SecureEventService.get_rw_accessible(
+    result = SecureEventService.get_all(
         event_type_to_find,
         1,
     )
@@ -205,7 +203,7 @@ def test_safe_get_all(db: SQLAlchemy, sample_file: File):
         [Event(**create_event(location_id=1, event_type=event_type_to_find)) for _ in range(10)]
     )
 
-    result = SecureEventService.get_rw_accessible(
+    result = SecureEventService.get_all(
         event_type_to_find,
         1,
     )

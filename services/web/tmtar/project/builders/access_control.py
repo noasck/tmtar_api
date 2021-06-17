@@ -1,4 +1,4 @@
-from functools import wraps
+from functools import partial, wraps
 from http import HTTPStatus
 from typing import Callable
 
@@ -8,19 +8,25 @@ from flask_jwt_extended.exceptions import JWTExtendedException
 from flask_restx import Namespace, abort
 
 from ..exceptions import AuthError
+from ..types import Role
 
 
 def access_restriction(
-    root_required: bool = False,
+    required_role: Role = Role.user,
     api: Namespace = None,
+    inject_claims: bool = False,
 ) -> Callable:
     """
     Wrap access control decorator.
 
-    :param root_required: if set, checks admin_location_id to be 0.
-    :type root_required: bool
+    Necessary to have claims parameter in wrapped function or method.
+
+    :param required_role: if set, checks user role.
+    :type required_role: Role
     :param api: api Namespace to create auth documentation.
     :type api: Namespace
+    :param inject_claims: indicates injection of user claims into route.
+    :type inject_claims: bool
     :return: secured endpoint wrapper.
     :rtype: Callable
     """
@@ -35,22 +41,32 @@ def access_restriction(
         :rtype: Callable
         """
 
-        @api.doc(security='root' if root_required else 'admin')
+        @api.doc(security=required_role.value)
         @jwt_required()
         @wraps(endpoint)
         def wrapper(*args, **kwargs):
             try:  # noqa: WPS229
                 verify_jwt_in_request()
                 claims = get_jwt()
-                admin_location_id = int(claims['admin_location_id'])
+                if required_role in {Role.root, Role.admin}:
+                    admin_location_id = int(claims['admin_location_id'])
             except (ValueError, TypeError, JWTExtendedException):
                 # TODO: make more detailed JWTExtendedException response
                 abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
             except AuthError as error:
                 abort(error.status_code, error.error)
-            if root_required and admin_location_id != 1:
+
+            if required_role == Role.root and admin_location_id != 1:
                 abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
-            return endpoint(*args, **kwargs)
+
+            if inject_claims and claims:
+                wrapped_endpoint = partial(
+                    endpoint,
+                    claims=claims,
+                )
+            else:
+                wrapped_endpoint = endpoint
+            return wrapped_endpoint(*args, **kwargs)
 
         return wrapper
 

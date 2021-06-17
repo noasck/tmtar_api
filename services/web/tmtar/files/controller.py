@@ -10,6 +10,7 @@ from flask_restx import Namespace, Resource, abort, reqparse
 
 from ..project.builders.access_control import access_restriction
 from ..project.injector import Injector
+from ..project.types import Role
 from .schema import FileSchema
 from .service import AliasGenerator, File, FileService, IFile
 
@@ -37,7 +38,7 @@ class FileResource(Resource):
     """Files."""
 
     @responds(schema=FileSchema(many=True), api=api)
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def get(self) -> List[File]:
         """Get all files list."""
         return FileService.get_all()
@@ -72,7 +73,7 @@ class FileNameResource(Resource):
         file_instance = werkzeug.utils.secure_filename(filename)
         return send_from_directory(media_folder, file_instance)
 
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def delete(self, filename):
         """Delete File from storage."""
         file_instance = werkzeug.utils.secure_filename(filename)

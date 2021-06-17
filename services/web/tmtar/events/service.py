@@ -17,6 +17,7 @@ class _EventService(AbstractService[Event, IEvent]):
     def model(cls):
         """
         Resolve Location model class.
+
         :return: Location Type.
         :rtype: type
         """
@@ -24,7 +25,7 @@ class _EventService(AbstractService[Event, IEvent]):
 
 
 class SecureEventService(object):
-    """Implements protected by location hierarchy service over EventService"""
+    """Implements protected by location hierarchy service over EventService."""
 
     # TODO: on request: inverse propagation of the events from parents to children.
     @classmethod
@@ -51,26 +52,24 @@ class SecureEventService(object):
             user_location_id,
         )
 
-        events = Event.query.filter(
+        return Event.query.filter(
             Event.location_id.in_(appropriated_locations),
-            Event.active == True,
-            Event.event_type == event_type
+            Event.active == True,  # noqa: E712
+            Event.event_type == event_type,
         ).order_by(Event.update_date.desc()).paginate(page, per_page, error_out=False).items
 
-        return events
-
     @classmethod
-    def update(
+    def update_by_id(
         cls,
-        event: Event,
+        event_id: int,
         event_upd: IEvent,
         user_admin_location_id: int,
     ) -> Event:
         """
-        Safely update specific event with dict.
+        Safely update specific event by id with dict.
 
-        :param event: event to update.
-        :type event: Event
+        :param event_id: event db id to update.
+        :type event_id: int
         :param event_upd: new fields
         :type event_upd: IEvent
         :param user_admin_location_id: [0] user db admin location id.
@@ -79,6 +78,8 @@ class SecureEventService(object):
         :rtype: Event
         :raises LocationAccessError: if user don't have necessary permissions.
         """
+        event = _EventService.get_by_id(event_id)
+
         if not LocationService.has_permission(event.location_id, user_admin_location_id):
             raise LocationAccessError(
                 error="You don't have permissions to access this location!",
@@ -95,17 +96,14 @@ class SecureEventService(object):
         return _EventService.update(event, event_upd)
 
     @classmethod
-    def get_rw_accessible(
+    def get_all(
         cls,
-        event_type,
         user_admin_location_id,
         page: int = 1,
     ):
         """
         Get all accessible events for certain admin location id.
 
-        :param event_type: 'news' or 'sales' accepted
-        :type event_type: str
         :param user_admin_location_id: admin location id from User instance.
         :type user_admin_location_id: int
         :param page: pagination page number.
@@ -118,12 +116,9 @@ class SecureEventService(object):
             user_admin_location_id,
         )
 
-        events = Event.query.filter(
+        return Event.query.filter(
             Event.location_id.in_(appropriated_locations),
-            Event.event_type == event_type
         ).order_by(Event.update_date.desc()).paginate(page, per_page, error_out=False).items
-
-        return events
 
     @classmethod
     def create(
@@ -163,23 +158,22 @@ class SecureEventService(object):
         Safely update specific event with dict.
 
         :param event_id: db id of Event to delete.
-        :type event_id: IEvent
+        :type event_id: int
         :param user_admin_location_id: [0] user db admin location id.
         :type user_admin_location_id: int
         :return: updated event.
-        :rtype: Event
+        :rtype: int
         :raises LocationAccessError: if user don't have necessary permissions.
         """
-        try:
-            if not LocationService.has_permission(
-                _EventService.get_by_id(event_id).location_id,
-                user_admin_location_id,
-            ):
-                raise LocationAccessError(
-                    error="You don't have permissions to access this location!",
-                    status_code=HTTPStatus.FORBIDDEN,
-                )
-        except KeyError:
-            abort(HTTPStatus.BAD_REQUEST, message='New Event location id is not specified.')
+        has_permission = LocationService.has_permission(
+            _EventService.get_by_id(event_id).location_id,
+            user_admin_location_id,
+        )
+
+        if not has_permission:
+            raise LocationAccessError(
+                error="You don't have permissions to access this location!",
+                status_code=HTTPStatus.FORBIDDEN,
+            )
 
         return _EventService.delete_by_id(event_id)

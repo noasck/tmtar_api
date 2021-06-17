@@ -7,6 +7,7 @@ from flask_cors import cross_origin
 from flask_restx import Namespace, Resource
 
 from ..project.builders.access_control import access_restriction
+from ..project.types import Role
 from .interface import IObject
 from .model import Object
 from .schema import ObjectSchema
@@ -28,7 +29,7 @@ class ObjectResource(Resource):
 
     @accepts(schema=ObjectSchema, api=api)
     @responds(schema=ObjectSchema, api=api)
-    @access_restriction(api=api)
+    @access_restriction(required_role=Role.admin, api=api)
     def post(self) -> Object:
         """Create new Object"""
         return ObjectService.create(request.parsed_obj)
@@ -46,7 +47,7 @@ class ObjectIdResource(Resource):
 
     @accepts(schema=ObjectSchema, api=api)
     @responds(schema=ObjectSchema, api=api)
-    @access_restriction(api=api)
+    @access_restriction(required_role=Role.admin, api=api)
     def put(self, objectId: int) -> Object:
         """Updates Object by id"""
 
@@ -55,7 +56,7 @@ class ObjectIdResource(Resource):
         return ObjectService.update(object_to_update, changes)
 
     @api.doc(responses={200: "{\"status\": \"Success\", \"id\" = 1}"})
-    @access_restriction(root_required=True, api=api)
+    @access_restriction(required_role=Role.root, api=api)
     def delete(self, objectId: int):
         """Delete single Object"""
 

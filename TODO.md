@@ -36,30 +36,9 @@ _____________________________________________________
 ### File instance:
 -  [ ] controller tests
 
-### Zone:
-=======
--  [x] D — add security headers (JWT) for flask_restx sqagger documentation
--  [ ] D — add validator for every field, validation exception handling, validation failing tests
--  [ ] D — add unique and other database exception handling
--  [ ] D — fix preferred event
--  [x] D — delete /user PUT route
--  [ ] D — add token expiration and JWT config.
--  [ ] D — provide auth0 authorization.
--  [ ] D — separate development\production auth.
-
-_____________________________________________________
-Закончить:
-
-Event instance:
--  [ ] service
--  [ ] service tests
--  [ ] controller
--  [ ] controller tests
-
-File instance:
--  [ ] controller tests
 
 ### Zone:
+
 -  [ ] configure PostGIS
 -  [ ] model
 -  [ ] interface

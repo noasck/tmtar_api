@@ -22,5 +22,5 @@ class Config(object):
         JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=15)
         JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=7)
     else:
-        JWT_ACCESS_TOKEN_EXPIRES = 30
+        JWT_ACCESS_TOKEN_EXPIRES = False
         JWT_REFRESH_TOKEN_EXPIRES = False

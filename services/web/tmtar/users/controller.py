@@ -4,9 +4,8 @@ from flask import jsonify, request
 from flask.wrappers import Response
 from flask_accepts import accepts, responds
 from flask_cors import cross_origin
-from flask_jwt_extended import (create_refresh_token, get_jwt, get_jwt_identity,  # noqa: WPS319
-                                jwt_required)
-from flask_restx import Namespace, Resource, abort
+from flask_jwt_extended import create_refresh_token, get_jwt_identity, jwt_required  # noqa: I001
+from flask_restx import Namespace, Resource, abort  # noqa: I005
 
 from ..project.builders.access_control import access_restriction
 from ..project.injector import Injector
@@ -39,11 +38,14 @@ class UserResource(Resource):
     @accepts(schema=UserInfoSchema, api=api)
     @responds(schema=UserSchema, api=api)
     @api.doc(security='loggedIn')
-    @access_restriction(required_role=Role.user, api=api)
-    def put(self) -> Tuple[Response, int]:
+    @access_restriction(
+        required_role=Role.user,
+        api=api,
+        inject_claims=True,
+    )
+    def put(self, claims) -> Tuple[Response, int]:
         """Update info of current User."""
-        claim = get_jwt()
-        usr = UserService.get_by_id(claim['id'])
+        usr = UserService.get_by_id(claims['id'])
         changes: IUser = request.parsed_obj
         if usr:
             return UserService.update(usr, changes)
@@ -79,7 +81,7 @@ class UserLoginResource(Resource):
     @api.doc(responses={
         403: 'Invalid identity',
         401: 'Invalid token',
-        200: '{status: OK, access_token: token, refresh_token: token}',
+        200: '{status: OK, access_token: token}',
     })
     @jwt_required(refresh=True)
     def post(self):

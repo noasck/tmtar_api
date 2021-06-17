@@ -65,6 +65,11 @@ class LocationIdResource(Resource):
         """Get specific Location instance."""
         return LocationService.get_by_id(location_id)
 
+    @api.doc(
+        responses={
+            200: "{'status': 'Success', 'id': deleted_id}",
+        },
+    )
     @access_restriction(required_role=Role.root, api=api)
     def delete(self, location_id: int):
         """Delete single Location."""

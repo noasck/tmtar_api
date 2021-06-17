@@ -5,7 +5,7 @@
 
 #### Pre-commit checks:
 - Styleguide: **OK** (0 warnings)
-- Tests: **OK** (82/73 passed)
+- Tests: **OK** (87/87 passed)
 
 #### Contacts 
 ```@you2ku``` at **Telegram**.
@@ -85,13 +85,7 @@ You'll get an access token and refresh token as following:
   "status": "OK"
 }
 ```
-In case token is invalid or expired, you receive the *401 UNAUTHORIZED* with following body:
-```json
-{
-  "msg": "Token has expired"
-}
-```
-To refresh token you need to make a request like:
+
 
 #### Testing
 1. Get our own API token. At this point, your request should be like (**curl** analogue): 
@@ -102,3 +96,28 @@ curl --request GET \
 ```
 Where ```admins_identity``` means your *root* identity - ```sub``` in testing environment.
 
+#### Token expiration
+In case token is invalid or expired, you receive the *401 UNAUTHORIZED* with following body:
+```json
+{
+  "msg": "Token has expired"
+}
+```
+To refresh token you need to make a request like:
+``` bash
+curl -X 'GET' \
+  'http://0.0.0.0:5000/api/users/login' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer refresh_token'
+```
+As a result you acquire new access token like:
+```json
+{
+  "access_token": "...",
+  "status": "OK"
+}
+```
+
+**Default timeouts** for *access* and *refresh* tokens expiration:
+- **Production**: *15 minutes* and *7 days* accordingly.
+- **Development**: *Never* and *Never* accordingly

@@ -1,6 +1,6 @@
 from functools import partial, wraps
 from http import HTTPStatus
-from typing import Callable, List
+from typing import Callable
 
 from flask_jwt_extended import verify_jwt_in_request  # noqa: WPS319
 from flask_jwt_extended import get_jwt, jwt_required  # noqa: WPS318
@@ -58,6 +58,7 @@ def access_restriction(
 
             if required_role == Role.root and admin_location_id != 1:
                 abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
+
             if inject_claims and claims:
                 wrapped_endpoint = partial(
                     endpoint,

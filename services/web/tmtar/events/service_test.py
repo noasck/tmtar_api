@@ -185,7 +185,7 @@ def test_safe_get_all(db: SQLAlchemy, sample_file: File):
     eg1 = Event(**create_event(location_id=1, event_type=event_type_to_find))
     eg3 = Event(**create_event(location_id=1, active=False))
 
-    db.session.add_all([e1, e2, e3, e4, eg1, eg2, eg3])
+    db.session.add_all([e1, e2, e4, eg1, eg3])
     db.session.commit()
 
     result = SecureEventService.get_all(

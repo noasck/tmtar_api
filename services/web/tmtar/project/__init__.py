@@ -50,6 +50,9 @@ class AppModule(object):
         # Adding CORS policy
         CORS(self.app)
 
+        # instantiating database
+        MLoader.initialize_db(self.app, db)
+
         # Register database brute CLI commands
         MLoader.configure_cli(self.app, db)
 

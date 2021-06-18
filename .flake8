@@ -9,5 +9,7 @@ max-cognitive-score = 30
 max-cognitive-average = 20
 max-string-usages = 4
 max-imports=15
+max-methods=10
+max-expressions=10
 per-file-ignores =
     config.py:WPS115,WPS432

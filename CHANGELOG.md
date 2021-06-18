@@ -15,7 +15,6 @@
 
 --------------------------------------------------------
 ### s.02
-
 #### Changes:
 
 1. ```api/users/login``` route: need to pass ```Authorization: Bearer ``` header with **Auth0** ```access_token```

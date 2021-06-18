@@ -46,11 +46,15 @@ class ModulesSetup(object):
     @singleton('db')
     def configure_db(cls, app: Flask) -> SQLAlchemy:
         """Configure SQLAlchemy ORM plugin."""
-        db = SQLAlchemy(app)
+        return SQLAlchemy(app)
+
+    @classmethod
+    def initialize_db(cls, app: Flask, db: SQLAlchemy):
+        """Instantiate database tables and seed necessary data."""
         if app.config['FLASK_ENV'] in {'development', 'testing'}:
             DatabaseSetup.tear_down_db(app, db)
             DatabaseSetup.set_up_db(app, db)
-        return db
+            DatabaseSetup.seed_db(app, db)
 
     @classmethod
     @singleton('ma')

@@ -16,7 +16,6 @@ class DatabaseSetup(object):
         :type db: SQLAlchemy
         """
         app.logger.info('Creating db tables...')
-        db.session.remove()
         db.create_all()
         db.session.commit()
 

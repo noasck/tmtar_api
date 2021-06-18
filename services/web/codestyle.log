@@ -1748,3 +1748,6 @@
 ./tmtar/users/controller.py:8:1: I005 isort found an unexpected missing import
 ./tmtar/users/controller.py:8:1: I005 isort found an unexpected missing import
 ./tmtar/events/controller.py:32:9: WPS421 Found wrong function call: print
+./tmtar/project/__init__.py:33:5: WPS213 Found too many expressions: 10 > 9
+./tmtar/project/builders/extension_loader.py:12:1: WPS214 Found too many methods: 8 > 7
+./tmtar/project/builders/extension_loader.py:51:9: WPS331 Found variables that are only used for `return`: db

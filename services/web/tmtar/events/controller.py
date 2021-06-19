@@ -28,7 +28,7 @@ class EventsResource(Resource):
         inject_claims=True,
     )
     def post(self, claims):
-        """Get all events for editing."""
+        """Create new event instance."""
         return SecureEventService.create(
             request.parsed_obj,
             user_admin_location_id=claims['admin_location_id'],

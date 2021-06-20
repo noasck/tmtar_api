@@ -131,3 +131,50 @@ class TestPaginatedEventsResource():
             ).get_json()
 
         assert result == {'id': 1, 'status': 'Success'}
+
+
+class TestEventsSearchResource():
+    @patch.object(SecureEventService, 'search_by_title', lambda *args, **kwargs: [
+        create_event(event_type=1),
+        create_event(event_type=2),
+    ])
+    def test_get(self, client: FlaskClient, token: str):
+        with client:
+            def get_events_by_type(event_type: str):
+                return client.get(
+                    f'/api/{BASE_ROUTE}/{event_type}/search/dfgdfg',
+                    headers={
+                        "Authorization": f"Bearer {token}"
+                    }).get_json()
+
+            expected = {
+                "status": "Match",
+                "events":
+                EventSchema(many=True).dump(
+                [
+                    create_event(event_type=1),
+                    create_event(event_type=2),
+                ]
+            )}
+            result_all = get_events_by_type("all")
+
+            assert result_all == expected
+
+
+class TestEventsCountResource():
+    @patch.object(SecureEventService, 'count_all_events', lambda *args, **kwargs: 4)
+    def test_get(self, client: FlaskClient, token: str):
+        with client:
+            def get_events_by_type(event_type: str):
+                return client.get(
+                    f'/api/{BASE_ROUTE}/{event_type}/count',
+                    headers={
+                        "Authorization": f"Bearer {token}"
+                    }).get_json()
+
+            expected = {
+                "count": 4,
+                }
+            result_all = get_events_by_type("all")
+
+            assert result_all == expected

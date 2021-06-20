@@ -1,6 +1,11 @@
 ## Versions
+### s.031 (Current)
+#### Changes:
+1. Added ```/all/count``` and ```/all/search/<str_to_search>``` **Event** resource routes.
+2. Added related tests.
 
-### s.03 (Current)
+--------------------------------------------------------
+### s.03
 #### Changes:
 1. Added Events service.
 2. Added token expiration and refreshing.

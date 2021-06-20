@@ -236,3 +236,46 @@ def test_delete_by_id(db: SQLAlchemy, sample_file: File):
     assert event_id == 1
     assert e1 not in res
     assert e2 in res
+
+
+@patch.object(LocationService, 'get_all_successor_id', lambda *args: [1, 2, 5])
+def test_count_all_events(db: SQLAlchemy, sample_file: File):
+    event_type_to_find = EventType[0]
+
+    LocationService.create({"id": 2, "name": "loc1", "root": 1})
+    LocationService.create({"id": 3, "name": "loc2", "root": 1})
+
+    e1 = Event(**create_event(location_id=2, event_type=event_type_to_find))
+    e2 = Event(**create_event(location_id=2, active=False))
+    e4 = Event(**create_event(location_id=3))
+
+    eg1 = Event(**create_event(location_id=1, event_type=event_type_to_find))
+    eg3 = Event(**create_event(location_id=1, active=False))
+
+    db.session.add_all([e1, e2, e4, eg1, eg3])
+    db.session.commit()
+
+    assert SecureEventService.count_all_events(1) == 4
+
+
+@patch.object(LocationService, 'get_all_successor_id', lambda *args: [1, 2, 5])
+def test_search_by_title(db: SQLAlchemy, sample_file: File):
+    event_type_to_find = EventType[0]
+
+    LocationService.create({"id": 2, "name": "loc1", "root": 1})
+    LocationService.create({"id": 3, "name": "loc2", "root": 1})
+
+    e1 = Event(**create_event(title="Sample_event1" ,location_id=2, event_type=event_type_to_find))
+    e2 = Event(**create_event(title="Sample_Event2", location_id=2, active=False))
+    e4 = Event(**create_event(location_id=3))
+
+    eg1 = Event(**create_event(title="Sample1", location_id=1, event_type=event_type_to_find))
+    eg3 = Event(**create_event(title="Sample2", location_id=1, active=False))
+
+    db.session.add_all([e1, e2, e4, eg1, eg3])
+    db.session.commit()
+
+    assert len(SecureEventService.search_by_title("event", 1)) == 2
+
+    for event in SecureEventService.search_by_title("event", 1):
+        assert event in {e1, e2}

@@ -177,3 +177,48 @@ class SecureEventService(object):
             )
 
         return _EventService.delete_by_id(event_id)
+
+    @classmethod
+    def count_all_events(
+        cls,
+        user_admin_location_id,
+    ) -> int:
+        """
+        Get count of all accessible events for certain admin location id.
+
+        :param user_admin_location_id: admin location id from User instance.
+        :type user_admin_location_id: int
+        :return: Count of matching events.
+        :rtype: int
+        """
+        appropriated_locations = LocationService.get_all_successor_id(
+            user_admin_location_id,
+        )
+
+        return Event.query.filter(
+            Event.location_id.in_(appropriated_locations),
+        ).count()
+
+    @classmethod
+    def search_by_title(
+        cls,
+        str_to_search: str,
+        user_admin_location_id,
+    ) -> List[Event]:
+        """
+        Find Events with matching substring of title.
+
+        :param str_to_search: substring - case insensitive.
+        :type str_to_search: str
+        :param user_admin_location_id: admin location id from User instance.
+        :type user_admin_location_id: int
+        :return: list of matching Events.
+        :rtype: List[Event]
+        """
+        appropriated_locations = LocationService.get_all_successor_id(
+            user_admin_location_id,
+        )
+        return Event.query.filter(
+            Event.location_id.in_(appropriated_locations),
+            Event.title.ilike(f'%{str_to_search}%'),
+        ).all()

@@ -1,11 +1,10 @@
-from time import time
-
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column
 
 from ..project.injector import Injector
 from .interface import IEvent
 
-db = Injector.db
+db: SQLAlchemy = Injector.db
 
 min_string = 255
 
@@ -22,7 +21,13 @@ class Event(db.Model):
         default=1,
         nullable=False,
     )
-    update_date = db.Column(db.Integer, onupdate=int(time()), index=True)
+    update_date = db.Column(
+        db.DateTime(timezone=True),
+        default=db.func.now(),
+        onupdate=db.func.now(),
+        nullable=False,
+        index=True,
+    )
     title = db.Column(db.String, nullable=False)
     short_description = db.Column(db.String(min_string), nullable=True)
     description = db.Column(db.Text, nullable=True)

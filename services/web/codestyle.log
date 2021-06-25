@@ -1751,3 +1751,7 @@
 ./tmtar/project/__init__.py:33:5: WPS213 Found too many expressions: 10 > 9
 ./tmtar/project/builders/extension_loader.py:12:1: WPS214 Found too many methods: 8 > 7
 ./tmtar/project/builders/extension_loader.py:51:9: WPS331 Found variables that are only used for `return`: db
+./tmtar/events/model.py:1:1: F401 'time.time' imported but unused
+./tmtar/events/model.py:26:5: WPS221 Found line with high Jones Complexity: 19 > 14
+./tmtar/events/model.py:26:101: E501 line too long (129 > 100 characters)
+./tmtar/events/model.py:2:1: F401 'sqlalchemy.func' imported but unused

@@ -1,3 +1,4 @@
+from datetime import datetime
 from time import time
 from typing import List
 from unittest.mock import patch
@@ -12,7 +13,7 @@ from .interface import IEvent
 from .model import Event
 from .service import LocationAccessError, LocationService, SecureEventService
 
-time_now = int(time())
+time_now = datetime.utcnow()
 
 
 @pytest.fixture

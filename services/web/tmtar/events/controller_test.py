@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import patch
 
 from flask.testing import FlaskClient
@@ -10,12 +11,14 @@ from .model import Event
 from .schema import EventSchema
 from .service import SecureEventService
 
+time_now = datetime.utcnow()
+
 
 def create_event(
         event_id=1,
         event_type=EventType[0],
         location_id=1,
-        update_date=123,
+        update_date=time_now,
         title="Sample",
         short_description="""The plugin adds a random text generator, capable
                  of creating witty texts in different genres. Created text can be inserted newly at the caret,

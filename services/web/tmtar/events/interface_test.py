@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 
 from pytest import fixture
 
@@ -16,7 +17,7 @@ def interface() -> IEvent:
         id=1,
         event_type=EventType[0],
         location_id=1,
-        update_date=time_now,
+        update_date=datetime.utcnow(),
         title="Sample",
         short_description="""The plugin adds a random text generator, capable 
                  of creating witty texts in different genres. Created text can be inserted newly at the caret, 

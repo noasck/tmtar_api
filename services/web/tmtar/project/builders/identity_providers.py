@@ -29,7 +29,7 @@ class ProductionIdentityLoader(AbstractIdentityLoader):
         :rtype: str
         :raise AuthError: incorrect token provided.
         """
-        jwks = requests.get('https://{0}/.well-known/jwks.json'.format(self.auth_domain))
+        jwks = requests.get('https://{0}/.well-known/jwks.json'.format(self.auth_domain)).json()
         unverified_header = jwt.get_unverified_header(token)
         rsa_key = {}
         for key in jwks['keys']:

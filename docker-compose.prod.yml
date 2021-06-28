@@ -16,14 +16,23 @@ services:
       - db
 
   db:
-    image: postgres:latest
+    image: crunchydata/crunchy-postgres-gis:centos8-13.3-3.1-4.6.3
+    hostname: db
     ports:
     - 5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-      - ./create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
+      - ./configs:/pgconf
+      - db-pgdata:/pgdata
+      - db-wal:/pgwal
+      - db-backup:/backrestrepo
     env_file:
       - env/.env.db
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   nginx:
     build: ./services/nginx
@@ -35,5 +44,7 @@ services:
       - web
 
 volumes:
-  postgres_data:
   media_volume:
+  db-pgdata:
+  db-wal:
+  db-backup:

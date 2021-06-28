@@ -1,37 +1,36 @@
 ## Backend
 
 
--  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
 -  [x] M — add dependency injection for: fixtures, app, modules, service methods
 -  [x] M — remove seeding database
--  [ ] M — add database backup and cache
--  [ ] M — add integration tests
--  [ ] M — add production tests
--  [ ] M — set up Profiling and Benchmark
 -  [x] M — wsgi.py — add CLI commands and flask-migrate
--  [ ] M — config.py — add prod config as yml
 -  [x] M — requirements — remove unused
 -  [x] S — remove email hashing
 -  [x] S — add relations between objects and fix tests
--  [ ] S — fix objects access
 -  [x] D — add security headers (JWT) for flask_restX swagger documentation
--  [ ] D — add validator for every field, validation exception handling, validation failing tests
--  [ ] D — add unique and other database exception handling
--  [ ] D — add unique and other database exception handling
 -  [x] D — fix preferred event
 -  [x] D — delete /user PUT route
 -  [x] D — add token expiration and JWT config.
 -  [x] D — provide auth0 authorization.
 -  [x] D — separate development\production auth.
-
+-  [ ] S — add database **migrations**.
+-  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
+-  [ ] M — add database backup and cache
+-  [ ] M — add integration tests
+-  [ ] M — add production tests
+-  [ ] M — set up Profiling and Benchmark
+-  [ ] M — config.py — add prod config as yml
+-  [ ] S — fix objects access
+-  [ ] D — add validator for every field, validation exception handling, validation failing tests
+-  [ ] D — add unique and other database exception handling
 _____________________________________________________
 ## Finish ASAP
 
 ### Event instance:
 -  [x] service
 -  [x] service tests
--  [ ] controller
--  [ ] controller tests
+-  [x] controller
+-  [x] controller tests
 
 ### File instance:
 -  [ ] controller tests
@@ -39,9 +38,9 @@ _____________________________________________________
 
 ### Zone:
 
--  [ ] configure PostGIS
--  [ ] model
--  [ ] interface
+-  [x] configure PostGIS
+-  [x] model
+-  [x] interface
 -  [ ] schemes
 -  [ ] m, i, s tests
 -  [ ] service

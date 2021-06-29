@@ -1,0 +1,3 @@
+[submodule "services/web/frontend"]
+	path = services/web/frontend
+	url = https://github.com/itdaos/takemetoar-admin.git

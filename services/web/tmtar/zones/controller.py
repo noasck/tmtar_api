@@ -44,26 +44,6 @@ class ZonesResource(Resource):
     def get(self, claims):
         """Get all accessible zones."""
         return SecureZoneService.get_by_location_id(
-            location_id=claims[admin_location_field],
-            user_admin_location_id=claims[admin_location_field],
-        )
-
-
-@api.param('location_id', 'Location instance db ID')
-@api.route('/by_location/<int:location_id>')
-class ZonesLocationIdResource(Resource):
-    """Zone Location Id Resource."""
-
-    @responds(schema=ZoneSchema(many=True), api=api)
-    @access_restriction(
-        required_role=Role.admin,
-        api=api,
-        inject_claims=True,
-    )
-    def get(self, location_id, claims):
-        """Get all accessible zones for certain location id."""
-        return SecureZoneService.get_by_location_id(
-            location_id=location_id,
             user_admin_location_id=claims[admin_location_field],
         )
 

@@ -1759,3 +1759,4 @@
 ./tmtar/locations/model.py:26:45: Q000 Remove bad quotes
 ./tmtar/locations/model.py:27:5: E303 too many blank lines (2)
 ./tmtar/project/builders/database_loader.py:34:28: WPS342 Found implicit raw string: '\\set AUTOCOMMIT on\n drop database test; create database test;'
+./tmtar/zones/service.py:67:1: D202 No blank lines allowed after function docstring

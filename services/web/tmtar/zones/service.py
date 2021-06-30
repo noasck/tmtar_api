@@ -62,7 +62,6 @@ class SecureZoneService(object):
     @classmethod
     def get_by_location_id(
         cls,
-        location_id: int,
         user_admin_location_id,
     ):
         """
@@ -70,17 +69,11 @@ class SecureZoneService(object):
 
         :param user_admin_location_id: admin location id from User instance.
         :type user_admin_location_id: int
-        :param location_id: location id to get related zones.
-        :type location_id: int
         :return: List of matching zones.
         :rtype: List[Zone]
-        :raises LocationAccessError: if user don't have necessary permissions.
         """
-        if not LocationService.has_permission(location_id, user_admin_location_id):
-            raise LocationAccessError()
-
         appropriated_locations = LocationService.get_all_successor_id(
-            location_id,
+            user_admin_location_id,
         )
 
         return Zone.query.filter(Zone.location_id.in_(appropriated_locations)).all()

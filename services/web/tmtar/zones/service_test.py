@@ -36,7 +36,6 @@ def create_zone(
     )
 
 
-@patch.object(LocationService, 'has_permission', lambda *args: True)
 @patch.object(LocationService, 'get_all_ancestors_id', lambda *args: [2, 3])
 def test_get_zones_by_location(db: SQLAlchemy):
     LocationService.create({"id": 2, "name": "loc1", "root": 1})
@@ -49,7 +48,7 @@ def test_get_zones_by_location(db: SQLAlchemy):
     db.session.add_all([z1, z2, z3])
     db.session.commit()
 
-    result = SecureZoneService.get_by_location_id(2, 1)
+    result = SecureZoneService.get_by_location_id(2)
 
     assert len(result) == 2
     assert z2 in result

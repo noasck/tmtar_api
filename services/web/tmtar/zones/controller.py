@@ -68,7 +68,7 @@ class ZoneIdResource(Resource):
             user_admin_location_id=claims[admin_location_field],
         )
 
-    @responds({'name': 'status', 'type': int}, {'name': 'id', 'type': 'int'}, api=api)
+    @responds({'name': 'status', 'type': str}, {'name': 'id', 'type': int}, api=api)
     @access_restriction(
         required_role=Role.admin,
         api=api,

@@ -37,6 +37,7 @@ class EventsResource(Resource):
         )
 
 
+@api.param('page', 'Number of page')
 @api.route('/all/<int:page>')
 class PaginatedEventsResource(Resource):
     """Paginated Events resource."""
@@ -107,6 +108,7 @@ class EventsCountResource(Resource):
         )
 
 
+@api.param('page', 'Number of page')
 @api.route('/news/<int:page>')
 class PaginatedNewsResource(Resource):
     """News event type."""
@@ -126,6 +128,7 @@ class PaginatedNewsResource(Resource):
         )
 
 
+@api.param('page', 'Number of page')
 @api.route('/sales/<int:page>')
 class PaginatedSalesResource(Resource):
     """Sales event type."""
@@ -145,6 +148,7 @@ class PaginatedSalesResource(Resource):
         )
 
 
+@api.param('event_id', 'Event instance db ID')
 @api.route('/<int:event_id>')
 class EventsIdResource(Resource):
     """Events instance id resource."""

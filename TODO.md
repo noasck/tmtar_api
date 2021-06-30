@@ -41,10 +41,10 @@ _____________________________________________________
 -  [x] configure PostGIS
 -  [x] model
 -  [x] interface
--  [ ] schemes
--  [ ] m, i, s tests
--  [ ] service
--  [ ] service tests
+-  [x] schemes
+-  [x] m, i, s tests
+-  [x] service
+-  [x] service tests
 -  [ ] controller
 -  [ ] controller tests
 

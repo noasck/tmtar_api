@@ -6,6 +6,7 @@ from ..project.injector import Injector
 from .interface import IZone
 
 db: SQLAlchemy = Injector.db
+SRID = 4326
 
 
 class Zone(db.Model):
@@ -19,7 +20,16 @@ class Zone(db.Model):
         db.ForeignKey('locations.id', ondelete='CASCADE', onupdate='CASCADE'),
         nullable=False,
     )
-    center = db.Column(Geography(geometry_type='POINT', srid=4326), index=True, nullable=False)
+
+    center = db.Column(
+        Geography(
+            geometry_type='POINT',
+            srid=SRID,
+        ),
+        index=True,
+        nullable=False,
+    )
+
     radius = db.Column(
         db.Float,
         nullable=False,
@@ -27,18 +37,18 @@ class Zone(db.Model):
     active = db.Column(
         db.Boolean,
         nullable=False,
-        default=True
+        default=True,
     )
     secret = db.Column(
         db.Boolean,
         nullable=False,
-        default=False
+        default=False,
     )
     location = db.relationship('Location', backref=backref('zones', passive_deletes=True))
 
     def update(self, changes: IZone):
         """Update certain record."""
         for key, new_value in changes.items():
-            if key not in {'id'}:
+            if key != 'id':
                 setattr(self, key, new_value)
         return self

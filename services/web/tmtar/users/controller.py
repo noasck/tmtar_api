@@ -35,8 +35,8 @@ class UserResource(Resource):
         """Get all users."""
         return UserService.get_all()
 
-    @accepts(schema=UserInfoSchema, api=api)
-    @responds(schema=UserSchema, api=api)
+    @accepts(schema=UserInfoSchema(), api=api)
+    @responds(schema=UserSchema(), api=api)
     @api.doc(security='loggedIn')
     @access_restriction(
         required_role=Role.user,
@@ -50,6 +50,21 @@ class UserResource(Resource):
         if usr:
             return UserService.update(usr, changes)
         return abort(404, message='User not found.')  # noqa: WPS432
+
+
+@api.route('/profile')
+class UserCurrentResource(Resource):
+    """Responsible for listing current User instance after log-in."""
+
+    @responds(schema=UserSchema(), api=api)
+    @access_restriction(
+        required_role=Role.user,
+        api=api,
+        inject_claims=True,
+    )
+    def get(self, claims):
+        """Get current User instance info."""
+        return UserService.get_by_id(claims['id'])
 
 
 @api.route('/login')
@@ -103,7 +118,7 @@ class UserLoginResource(Resource):
 @api.param('userId', 'User db ID')
 class UserIdResource(Resource):
 
-    @responds(schema=UserSchema, api=api)
+    @responds(schema=UserSchema(), api=api)
     @access_restriction(required_role=Role.root, api=api)
     def get(self, user_id: int):
         """Get specific User instance."""
@@ -116,8 +131,8 @@ class UserIdResource(Resource):
 
         return jsonify({'status': 'Success', 'id': deleted_id})
 
-    @accepts(schema=UserAdminLocationIdSchema, api=api)
-    @responds(schema=UserSchema, api=api)
+    @accepts(schema=UserAdminLocationIdSchema(), api=api)
+    @responds(schema=UserSchema(), api=api)
     @access_restriction(required_role=Role.root, api=api)
     def put(self, user_id: int):
         """Update single User."""

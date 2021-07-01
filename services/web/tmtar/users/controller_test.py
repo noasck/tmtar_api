@@ -63,6 +63,23 @@ class TestUserLoginResource:
             assert get_jti(result['access_token'])
 
 
+class TestUserCurrentResource:
+
+    @patch.object(UserService, "get_by_id",
+                  lambda id: make_common_user('sdfsdf', 1))
+    def test_get(self, client: FlaskClient, token):
+        with client:
+            result = client.get(
+                f"/api/{BASE_ROUTE}/profile",
+                headers={
+                    "Authorization": f"Bearer {token}"
+                },
+            )
+            expected = UserSchema().dump(
+                make_common_user('sdfsdf', 1)
+            )
+            return result == expected
+
 class TestUserResource:
 
     @patch.object(UserService, "get_all", lambda: [

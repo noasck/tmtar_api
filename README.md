@@ -37,7 +37,7 @@ alias dc_down_prod='docker-compose -f docker-compose.prod.yml down --volumes --r
 - Up: ```dc_build_dev```
 - Down: ```dc_down_dev```
 ### Production
-- Up: ```dc_build_peod```
+- Up: ```dc_build_prod```
 - Down: ```dc_down_prod```
 
 ### Accessing API

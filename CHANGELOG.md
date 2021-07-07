@@ -1,5 +1,12 @@
 ## Versions
-### s.031 (Current)
+
+### s.04 (Current)
+#### Changes:
+1. Added **Zone** instance.
+2. Added ```/users/profile``` route to obtain info about current user.
+3. Added related tests.
+--------------------------------------------------------
+### s.031
 #### Changes:
 1. Added ```/all/count``` and ```/all/search/<str_to_search>``` **Event** resource routes.
 2. Added related tests.

@@ -31,6 +31,8 @@ class DatabaseSetup(object):
         """
         app.logger.info('Removing db tables...')
         db.session.remove()
+        db.session.execute('drop table if exists locations cascade;')
+        db.session.commit()
         db.drop_all()
         db.session.commit()
 

@@ -14,16 +14,24 @@ services:
       - api
 
   db:
-    image: postgres:latest
+    image: crunchydata/crunchy-postgres-gis:centos8-13.3-3.1-4.6.3
+    networks:
+      - api
     ports:
     - 5432:5432
     volumes:
-      - ./create_db.sh:/docker-entrypoint-initdb.d/create_db.sh
+      - ./configs:/pgconf
+      - db-pgdata:/pgdata
+      - db-wal:/pgwal
+      - db-backup:/backrestrepo
     env_file:
       - env/.env.db
-    networks:
-      - api
 
 
 networks:
   api:
+
+volumes:
+  db-pgdata:
+  db-wal:
+  db-backup:

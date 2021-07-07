@@ -1755,3 +1755,9 @@
 ./tmtar/events/model.py:26:5: WPS221 Found line with high Jones Complexity: 19 > 14
 ./tmtar/events/model.py:26:101: E501 line too long (129 > 100 characters)
 ./tmtar/events/model.py:2:1: F401 'sqlalchemy.func' imported but unused
+./tmtar/locations/model.py:26:29: Q000 Remove bad quotes
+./tmtar/locations/model.py:26:45: Q000 Remove bad quotes
+./tmtar/locations/model.py:27:5: E303 too many blank lines (2)
+./tmtar/project/builders/database_loader.py:34:28: WPS342 Found implicit raw string: '\\set AUTOCOMMIT on\n drop database test; create database test;'
+./tmtar/zones/service.py:67:1: D202 No blank lines allowed after function docstring
+./tmtar/users/controller.py:63:27: C812 missing trailing comma

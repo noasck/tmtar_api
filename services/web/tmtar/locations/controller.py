@@ -5,7 +5,7 @@ from flask_accepts import accepts, responds
 from flask_cors import cross_origin
 from flask_restx import Namespace, Resource
 
-from ..project.builders.access_control import access_restriction
+from ..project.decorators.access_control import access_restriction
 from ..project.types import Role
 from .interface import ILocation
 from .model import Location

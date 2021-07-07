@@ -5,7 +5,7 @@
 
 #### Pre-commit checks:
 - Styleguide: **OK** (0 warnings)
-- Tests: **OK** (91/91 passed)
+- Tests: **OK** (108/108 passed)
 
 #### Contacts 
 ```@you2ku``` at **Telegram**.

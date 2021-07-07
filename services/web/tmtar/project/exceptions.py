@@ -1,4 +1,5 @@
 from abc import ABC
+from http import HTTPStatus
 
 
 class InternalAPIException(ABC, Exception):
@@ -23,3 +24,10 @@ class AuthError(InternalAPIException):
 
 class LocationAccessError(InternalAPIException):
     """Exception during accessing."""
+
+    def __init__(self):
+        """Instantiate API Exception."""
+        super().__init__(
+            "You don't have permissions to access this location!",
+            HTTPStatus.FORBIDDEN,
+        )

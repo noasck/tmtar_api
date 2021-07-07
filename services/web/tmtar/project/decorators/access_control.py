@@ -48,6 +48,8 @@ def access_restriction(
             try:  # noqa: WPS229
                 verify_jwt_in_request()
                 claims = get_jwt()
+
+                # checking admin_location_id to be present
                 if required_role in {Role.root, Role.admin}:
                     admin_location_id = int(claims['admin_location_id'])
             except (ValueError, TypeError, JWTExtendedException):
@@ -56,9 +58,11 @@ def access_restriction(
             except AuthError as error:
                 abort(error.status_code, error.error)
 
+            # checking root access
             if required_role == Role.root and admin_location_id != 1:
                 abort(HTTPStatus.FORBIDDEN.value, 'Access denied.')
 
+            # injecting user jwt claims to endpoint function
             if inject_claims and claims:
                 wrapped_endpoint = partial(
                     endpoint,

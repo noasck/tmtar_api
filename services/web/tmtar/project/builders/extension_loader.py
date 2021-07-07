@@ -4,14 +4,15 @@ from flask_marshmallow import Marshmallow
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
 
-from .database_loader import DatabaseSetup
-from .identity_providers import ProductionIdentityLoader, TestIdentityLoader
-from .singleton import singleton
+from ..decorators.singleton import singleton
+from .database_builder import DatabaseSetup
+from .identity_builder import ProductionIdentityLoader, TestIdentityLoader
 
 
 class ModulesSetup(object):
     """Setups all app modules."""
 
+    # TODO: mv to config
     _authorizations = {
         'admin': {
             'type': 'apiKey',

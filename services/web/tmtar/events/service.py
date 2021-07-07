@@ -81,17 +81,11 @@ class SecureEventService(object):
         event = _EventService.get_by_id(event_id)
 
         if not LocationService.has_permission(event.location_id, user_admin_location_id):
-            raise LocationAccessError(
-                error="You don't have permissions to access this location!",
-                status_code=HTTPStatus.FORBIDDEN,
-            )
+            raise LocationAccessError()
 
         if 'location_id' in event_upd.keys():
             if not LocationService.has_permission(event_upd['location_id'], user_admin_location_id):
-                raise LocationAccessError(
-                    error="You don't have permissions to access this location!",
-                    status_code=HTTPStatus.FORBIDDEN,
-                )
+                raise LocationAccessError()
 
         return _EventService.update(event, event_upd)
 
@@ -139,10 +133,8 @@ class SecureEventService(object):
         """
         try:
             if not LocationService.has_permission(new_event['location_id'], user_admin_location_id):
-                raise LocationAccessError(
-                    error="You don't have permissions to access this location!",
-                    status_code=HTTPStatus.FORBIDDEN,
-                )
+                raise LocationAccessError()
+
         except KeyError:
             abort(HTTPStatus.BAD_REQUEST, message='New Event location id is not specified.')
 
@@ -171,10 +163,7 @@ class SecureEventService(object):
         )
 
         if not has_permission:
-            raise LocationAccessError(
-                error="You don't have permissions to access this location!",
-                status_code=HTTPStatus.FORBIDDEN,
-            )
+            raise LocationAccessError()
 
         return _EventService.delete_by_id(event_id)
 

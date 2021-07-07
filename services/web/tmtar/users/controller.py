@@ -7,7 +7,7 @@ from flask_cors import cross_origin
 from flask_jwt_extended import create_refresh_token, get_jwt_identity, jwt_required  # noqa: I001
 from flask_restx import Namespace, Resource, abort  # noqa: I005
 
-from ..project.builders.access_control import access_restriction
+from ..project.decorators.access_control import access_restriction
 from ..project.injector import Injector
 from ..project.types import Role
 from .controller_identity import create_internal_jwt, get_payload

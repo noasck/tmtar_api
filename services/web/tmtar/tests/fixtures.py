@@ -1,7 +1,7 @@
 import pytest
 from wsgi import start_app
 
-from ..project.builders.database_loader import DatabaseSetup
+from ..project.builders.database_builder import DatabaseSetup
 from ..project.injector import Injector
 
 try:

@@ -5,8 +5,8 @@ from flask import Flask
 from jose import jwt
 
 from ..abstract.abstract_identity_loader import AbstractIdentityLoader
+from ..decorators.singleton import singleton
 from ..exceptions import AuthError
-from .singleton import singleton
 
 
 class ProductionIdentityLoader(AbstractIdentityLoader):

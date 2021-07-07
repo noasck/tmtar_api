@@ -3,7 +3,7 @@ from typing import Callable
 
 from flask import Flask
 
-from ..builders.singleton import singleton
+from ..decorators.singleton import singleton
 
 
 class AbstractIdentityLoader(ABC):

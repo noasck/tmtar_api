@@ -23,6 +23,7 @@
 -  [ ] S — fix objects access
 -  [ ] D — add validator for every field, validation exception handling, validation failing tests
 -  [ ] D — add unique and other database exception handling
+-  [ ] D — add OpenStreetMap, auto country detect for zones
 _____________________________________________________
 ## Finish ASAP
 

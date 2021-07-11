@@ -23,6 +23,10 @@
 -  [ ] S — fix objects access
 -  [ ] D — add validator for every field, validation exception handling, validation failing tests
 -  [ ] D — add unique and other database exception handling
+-  [ ] D — change id to uuid
+-  [ ] D — add data volumes protection
+-  [ ] D — add ZoneCenter table
+-  [ ] D — fix on delete cascades for all tables
 _____________________________________________________
 ## Finish ASAP
 

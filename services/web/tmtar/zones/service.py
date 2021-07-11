@@ -101,7 +101,11 @@ class SecureZoneService(object):
         except KeyError:
             abort(HTTPStatus.BAD_REQUEST, message='New Zone location_id is not specified.')
 
-        return _ZoneService.create(new_zone)
+        # obtain id of created Zone:
+        zone_id = _ZoneService.create(new_zone).id
+
+        # zone creation is rare. Temporary will be working.
+        return _ZoneService.get_by_id(zone_id)
 
     @classmethod
     def delete_by_id(

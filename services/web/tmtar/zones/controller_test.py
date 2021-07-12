@@ -92,33 +92,33 @@ class TestZonesResource:
             ))
             assert result == expected
 
-    # @patch.object(SecureZoneService, "delete_by_id",
-    #               lambda zone_id: zone_id)
-    # def test_delete(self, client: FlaskClient, token: str):
-    #     with client:
-    #         result = client.delete(f"/api/{BASE_ROUTE}/123",
-    #                                headers={
-    #                                    "Authorization": f"Bearer {token}"
-    #                                }).get_json()
-    #         expected = dict(status="Success", id=123)
-    #         assert result == expected
-#
-#     @patch.object(LocationService, "get_by_id",
-#                   lambda location_id: make_location(location_id=location_id))
-#     @patch.object(LocationService, "update", make_update)
-#     def test_put(self, client: FlaskClient, token: str):
-#         with client:
-#             result = client.put(f"/api/{BASE_ROUTE}/123",
-#                                 json={
-#                                     "name": "New city"
-#                                 },
-#                                 headers={
-#                                     "Authorization": f"Bearer {token}"
-#                                 }).get_json()
-#
-#             expected = (LocationSchema().dump(
-#                 make_location(location_id=123, name="New city")))
-#
-#             assert result == expected
-#
-#
+class TestZoneIDResource:
+    @patch.object(SecureZoneService, "delete_by_id",
+                  lambda zone_id: zone_id)
+    def test_delete(self, client: FlaskClient, token: str):
+        with client:
+            result = client.delete(f"/api/{BASE_ROUTE}/123",
+                                   headers={
+                                       "Authorization": f"Bearer {token}"
+                                   }).get_json()
+            expected = dict(status="Success", id=123)
+            assert result == expected
+
+    @patch.object(SecureZoneService, 'update_by_id', make_update)
+    def test_put(self, client: FlaskClient, token: str):
+        with client:
+            result = client.put(
+                f'/api/{BASE_ROUTE}/1',
+                json={
+                    'title': 'sample_new_title',
+                    'radius': '234'
+                },
+                headers={
+                    "Authorization": f"Bearer {token}"
+                }
+            ).get_json()
+
+            expected = (ZoneSchema().dump(
+                Zone(**create_zone(zone_id=1, title='sample_new_title', radius=234))))
+
+            assert result == expected

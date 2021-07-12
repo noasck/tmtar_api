@@ -36,8 +36,8 @@ def create_zone(
     )
 
 
-def make_update(zone: Zone, zone_upd: IZone) -> Zone:
-    new_zone = Zone(**create_zone(zone.id, title=zone_upd['title'], radius=zone_upd['radius']))
+def make_update(zone_id, zone_upd: IZone, *args, **kwargs) -> Zone:
+    new_zone = Zone(**create_zone(zone_id, title=zone_upd['title'], radius=zone_upd['radius']))
     return new_zone
 
 
@@ -94,14 +94,14 @@ class TestZonesResource:
 
 class TestZoneIDResource:
     @patch.object(SecureZoneService, "delete_by_id",
-                  lambda zone_id: zone_id)
+                  lambda zone_id, *args, **kwargs: zone_id)
     def test_delete(self, client: FlaskClient, token: str):
         with client:
-            result = client.delete(f"/api/{BASE_ROUTE}/123",
+            result = client.delete(f"/api/{BASE_ROUTE}/2",
                                    headers={
                                        "Authorization": f"Bearer {token}"
                                    }).get_json()
-            expected = dict(status="Success", id=123)
+            expected = dict(status="Success", id=2)
             assert result == expected
 
     @patch.object(SecureZoneService, 'update_by_id', make_update)

@@ -27,6 +27,7 @@
 -  [ ] D — add data volumes protection
 -  [ ] D — add ZoneCenter table
 -  [ ] D — fix on delete cascades for all tables
+-  [ ] D — add OpenStreetMap, auto country detect for zones
 _____________________________________________________
 ## Finish ASAP
 

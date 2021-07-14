@@ -1,0 +1,38 @@
+<div class="backdrop"></div>
+<div class="modalWidow">
+  <h2>User {{fetchedUser.id}} update</h2>
+  <form [formGroup]="user" (ngSubmit)="updateUser()">
+    <div class="form-group">
+      <p *ngIf="fetchedUser.admin_location_id != 1; else r">Admin location: {{fetchedUser.adminLocation['name']}}</p>
+      
+      <ng-template #r>
+        <p>Admin location:
+          <i class="fas fa-tree"></i>
+        </p>
+      </ng-template>
+
+      <div class="input-group mb-3">
+        <input class="form-control" type="text" matInput formControlName="admin_location" [matAutocomplete]="auto">
+
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+            <p *ngIf="location.root != 1 && location.id != 1">{{location.name}}, {{location.parentName}}</p>
+            <p *ngIf="location.root == 1 && location.id != 1">
+              {{location.name}},
+              <i class="fas fa-tree"></i>
+            </p>
+            <p *ngIf="location.id == 1">
+              <i class="fas fa-tree"></i>
+            </p>
+
+
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="user.invalid">Edit</button>
+    <button class="btn btn-primary" (click)="close.emit()">Close</button>
+  </form>
+</div>
+
+<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>

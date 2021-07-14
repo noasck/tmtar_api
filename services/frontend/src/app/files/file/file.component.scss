@@ -1,0 +1,20 @@
+.form-control-file {
+  padding-bottom: 10px;
+}
+.files {
+  border-top: 2px solid #0275d8;
+  padding-top: 10px;
+}
+.fileName {
+  display: flex;
+  align-items: center;
+}
+.fileName:hover {
+  color: rgb(85, 85, 85);
+  background-color: rgba(175, 175, 175, 0.267);
+  border-radius: 12px;
+  min-width: 500px;
+}
+.btn{
+  margin-right: 10px;
+}

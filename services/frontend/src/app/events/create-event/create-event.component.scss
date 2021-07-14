@@ -1,0 +1,22 @@
+.event {
+  padding: 20px;
+  border: 3px solid #0275d8;
+  box-shadow: 1px 1px #004079;
+  border-radius: 5px;
+  max-width: 700px;
+  min-width: 700px;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.form-control-file {
+  margin-bottom: 10px;
+}
+.picture img {
+  height: 200px;
+  width: auto;
+}
+.buttons {
+  justify-content: space-between;
+}

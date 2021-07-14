@@ -1,0 +1,76 @@
+<div class="profile pageBorder">
+  <div class="row">
+    <div class="col-1">
+      <img src="{{userInfoFromAuth.picture}}" alt="user picture" class="userPic">
+    </div>
+    <!-- NAME AND EMAIL -->
+    <div class="col">
+      <h1 class="name">{{userInfoFromAuth.name}}</h1>
+      <p class="email">{{userInfoFromAuth.email}}</p>
+    </div>
+  </div>
+  <div class="formInfo">
+    <form [formGroup]="profile" (ngSubmit)="updateProfile()">
+      <div class="form-group row">
+
+        <!-- BDATE -->
+        <label for="bdate" class="col-2 col-form-label">Date of birth</label>
+        <div class="col-4">
+          <input type="text" class="form-control" formControlName="bdate" matInput [textMask]="{mask: datemask}"
+            placeholder="yyyy-mm-dd">
+        </div>
+      </div>
+
+      <!-- SEX -->
+      <div class="form-group row">
+        <label for="bdate" class="col-2 col-form-label">Sex</label>
+        <div class="col-4">
+          <select class="form-select form-control" formControlName="sex">
+            <option [ngValue]="'male'">Male</option>
+            <option [ngValue]="'female'">Female</option>
+            <option [ngValue]="'other'">Other</option>
+          </select>
+        </div>
+      </div>
+      <!-- CURRENT USER LOCATION -->
+      <div class="form-group row">
+        <label for="location" class="col-2 col-form-label">Location</label>
+        <div class="col-4">
+          <input *ngIf="location.id != 1 && location.root != 1" class="form-control" type="text" matInput formControlName="place"
+            [matAutocomplete]="auto" placeholder="{{location.name}}, {{location.parentName}}">
+          <input *ngIf="location.id == 1" class="form-control" type="text" matInput formControlName="place"
+            [matAutocomplete]="auto" placeholder="root">
+          <input *ngIf="location.root == 1 && location.id!=1" class="form-control" type="text" matInput formControlName="place"
+            [matAutocomplete]="auto" placeholder="{{location.name}}">
+
+
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+
+              <p *ngIf="location.id != 1 && location.root != 1">
+                {{location.name}}, {{location.parentName}}
+              </p>
+
+              <p *ngIf="location.id != 1 && location.root == 1">
+                {{location.name}}, <i class="fas fa-tree"></i>
+              </p>
+
+              <p *ngIf="location.id == 1">
+                <i class="fas fa-tree"></i>
+              </p>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+
+      <!-- SUBMIT BUTTON-->
+      <div class="form-group row change">
+        <div class="col-6">
+          <button type="submit" class="btn btn-primary float-right">Change</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>

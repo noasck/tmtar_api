@@ -1,0 +1,25 @@
+<div class="backdrop"></div>
+<div class="modalWidow">
+  <h2>Location update</h2>
+  <form [formGroup]="location" (ngSubmit)="editLocation()">
+    <div class="form-group">
+      
+      <label for="name" *ngIf="fetchedLocation.id != 1 && parent.id != 1">Name: {{fetchedLocation.name}},
+        {{parent.name}}</label>
+      <label for="name" *ngIf="parent.id == 1">
+        Name: {{fetchedLocation.name}}, <i class="fas fa-tree"></i>
+      </label>
+
+      <input formControlName="name" type="text" class="form-control" placeholder="Enter name">
+      <div *ngIf="location.get('name').invalid && location.get('name').touched" class="validation">
+        <small *ngIf="location.get('name').errors.required">
+          Field "name" can’t be empty
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="location.invalid">Edit</button>
+    <button class="btn btn-primary" (click)="close.emit()">Close</button>
+  </form>
+</div>
+
+<app-errors *ngIf="errorMsg" [error]="errorMsg" (close)="errorMsg = '' "></app-errors>

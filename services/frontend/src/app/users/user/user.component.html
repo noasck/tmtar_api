@@ -1,0 +1,321 @@
+<div class="read-user pageBorder">
+  <div *ngIf="!this.errorMessage; else errorBlock">
+    <div class="menu">
+      <!-- ACTION BUTTONS -->
+
+
+      <div class="btn-group" role="group">
+        <!--DELETE GROUP-->
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="deleteU = 'users'"
+        >
+          Delete
+        </button>
+        <div class="btn-group" role="group">
+          <!--PICK SEARCH GROUP-->
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Search field: {{ searchField }}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a
+              class="dropdown-item prop"
+              *ngFor="let prop of keys"
+              (click)="searchField = prop.toString()"
+              >{{ prop }}</a
+            >
+          </div>
+        </div>
+      </div>
+      <div>
+        <!-- INPUT FOR SEARCH -->
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"
+              ><i class="fas fa-search"></i
+            ></span>
+          </div>
+          <input
+            type="text"
+            class="form-control search"
+            aria-describedby="btnGroupAddon"
+            [(ngModel)]="src"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- USER TABLE -->
+
+    <table class="table table-bordered" *ngIf="fetchedUsers; else noUsers">
+      <thead>
+        <tr>
+          <th scope="col">&nbsp;</th>
+          <th scope="col">
+            Id
+            <i class="fas fa-sort" (click)="sort('id')"></i>
+          </th>
+          <th scope="col">
+            Email
+            <i class="fas fa-sort" (click)="sort('email')"></i>
+          </th>
+          <th scope="col">
+            Birthday
+            <i class="fas fa-sort" (click)="sort('bdate')"></i>
+          </th>
+          <th scope="col">
+            Sex
+            <i class="fas fa-sort" (click)="sort('sex')"></i>
+          </th>
+          <th scope="col">
+            Location
+            <i class="fas fa-sort" (click)="sort('location_id')"></i>
+          </th>
+          <th scope="col">
+            Admin location
+            <i class="fas fa-sort" (click)="sort('admin_location_id')"></i>
+          </th>
+          <th scope="col">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of fetchedUsers | search: src:searchField;
+            first as isFirst
+          "
+        >
+          <td class="text-center">
+            <input class="checkbox" type="checkbox" value="{{ user.id }}" />
+          </td>
+          <td class="text-center">{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.bdate }}</td>
+          <td>{{ user.sex }}</td>
+          <td *ngIf="user.location.name != 'root'; else root">
+            {{ user.location.name }}
+          </td>
+          <td *ngIf="user.adminLocation.name != 'root'; else root">
+            {{ user.adminLocation.name }}
+          </td>
+          <ng-template #root>
+            <td>
+              <i class="fas fa-tree"></i>
+            </td>
+          </ng-template>
+
+          <td>
+            <div class="actionsUser">
+              <!-- UPDATE/EDIT USER -->
+              <div class="icon" (click)="userChange = user">
+                <svg
+                  width="0.7em"
+                  height="0.7em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-pencil-square"
+                  fill="#17a2b8"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                  />
+                </svg>
+              </div>
+
+              <!-- DELETE USER -->
+              <div class="icon" (click)="deleteU = user.id">
+                <svg
+                  class="delete"
+                  width="0.7em"
+                  height="0.7em"
+                  viewBox="0 0 16 16"
+                  class="bi bi-trash"
+                  fill="#dc3545"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #noUsers> Sorry, no users were found </ng-template>
+  </div>
+  <ng-template #errorBlock>
+    <div class="card shadow px-0 col-12">
+      <div class="card-header bg-color-error"></div>
+      <div class="card-body"></div>
+    </div>
+    {{ this.errorMessage }}
+  </ng-template>
+</div>
+
+<app-update-user
+  *ngIf="userChange"
+  (close)="edit = false; userChange = undefined"
+  (update)="getAllUsers()"
+  [fetchedUser]="userChange"
+>
+</app-update-user>
+
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>
+
+<app-delete-user
+  *ngIf="deleteU && deleteU != 'users'"
+  (deleteOption)="deleteUser($event, deleteU)"
+  [user]="deleteU"
+>
+</app-delete-user>
+<app-delete-user
+  *ngIf="deleteU && deleteU == 'users'"
+  (deleteOption)="multipleDelete($event)"
+  [user]="deleteU"
+>
+</app-delete-user>
+
+<!--
+          <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+          *ngIf="fetchedUsers; else noUsers"
+        >
+          <thead>
+            <tr>
+              <th></th>
+              <th>Actions</th>
+              <th>
+                Email
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('email')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+              <th>
+                Sex
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('sex')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+              <th>
+                Id
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('id')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+              <th>
+                Location
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('location_id')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+              <th>
+                Birthday
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('bdate')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+              <th>
+                Admin location<button
+                  type="button"
+                  class="btn btn-light"
+                  (click)="sort('lName')"
+                >
+                  &#8593;&#8595;
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th>Actions</th>
+              <th>Email</th>
+              <th>Sex</th>
+              <th>Id</th>
+              <th>Location</th>
+              <th>Birthday</th>
+              <th>Admin location</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr
+              *ngFor="
+                let user of fetchedUsers | search: src:searchField;
+                first as isFirst
+              "
+            >
+              <td>
+                <input class="checkbox" type="checkbox" value="{{ user.id }}" />
+              </td>
+              <td>
+                <p><a class="edit" (click)="userChange = user">Edit</a></p>
+                <p>
+                  <a class="deletion" (click)="deleteU = user.id">Delete</a>
+                </p>
+              </td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.sex }}</td>
+              <td>{{ user.id }}</td>
+              <td *ngIf="user.location.name != 'root'; else root">
+                {{ user.location.name }}
+              </td>
+              <td>{{ user.bdate }}</td>
+
+              <td *ngIf="user.adminLocation.name != 'root'; else root">
+                {{ user.adminLocation.name }}
+              </td>
+              <ng-template #root>
+                <td>
+                  <i class="fas fa-tree"></i>
+                </td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+-->

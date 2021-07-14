@@ -1,0 +1,33 @@
+<!--<div class="row">
+  <div
+    class="card shadow px-0 col-12"
+    *ngIf="!this.errorMessage; else errorBlock"
+  >
+    <div class="card-header">
+      <h6 class="font-weight-bold text-dark">Users controls</h6>
+    </div>
+    <div class="card-body">
+        <div>
+          
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          
+              <input type="file" name="filename" (change)="onFileChange($event)" />
+              <button type="submit">Upload</button>
+          
+            </form>
+          </div>
+
+
+    </div>
+    <div *ngFor = "let f of files">
+      <p>{{f.filename}}</p>
+    </div>
+  </div>
+  <ng-template #errorBlock>
+    <div class="card shadow px-0 col-12">
+      <div class="card-header bg-color-danger"></div>
+      <div class="card-body">{{ this.errorMessage }}</div>
+    </div>
+    
+  </ng-template>
+</div>-->

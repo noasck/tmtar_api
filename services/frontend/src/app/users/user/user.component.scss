@@ -1,0 +1,43 @@
+.col {
+  min-width: 150px;
+}
+th {
+  text-align: center;
+}
+.edit,
+.deletion {
+  cursor: pointer;
+}
+.edit:hover {
+  color: #004079;
+}
+.deletion:hover {
+  color: red;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+table {
+  margin: 15px;
+}
+.input-group {
+  margin-left: 10px;
+}
+.prop:hover {
+  font-weight: bold;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.menu {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.actionsUser{
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+}

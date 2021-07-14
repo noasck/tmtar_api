@@ -1,0 +1,15 @@
+p,
+h2 {
+  cursor: pointer;
+  user-select: none;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-success {
+  margin-left: 10px;
+}
+.confirm {
+  margin-bottom: 10px;
+}

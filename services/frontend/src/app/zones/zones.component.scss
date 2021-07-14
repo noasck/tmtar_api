@@ -1,0 +1,59 @@
+.zones {
+  border-top: 2px solid #0275d8;
+  padding-top: 10px;
+  position: relative;
+
+}
+
+agm-map {
+  height: 600px;
+}
+
+.creation {
+  position: fixed;
+  padding: 20px;
+  border: 3px solid #0275d8;
+  box-shadow: 1px 1px #004079;
+  border-radius: 5px;
+  min-width: 200px;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.creation input {
+  margin-bottom: 10px;
+}
+.buttons {
+  justify-content: space-between;
+}
+
+/* Table */
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.zoneTable {
+  margin-top: 30px;
+}
+
+.actionsZone {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+}
+
+.zoneRow {
+  cursor: pointer;
+}
+
+.zoneRow:hover {
+  color: #292b2c;
+}
+
+.controls {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+}

@@ -1,0 +1,12 @@
+input {
+  max-width: 300px;
+  &.ng-invalid.ng-touched {
+    border: 2px solid #d9534f;
+  }
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+}
+button {
+  margin-right: 10px;
+}

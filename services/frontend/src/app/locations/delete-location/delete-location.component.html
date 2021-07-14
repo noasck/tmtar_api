@@ -1,0 +1,20 @@
+<div class="backdrop"></div>
+
+<div class="delete">
+    <h2>Are you sure you want to delete location?</h2>
+    <div class="confirm">
+        <p>Type "delete location {{location}}"</p>
+        <input type="text" class="form-control" [(formControl)]="confirmText">
+
+        <div *ngIf="confirmText.invalid && confirmText.touched" class="validation">
+            <small *ngIf="confirmText.errors.required">
+                Please enter the text exactly as displayed to confirm
+            </small>
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" class="btn btn-danger" [disabled]="confirmText.value != validation"
+            (click)="pickOption(true)">Confirm</button>
+        <button type="button" class="btn btn-success" (click)="pickOption(false)">Cancel</button>
+    </div>
+</div>

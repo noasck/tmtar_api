@@ -1,0 +1,12 @@
+<div class="read-locations">
+  <app-create-location *ngIf="create" (close)="create = false"></app-create-location>
+  <div class="but">
+    <button type="button" class="btn btn-primary" (click)="create = true"><a>Create</a></button>
+  </div>
+
+  <div class="locView">
+    <app-loc-box [show]="true" [locationRoot]="null" [allLocations]="fetchedLocations"></app-loc-box>
+  </div>
+</div>
+
+<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>

@@ -1,0 +1,27 @@
+li {
+  cursor: pointer;
+}
+
+button {
+  margin-right: 10px;
+}
+.but {
+  margin-bottom: 10px;
+}
+.buttons a {
+  color: white;
+  text-decoration: none;
+}
+.read-locations {
+  border-top: 2px solid #0275d8;
+  padding-top: 10px;
+}
+
+.locView{
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

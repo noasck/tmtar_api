@@ -1,0 +1,37 @@
+a {
+  font-size: larger;
+  cursor: pointer;
+  font-size: 25px;
+  line-height: 30px;
+  max-width: 300px;
+  min-width: 300px;
+}
+li {
+  font-size: 25px;
+  line-height: 30px;
+  list-style: none;
+}
+.locationName {
+  display: flex;
+  margin-bottom: 5px;
+}
+li:hover {
+  color: rgb(85, 85, 85);
+}
+/*.icon {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: rgba(114, 113, 113, 0.267);
+  text-align: center;
+  margin-right: 5px;
+}
+.icon:hover {
+  transform: scale(1.2);
+  transition-duration: 0.3;
+}*/
+.locationName:hover {
+  background-color: rgba(175, 175, 175, 0.267);
+  border-radius: 12px;
+}

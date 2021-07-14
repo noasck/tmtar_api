@@ -1,0 +1,63 @@
+<div class="backdrop"></div>
+<div class="modalWidow">
+  <h2>Location creation</h2>
+
+  <form [formGroup]="location" (ngSubmit)="createLocation()">
+    <div class="form-group">
+
+      <div class="input-group mb-3">
+        <mat-label for="root" class="input-group-text input-group-prepend">Root</mat-label>
+        <input class="form-control" type="text" matInput formControlName="root" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+
+            <p *ngIf="location.id != 1 && location.root != 1"> {{location.name}}, {{location.parentName}}</p>
+            <p *ngIf="location.id != 1 && location.root == 1">
+              {{location.name}}, <i class="fas fa-tree"></i>
+            </p>
+            <p *ngIf="location.id == 1">
+              <i class="fas fa-tree"></i>
+            </p>
+
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input formControlName="name" type="text" class="form-control" placeholder="Enter name">
+      <div *ngIf="location.get('name').invalid && location.get('name').touched" class="validation">
+        <small *ngIf="location.get('name').errors.required">
+          Field "name" can’t be empty
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="location.invalid">Create</button>
+    <button class="btn btn-primary" (click)="close.emit()">Close</button>
+  </form>
+
+</div>
+
+<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+
+
+<!--    <div class="input-group mb-3">
+                  <label  for="root" class="input-group-text input-group-prepend" >Options</label>
+                <select formControlName="root" class="custom-select">
+                    <option *ngFor = "let l of allLocations" value="{{l.id}}">{{l.name}}</option>
+                </select>
+              </div>-->
+
+<!-- <label for="root">Root</label>
+          <input formControlName="root" type="text" class="form-control" placeholder="Enter root" (ngModelChange)="searchLoc()">
+          <p>{{sss | json}}</p>
+          <div *ngIf="location.get('root').invalid && location.get('root').touched" class="validation">
+                <small *ngIf="location.get('root').errors.required">
+                    Field "root" can’t be empty
+                </small>
+
+                <small *ngIf="location.get('root').errors.pattern">
+                    Field "root" should contain only numbers
+                </small>
+            </div>-->

@@ -1,0 +1,6 @@
+{
+    "domain": "supruniiuk.us.auth0.com",
+    "clientId": "WZOJ7xNMIVcU1uI90oPkY9m8bN8GNIHT",
+    "audience": "takemetoarapi",
+    "responseType": "token id_token"
+}

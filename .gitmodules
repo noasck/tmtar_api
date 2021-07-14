@@ -1,3 +1,0 @@
-[submodule "services/frontend"]
-	path = services/frontend
-	url = https://github.com/Softweird-Engineering/takemetoar-admin.git

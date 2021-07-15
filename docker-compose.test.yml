@@ -5,7 +5,8 @@ services:
       context: ./services/web
       dockerfile: Dockerfile
     command: bash -c "
-      pytest ./tmtar -v --junitxml=report.xml"
+      flake8 --tee --output-file=codestyle.log .
+      && pytest ./tmtar -v --junitxml=report.xml"
     volumes:
       - ./services/web/:/usr/src/app/
       - ./.flake8:/usr/src/app/.flake8

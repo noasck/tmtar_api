@@ -1761,3 +1761,21 @@
 ./tmtar/project/builders/database_loader.py:34:28: WPS342 Found implicit raw string: '\\set AUTOCOMMIT on\n drop database test; create database test;'
 ./tmtar/zones/service.py:67:1: D202 No blank lines allowed after function docstring
 ./tmtar/users/controller.py:63:27: C812 missing trailing comma
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import
+./tmtar/locations/controller.py:12:1: I001 isort found an import in the wrong position
+./tmtar/locations/controller.py:13:1: I005 isort found an unexpected missing import

@@ -18,4 +18,3 @@ class LocationUpdateSchema(Schema):
         required=True,
         validate=validate.NoneOf(['root']),
     )
-

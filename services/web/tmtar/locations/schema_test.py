@@ -1,9 +1,9 @@
 from pytest import fixture
-from marshmallow import ValidationError
 
 from .interface import ILocation
 from .model import Location
 from .schema import LocationSchema, LocationUpdateSchema
+
 
 @fixture
 def schema() -> LocationSchema:
@@ -13,11 +13,6 @@ def schema() -> LocationSchema:
 @fixture
 def update_schema() -> LocationUpdateSchema:
     return LocationUpdateSchema()
-
-
-@fixture
-def create_schema() -> LocationSchema:
-    return LocationSchema()
 
 
 def test_LocationSchema_create(schema: LocationSchema):  # noqa
@@ -45,4 +40,3 @@ def test_LocationUpdateSchema_works(update_schema: LocationUpdateSchema):  # noq
     widget = Location(**params)
 
     assert widget.name == 'test city'
-

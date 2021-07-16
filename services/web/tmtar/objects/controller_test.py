@@ -53,17 +53,17 @@ class TestObjectResource:
                   lambda create_request: Object(**create_request))
     def test_post(self, client: FlaskClient, token: str):
         with client:
-            payload = dict(id=7,
-                           name='Test 2',
+            payload = dict(name='Test 2',
                            target_image_file="Image 2",
                            asset_file="asset file",
                            subzone_id=0)
             result = client.post(f"/api/{BASE_ROUTE}/", json=payload, headers={"Authorization": f"Bearer {token}"})\
                 .get_json()
             expected = (ObjectSchema().dump(
-                make_object(object_id=7,
-                            name='Test 2',
-                            target_image_file="Image 2")))
+                     Object(name='Test 2',
+                            target_image_file="Image 2",
+                            asset_file="asset file",
+                            subzone_id=0)))
             assert result == expected
 
 

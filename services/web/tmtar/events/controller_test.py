@@ -156,7 +156,7 @@ class TestEventsSearchResource:
                     create_event(event_type=1),
                     create_event(event_type=2),
                 ]
-            )}
+                )}
             result_all = get_events_by_type("all")
 
             assert result_all == expected

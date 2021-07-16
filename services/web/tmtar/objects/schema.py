@@ -2,7 +2,7 @@ from marshmallow import Schema, fields
 
 
 class ObjectSchema(Schema):
-    id = fields.Number(attribute='id')
+    id = fields.Number(attribute='id', dump_only=True)
     name = fields.String(attribute='name')
     target_image_file = fields.String(attribute='target_image_file')
     asset_file = fields.String(attribute='asset_file')

@@ -1761,3 +1761,8 @@
 ./tmtar/project/builders/database_loader.py:34:28: WPS342 Found implicit raw string: '\\set AUTOCOMMIT on\n drop database test; create database test;'
 ./tmtar/zones/service.py:67:1: D202 No blank lines allowed after function docstring
 ./tmtar/users/controller.py:63:27: C812 missing trailing comma
+./tmtar/locations/model.py:23:17: Q000 Remove bad quotes
+./tmtar/users/model.py:30:31: C812 missing trailing comma
+./tmtar/users/model.py:35:32: C812 missing trailing comma
+./tmtar/locations/model.py:32:29: C812 missing trailing comma
+./tmtar/locations/model.py:38:29: C812 missing trailing comma

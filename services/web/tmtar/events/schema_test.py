@@ -23,7 +23,6 @@ def test_schema_create(schema: EventSchema):
 def test_schema_works(schema: EventSchema):
     params: IEvent = schema.load(
         dict(
-            id='1',
             event_type=EventType[0],
             location_id='1',
             update_date=str(time_now),
@@ -41,7 +40,6 @@ def test_schema_works(schema: EventSchema):
 
     event: Event = Event(**params)
 
-    assert event.id == 1
     assert event.event_type == EventType[0]
     assert event.location_id == 1
     assert event.update_date == time_now
@@ -61,7 +59,6 @@ def test_schema_works(schema: EventSchema):
 def test_update_schema_works():
     params: IEvent = UpdateEventSchema().load(
         dict(
-            id='1',
             event_type=EventType[0],
             location_id='1',
             update_date=str(time_now),
@@ -80,7 +77,6 @@ def test_update_schema_works():
 
     event: Event = Event(**params)
 
-    assert event.id == 1
     assert event.event_type == EventType[0]
     assert event.location_id == 1
     assert event.update_date == time_now

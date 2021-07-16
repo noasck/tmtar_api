@@ -4,7 +4,7 @@ from ..project.types import EventType
 
 
 class EventSchema(Schema):
-    id = fields.Integer(attribute='id')
+    id = fields.Integer(attribute='id', dump_only=True)
     event_type = fields.String(
         attribute='event_type',
         validate=validate.OneOf(EventType),

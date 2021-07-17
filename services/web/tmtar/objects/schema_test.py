@@ -16,7 +16,6 @@ def test_ObjectSchema_create(schema: ObjectSchema):  # noqa
 
 def test_ObjectSchema_works(schema: ObjectSchema):  # noqa
     params: IObject = schema.load({
-        'id': "1",
         'name': "SampleName",
         'target_image_file': "lorem_ipsum",
         'asset_file': "lorem_ipsum",
@@ -24,7 +23,6 @@ def test_ObjectSchema_works(schema: ObjectSchema):  # noqa
     })
 
     object = Object(**params)  # noqa
-    assert object.id == 1
     assert object.name == "SampleName"
     assert object.target_image_file == "lorem_ipsum"
     assert object.asset_file == "lorem_ipsum"

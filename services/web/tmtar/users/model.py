@@ -19,8 +19,20 @@ class User(db.Model):
     sex = db.Column(db.String, nullable=True)
     admin_location_id = db.Column(
         db.Integer,
-        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET NULL'),
         nullable=True,
+    )
+
+    # Relations
+    location = db.relationship(
+        'Location',
+        foreign_keys=[location_id],
+        back_populates='users',
+    )
+    admin_location = db.relationship(
+        'Location',
+        foreign_keys=[admin_location_id],
+        back_populates='admins',
     )
 
     def update(self, changes: IUser):

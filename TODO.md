@@ -21,12 +21,14 @@
 -  [ ] M — set up Profiling and Benchmark
 -  [ ] M — config.py — add prod config as yml
 -  [ ] S — fix objects access
+-  [ ] S — add integration tests: between Services and for database cascades and relations.
 -  [ ] D — add validator for every field, validation exception handling, validation failing tests
 -  [ ] D — add unique and other database exception handling
 -  [ ] D — change id to uuid
 -  [ ] D — add data volumes protection
 -  [ ] D — add ZoneCenter table
 -  [ ] D — fix on delete cascades for all tables
+-  [ ] D — add OpenStreetMap, auto country detect for zones
 _____________________________________________________
 ## Finish ASAP
 

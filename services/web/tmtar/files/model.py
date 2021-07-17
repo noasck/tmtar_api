@@ -13,5 +13,5 @@ class File(db.Model):  # noqa: WPS110
     def update(self):
         """Update file instance."""
         raise NotImplementedError(
-            'Update method is unavailable 4 immutable instance',
+            'Update method is unavailable for immutable instance.',
         )

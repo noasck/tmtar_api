@@ -68,6 +68,7 @@ export class CreateZoneComponent implements OnInit {
     this.zoneService.createZone(newZone).subscribe(
       (res) => {
         this.create.emit(res);
+        this.close.emit()
       },
       (error) => {
         this.errorMessage = error;

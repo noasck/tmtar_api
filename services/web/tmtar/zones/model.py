@@ -49,6 +49,5 @@ class Zone(db.Model):
     def update(self, changes: IZone):
         """Update certain record."""
         for key, new_value in changes.items():
-            if key != 'id':
-                setattr(self, key, new_value)
+            setattr(self, key, new_value)
         return self

@@ -71,14 +71,12 @@ def test_update(db: SQLAlchemy):
     db.session.add(u1)
     db.session.commit()
 
-    upd: IUser = IUser(identity=str(hash('new_identity@mail.ex')),
-                       bdate='2016-07-04',
+    upd: IUser = IUser(bdate='2016-07-04',
                        sex=SexType[1])
     UserService.update(u1, upd)
 
     result: User = UserService.get_by_id(u1.id)
 
-    assert result.identity == str(hash('example1@mail.ex'))
     assert result.bdate == datetime.strptime('2016-07-04', '%Y-%m-%d').date()
     assert result.sex == SexType[1]
 

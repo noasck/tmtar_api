@@ -13,7 +13,7 @@ max_radius = 2000
 class ZoneSchema(Schema):
     """Zone instance schema."""
 
-    id = fields.Integer(attribute='id')
+    id = fields.Integer(attribute='id', dump_only=True)
     title = fields.String(attribute='title', required=True)
     location_id = fields.Integer(attribute='location_id', required=True)
     latitude = fields.Float(

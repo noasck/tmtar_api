@@ -2,11 +2,11 @@ FROM node:alpine
 
 WORKDIR /usr/src/app
 RUN apk add curl
-EXPOSE 4200
 
 COPY package.json package-lock.json ./
+
 RUN npm install
 
 COPY . .
 
-CMD ["ng", "serve", "--host=0.0.0.0"]
+RUN npm run build

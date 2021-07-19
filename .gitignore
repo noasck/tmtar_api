@@ -6,3 +6,4 @@ web/.pytest_cache
 services/web/codestyle.json
 services/web/report.xml
 services/web/access.log
+hosts

@@ -40,6 +40,5 @@ class User(db.Model):
     def update(self, changes: IUser):
         """Update certain record."""
         for key, new_value in changes.items():
-            if key not in {'id', 'identity'}:
-                setattr(self, key, new_value)
+            setattr(self, key, new_value)
         return self

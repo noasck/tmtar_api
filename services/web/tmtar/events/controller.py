@@ -143,7 +143,7 @@ class PaginatedSalesResource(Resource):
         """Get latest sales for current user."""
         return SecureEventService.get_by_user_location(
             event_type=EventType[1],
-            user_location_id=claims['location_id'],
+            user_location_id=claims['location_id'] or 1,
             page=page,
         )
 

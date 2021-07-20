@@ -44,7 +44,16 @@ class Zone(db.Model):
         nullable=False,
         default=False,
     )
-    location = db.relationship('Location', backref=backref('zones', passive_deletes=True))
+
+    location = db.relationship(
+        'Location',
+        backref=backref(
+            'zones',
+            passive_deletes='all',
+            lazy='select',
+        ),
+        lazy='noload',
+    )
 
     def update(self, changes: IZone):
         """Update certain record."""

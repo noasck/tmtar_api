@@ -13,6 +13,7 @@
 -  [x] D — add token expiration and JWT config.
 -  [x] D — provide auth0 authorization.
 -  [x] D — separate development\production auth.
+-  [x] D — fix on delete cascades for all tables
 -  [ ] S — add database **migrations**.
 -  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
 -  [ ] M — add database backup and cache
@@ -27,7 +28,6 @@
 -  [ ] D — change id to uuid
 -  [ ] D — add data volumes protection
 -  [ ] D — add ZoneCenter table
--  [ ] D — fix on delete cascades for all tables
 -  [ ] D — add OpenStreetMap, auto country detect for zones
 _____________________________________________________
 ## Finish ASAP
@@ -38,8 +38,6 @@ _____________________________________________________
 -  [x] controller
 -  [x] controller tests
 
-### File instance:
--  [ ] controller tests
 
 
 ### Zone:
@@ -51,7 +49,10 @@ _____________________________________________________
 -  [x] m, i, s tests
 -  [x] service
 -  [x] service tests
--  [ ] controller
+-  [x] controller
+-  [x] controller tests
+
+### File instance:
 -  [ ] controller tests
 
 ### Subzone:

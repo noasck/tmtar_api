@@ -25,7 +25,6 @@ def test_schema_works(schema: EventSchema):
         dict(
             event_type=EventType[0],
             location_id='1',
-            update_date=str(time_now),
             title="Sample",
             short_description="""The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 
@@ -42,7 +41,6 @@ def test_schema_works(schema: EventSchema):
 
     assert event.event_type == EventType[0]
     assert event.location_id == 1
-    assert event.update_date == time_now
     assert event.title == "Sample"
     assert event.short_description == """The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 
@@ -61,7 +59,6 @@ def test_update_schema_works():
         dict(
             event_type=EventType[0],
             location_id='1',
-            update_date=str(time_now),
             title="Sample",
             short_description="""The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 
@@ -79,7 +76,6 @@ def test_update_schema_works():
 
     assert event.event_type == EventType[0]
     assert event.location_id == 1
-    assert event.update_date == time_now
     assert event.title == "Sample"
     assert event.short_description == """The plugin adds a random text generator, capable 
                      of creating witty texts in different genres. Created text can be inserted newly at the caret, 

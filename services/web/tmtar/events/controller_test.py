@@ -54,15 +54,15 @@ class TestEventsResource:
     @patch.object(SecureEventService, 'create', lambda fields, *args, **kwargs: create_event(**fields))
     def test_post(self, client: FlaskClient, token: str):
         with client:
-            payload = dict(title="Sample1", short_description="sjdnfsjdnffnsdf")
-            result = client.post(f'/api/{BASE_ROUTE}/',
+            payload = dict(title="Sample1", short_description="sjdnfsjdnffnsdf", event_type=EventType[0])
+            result: IEvent = client.post(f'/api/{BASE_ROUTE}/',
                                  json=payload,
                                  headers={
                                      "Authorization": f"Bearer {token}"
                                  }).get_json()
 
-            expected = EventSchema().dump(create_event(**payload))
-
+            expected: IEvent = EventSchema().dump(create_event(**payload))
+            expected['update_date'] = result['update_date']
             assert result == expected
 
 

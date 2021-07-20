@@ -8,10 +8,12 @@ class EventSchema(Schema):
     event_type = fields.String(
         attribute='event_type',
         validate=validate.OneOf(EventType),
+        required=True,
     )
     location_id = fields.Integer(attribute='location_id')
     update_date = fields.DateTime(
         attribute='update_date',
+        dump_only=True,
     )
     title = fields.String(
         attribute='title',
@@ -32,4 +34,8 @@ class UpdateEventSchema(EventSchema):
     )
     short_description = fields.String(
         attribute='short_description',
+    )
+    event_type = fields.String(
+        attribute='event_type',
+        validate=validate.OneOf(EventType),
     )

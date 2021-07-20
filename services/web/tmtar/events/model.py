@@ -33,10 +33,25 @@ class Event(db.Model):
     description = db.Column(db.Text, nullable=True)
     image_file_name = db.Column(
         db.String,
-        db.ForeignKey('files.filename', onupdate='CASCADE', ondelete='CASCADE'),
+        db.ForeignKey('files.filename', onupdate='CASCADE', ondelete='SET NULL'),
         nullable=True,
     )
     active = db.Column(db.Boolean, default=True, nullable=False, index=True)
+
+    # Relations
+    location = db.relationship(
+        'Location',
+        foreign_keys=[location_id],
+        back_populates='events',
+        lazy='joined',
+    )
+
+    image_file = db.relationship(
+        'File',
+        foreign_keys=[image_file_name],
+        back_populates='events',
+        lazy='noload',
+    )
 
     def update(self, changes: IEvent):
         """Update certain record."""

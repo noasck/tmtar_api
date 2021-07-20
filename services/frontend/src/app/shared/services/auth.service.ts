@@ -44,9 +44,9 @@ export class Auth0Service {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['']);
+        this.router.navigate(['/']);
       } else if (err) {
-        this.router.navigate(['']);
+        this.router.navigate(['/login']);
         //console.log(err);
         alert(
           'Error: <%= "${err.error}" %>. Check the console for further details.'
@@ -60,7 +60,10 @@ export class Auth0Service {
       authResult.expiresIn * 1000 + new Date().getTime()
     );
     const scopes = authResult.scope || this.requestedScopes || '';
-    localStorage.setItem("userInfoFromAuth", JSON.stringify(authResult.idTokenPayload))
+    localStorage.setItem(
+      'userInfoFromAuth',
+      JSON.stringify(authResult.idTokenPayload)
+    );
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
@@ -110,7 +113,7 @@ export class Auth0Service {
           localStorage.setItem('access_token', res.access_token);
           localStorage.setItem('refresh_token', res.refresh_token);
 
-          this.getUserProfile()
+          this.getUserProfile();
         },
         (error) => {
           console.log('error', error);
@@ -118,21 +121,25 @@ export class Auth0Service {
       );
   }
 
-  getUserProfile(){
+  getUserProfile() {
     let token = this.getToken();
-    this.http.get<User>(`${environment.apiUrl}` + `/users/profile`, {
+    this.http
+      .get<User>(`${environment.apiUrl}` + `/users/profile`, {
         headers: this.generateHeaders(token),
       })
       .subscribe(
-          (res) => {
-              localStorage.setItem('user_profile', JSON.stringify(res))
-              localStorage.setItem('user_location_id', JSON.stringify(res.location_id))
-              console.log(JSON.parse(localStorage.getItem('user_location_id')))
-          },
-          (error) => {
-            console.log('error', error);
-          }
-      )
+        (res) => {
+          localStorage.setItem('user_profile', JSON.stringify(res));
+          localStorage.setItem(
+            'user_location_id',
+            JSON.stringify(res.location_id)
+          );
+          console.log(JSON.parse(localStorage.getItem('user_location_id')));
+        },
+        (error) => {
+          console.log('error', error);
+        }
+      );
   }
 
   public refreshToken() {

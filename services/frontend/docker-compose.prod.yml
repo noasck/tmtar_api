@@ -4,6 +4,7 @@ services:
 
   admin:
     container_name: takemetoar-prod
+    command: npm run start:prod
     build:
       context: .
       dockerfile: Dockerfile.prod
@@ -11,4 +12,4 @@ services:
       - '.:/app'
       - '/app/node_modules'
     ports:
-      - '4200:4200'
+      - 4200:4200

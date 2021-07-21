@@ -30,7 +30,7 @@ export class ReadLocationComponent implements OnInit {
         //set parentName
         this.fetchedLocations.map((l) => {
           if (l.id != 1) {
-            this.locationService.setParent(l)
+            this.locationService.getParentName(l)
           }
         })
         this.transferService.setLocations(this.fetchedLocations);

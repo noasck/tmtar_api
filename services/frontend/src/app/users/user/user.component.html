@@ -100,11 +100,11 @@
           <td>{{ user.email }}</td>
           <td>{{ user.bdate }}</td>
           <td>{{ user.sex }}</td>
-          <td *ngIf="user.location.name != 'root'; else root">
-            {{ user.location.name }}
+          <td *ngIf="user.location != 'root'; else root">
+            {{ user.location }}
           </td>
-          <td *ngIf="user.adminLocation.name != 'root'; else root">
-            {{ user.adminLocation.name }}
+          <td *ngIf="user.adminLocation != 'root'; else root">
+            {{ user.adminLocation }}
           </td>
           <ng-template #root>
             <td>

@@ -28,7 +28,7 @@ export class Auth0Service {
     public router: Router,
     public auth: AuthService,
     private http: HttpClient
-  ) {}
+  ) { }
 
   public login(): void {
     this.auth0.authorize({
@@ -104,9 +104,7 @@ export class Auth0Service {
   public loginApi() {
     let token = this.getToken();
     this.http
-      .get<any>(`${environment.apiUrl}` + `/users/login`, {
-        headers: this.generateHeaders(token),
-      })
+      .get<any>(`${environment.apiUrl}` + `/users/login`)
       .subscribe(
         (res) => {
           this.tokenResponse = res;
@@ -124,9 +122,7 @@ export class Auth0Service {
   getUserProfile() {
     let token = this.getToken();
     this.http
-      .get<User>(`${environment.apiUrl}` + `/users/profile`, {
-        headers: this.generateHeaders(token),
-      })
+      .get<User>(`${environment.apiUrl}` + `/users/profile`)
       .subscribe(
         (res) => {
           localStorage.setItem('user_profile', JSON.stringify(res));

@@ -3,7 +3,7 @@ venv
 web/.pytest_cache
 *.pyc
 .github
-services/web/codestyle.json
+services/web/codestyle.log
 services/web/report.xml
 services/web/access.log
 hosts

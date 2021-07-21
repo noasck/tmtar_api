@@ -74,7 +74,6 @@ class TestZonesResource:
             result = client.post(
                 f"/api/{BASE_ROUTE}/",
                 json={
-                    'id': 1,
                     'title': 'zone1',
                     'longitude': '3.546456',
                     'latitude': '45.6567456',
@@ -88,9 +87,10 @@ class TestZonesResource:
                 }
             ).get_json()
             expected = (ZoneSchema().dump(
-                Zone(**create_zone(zone_id=1, title='zone1'))
+                Zone(**create_zone(zone_id=None, title='zone1'))
             ))
             assert result == expected
+
 
 class TestZoneIDResource:
     @patch.object(SecureZoneService, "delete_by_id",

@@ -13,19 +13,32 @@ class User(db.Model):
     bdate = db.Column(db.Date, nullable=True)
     location_id = db.Column(
         db.Integer,
-        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET NULL'),
         nullable=True,
     )
     sex = db.Column(db.String, nullable=True)
     admin_location_id = db.Column(
         db.Integer,
-        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET NULL'),
         nullable=True,
+    )
+
+    # Relations
+    location = db.relationship(
+        'Location',
+        foreign_keys=[location_id],
+        back_populates='users',
+        lazy='noload',
+    )
+    admin_location = db.relationship(
+        'Location',
+        foreign_keys=[admin_location_id],
+        back_populates='admins',
+        lazy='noload',
     )
 
     def update(self, changes: IUser):
         """Update certain record."""
         for key, new_value in changes.items():
-            if key not in {'id', 'identity'}:
-                setattr(self, key, new_value)
+            setattr(self, key, new_value)
         return self

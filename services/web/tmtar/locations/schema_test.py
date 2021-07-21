@@ -21,13 +21,11 @@ def test_LocationSchema_create(schema: LocationSchema):  # noqa
 
 def test_LocationSchema_works(schema: LocationSchema):  # noqa
     params: ILocation = schema.load({
-        'id': '123',
         'name': 'test city',
         'root': '1'
     })
     widget = Location(**params)
 
-    assert widget.id == 123
     assert widget.name == 'test city'
     assert widget.root == 1
 
@@ -38,8 +36,7 @@ def test_LocationUpdateSchema_create(   # noqa
 
 
 def test_LocationUpdateSchema_works(update_schema: LocationUpdateSchema):  # noqa
-    params: ILocation = update_schema.load({'id': '12', 'name': 'test city'})
+    params: ILocation = update_schema.load({'name': 'test city'})
     widget = Location(**params)
 
-    assert widget.id == 12
     assert widget.name == 'test city'

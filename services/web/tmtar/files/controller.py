@@ -45,7 +45,7 @@ class FileResource(Resource):
 
     @responds(schema=FileSchema, api=api)
     @api.expect(file_upload)
-    @access_restriction(api=api)
+    @access_restriction(required_role=Role.admin, api=api)
     def post(self):
         """Post new File to server media storage."""
         args = file_upload.parse_args()

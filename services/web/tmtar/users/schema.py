@@ -4,8 +4,8 @@ from ..project.types import SexType
 
 
 class UserSchema(Schema):
-    id = fields.Number(attribute='id')
-    identity = fields.String(attribute='identity')
+    id = fields.Number(attribute='id', dump_only=True)
+    identity = fields.String(attribute='identity', dump_only=True)
     bdate = fields.Date(attribute='bdate')
     location_id = fields.Number(attribute='location_id')
     sex = fields.String(

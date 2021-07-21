@@ -2,7 +2,7 @@ from marshmallow import Schema, fields, validate
 
 
 class LocationSchema(Schema):
-    id = fields.Number(attribute='id')
+    id = fields.Number(attribute='id', dump_only=True)
     name = fields.String(
         attribute='name',
         required=True,

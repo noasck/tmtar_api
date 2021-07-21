@@ -15,7 +15,6 @@ time_now = datetime.utcnow()
 
 
 def create_event(
-        event_id=1,
         event_type=EventType[0],
         location_id=1,
         update_date=time_now,
@@ -33,7 +32,6 @@ def create_event(
         **kwargs
 ) -> Event:
     return Event(
-        id=event_id,
         event_type=event_type,
         location_id=location_id,
         update_date=update_date,
@@ -48,7 +46,7 @@ def create_event(
 def make_update(event_id, event_upd: IEvent, *args, **kwargs):
     return create_event(
         event_id=event_id,
-        title = event_upd['title']
+        title=event_upd['title']
     )
 
 
@@ -56,15 +54,15 @@ class TestEventsResource:
     @patch.object(SecureEventService, 'create', lambda fields, *args, **kwargs: create_event(**fields))
     def test_post(self, client: FlaskClient, token: str):
         with client:
-            payload = dict(title="Sample1", short_description="sjdnfsjdnffnsdf")
-            result = client.post(f'/api/{BASE_ROUTE}/',
+            payload = dict(title="Sample1", short_description="sjdnfsjdnffnsdf", event_type=EventType[0])
+            result: IEvent = client.post(f'/api/{BASE_ROUTE}/',
                                  json=payload,
                                  headers={
                                      "Authorization": f"Bearer {token}"
                                  }).get_json()
 
-            expected = EventSchema().dump(create_event(**payload))
-
+            expected: IEvent = EventSchema().dump(create_event(**payload))
+            expected['update_date'] = result['update_date']
             assert result == expected
 
 
@@ -104,7 +102,7 @@ class TestPaginatedEventsSalesAndNewsResource:
             assert result_news == expected
 
 
-class TestPaginatedEventsResource():
+class TestPaginatedEventsResource:
     """Events instance id resource."""
 
     @patch.object(SecureEventService, 'update_by_id', make_update)
@@ -119,7 +117,7 @@ class TestPaginatedEventsResource():
                 headers={
                     "Authorization": f"Bearer {token}"
                 }
-           ).get_json()
+            ).get_json()
             expected = EventSchema().dump(create_event(title='sample_new_title'))
             assert result == expected
 
@@ -136,7 +134,7 @@ class TestPaginatedEventsResource():
         assert result == {'id': 1, 'status': 'Success'}
 
 
-class TestEventsSearchResource():
+class TestEventsSearchResource:
     @patch.object(SecureEventService, 'search_by_title', lambda *args, **kwargs: [
         create_event(event_type=1),
         create_event(event_type=2),
@@ -158,13 +156,13 @@ class TestEventsSearchResource():
                     create_event(event_type=1),
                     create_event(event_type=2),
                 ]
-            )}
+                )}
             result_all = get_events_by_type("all")
 
             assert result_all == expected
 
 
-class TestEventsCountResource():
+class TestEventsCountResource:
     @patch.object(SecureEventService, 'count_all_events', lambda *args, **kwargs: 4)
     def test_get(self, client: FlaskClient, token: str):
         with client:

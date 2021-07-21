@@ -1,7 +1,9 @@
+from flask_sqlalchemy import SQLAlchemy
+
 from ..project.injector import Injector
 from .interface import ILocation
 
-db = Injector.db
+db: SQLAlchemy = Injector.db
 
 # TODO: replace adjacency list with ltree.
 
@@ -17,10 +19,37 @@ class Location(db.Model):
         db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
         nullable=True,
     )
+
     children = db.relationship(
         'Location',
         backref=db.backref('parent', remote_side=[id]),
         passive_deletes=True,
+        lazy='select',
+    )
+
+    # Noload relations
+    users = db.relationship(
+        'User',
+        back_populates='location',
+        foreign_keys='User.location_id',
+        passive_deletes='all',
+        lazy='noload',
+    )
+
+    admins = db.relationship(
+        'User',
+        back_populates='admin_location',
+        foreign_keys='User.admin_location_id',
+        passive_deletes='all',
+        lazy='noload',
+    )
+
+    events = db.relationship(
+        'Event',
+        back_populates='location',
+        foreign_keys='Event.location_id',
+        passive_deletes='all',
+        lazy='noload',
     )
 
     def update(self, changes: ILocation):

@@ -80,6 +80,7 @@ class TestUserCurrentResource:
             )
             return result == expected
 
+
 class TestUserResource:
 
     @patch.object(UserService, "get_all", lambda: [

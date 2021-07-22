@@ -43,7 +43,7 @@ import { CreateZoneComponent } from './zones/create-zone/create-zone.component';
 import { UpdateZoneComponent } from './zones/update-zone/update-zone.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TextMaskModule } from 'angular2-text-mask';
-import { AutocompletePipe } from './users/update-user/autocompletePipe.pipe';
+import { AutocompletePipe } from './shared/autocomplete.pipe';
 
 @NgModule({
   declarations: [

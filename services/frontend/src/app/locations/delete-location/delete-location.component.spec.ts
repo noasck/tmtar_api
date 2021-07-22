@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/*import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteLocationComponent } from './delete-location.component';
 
@@ -21,6 +21,6 @@ describe('DeleteLocationComponent', () => {
 
   /*it('should create', () => {
     expect(component).toBeTruthy();
-  });*/
+  });
 
-});
+});*/

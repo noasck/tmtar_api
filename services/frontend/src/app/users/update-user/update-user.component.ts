@@ -3,7 +3,6 @@ import { User, UserService } from '../user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-user',
@@ -43,7 +42,6 @@ export class UpdateUserComponent implements OnInit {
     const changes = {
       admin_location_id: data.admin_location.id,
     };
-    console.log('changes', changes);
 
     this.userService.updateUser(this.fetchedUser.id, changes).subscribe(
       (res) => {

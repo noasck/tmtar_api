@@ -6,14 +6,14 @@ export interface User {
   id: number;
   location_id?: number;
   bdate?: Date;
-  email_hash?: string;
+  identity?: string;
   admin_location_id?: number;
   sex?: string;
 
   //location?: Location;
   //adminLocation?: Location;
-  location: string;
-  adminLocation: string;
+  location?: string;
+  adminLocation?: string;
 }
 
 export interface CurrentUser {

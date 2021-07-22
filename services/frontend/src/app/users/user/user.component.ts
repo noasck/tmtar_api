@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from 'src/app/locations/location.service';
 import { User, UserService } from '../user.service';
 
 @Component({
@@ -14,8 +13,6 @@ export class UserComponent implements OnInit {
   indicator: boolean = false;
   keys: string[];
   deleteU: number | string;
-  //usersLocations: UserLoc[] = [];
-  //userShown: boolean;
 
   searchField: string = 'id';
   src: string = '';
@@ -29,7 +26,7 @@ export class UserComponent implements OnInit {
     this.getAllUsers();
   }
 
-  async getAllUsers() {
+  getAllUsers() {
     this.fetched = false;
     this.userService.getUsers().subscribe(
       (res) => {
@@ -68,6 +65,7 @@ export class UserComponent implements OnInit {
   }
 
   multipleDelete(delOption): void {
+    //if user picked deletion with checkboxes
     let users = this.getCheckedCheckBoxes();
     for (let id of users) {
       this.deleteUser(delOption, id);
@@ -84,6 +82,11 @@ export class UserComponent implements OnInit {
     return checkedValues;
   }
 
+  sort(field) {
+    this.indicator = !this.indicator;
+    this.fetchedUsers.sort(this.byField(field));
+  }
+
   byField(field) {
     if (this.indicator) {
       return (a, b) => (a[field] > b[field] ? -1 : 1);
@@ -91,37 +94,4 @@ export class UserComponent implements OnInit {
       return (a, b) => (a[field] > b[field] ? 1 : -1);
     }
   }
-
-  sort(field) {
-    this.indicator = !this.indicator;
-    this.fetchedUsers.sort(this.byField(field));
-  }
 }
-
-/*
- getLocation(user, lid, alid): void {
-    //get user`s adminLocation and location as object
-    this.locationService.getLocationsByID(lid).subscribe(
-      (res) => {
-        user.location = res;
-      },
-      (error) => {
-        this.errorMessage = String(error);
-      },
-      () => {
-        this.errorMessage = null;
-      }
-    );
-
-    this.locationService.getLocationsByID(alid).subscribe(
-      (res) => {
-        user.adminLocation = res;
-      },
-      (error) => {
-        this.errorMessage = String(error);
-      },
-      () => {
-        this.errorMessage = null;
-      }
-    );
-  } */

@@ -39,9 +39,21 @@ services:
     volumes:
       - media_volume:/home/app/web/project/tmtar/media
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - web
+
+  admin:
+    container_name: admin_panel
+    command: npm run start:prod
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 4200:4200
 
 volumes:
   media_volume:

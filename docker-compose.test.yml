@@ -33,6 +33,18 @@ services:
     networks:
       - api
 
+  admin:
+      container_name: admin_panel
+      command: npm test
+      build:
+        context: ./services/frontend
+        dockerfile: Dockerfile
+      volumes:
+        - .:/app
+        - /app/node_modules
+      ports:
+        - 4200:4200
+
 networks:
   api:
 

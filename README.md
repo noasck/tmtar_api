@@ -40,6 +40,9 @@ alias dc_down_prod='docker-compose -f docker-compose.prod.yml down --volumes --r
 - Up: ```dc_build_prod```
 - Down: ```dc_down_prod```
 
+In **production** mode accessable link is
+ - ```http://localhost/ ```
+
 ### Accessing API
 In **development** you can use *Swagger OpenAPI* documentation to check routes you need and view namespaces, schemas, parameters, route's information.
 - **Development:** ```http://localhost:5000```.

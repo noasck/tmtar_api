@@ -17,8 +17,6 @@ export class UpdateUserComponent implements OnInit {
 
   src: string = '';
 
-  filteredLocations: Observable<Location[]>;
-
   @Output() close = new EventEmitter<void>();
   @Output() update = new EventEmitter<void>();
 
@@ -56,8 +54,8 @@ export class UpdateUserComponent implements OnInit {
         );
         this.update.emit();
       },
-      (err) => {
-        this.errorMessage = String(err);
+      (error) => {
+        this.errorMessage = error;
       },
       () => {
         this.errorMessage = null;

@@ -34,15 +34,6 @@ services:
         max_attempts: 3
         window: 120s
 
-  # nginx:
-  #   build: ./services/nginx
-  #   volumes:
-  #     - media_volume:/home/app/web/project/tmtar/media
-  #   ports:
-  #     - 80:80
-  #   depends_on:
-  #     - web
-
   admin:
     container_name: admin_panel
     build:

@@ -40,18 +40,27 @@
   </agm-map>
 
   <div class="controls">
-    <button *ngIf="mode == 'view'" type="button" (click) = "mode = 'create'" class="btn btn-primary">Create zone</button>
+    <button
+      *ngIf="mode == 'view'"
+      type="button"
+      (click)="mode = 'create'"
+      class="btn btn-primary"
+    >
+      Create zone
+    </button>
 
-    <div class="input-group mb-3" *ngIf="mode == 'create'" >
+    <div class="input-group mb-3" *ngIf="mode == 'create'">
       <div class="input-group-prepend">
-        <span class="input-group-text" >Pick location on the map</span>
+        <span class="input-group-text">Pick location on the map</span>
       </div>
-      <button type="button" (click) = "mode = 'view'" class="btn btn-primary">Cancel</button>
+      <button type="button" (click)="mode = 'view'" class="btn btn-primary">
+        Cancel
+      </button>
     </div>
-    </div>
+  </div>
 
   <!-- TABLE WITH ZONES -->
-  <div class="zoneTable">
+  <div class="zoneTable" *ngIf="fetchedZones != []">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text"><i class="fas fa-search"></i></span>

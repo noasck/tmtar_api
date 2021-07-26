@@ -1,121 +1,174 @@
 <div class="event">
-    <h2>Event creation</h2>
-    <form [formGroup]="event" (ngSubmit)="createEvent()">
-        <div class="inl-group row">
-            <!--TITLE-->
-            <div class="form-group col-7">
-                <label for="title">Title</label>
-                <input formControlName="title" type="text" class="form-control formVal" placeholder="Enter title">
-                <div *ngIf="event.get('title').invalid && event.get('title').touched" class="validation">
-                    <small *ngIf="event.get('title').errors.required">
-                        Field "title" can’t be empty
-                    </small>
-                </div>
-            </div>
-
-            <!-- EVENT TYPE -->
-            <div class="form-group col-2">
-                <label for="event-type">Event type</label>
-                <select class="form-select form-control formVal" formControlName="event_type">
-                    <option [ngValue]="'sales'">Sales</option>
-                    <option [ngValue]="'news'">News</option>
-                </select>
-            </div>
-
-            <!-- ACTIVE  -->
-            <div class="form-group">
-                <label for="active">Status</label>
-                <select class="form-select form-control formVal" formControlName="active">
-                    <option [ngValue]="true">Active</option>
-                    <option [ngValue]="false">Disabled</option>
-                </select>
-            </div>
+  <h2>Event creation</h2>
+  <form [formGroup]="event" (ngSubmit)="createEvent()">
+    <div class="inl-group row">
+      <!--TITLE-->
+      <div class="form-group col-7">
+        <label for="title">Title</label>
+        <input
+          formControlName="title"
+          type="text"
+          class="form-control formVal"
+          placeholder="Enter title"
+        />
+        <div
+          *ngIf="event.get('title').invalid && event.get('title').touched"
+          class="validation"
+        >
+          <small *ngIf="event.get('title').errors.required">
+            Field "title" can’t be empty
+          </small>
         </div>
+      </div>
 
-        <div class="inl-group row">
+      <!-- EVENT TYPE -->
+      <div class="form-group col-2">
+        <label for="event-type">Event type</label>
+        <select
+          class="form-select form-control formVal"
+          formControlName="event_type"
+        >
+          <option [ngValue]="'sales'">Sales</option>
+          <option [ngValue]="'news'">News</option>
+        </select>
+      </div>
 
-            <!-- LOCATION -->
-            <div class="form-group col-7">
-                <label for="location">Location</label>
-                <input class="form-control formVal" type="text" matInput formControlName="location" [matAutocomplete]="auto"
-                    placeholder="Pick location">
-                <div *ngIf="event.get('location').invalid && event.get('location').touched" class="validation">
-                    <small *ngIf="event.get('location').errors.required">
-                        Field "location" can’t be empty
-                    </small>
-                </div>
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                    <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+      <!-- ACTIVE  -->
+      <div class="form-group">
+        <label for="active">Status</label>
+        <select
+          class="form-select form-control formVal"
+          formControlName="active"
+        >
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">Disabled</option>
+        </select>
+      </div>
+    </div>
 
-                        <p *ngIf="location.id != 1 && location.root != 1"> 
-                            {{location.name}},{{location.parentName}}
-                        </p>
+    <div class="inl-group row">
+      <!-- LOCATION -->
+      <div class="form-group col-7">
+        <label for="location">Location</label>
+        <input
+          class="form-control formVal"
+          type="text"
+          matInput
+          formControlName="location"
+          [matAutocomplete]="auto"
+          placeholder="Pick location"
+          [(ngModel)]="src"
+        />
+        <div
+          *ngIf="event.get('location').invalid && event.get('location').touched"
+          class="validation"
+        >
+          <small *ngIf="event.get('location').errors.required">
+            Field "location" can’t be empty
+          </small>
+        </div>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option
+            *ngFor="let location of allLocations | startsWith: src"
+            [value]="location"
+          >
+            <p *ngIf="location.id != 1 && location.root != 1">
+              {{ location.name }},{{ location.parentName }}
+            </p>
 
-                        <p *ngIf="location.id != 1 && location.root == 1">
-                            {{location.name}},
-                            <i class="fas fa-tree"></i>
-                        </p>
-                        <p *ngIf="location.id == 1">
-                            <i class="fas fa-tree"></i>
-                        </p>
-                    </mat-option>
-                </mat-autocomplete>
-            </div>
+            <p *ngIf="location.id != 1 && location.root == 1">
+              {{ location.name }},
+              <i class="fas fa-tree"></i>
+            </p>
+            <p *ngIf="location.id == 1">
+              <i class="fas fa-tree"></i>
+            </p>
+          </mat-option>
+        </mat-autocomplete>
+      </div>
 
-
-            <!-- DATE
+      <!-- DATE
             <div class="form-group col-3">
                 <label for="event-type">Update date</label>
                 <input type="number" id="date" class=" form-control" formControlName="date" min="1" max="31">
             </div>-->
-        </div>
+    </div>
 
-        <!-- SHORT DESCRIPTION -->
-        <div class="form-group">
-            <label for="short_description">Short description</label>
-            <textarea formControlName="short_description" type="text" class="form-control formVal"
-                placeholder="Enter short description"></textarea>
-            <div *ngIf="event.get('short_description').invalid && event.get('short_description').touched"
-                class="validation">
-                <small *ngIf="event.get('short_description').errors.required">
-                    Field "short description" can’t be empty
-                </small>
-            </div>
-        </div>
+    <!-- SHORT DESCRIPTION -->
+    <div class="form-group">
+      <label for="short_description">Short description</label>
+      <textarea
+        formControlName="short_description"
+        type="text"
+        class="form-control formVal"
+        placeholder="Enter short description"
+      ></textarea>
+      <div
+        *ngIf="
+          event.get('short_description').invalid &&
+          event.get('short_description').touched
+        "
+        class="validation"
+      >
+        <small *ngIf="event.get('short_description').errors.required">
+          Field "short description" can’t be empty
+        </small>
+      </div>
+    </div>
 
-        <!-- FULL DESCRIPTION -->
-        <div class="form-group">
-            <label for="description">Full description</label>
-            <textarea formControlName="description" type="text" class="form-control formVal"
-                placeholder="Enter full description"></textarea>
-            <div *ngIf="event.get('description').invalid && event.get('description').touched" class="validation">
-                <small *ngIf="event.get('description').errors.required">
-                    Field "description" can’t be empty
-                </small>
-            </div>
-        </div>
+    <!-- FULL DESCRIPTION -->
+    <div class="form-group">
+      <label for="description">Full description</label>
+      <textarea
+        formControlName="description"
+        type="text"
+        class="form-control formVal"
+        placeholder="Enter full description"
+      ></textarea>
+      <div
+        *ngIf="
+          event.get('description').invalid && event.get('description').touched
+        "
+        class="validation"
+      >
+        <small *ngIf="event.get('description').errors.required">
+          Field "description" can’t be empty
+        </small>
+      </div>
+    </div>
 
-        <!-- PICTURE -->
-        <div class="form-group picture center">
-            <!--<label>Add picture(optional):</label>
+    <!-- PICTURE -->
+    <div class="form-group picture center">
+      <!--<label>Add picture(optional):</label>
             <input type="file" class="form-control-file" name="filename" (change)="onFileChange($event)" />
             <img *ngIf="url" src="{{url}}">-->
 
-            <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="droppedPicture($event)">
-                <ng-template class="words" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                    <p (click)="openFileSelector()">add picture(optional)</p>
-                </ng-template>
-            </ngx-file-drop>
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedPicture($event)"
+      >
+        <ng-template
+          class="words"
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <p (click)="openFileSelector()">add picture(optional)</p>
+        </ng-template>
+      </ngx-file-drop>
 
-            <img *ngIf="url" src="{{url}}">
-
-        </div>
-        <div class="buttons">
-            <button type="submit" class="btn btn-primary" [disabled]="event.invalid">Create</button>
-            <button class="btn btn-primary" [routerLink]="['/events']">Close</button>
-        </div>
-    </form>
+      <img *ngIf="url" src="{{ url }}" />
+    </div>
+    <div class="buttons">
+      <button type="submit" class="btn btn-primary" [disabled]="event.invalid">
+        Create
+      </button>
+      <button class="btn btn-primary" [routerLink]="['/events']">Close</button>
+    </div>
+  </form>
 </div>
 
-
-<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

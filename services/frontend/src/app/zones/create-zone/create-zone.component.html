@@ -1,76 +1,114 @@
 <div class="backdrop"></div>
 
 <div class="zoneCreate modalWidow">
-    <form [formGroup]="zone" (ngSubmit)="createZone()">
-        <div class="form-group row">
-            <!-- TITLE -->
-            <div class="col-8">
-                <label for="title">Title</label>
-                <input formControlName="title" type="text" class="form-control formVal">
-            </div>
-            <!-- ACTIVE OR NOT -->
-            <div class="col">
-                <label for="title">Status</label>
-                <select class="form-control form-select formVal" formControlName="active">
-                    <option [ngValue]="true">Active</option>
-                    <option [ngValue]="false">Disabled</option>
-                </select>
-            </div>
-            <!-- SECRET OR NOT -->
-            <div class="col">
-                <label for="title">Secret</label>
-                <select class="form-select form-control formVal" formControlName="secret">
-                    <option [ngValue]="true">Yes</option>
-                    <option [ngValue]="false">No</option>
-                </select>
-            </div>
-        </div>
+  <form [formGroup]="zone" (ngSubmit)="createZone()">
+    <div class="form-group row">
+      <!-- TITLE -->
+      <div class="col-8">
+        <label for="title">Title</label>
+        <input
+          formControlName="title"
+          type="text"
+          class="form-control formVal"
+        />
+      </div>
+      <!-- ACTIVE OR NOT -->
+      <div class="col">
+        <label for="title">Status</label>
+        <select
+          class="form-control form-select formVal"
+          formControlName="active"
+        >
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">Disabled</option>
+        </select>
+      </div>
+      <!-- SECRET OR NOT -->
+      <div class="col">
+        <label for="title">Secret</label>
+        <select
+          class="form-select form-control formVal"
+          formControlName="secret"
+        >
+          <option [ngValue]="true">Yes</option>
+          <option [ngValue]="false">No</option>
+        </select>
+      </div>
+    </div>
 
-        <!-- COORDINATES -->
-        <div class="form-group row">
-            <div class="col">
-                <label for="latitude">Latitude</label>
-                <input formControlName="latitude" type="number" step="0.00000001" class="form-control formVal">
-            </div>
+    <!-- COORDINATES -->
+    <div class="form-group row">
+      <div class="col">
+        <label for="latitude">Latitude</label>
+        <input
+          formControlName="latitude"
+          type="number"
+          step="0.00000001"
+          class="form-control formVal"
+        />
+      </div>
 
-            <div class="col">
-                <label for="longitude">Longitude</label>
-                <input formControlName="longitude" type="number" step="0.00000001" class="form-control formVal">
-            </div>
+      <div class="col">
+        <label for="longitude">Longitude</label>
+        <input
+          formControlName="longitude"
+          type="number"
+          step="0.00000001"
+          class="form-control formVal"
+        />
+      </div>
 
-            <div class="col">
-                <label for="radius">Radius</label>
-                <input formControlName="radius"  type="number" step="5"  class="form-control formVal">
-            </div>
-        </div>
+      <div class="col">
+        <label for="radius">Radius</label>
+        <input
+          formControlName="radius"
+          type="number"
+          step="5"
+          class="form-control formVal"
+        />
+      </div>
+    </div>
 
-        <!-- LOCATION -->
-        <div class="form-group row">
-            <div class="col-8">
-                <label for="radius">Location</label>
-                <input class="form-control formVal" type="text" matInput formControlName="location" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+    <!-- LOCATION -->
+    <div class="form-group row">
+      <div class="col-8">
+        <label for="radius">Location</label>
+        <input
+          class="form-control formVal"
+          type="text"
+          matInput
+          formControlName="location"
+          [matAutocomplete]="auto"
+          [(ngModel)]="src"
+        />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option
+            *ngFor="let location of allLocations | startsWith: src"
+            [value]="location"
+          >
+            <p *ngIf="location.id != 1 && location.root != 1">
+              {{ location.name }}, {{ location.parentName }}
+            </p>
 
-                    <p *ngIf="location.id != 1 && location.root != 1">
-                        {{location.name}}, {{location.parentName}}
-                    </p>
+            <p *ngIf="location.id != 1 && location.root == 1">
+              {{ location.name }}, <i class="fas fa-tree"></i>
+            </p>
 
-                    <p *ngIf="location.id != 1 && location.root == 1">
-                        {{location.name}},  <i class="fas fa-tree"></i>
-                    </p>
+            <p *ngIf="location.id == 1">
+              <i class="fas fa-tree"></i>
+            </p>
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </div>
 
-                    <p *ngIf="location.id == 1">
-                        <i class="fas fa-tree"></i>
-                    </p>
-                </mat-option>
-            </mat-autocomplete>
-            </div>
-        </div>
-
-        <div class="buttons">
-            <button type="submit" class="btn btn-primary" [disabled]="zone.invalid">Create</button>
-            <button type="button" class="btn btn-primary" (click)="close.emit()">Close</button>
-        </div>
-    </form>
+    <div class="buttons">
+      <button type="submit" class="btn btn-primary" [disabled]="zone.invalid">
+        Create
+      </button>
+      <button type="button" class="btn btn-primary" (click)="close.emit()">
+        Close
+      </button>
+    </div>
+  </form>
 </div>

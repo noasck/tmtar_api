@@ -54,9 +54,6 @@ export class UpdateUserComponent implements OnInit {
         this.fetchedUser.adminLocation = this.getLocationName(
           this.fetchedUser.admin_location_id
         );
-
-        this.src = '';
-
         this.update.emit();
       },
       (err) => {
@@ -67,6 +64,7 @@ export class UpdateUserComponent implements OnInit {
       }
     );
     this.user.reset();
+    this.src = '';
     this.getLocations();
   }
 

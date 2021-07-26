@@ -1,171 +1,253 @@
+<!-- READ EVENT -->
 <div class="read-event">
-    <div *ngIf="!update && fetchedEvent" class="read">
-        <div class="eventPlace">
-            <h1>{{fetchedEvent.title}}<small>({{fetchedEvent.event_type}})</small></h1>
+  <div *ngIf="!update && fetchedEvent" class="read">
+    <div class="eventPlace" *ngIf="eventLocation">
+      <h1>
+        {{ fetchedEvent.title }}<small>({{ fetchedEvent.event_type }})</small>
+      </h1>
 
-            <p class="locat-date" *ngIf="eventLocation.id != 1 && eventLocation.root != 1">
-                <small *ngIf="fetchedEvent.update_date">{{fetchedEvent.update_date | date:'MMM d, y, h:mm a'}},</small>
-                {{eventLocation.name}}({{eventLocation.parentName}})
-            </p>
+      <p
+        class="locat-date"
+        *ngIf="eventLocation.id != 1 && eventLocation.root != 1"
+      >
+        <small *ngIf="fetchedEvent.update_date"
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
+        >
+        {{ eventLocation.name }}({{ eventLocation.parentName }})
+      </p>
 
-            <p class="locat-date" *ngIf="eventLocation.id == 1">
-                <small *ngIf="fetchedEvent.update_date">{{fetchedEvent.update_date | date:'MMM d, y, h:mm a'}},</small>
-                <i class="fas fa-tree"></i>
-            </p>
+      <p class="locat-date" *ngIf="eventLocation.id == 1">
+        <small *ngIf="fetchedEvent.update_date"
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
+        >
+        <i class="fas fa-tree"></i>
+      </p>
 
-            <p class="locat-date" *ngIf="eventLocation.root == 1">
-                <small *ngIf="fetchedEvent.update_date">{{fetchedEvent.update_date | date:'MMM d, y, h:mm a'}},</small>
-                {{eventLocation.name}}
-                (<i class="fas fa-tree"></i>)
-            </p>
-
-        </div>
-        <div>
-            <p id="short-d">{{fetchedEvent.short_description}}</p>
-            <p id="description">{{fetchedEvent.description}}</p>
-            <div class="read-pic">
-                <img *ngIf="fetchedEvent.image_file_name" src="{{url}}">
-            </div>
-            <div class="btn-space">
-                <button class="btn btn-primary change" (click)="update = true">Change</button>
-                <button class="btn btn-primary change" [routerLink]="['/events/']">Close</button>
-            </div>
-        </div>
-
+      <p class="locat-date" *ngIf="eventLocation.root == 1">
+        <small *ngIf="fetchedEvent.update_date"
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
+        >
+        {{ eventLocation.name }}
+        (<i class="fas fa-tree"></i>)
+      </p>
     </div>
+    <div>
+      <p id="short-d">{{ fetchedEvent.short_description }}</p>
+      <p id="description">{{ fetchedEvent.description }}</p>
+      <div class="read-pic">
+        <img *ngIf="fetchedEvent.image_file_name" src="{{ url }}" />
+      </div>
+      <div class="btn-space">
+        <button class="btn btn-primary change" (click)="update = true">
+          Change
+        </button>
+        <button class="btn btn-primary change" [routerLink]="['/events/']">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 
+  <!-- UPDATE EVENT  -->
 
+  <div *ngIf="update && event" class="update">
+    <form [formGroup]="event" (ngSubmit)="updateEvent()">
+      <div class="inl-group row">
+        <!--TITLE-->
+        <div class="form-group col-7">
+          <label for="title">Title</label>
+          <input
+            formControlName="title"
+            type="text"
+            class="form-control formVal"
+            placeholder="Enter title"
+          />
+          <div
+            *ngIf="event.get('title').invalid && event.get('title').touched"
+            class="validation"
+          >
+            <small *ngIf="event.get('title').errors.required">
+              Field "title" can’t be empty
+            </small>
+          </div>
+        </div>
 
-<!-- UPDATE EVENT  -->
+        <!-- EVENT TYPE -->
+        <div class="form-group col-2">
+          <label for="event-type">Event type</label>
+          <select
+            class="form-select form-control formVal"
+            formControlName="event_type"
+          >
+            <option [ngValue]="'sales'">Sales</option>
+            <option [ngValue]="'news'">News</option>
+          </select>
+        </div>
 
-    <div *ngIf="update && event" class="update">
-        <form [formGroup]="event" (ngSubmit)="updateEvent()">
-            <div class="inl-group row">
-                <!--TITLE-->
-                <div class="form-group col-7">
-                    <label for="title">Title</label>
-                    <input formControlName="title" type="text" class="form-control formVal" placeholder="Enter title">
-                    <div *ngIf="event.get('title').invalid && event.get('title').touched" class="validation">
-                        <small *ngIf="event.get('title').errors.required">
-                            Field "title" can’t be empty
-                        </small>
-                    </div>
-                </div>
+        <!-- ACTIVE  -->
+        <div class="form-group">
+          <label for="active">Status</label>
+          <select
+            class="form-select form-control formVal"
+            formControlName="active"
+          >
+            <option [ngValue]="true">Active</option>
+            <option [ngValue]="false">Disabled</option>
+          </select>
+        </div>
+      </div>
 
-                <!-- EVENT TYPE -->
-                <div class="form-group col-2">
-                    <label for="event-type">Event type</label>
-                    <select class="form-select form-control formVal" formControlName="event_type">
-                        <option [ngValue]="'sales'">Sales</option>
-                        <option [ngValue]="'news'">News</option>
-                    </select>
-                </div>
+      <div class="inl-group row">
+        <!-- LOCATION -->
+        <div class="form-group col-7">
+          <label for="location">Location</label>
 
-                <!-- ACTIVE  -->
-                <div class="form-group">
-                    <label for="active">Status</label>
-                    <select class="form-select form-control formVal" formControlName="active">
-                        <option [ngValue]="true">Active</option>
-                        <option [ngValue]="false">Disabled</option>
-                    </select>
-                </div>
-            </div>
+          <input
+            class="form-control formVal"
+            type="text"
+            matInput
+            formControlName="location"
+            [matAutocomplete]="auto"
+            *ngIf="eventLocation.id != 1"
+            placeholder="{{ eventLocation.name }}, {{
+              eventLocation.parentName
+            }}"
+          />
 
-            <div class="inl-group row">
+          <input
+            class="form-control"
+            type="text"
+            matInput
+            formControlName="location"
+            [matAutocomplete]="auto"
+            *ngIf="eventLocation.id == 1"
+            placeholder="{{ eventLocation.name }}"
+            [(ngModel)]="src"
+          />
 
-                <!-- LOCATION -->
-                <div class="form-group col-7">
-                    <label for="location">Location</label>
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option
+              *ngFor="let location of allLocations | startsWith: src"
+              [value]="location"
+            >
+              <p *ngIf="location.id != 1 && location.root != 1">
+                {{ location.name }}, {{ location.parentName }}
+              </p>
 
-                    <input class="form-control formVal" type="text" matInput formControlName="location" [matAutocomplete]="auto"
-                        *ngIf="eventLocation.id != 1"
-                        placeholder="{{eventLocation.name}}, {{eventLocation.parentName}}">
+              <p *ngIf="location.id != 1 && location.root == 1">
+                {{ location.name }},
+                <i class="fas fa-tree"></i>
+              </p>
 
-                    <input class="form-control" type="text" matInput formControlName="location" [matAutocomplete]="auto"
-                        *ngIf="eventLocation.id == 1" placeholder="{{eventLocation.name}}">
+              <p *ngIf="location.id == 1">
+                <i class="fas fa-tree"></i>
+              </p>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
 
-                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                        <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
-
-                            <p *ngIf="location.id != 1 && location.root != 1"> 
-                                {{location.name}}, {{location.parentName}}
-                            </p>
-
-                            <p *ngIf="location.id != 1 && location.root == 1">
-                                {{location.name}},
-                                <i class="fas fa-tree"></i>
-                            </p>
-                            
-                            <p *ngIf="location.id == 1">
-                                <i class="fas fa-tree"></i>
-                            </p>
-                        </mat-option>
-                    </mat-autocomplete>
-                </div>
-
-
-                <!-- DATE
+        <!-- DATE
                 <div class="form-group col-3">
                     <label for="event-type">Update date</label>
                     <input type="number" id="date" class=" form-control" formControlName="date" min="1" max="31">
                 </div>-->
-            </div>
+      </div>
 
-            <!-- SHORT DESCRIPTION -->
-            <div class="form-group">
-                <label for="short_description">Short description</label>
-                <textarea formControlName="short_description" type="text" class="form-control formVal"
-                    placeholder="Enter short description"></textarea>
-                <div *ngIf="event.get('short_description').invalid && event.get('short_description').touched"
-                    class="validation">
-                    <small *ngIf="event.get('short_description').errors.required">
-                        Field "short description" can’t be empty
-                    </small>
-                </div>
-            </div>
+      <!-- SHORT DESCRIPTION -->
+      <div class="form-group">
+        <label for="short_description">Short description</label>
+        <textarea
+          formControlName="short_description"
+          type="text"
+          class="form-control formVal"
+          placeholder="Enter short description"
+        ></textarea>
+        <div
+          *ngIf="
+            event.get('short_description').invalid &&
+            event.get('short_description').touched
+          "
+          class="validation"
+        >
+          <small *ngIf="event.get('short_description').errors.required">
+            Field "short description" can’t be empty
+          </small>
+        </div>
+      </div>
 
-            <!-- FULL DESCRIPTION -->
-            <div class="form-group">
-                <label for="description">Full description</label>
-                <textarea formControlName="description" type="text" class="form-control formVal"
-                    placeholder="Enter full description"></textarea>
-                <div *ngIf="event.get('description').invalid && event.get('description').touched" class="validation">
-                    <small *ngIf="event.get('description').errors.required">
-                        Field "description" can’t be empty
-                    </small>
-                </div>
-            </div>
+      <!-- FULL DESCRIPTION -->
+      <div class="form-group">
+        <label for="description">Full description</label>
+        <textarea
+          formControlName="description"
+          type="text"
+          class="form-control formVal"
+          placeholder="Enter full description"
+        ></textarea>
+        <div
+          *ngIf="
+            event.get('description').invalid && event.get('description').touched
+          "
+          class="validation"
+        >
+          <small *ngIf="event.get('description').errors.required">
+            Field "description" can’t be empty
+          </small>
+        </div>
+      </div>
 
-            <!-- PICTURE -->
-            <div *ngIf="picture" [formGroup]="picture" class="form-group picture">
-                <!--<label>Change picture(optional):</label>
+      <!-- PICTURE -->
+      <div *ngIf="picture" [formGroup]="picture" class="form-group picture">
+        <!--<label>Change picture(optional):</label>
                 <input type="file" class="form-control-file" name="filename" (change)="onFileChange($event)" />-->
 
-                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="droppedPicture($event)">
-                    <ng-template class="words" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                        <p (click)="openFileSelector()">change picture(optional)</p>
-                    </ng-template>
-                </ngx-file-drop>
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="droppedPicture($event)"
+        >
+          <ng-template
+            class="words"
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+          >
+            <p (click)="openFileSelector()">change picture(optional)</p>
+          </ng-template>
+        </ngx-file-drop>
 
-                <img *ngIf="url" src="{{url}}">
-            </div>
-            <div class="btn-space">
-                <button type="submit" class="btn btn-primary" [disabled]="event.invalid">Save</button>
-                <button class="btn btn-primary" (click)="update = false">Back</button>
-            </div>
-        </form>
-    </div>
+        <img *ngIf="url" src="{{ url }}" />
+      </div>
+      <div class="btn-space">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="event.invalid"
+        >
+          Save
+        </button>
+        <button class="btn btn-primary" (click)="update = false">Back</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <div *ngIf="updatedEvent">
-    <div class="backdrop"></div>
-    <div class="success">
-        <p>Event successfully updated!</p>
-        <div class="buttons">
-            <button type="button" class="btn btn-success" (click)="updatedEvent = false">ОК</button>
-
-        </div>
+  <div class="backdrop"></div>
+  <div class="success">
+    <p>Event successfully updated!</p>
+    <div class="buttons">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="updatedEvent = false"
+      >
+        ОК
+      </button>
     </div>
+  </div>
 </div>
 
-<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

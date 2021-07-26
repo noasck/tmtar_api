@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Zone, ZonesService } from '../zones.service';
 
@@ -13,11 +11,13 @@ import { Zone, ZonesService } from '../zones.service';
 export class UpdateZoneComponent implements OnInit {
   zone: FormGroup;
 
-  filteredLocations: Observable<Location[]>; //for autocomplete
   allLocations: Location[];
   errorMessage: string;
 
   zoneLocation: Location;
+
+  //search location
+  src: string = '';
 
   @Input() fetchedZone: Zone; //zone for update
   @Input() coordinates?: any; // object {lat:  number, lng: number}
@@ -27,7 +27,9 @@ export class UpdateZoneComponent implements OnInit {
   constructor(
     private zoneService: ZonesService,
     private locationService: LocationService
-  ) {this.getLocations();}
+  ) {
+    this.getLocations();
+  }
 
   ngOnInit(): void {
     this.setZoneForm();
@@ -37,7 +39,7 @@ export class UpdateZoneComponent implements OnInit {
     this.zone = new FormGroup({
       longitude: new FormControl(
         this.coordinates ? this.coordinates.lng : this.fetchedZone.longitude,
-        [Validators.required,  Validators.pattern(/^\-?\d+((\.|\,)\d+)?$/)]
+        [Validators.required, Validators.pattern(/^\-?\d+((\.|\,)\d+)?$/)]
       ),
       latitude: new FormControl(
         this.coordinates ? this.coordinates.lat : this.fetchedZone.latitude,
@@ -66,7 +68,7 @@ export class UpdateZoneComponent implements OnInit {
           res,
           userLocationId
         );
-        
+
         //set parent name for all location
         this.allLocations.map((l) => {
           if (l.id != 1) {
@@ -74,14 +76,9 @@ export class UpdateZoneComponent implements OnInit {
           }
         });
 
-        this.zoneLocation = res.filter((location) => location.id == this.fetchedZone.location_id)[0];
-
-        //autocomplete
-        this.filteredLocations = this.zone.get('location').valueChanges.pipe(
-          startWith(''),
-          map((value) => (typeof value === 'string' ? value : value.name)),
-          map((name) => (name ? this._filter(name) : this.allLocations.slice()))
-        );
+        this.zoneLocation = res.filter(
+          (location) => location.id == this.fetchedZone.location_id
+        )[0];
       },
       (error) => {
         this.errorMessage = error;
@@ -90,38 +87,33 @@ export class UpdateZoneComponent implements OnInit {
     );
   }
 
-  displayFn(loc: Location): string {
-    return loc && loc.name ? loc.name : '';
-  }
-
-  private _filter(name: string): Location[] {
-    const filterValue = name.toLowerCase();
-
-    return this.allLocations.filter(
-      (location) => location.name.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
   updateZone() {
-    let formData = this.zone.value
+    let formData = this.zone.value;
     let update = {
       title: formData.title,
       latitude: formData.latitude,
       longitude: formData.longitude,
       radius: formData.radius,
-      location_id: formData.location ? formData.location.id : this.fetchedZone.location_id,
+      location_id: formData.location
+        ? formData.location.id
+        : this.fetchedZone.location_id,
       active: formData.active,
       secret: formData.secret,
-    }
+    };
     this.zoneService.updateZone(this.fetchedZone.id, update).subscribe(
       (res) => {
-        this.fetchedZone = res
-        this.update.emit(res)
+        this.fetchedZone = res;
+        this.update.emit(res);
       },
       (error) => {
-        this.errorMessage = error
+        this.errorMessage = error;
       }
-    )
+    );
+
+    this.src = '';
   }
 
+  displayFn(loc: Location): string {
+    return loc && loc.name ? loc.name : '';
+  }
 }

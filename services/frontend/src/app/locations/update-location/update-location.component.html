@@ -2,7 +2,7 @@
 <div class="modalWidow">
   <h2>Location update</h2>
   <form [formGroup]="location" (ngSubmit)="editLocation()">
-    <div class="form-group">
+    <div class="form-group" *ngIf="parent">
       
       <label for="name" *ngIf="fetchedLocation.id != 1 && parent.id != 1">Name: {{fetchedLocation.name}},
         {{parent.name}}</label>

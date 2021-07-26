@@ -3,13 +3,12 @@ version: '3.7'
 services:
 
   admin:
-    container_name: takemetoar-prod
-    command: npm run start:prod
+    container_name: admin_panel
     build:
-      context: .
+      context: ./services/frontend
       dockerfile: Dockerfile.prod
     volumes:
-      - '.:/app'
-      - '/app/node_modules'
+      - .:/app
+      - /app/node_modules
     ports:
-      - 4200:4200
+      - 80:80

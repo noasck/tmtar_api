@@ -1,11 +1,27 @@
-FROM node:alpine
+#build step
+FROM node:slim as build
 
-WORKDIR /usr/src/app
-RUN apk add curl
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json package-lock.json ./
 RUN npm install
+RUN npm install -g @angular/cli@7.3.9
 
-COPY . .
+COPY . /app
 
-RUN npm run build
+# generate build
+RUN ng build  --prod --output-path=dist
+
+RUN ls dist/
+#prod step
+FROM nginx:latest
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]

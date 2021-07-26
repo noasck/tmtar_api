@@ -34,16 +34,16 @@ services:
       - api
 
   admin:
-      container_name: admin_panel
-      command: npm test
-      build:
-        context: ./services/frontend
-        dockerfile: Dockerfile
-      volumes:
-        - .:/app
-        - /app/node_modules
-      ports:
-        - 4200:4200
+    container_name: admin_panel
+    command: npm test
+    build:
+      context: ./services/frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./services/frontend:/app
+      - /app/node_modules
+    ports:
+      - 9876:9876
 
 networks:
   api:

@@ -1,15 +1,14 @@
 version: '3.7'
 
 services:
-
   admin:
-    container_name: takemetoar
+    container_name: takemetoaradmin
     command: npm start
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '.:/app'
-      - '/app/node_modules'
+      - .:/app
+      - /app/node_modules
     ports:
       - 4200:4200

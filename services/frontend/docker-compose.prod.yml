@@ -1,9 +1,8 @@
 version: '3.7'
 
 services:
-
   admin:
-    container_name: admin_panel
+    container_name: admin
     build:
       context: ./services/frontend
       dockerfile: Dockerfile.prod

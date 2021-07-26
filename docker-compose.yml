@@ -34,11 +34,11 @@ services:
       context: ./services/frontend
       dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./services/frontend:/app
       - /app/node_modules
     ports:
       - 4200:4200
-    
+
 networks:
   api:
 

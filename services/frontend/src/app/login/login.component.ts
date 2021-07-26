@@ -5,20 +5,17 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private auth: Auth0Service) { 
-    auth.handleAuthentication()
-    console.log("au", this.auth.isAuthenticated())
-  }
+  constructor(private auth: Auth0Service) {}
   ngOnInit(): void {
-
+    this.auth.handleAuthentication();
+    console.log('au', this.auth.isAuthenticated());
   }
 
   clickLogin(): void {
-    this.auth.login()
+    this.auth.login();
     /* this.auth.login(this.email).subscribe(
        (token) => {
          console.log('Token Request...');

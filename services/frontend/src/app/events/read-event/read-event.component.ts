@@ -53,7 +53,7 @@ export class ReadEventComponent implements OnInit {
               this.allLocations = res;
               //set parentName
               this.allLocations.map((l) => {
-                if (l.id != 1) { this.locationService.setParent(l) }
+                if (l.id != 1) { this.locationService.getParentName(l) }
               })
               this.eventLocation = res.filter((location) => location.id == this.fetchedEvent.location_id)[0]
               this.transferService.setLocations(this.allLocations);

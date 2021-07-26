@@ -68,6 +68,7 @@ export class CreateZoneComponent implements OnInit {
     this.zoneService.createZone(newZone).subscribe(
       (res) => {
         this.create.emit(res);
+        this.close.emit()
       },
       (error) => {
         this.errorMessage = error;
@@ -93,7 +94,7 @@ export class CreateZoneComponent implements OnInit {
         //set parent name for all location
         this.allLocations.map((l) => {
           if (l.id != 1) {
-            this.locationService.setParent(l);
+            this.locationService.getParentName(l);
           }
         });
 

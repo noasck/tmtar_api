@@ -1,59 +1,66 @@
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { TestBed } from "@angular/core/testing";
-import { EMPTY, of } from "rxjs";
-import { LocationService } from "src/app/locations/location.service";
-import { TransferService } from "src/app/transfer.service";
-import { User } from "src/app/_models/user";
-import { UserService } from "../user.service";
-import { UserComponent } from "./user.component";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { User, UserService } from '../user.service';
+import { UserComponent } from './user.component';
+import { Auth0Service } from 'src/app/shared/services/auth.service';
+import { RouterModule } from '@angular/router';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from 'src/environments/environment';
+import users from '../../shared/mockDB/users.js';
+import { EMPTY, of, throwError } from 'rxjs';
 
 describe('UserComponent', () => {
   let service: UserService;
-  let locationService: LocationService;
-  let transferService: TransferService;
   let component: UserComponent;
-  let users: User[] = [{ "bdate": null, "id": 228, "email": "denter425@gmail.com", "admin_location_id": 0, "location_id": 1, "sex": null }]
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
-      ]
+        HttpClientTestingModule,
+        RouterModule.forRoot([{ path: 'users', component: UserComponent }]),
+        AuthModule.forRoot({
+          ...env.auth,
+          httpInterceptor: {
+            allowedList: [`${env.apiUrl}/`],
+          },
+        }),
+      ],
+      providers: [Auth0Service],
     });
 
     service = TestBed.inject(UserService);
-    locationService = TestBed.inject(LocationService);
-    transferService = TestBed.inject(TransferService);
-    component = new UserComponent(service, locationService, transferService);
+    component = new UserComponent(service);
   });
 
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit()', () => {
-    const spy = spyOn(service, "getUsers").and.callFake(() => {
-      return EMPTY
-    })
-    component.ngOnInit()
-    expect(spy).toHaveBeenCalled()
+  it('get all users', () => {
+    spyOn(service, 'getUsers').and.callFake(() => {
+      return of(users);
+    });
+
+    component.ngOnInit();
+    let fetchedUsers = component.fetchedUsers;
+    expect(fetchedUsers).toBe(users);
   });
 
-  it('sould calculate length of Users[] from ngOnInit()', () => {
-    spyOn(service, "getUsers").and.callFake(() => {
-      return of(users)
-    })
-    component.ngOnInit()
-    let fetchedUsers = component.fetchedUsers
-    expect(fetchedUsers.length).toBe(users.length)
+  it('should set errorMessage if error when getting users', () => {
+    let error = 'Error message';
+    spyOn(service, 'getUsers').and.returnValue(throwError(error));
+
+    component.ngOnInit();
+    expect(component.errorMessage).toBe(error);
   });
 
-  it('deleteUser()', () => {
-    const spy = spyOn(service, "deleteUserByID").and.callFake(() => {
-      return EMPTY
-    })
-    component.deleteUser(true, 228)
-    expect(spy).toHaveBeenCalled()
-  });
+  it('delete user', () => {
+    component.fetchedUsers = users;
+    let spy = spyOn(service, 'deleteUserByID').and.returnValue(EMPTY);
 
+    component.ngOnInit();
+    component.deleteUser(true, 5);
+
+    expect(spy).toHaveBeenCalledWith(5);
+  });
 });

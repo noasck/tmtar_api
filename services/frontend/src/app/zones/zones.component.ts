@@ -128,7 +128,7 @@ export class ZonesComponent implements OnInit {
         //set parent name for all location
         this.allLocations.map((l) => {
           if (l.id != 1) {
-            this.locationService.setParent(l);
+            this.locationService.getParentName(l);
           }
         });
       },

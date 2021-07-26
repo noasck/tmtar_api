@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User, UserService } from '../user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TransferService } from 'src/app/transfer.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-user',
@@ -16,6 +14,8 @@ export class UpdateUserComponent implements OnInit {
   errorMessage: string;
   allUsers: User[];
   allLocations: Location[];
+
+  src: string = '';
 
   filteredLocations: Observable<Location[]>;
 
@@ -35,9 +35,6 @@ export class UpdateUserComponent implements OnInit {
     this.user = new FormGroup({
       admin_location: new FormControl(null, [Validators.required]),
     });
-
-    //autocomplete
-    this.filterLocations();
   }
 
   updateUser(): void {
@@ -49,6 +46,17 @@ export class UpdateUserComponent implements OnInit {
     this.userService.updateUser(this.fetchedUser.id, changes).subscribe(
       (res) => {
         this.fetchedUser = res;
+
+        //get name of user location
+        this.fetchedUser.location = this.getLocationName(
+          this.fetchedUser.location_id
+        );
+        this.fetchedUser.adminLocation = this.getLocationName(
+          this.fetchedUser.admin_location_id
+        );
+
+        this.src = '';
+
         this.update.emit();
       },
       (err) => {
@@ -59,7 +67,7 @@ export class UpdateUserComponent implements OnInit {
       }
     );
     this.user.reset();
-    this.getLocations()
+    this.getLocations();
   }
 
   getLocations() {
@@ -78,12 +86,9 @@ export class UpdateUserComponent implements OnInit {
         //set parent name for all location
         this.allLocations.map((l) => {
           if (l.id != 1) {
-            this.locationService.setParent(l);
+            this.locationService.getParentName(l);
           }
         });
-
-        //autocomplete
-        this.filterLocations();
       },
       (error) => {
         this.errorMessage = error;
@@ -92,23 +97,13 @@ export class UpdateUserComponent implements OnInit {
     );
   }
 
+  getLocationName(id): string {
+    let name = this.allLocations.filter((location) => location.id === id)[0]
+      .name;
+    return name;
+  }
+
   displayFn(loc: Location): string {
     return loc && loc.name ? loc.name : '';
-  }
-
-  private _filter(name: string): Location[] {
-    const filterValue = name.toLowerCase();
-    return this.allLocations.filter(
-      (location) => location.name.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
-  filterLocations() {
-    //autocomplete
-    this.filteredLocations = this.user.get('admin_location').valueChanges.pipe(
-      startWith(''),
-      map((value) => (typeof value === 'string' ? value : value.name)),
-      map((name) => (name ? this._filter(name) : this.allLocations.slice()))
-    );
   }
 }

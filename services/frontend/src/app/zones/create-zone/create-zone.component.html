@@ -112,3 +112,9 @@
     </div>
   </form>
 </div>
+
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

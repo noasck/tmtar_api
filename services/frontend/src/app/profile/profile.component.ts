@@ -18,9 +18,10 @@ export class ProfileComponent implements OnInit {
 
   datemask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
-  filteredLocations: Observable<Location[]>; // for autocomplete
   allLocations: Location[];
   errorMessage: string;
+
+  src: string = '';
 
   constructor(
     private locationService: LocationService,
@@ -69,35 +70,14 @@ export class ProfileComponent implements OnInit {
           }
         });
 
-        this.location = this.allLocations.filter(
-          (l) => l.id == userLocationId
-        )[0];
+        this.setProfileLocation(userLocationId);
 
         this.allLocations = this.allLocations.filter((loc) => loc.id != 1);
-
-        //autocomplete
-        this.filteredLocations = this.profile.get('place').valueChanges.pipe(
-          startWith(''),
-          map((value) => (typeof value === 'string' ? value : value.name)),
-          map((name) => (name ? this._filter(name) : this.allLocations.slice()))
-        );
       },
       (error) => {
         this.errorMessage = error;
       },
       () => {}
-    );
-  }
-
-  displayFn(loc: Location): string {
-    return loc && loc.name ? loc.name : '';
-  }
-
-  _filter(name: string): Location[] {
-    const filterValue = name.toLowerCase();
-
-    return this.allLocations.filter(
-      (location) => location.name.toLowerCase().indexOf(filterValue) === 0
     );
   }
 
@@ -123,10 +103,22 @@ export class ProfileComponent implements OnInit {
           'user_location_id',
           JSON.stringify(res.location_id)
         );
+
+        this.setProfileLocation(res.location_id)
       },
       (error) => {
         this.errorMessage = error;
       }
     );
+
+    this.src = '';
+  }
+
+  setProfileLocation(id) {
+    this.location = this.allLocations.filter((l) => l.id == id)[0];
+  }
+
+  displayFn(loc: Location): string {
+    return loc && loc.name ? loc.name : '';
   }
 }

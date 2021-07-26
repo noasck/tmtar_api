@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location, LocationService } from '../location.service';
 import { TransferService } from '../../transfer.service';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 export interface User {
   name: string;
 }
@@ -20,8 +19,6 @@ export class CreateLocationComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
 
   src: string = '';
-
-  filteredLocations: Observable<Location[]>;
 
   constructor(
     private locationService: LocationService,

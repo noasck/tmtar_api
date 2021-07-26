@@ -63,42 +63,6 @@
       </a>
     </li>
 
-    <!-- <li class="nav-item" routerLink="/files/">
-      <a
-        class="nav-link collapsed"
-        href="#"
-        data-toggle="collapse"
-        data-target="#collapseFiles"
-        aria-expanded="true"
-        aria-controls="collapseFiles"
-      >
-        <span>Files</span>
-      </a>
-      <div id="collapseFiles" class="collapse in" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Actions:</h6>
-          <a class="collapse-item" routerLink="/files/create">Upload</a>
-          <a class="collapse-item" routerLink="/files/read">Get All</a>
-          <a class="collapse-item" routerLink="/files/delete">Delete By ID</a>
-        </div>
-      </div>
-    </li>-->
-
-    <!--<li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLocations" aria-expanded="true" aria-controls="collapseLocations">
-            <i class="fas fa-fw fa-globe"></i>
-            <span>Locations</span>
-          </a>
-          <div id="collapseLocations" class="collapse in" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Actions:</h6>
-              <a class="collapse-item" routerLink="/locations/read">View All</a>
-              <a class="collapse-item" routerLink="/locations/update">Update</a>
-              <a class="collapse-item" routerLink="/locations/delete">Delete</a>
-            </div>
-          </div>
-        </li>-->
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block" />
 
@@ -165,7 +129,7 @@
               aria-haspopup="true" aria-expanded="false">
 
               <span class="text-gray-600" *ngIf="+location==1">Admin location: <i class="fas fa-tree"></i></span>
-              <span class="text-gray-600" *ngIf="+location!=1">Admin location: {{location}}</span>
+              <span class="text-gray-600" *ngIf="+location!=1">Admin location: {{locationName}}</span>
 
 
               <div class="topbar-divider d-none d-sm-block"></div>

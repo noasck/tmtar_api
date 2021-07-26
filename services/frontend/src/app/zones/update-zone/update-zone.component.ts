@@ -76,9 +76,7 @@ export class UpdateZoneComponent implements OnInit {
           }
         });
 
-        this.zoneLocation = res.filter(
-          (location) => location.id == this.fetchedZone.location_id
-        )[0];
+        this.setZoneLocation(this.fetchedZone.location_id)
       },
       (error) => {
         this.errorMessage = error;
@@ -111,9 +109,17 @@ export class UpdateZoneComponent implements OnInit {
     );
 
     this.src = '';
+    this.setZoneLocation(this.fetchedZone.location_id)
+
   }
 
   displayFn(loc: Location): string {
     return loc && loc.name ? loc.name : '';
+  }
+
+  setZoneLocation(id){
+    this.zoneLocation = this.allLocations.filter(
+      (location) => location.id == this.fetchedZone.location_id
+    )[0];
   }
 }

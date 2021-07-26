@@ -12,8 +12,11 @@ import { Location, LocationService } from 'src/app/locations/location.service';
 import { TransferService } from 'src/app/transfer.service';
 import { EventsComponent } from '../events.component';
 import { Event, EventService } from '../events.service';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-
+import {
+  NgxFileDropEntry,
+  FileSystemFileEntry,
+  FileSystemDirectoryEntry,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-create-event',
@@ -22,11 +25,13 @@ import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 
 })
 export class CreateEventComponent implements OnInit {
   event: FormGroup;
-  filteredLocations: Observable<Location[]>;
   allLocations: Location[];
   errorMessage: string;
   picture: FormGroup;
   url: string;
+
+  //search location
+  src: string = '';
 
   public files: NgxFileDropEntry[] = [];
 
@@ -41,6 +46,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //creation form for event
     this.event = new FormGroup({
       title: new FormControl('', [Validators.required]),
       event_type: new FormControl('news', [Validators.required]),
@@ -51,62 +57,26 @@ export class CreateEventComponent implements OnInit {
       image_file_name: new FormControl(null),
     });
 
+    //form for picture
     this.picture = this.formBuilder.group({
       avatar: [],
     });
   }
 
-  getLocations() {
-    this.locationService.getLocations().subscribe(
-      (res) => {
-        this.allLocations = res;
-        //set parentName
-        this.allLocations.map((l) => {
-          if (l.id != 1) {
-            this.locationService.getParentName(l);
-          }
-        });
-        this.transferService.setLocations(this.allLocations);
-
-        //autocomplete
-        this.filteredLocations = this.event.get('location').valueChanges.pipe(
-          startWith(''),
-          map((value) => (typeof value === 'string' ? value : value.name)),
-          map((name) => (name ? this._filter(name) : this.allLocations.slice()))
-        );
-      },
-      (error) => {
-        this.errorMessage = error;
-      },
-      () => { }
-    );
-  }
-
-  displayFn(loc: Location): string {
-    return loc && loc.name ? loc.name : '';
-  }
-
-  private _filter(name: string): Location[] {
-    const filterValue = name.toLowerCase();
-
-    return this.allLocations.filter(
-      (location) => location.name.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-
   onFileChange(picture) {
     if (this.event.get('image_file_name').value) {
-
       //if user wants to change picture, but one was picked, delete it from server
-      this.fileService.deleteFile(this.event.get('image_file_name').value).subscribe(
-        () => { },
-        (error) => {
-          this.errorMessage = error;
-        }
-      );
+      this.fileService
+        .deleteFile(this.event.get('image_file_name').value)
+        .subscribe(
+          () => {},
+          (error) => {
+            this.errorMessage = error;
+          }
+        );
     }
 
-    //upload new picture 
+    //upload new picture
     this.picture.get('avatar').setValue(picture);
     let formData = new FormData();
     formData.append('file', this.picture.get('avatar').value);
@@ -128,8 +98,7 @@ export class CreateEventComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log("pic", file)
-          this.onFileChange(file)
+          this.onFileChange(file);
         });
       } else {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
@@ -148,13 +117,13 @@ export class CreateEventComponent implements OnInit {
       active: formInfo.active,
     };
     if (formInfo.image_file_name) {
-      newEvent.image_file_name = formInfo.image_file_name
+      newEvent.image_file_name = formInfo.image_file_name;
     }
 
     this.eventService.createEvent(newEvent).subscribe(
       (res) => {
         let event = res;
-        this.eventService.getLocationName(event, event.location_id)
+        this.eventService.getLocationName(event, event.location_id);
         this.transferService.fetchedEvents.push(event);
       },
       (error) => {
@@ -163,7 +132,31 @@ export class CreateEventComponent implements OnInit {
     );
     this.event.reset();
     this.picture.get('avatar').setValue(null);
-    this.url = ""
-    this.getLocations()
+    this.url = '';
+    this.src = '';
+    this.getLocations();
+  }
+
+  displayFn(loc: Location): string {
+    return loc && loc.name ? loc.name : '';
+  }
+
+  getLocations() {
+    this.locationService.getLocations().subscribe(
+      (res) => {
+        this.allLocations = res;
+        //set parentName
+        this.allLocations.map((l) => {
+          if (l.id != 1) {
+            this.locationService.getParentName(l);
+          }
+        });
+        this.transferService.setLocations(this.allLocations);
+      },
+      (error) => {
+        this.errorMessage = error;
+      },
+      () => {}
+    );
   }
 }

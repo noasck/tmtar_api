@@ -13,9 +13,11 @@ import { Zone, ZonesService } from '../zones.service';
 export class CreateZoneComponent implements OnInit {
   zone: FormGroup;
 
-  filteredLocations: Observable<Location[]>; //for autocomplete
   allLocations: Location[];
   errorMessage: string;
+
+  //search location
+  src: string = '';
 
   @Input() fetchedCoordinates: any; // object {lat:  number, lng: number}
   @Output() close = new EventEmitter<void>();
@@ -68,15 +70,16 @@ export class CreateZoneComponent implements OnInit {
     this.zoneService.createZone(newZone).subscribe(
       (res) => {
         this.create.emit(res);
-        this.close.emit()
+        this.close.emit();
       },
       (error) => {
         this.errorMessage = error;
       },
       () => {}
     );
-    
+
     this.zone.reset();
+    this.src = ''
   }
 
   getLocations() {
@@ -97,13 +100,6 @@ export class CreateZoneComponent implements OnInit {
             this.locationService.getParentName(l);
           }
         });
-
-        //autocomplete
-        this.filteredLocations = this.zone.get('location').valueChanges.pipe(
-          startWith(''),
-          map((value) => (typeof value === 'string' ? value : value.name)),
-          map((name) => (name ? this._filter(name) : this.allLocations.slice()))
-        );
       },
       (error) => {
         this.errorMessage = error;
@@ -114,13 +110,5 @@ export class CreateZoneComponent implements OnInit {
 
   displayFn(loc: Location): string {
     return loc && loc.name ? loc.name : '';
-  }
-
-  private _filter(name: string): Location[] {
-    const filterValue = name.toLowerCase();
-
-    return this.allLocations.filter(
-      (location) => location.name.toLowerCase().indexOf(filterValue) === 0
-    );
   }
 }

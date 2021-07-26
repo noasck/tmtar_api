@@ -34,8 +34,6 @@ export class ReadLocationComponent implements OnInit {
           }
         })
         this.transferService.setLocations(this.fetchedLocations);
-
-        console.log(this.fetchedLocations)
       },
       (error) => {
         this.errorMessage = error;

@@ -19,10 +19,7 @@ export class CreateLocationComponent implements OnInit {
 
   src: string = '';
 
-  constructor(
-    private locationService: LocationService
-  ) {
-  }
+  constructor(private locationService: LocationService) {}
 
   ngOnInit(): void {
     this.location = new FormGroup({
@@ -32,13 +29,8 @@ export class CreateLocationComponent implements OnInit {
   }
 
   createLocation() {
-    const index = this.allLocations.reduce(function (prev, current) {
-      return prev.id > current.id ? prev : current;
-    });
-
     let data = this.location.value;
     let newLocation = {
-      id: index.id + 1,
       name: data.name,
       root: data.root.id,
     };

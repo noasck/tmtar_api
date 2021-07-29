@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Location, LocationService } from '../../location.service';
 
 @Component({
@@ -10,7 +6,6 @@ import { Location, LocationService } from '../../location.service';
   templateUrl: './loc-box.component.html',
   styleUrls: ['./loc-box.component.scss'],
 })
-
 export class LocBoxComponent implements OnInit {
   locationChange: Location;
   deleteLoc: Location;

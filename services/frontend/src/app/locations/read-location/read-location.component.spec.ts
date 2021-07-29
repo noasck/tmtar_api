@@ -7,11 +7,14 @@ import { environment as env } from 'src/environments/environment';
 import { LocationService } from '../location.service.js';
 import { ReadLocationComponent } from './read-location.component.js';
 import locations from '../../shared/mockDB/locations.js';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
+import { LocBoxComponent } from './loc-box/loc-box.component.js';
 
 describe('LocationComponent', () => {
   let service: LocationService;
   let component: ReadLocationComponent;
+
+  let locBox: LocBoxComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,6 +35,7 @@ describe('LocationComponent', () => {
 
     service = TestBed.inject(LocationService);
     component = new ReadLocationComponent(service);
+    locBox = new LocBoxComponent(service);
   });
 
   it('should be created', () => {
@@ -46,5 +50,14 @@ describe('LocationComponent', () => {
     component.ngOnInit();
     let fetchedLocations = component.fetchedLocations;
     expect(fetchedLocations.length).toBe(locations.length);
+  });
+
+  it('delete location by id', () => {
+    locBox.allLocations = locations;
+    let spy = spyOn(service, 'deleteLocationByID').and.returnValue(EMPTY);
+
+    locBox.deleteLocation(true, 7);
+
+    expect(spy).toHaveBeenCalledWith(7);
   });
 });

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location, LocationService } from '../location.service';
-import { TransferService } from '../../transfer.service';
 
 @Component({
   selector: 'app-update-location',
@@ -11,18 +10,13 @@ import { TransferService } from '../../transfer.service';
 export class UpdateLocationComponent implements OnInit {
   public location: FormGroup;
   errorMsg: string;
-  allLocations: Location[];
   parent: Location;
 
+  @Input() allLocations: Location[];
   @Output() close = new EventEmitter<void>();
   @Input() fetchedLocation: Location;
 
-  constructor(
-    private locationService: LocationService,
-    private transferService: TransferService
-  ) {
-    this.allLocations = this.transferService.locations;
-  }
+  constructor(private locationService: LocationService) {}
 
   ngOnInit(): void {
     // get parent of fetchedLocation and create form on component initialization
@@ -58,7 +52,6 @@ export class UpdateLocationComponent implements OnInit {
               location.name = res.name;
             }
           });
-          this.transferService.setLocations(this.allLocations);
         },
         (error) => {
           this.errorMsg = String(error);

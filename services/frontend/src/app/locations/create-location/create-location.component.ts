@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location, LocationService } from '../location.service';
-import { TransferService } from '../../transfer.service';
-import { Observable } from 'rxjs';
 export interface User {
   name: string;
 }
@@ -14,17 +12,16 @@ export interface User {
 export class CreateLocationComponent implements OnInit {
   location: FormGroup;
   errorMessage: string;
-  allLocations: Location[];
   parent: Location;
+
+  @Input() allLocations: Location[];
   @Output() close = new EventEmitter<void>();
 
   src: string = '';
 
   constructor(
-    private locationService: LocationService,
-    private transferService: TransferService
+    private locationService: LocationService
   ) {
-    this.allLocations = this.transferService.locations;
   }
 
   ngOnInit(): void {
@@ -50,9 +47,6 @@ export class CreateLocationComponent implements OnInit {
       (response) => {
         response.parentName = data.root.name;
         this.allLocations.push(response);
-        this.transferService.setLocations(this.allLocations);
-
-        this.allLocations = this.transferService.locations;
       },
 
       (error) => {

@@ -1,18 +1,16 @@
 import {
   Component,
-  EventEmitter,
   Input,
-  OnInit,
-  Output,
-  SimpleChanges,
+  OnInit
 } from '@angular/core';
 import { Location, LocationService } from '../../location.service';
-import { TransferService } from '../../../transfer.service';
+
 @Component({
   selector: 'app-loc-box',
   templateUrl: './loc-box.component.html',
   styleUrls: ['./loc-box.component.scss'],
 })
+
 export class LocBoxComponent implements OnInit {
   locationChange: Location;
   deleteLoc: Location;
@@ -25,14 +23,9 @@ export class LocBoxComponent implements OnInit {
   @Input() show: boolean;
   @Input() allLocations: Location[];
 
-  constructor(
-    private transferService: TransferService,
-    private locationService: LocationService
-  ) {}
+  constructor(private locationService: LocationService) {}
 
-  ngOnInit(): void {
-    this.allLocations = this.transferService.getLocations();
-  }
+  ngOnInit(): void {}
 
   showLocation(locationId) {
     //open/close(show) location from root
@@ -47,7 +40,6 @@ export class LocBoxComponent implements OnInit {
           this.allLocations = this.allLocations.filter(
             (user) => user.id != deleteId
           );
-          this.transferService.setLocations(this.allLocations);
         },
         (error) => {
           this.errorMessage = error;

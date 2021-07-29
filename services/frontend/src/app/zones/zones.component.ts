@@ -19,6 +19,7 @@ export class ZonesComponent implements OnInit {
   fetchedZones: Zone[] = [];
   errorMessage: string;
   zone: FormGroup;
+  fetched: boolean = false;
 
   delZone: marker = null; //open deletion
   zoneForUpdate: Zone = null;

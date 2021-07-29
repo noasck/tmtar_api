@@ -23,6 +23,7 @@ export class ReadLocationComponent implements OnInit {
     this.fetched = false;
     this.getLocations();
   }
+
   getLocations() {
     this.locationService.getLocations().subscribe(
       (res) => {

@@ -1,50 +1,50 @@
-/*import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ReadLocationComponent } from './read-location.component';
-import { Location, LocationService } from '../location.service';
-import { TransferService } from 'src/app/transfer.service';
-import { EMPTY, of } from 'rxjs';
-import { LocBoxComponent } from './loc-box/loc-box.component';
+import { TestBed } from '@angular/core/testing';
+import { Auth0Service } from 'src/app/shared/services/auth.service';
+import { RouterModule } from '@angular/router';
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from 'src/environments/environment';
+import { LocationService } from '../location.service.js';
+import { ReadLocationComponent } from './read-location.component.js';
+import locations from '../../shared/mockDB/locations.js';
+import { of } from 'rxjs';
 
-describe('ReadLocationComponent', () => {
+describe('LocationComponent', () => {
+  let service: LocationService;
   let component: ReadLocationComponent;
-  let locComponent: LocBoxComponent
-  let locationService: LocationService;
-  let transferService: TransferService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ReadLocationComponent],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
-      ]
-    })
-      .compileComponents();
-    locationService = TestBed.inject(LocationService);
-    transferService = TestBed.inject(TransferService);
-    component = new ReadLocationComponent(locationService, transferService);
-    locComponent = new LocBoxComponent(transferService, locationService)
+        HttpClientTestingModule,
+        RouterModule.forRoot([
+          { path: 'locations/read', component: ReadLocationComponent },
+        ]),
+        AuthModule.forRoot({
+          ...env.auth,
+          httpInterceptor: {
+            allowedList: [`${env.apiUrl}/`],
+          },
+        }),
+      ],
+      providers: [Auth0Service],
+    });
+
+    service = TestBed.inject(LocationService);
+    component = new ReadLocationComponent(service);
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ngOnInit()', () => {
-    let locations: Location[] = [{ id: 1, name: 'root', root: null }, { id: 2, name: 'lviv', root: 1 }, { id: 3, name: 'ukraine', root: 1 }]
+  it('get all locations', () => {
+    spyOn(service, 'getLocations').and.callFake(() => {
+      return of(locations);
+    });
 
-    const spy = spyOn(locationService, "getLocations").and.callFake(() => {
-      return of(locations)
-    })
-    component.ngOnInit()
-    expect(spy).toHaveBeenCalled()
+    component.ngOnInit();
+    let fetchedLocations = component.fetchedLocations;
+    expect(fetchedLocations.length).toBe(locations.length);
   });
-
-  it('deleteLocation()', () => {
-    const spy = spyOn(locationService, "deleteLocationByID").and.callFake(() => {
-      return EMPTY
-    })
-    locComponent.deleteLocation(true, null)
-    expect(spy).toHaveBeenCalled()
-  });
-});*/
+});

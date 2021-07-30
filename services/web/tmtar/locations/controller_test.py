@@ -101,6 +101,14 @@ class TestLocationIdResource:
             expected = dict(status="Success", id=123)
             assert result == expected
 
+    def test_delete_1(self, client: FlaskClient, token: str):
+        with client:
+            result = client.delete(f"/api/{BASE_ROUTE}/1",
+                                   headers={
+                                       "Authorization": f"Bearer {token}"
+                                   }).get_json()
+            assert result['message'] == 'Cannot delete root location.'
+
     @patch.object(LocationService, "get_by_id",
                   lambda location_id: make_location(location_id=location_id))
     @patch.object(LocationService, "update", make_update)

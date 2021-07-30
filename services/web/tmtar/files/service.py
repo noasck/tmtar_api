@@ -1,5 +1,3 @@
-import random
-import string
 from typing import List
 
 from ..project.abstract.abstract_service import AbstractService
@@ -8,23 +6,6 @@ from .interface import IFile
 from .model import File
 
 db = Injector.db
-
-
-class AliasGenerator(object):
-    """Generates alias for filename."""
-
-    @classmethod
-    def random_string_generator(
-        cls,
-        str_size: int = 40,
-        allowed_chars=string.ascii_letters,
-    ) -> str:
-        """Return a random string for file alias."""
-        return ''.join(
-            random.choice(  # noqa: S311
-                allowed_chars,
-            ) for _ in range(str_size)
-        )
 
 
 class FileService(AbstractService[File, IFile]):

@@ -1,4 +1,5 @@
 from ..project.injector import Injector
+from .constants import SEX_FIELD_LENGTH
 from .interface import IUser
 
 db = Injector.db
@@ -13,10 +14,11 @@ class User(db.Model):
     bdate = db.Column(db.Date, nullable=True)
     location_id = db.Column(
         db.Integer,
-        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET NULL'),
-        nullable=True,
+        db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET DEFAULT'),
+        server_default='1',
+        nullable=False,
     )
-    sex = db.Column(db.String, nullable=True)
+    sex = db.Column(db.String(SEX_FIELD_LENGTH), nullable=True)
     admin_location_id = db.Column(
         db.Integer,
         db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='SET NULL'),

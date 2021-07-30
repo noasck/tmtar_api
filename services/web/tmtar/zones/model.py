@@ -3,10 +3,10 @@ from geoalchemy2 import Geography
 from sqlalchemy.orm import backref
 
 from ..project.injector import Injector
+from .constants import Constants
 from .interface import IZone
 
 db: SQLAlchemy = Injector.db
-SRID = 4326
 
 
 class Zone(db.Model):
@@ -14,17 +14,24 @@ class Zone(db.Model):
 
     __tablename__ = 'zones'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String, nullable=False)
+    title = db.Column(db.String(Constants.title_max_length), nullable=False)
+    description = db.Column(db.String(Constants.description_max_length), nullable=True)
+    actual_address = db.Column(db.String, nullable=True)
     location_id = db.Column(
         db.Integer,
-        db.ForeignKey('locations.id', ondelete='CASCADE', onupdate='CASCADE'),
+        db.ForeignKey('locations.id', ondelete='SET DEFAULT', onupdate='CASCADE'),
+        server_default='1',
         nullable=False,
     )
-
+    preview_image_filename = db.Column(
+        db.String,
+        db.ForeignKey('files.filename', ondelete='SET NULL', onupdate='CASCADE'),
+        nullable=True,
+    )
     center = db.Column(
         Geography(
             geometry_type='POINT',
-            srid=SRID,
+            srid=Constants.SRID,
         ),
         index=True,
         nullable=False,
@@ -47,6 +54,15 @@ class Zone(db.Model):
 
     location = db.relationship(
         'Location',
+        backref=backref(
+            'zones',
+            passive_deletes='all',
+            lazy='select',
+        ),
+        lazy='noload',
+    )
+    preview_image = db.relationship(
+        'File',
         backref=backref(
             'zones',
             passive_deletes='all',

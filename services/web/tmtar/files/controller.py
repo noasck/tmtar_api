@@ -1,4 +1,5 @@
 import os
+import uuid
 from http import HTTPStatus
 from typing import List
 
@@ -12,7 +13,7 @@ from ..project.decorators.access_control import access_restriction
 from ..project.injector import Injector
 from ..project.types import Role
 from .schema import FileSchema
-from .service import AliasGenerator, File, FileService, IFile
+from .service import File, FileService, IFile
 
 app = Injector.app
 media_folder = app.config['MEDIA_FOLDER']
@@ -51,14 +52,14 @@ class FileResource(Resource):
         args = file_upload.parse_args()
         if args['file']:
             filename, file_extension = os.path.splitext(args['file'].filename)
-            alias = AliasGenerator.random_string_generator() + file_extension
+            alias = str(uuid.uuid4()) + file_extension
             destination = os.path.join(media_folder, alias)
             if not os.path.exists(media_folder):
                 os.makedirs(media_folder)
             args['file'].save(destination)
             return FileService.create(IFile(filename=alias))
         else:
-            abort(HTTPStatus.NOT_FOUND.value, message='File not sent')
+            abort(HTTPStatus.NOT_FOUND.value, message='File was not sent.')
 
 
 @api.route('/<path:filename>')

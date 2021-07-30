@@ -1,4 +1,5 @@
 from ..project.injector import Injector
+from .constants import FILENAME_MAX_LENGTH
 
 db = Injector.db
 
@@ -8,7 +9,7 @@ class File(db.Model):  # noqa: WPS110
 
     __tablename__ = 'files'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    filename = db.Column(db.String, nullable=False, unique=True)
+    filename = db.Column(db.String(FILENAME_MAX_LENGTH), nullable=False, index=True)
 
     # Relations
 

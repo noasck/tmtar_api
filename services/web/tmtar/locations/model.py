@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
 from ..project.injector import Injector
+from .constants import NAME_MAX_LENGTH
 from .interface import ILocation
 
 db: SQLAlchemy = Injector.db
@@ -13,7 +14,7 @@ class Location(db.Model):
 
     __tablename__ = 'locations'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(NAME_MAX_LENGTH), nullable=False)
     root = db.Column(
         db.Integer,
         db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),

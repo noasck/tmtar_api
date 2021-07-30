@@ -1,9 +1,10 @@
+import http
 from typing import List
 
 from flask import jsonify, request
 from flask_accepts import accepts, responds
 from flask_cors import cross_origin
-from flask_restx import Namespace, Resource
+from flask_restx import Namespace, Resource, abort
 
 from ..project.decorators.access_control import access_restriction
 from ..project.types import Role
@@ -73,6 +74,12 @@ class LocationIdResource(Resource):
     @access_restriction(required_role=Role.root, api=api)
     def delete(self, location_id: int):
         """Delete single Location."""
+        if location_id == 1:
+            abort(
+                message='Cannot delete root location.',
+                code=http.HTTPStatus.FORBIDDEN.value,
+            )
+
         deleted_id = LocationService.delete_by_id(location_id)
 
         return jsonify({'status': 'Success', 'id': deleted_id})

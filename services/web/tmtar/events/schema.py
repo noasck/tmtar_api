@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields, validate
 
 from ..project.types import EventType
+from .constants import Constants
 
 
 class EventSchema(Schema):
@@ -18,10 +19,12 @@ class EventSchema(Schema):
     title = fields.String(
         attribute='title',
         required=True,
+        validate=validate.Length(Constants.title_min_length, Constants.title_max_length),
     )
     short_description = fields.String(
         attribute='short_description',
-        required=True,
+        required=False,
+        validate=validate.Length(max=Constants.short_desc_max_length),
     )
     description = fields.String(attribute='description')
     image_file_name = fields.String(attribute='image_file_name')
@@ -31,9 +34,7 @@ class EventSchema(Schema):
 class UpdateEventSchema(EventSchema):
     title = fields.String(
         attribute='title',
-    )
-    short_description = fields.String(
-        attribute='short_description',
+        validate=validate.Length(Constants.title_min_length, Constants.title_max_length),
     )
     event_type = fields.String(
         attribute='event_type',

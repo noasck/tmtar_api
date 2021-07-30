@@ -21,7 +21,7 @@ def test_update_schema():
 def test_schema_works():
     result: List[IZone] = ZoneSchema(many=True).load(
         [{
-            "title": "t1",
+            "title": "sample_title1",
             "location_id": "1",
             "latitude": "1.123123",
             "longitude": "1.234234",
@@ -29,7 +29,7 @@ def test_schema_works():
         },
 
         {
-            "title": "t1",
+            "title": "sample_title1",
             "location_id": "1",
             "latitude": "1.123123",
             "longitude": "1.234234",
@@ -37,7 +37,7 @@ def test_schema_works():
         }],
     )
 
-    assert result[0]['title'] == 't1'
+    assert result[0]['title'] == 'sample_title1'
     assert result[0]['location_id'] == 1
     assert result[0]['center'] is not None
     assert result[0]['radius'] == 234
@@ -81,16 +81,16 @@ def test_update_schema_works():
     result: List[IZone] = ZoneUpdateSchema(many=True).load(
         [
             {
-                "title": "t111",
+                "title": "sample_title1",
                 "longitude": "34.234234",
                 "latitude": "34.3242342",
             },
             {
-                "title": "t111",
+                "title": "sample_title1",
                 "longitude": "34.234234",
             },
             {
-                "title": "t111",
+                "title": "sample_title1",
                 "latitude": "34.3242342",
             }
         ]

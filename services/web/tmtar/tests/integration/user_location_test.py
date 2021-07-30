@@ -27,6 +27,6 @@ def test_user_location_relation(db: SQLAlchemy):
 
     assert len(users) == 4
     assert u2 in users and u1 in users
-    assert u1.location_id is None
+    assert u1.location_id == 1
     assert u2.location_id == 3
     assert u1.admin_location_id is None

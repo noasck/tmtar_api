@@ -2,11 +2,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column
 
 from ..project.injector import Injector
+from .constants import Constants
 from .interface import IEvent
 
 db: SQLAlchemy = Injector.db
-
-min_string = 255
 
 
 class Event(db.Model):
@@ -14,7 +13,11 @@ class Event(db.Model):
 
     __tablename__ = 'events'
     id: Column = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    event_type: Column = db.Column(db.String(min_string), nullable=False, index=True)
+    event_type: Column = db.Column(
+        db.String(Constants.event_type_length),
+        nullable=False,
+        index=True,
+    )
     location_id: Column = db.Column(
         db.Integer,
         db.ForeignKey('locations.id', onupdate='CASCADE', ondelete='CASCADE'),
@@ -28,8 +31,8 @@ class Event(db.Model):
         nullable=False,
         index=True,
     )
-    title = db.Column(db.String, nullable=False)
-    short_description = db.Column(db.String(min_string), nullable=True)
+    title = db.Column(db.String(Constants.title_max_length), nullable=False)
+    short_description = db.Column(db.String(Constants.short_desc_max_length), nullable=True)
     description = db.Column(db.Text, nullable=True)
     image_file_name = db.Column(
         db.String,

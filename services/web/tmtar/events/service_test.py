@@ -28,7 +28,7 @@ def create_event(
         event_type=EventType[0],
         location_id=1,
         update_date=time_now,
-        title="Sample",
+        title="Sample_event_title",
         short_description="""The plugin adds a random text generator, capable
                  of creating witty texts in different genres. Created text can be inserted newly at the caret,
                  or replace a selection.""",
@@ -109,7 +109,7 @@ class TestSecuredEventUpdate:
 
     @patch.object(LocationService, 'has_permission', lambda *args: True)
     def test_case1(self, db: SQLAlchemy, sample_file: File):
-        event_upd = IEvent(active=True, title='Wubba Lubba')
+        event_upd = IEvent(active=True, title='Wubba Lubba 1')
         event = Event(**create_event(active=False))
 
         db.session.add(event)
@@ -120,11 +120,11 @@ class TestSecuredEventUpdate:
 
         assert len(events) == 1
 
-        assert events[0].title == 'Wubba Lubba'
+        assert events[0].title == 'Wubba Lubba 1'
 
     @patch.object(LocationService, 'has_permission', lambda *args: False)
     def test_case2(self, db: SQLAlchemy, sample_file: File):
-        event_upd = IEvent(active=True, title='Wubba Lubba')
+        event_upd = IEvent(active=True, title='Wubba Lubba 1')
         event = Event(**create_event(active=False))
 
         db.session.add(event)
@@ -137,7 +137,7 @@ class TestSecuredEventUpdate:
 
     @patch.object(LocationService, 'has_permission', lambda *args: True)
     def test_case3(self, db: SQLAlchemy, sample_file: File):
-        event_upd = IEvent(active=True, title='Wubba Lubba', location_id=2)
+        event_upd = IEvent(active=True, title='Wubba Lubba 1', location_id=2)
         event = Event(**create_event(active=False))
 
         LocationService.create({"id": 2, "name": "loc1", "root": 1})
@@ -150,14 +150,14 @@ class TestSecuredEventUpdate:
 
         assert len(events) == 1
 
-        assert events[0].title == 'Wubba Lubba'
+        assert events[0].title == 'Wubba Lubba 1'
 
         assert events[0].location_id == 2
 
     # returns True for first check and False for second (see Service class).
     @patch.object(LocationService, 'has_permission', lambda l1, l2: l2 == 42)
     def test_case4(self, db: SQLAlchemy, sample_file: File):
-        event_upd = IEvent(active=True, title='Wubba Lubba', location_id=2)
+        event_upd = IEvent(active=True, title='Wubba Lubba 1', location_id=2)
         event = Event(**create_event(active=False))
 
         LocationService.create({"id": 2, "name": "loc1", "root": 1})
@@ -270,8 +270,8 @@ def test_search_by_title(db: SQLAlchemy, sample_file: File):
     e2 = Event(**create_event(title="Sample_Event2", location_id=2, active=False))
     e4 = Event(**create_event(location_id=3))
 
-    eg1 = Event(**create_event(title="Sample1", location_id=1, event_type=event_type_to_find))
-    eg3 = Event(**create_event(title="Sample2", location_id=1, active=False))
+    eg1 = Event(**create_event(title="Wubba Lubba 2", location_id=1, event_type=event_type_to_find))
+    eg3 = Event(**create_event(title="Wubba Lubba 3", location_id=1, active=False))
 
     db.session.add_all([e1, e2, e4, eg1, eg3])
     db.session.commit()

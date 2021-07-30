@@ -1,10 +1,19 @@
 ## Versions
+### s.05 (Current)
+#### Changes:
+1. Changed **files** name resolution and generator. Now UUID4 used. Should be manually tested by client.
+2. Changed **zones** schema. Several new fields added.
+3. Fixed **events** schema. Reviewed required fields.
+4. Fixed **user, events, zones, files** model. Major fixes, client fixes required.
 
-### s.04 (Current)
+--------------------------------------------------------
+
+### s.04
 #### Changes:
 1. Added **Zone** instance.
 2. Added ```/users/profile``` route to obtain info about current user.
 3. Added related tests.
+
 --------------------------------------------------------
 ### s.031
 #### Changes:

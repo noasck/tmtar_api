@@ -21,7 +21,7 @@ def create_zone(
     title="Sample_title",
     location_id=1,
     center=WKTElement('POINT(3.546456 45.6567456)', srid=4326),
-    radius: float = 10.0,
+    radius: float = 50.0,
     active=True,
     secret=False
 ) -> IZone:
@@ -74,11 +74,11 @@ class TestZonesResource:
             result = client.post(
                 f"/api/{BASE_ROUTE}/",
                 json={
-                    'title': 'zone1',
+                    'title': 'sample_title1',
                     'longitude': '3.546456',
                     'latitude': '45.6567456',
                     'location_id': '1',
-                    'radius': '10',
+                    'radius': '50',
                     'secret': False,
                     'active': True
                 },
@@ -87,7 +87,7 @@ class TestZonesResource:
                 }
             ).get_json()
             expected = (ZoneSchema().dump(
-                Zone(**create_zone(zone_id=None, title='zone1'))
+                Zone(**create_zone(zone_id=None, title='sample_title1'))
             ))
             assert result == expected
 

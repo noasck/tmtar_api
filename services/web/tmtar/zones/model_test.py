@@ -14,6 +14,9 @@ def zone() -> Zone:
         active=True,
         radius=123,
         center=func.ST_MakePoint(3.546456, 45.6567456),
+        preview_image_filename="sdfsdf.sdf",
+        description='sdfgdfgdfgdfgdfg',
+        actual_address='sdfsdfsdf'
     )
 
 

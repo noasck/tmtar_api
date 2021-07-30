@@ -18,7 +18,7 @@ def create_event(
         event_type=EventType[0],
         location_id=1,
         update_date=time_now,
-        title="Sample",
+        title="Sample_event_title",
         short_description="""The plugin adds a random text generator, capable
                  of creating witty texts in different genres. Created text can be inserted newly at the caret,
                  or replace a selection.""",
@@ -54,7 +54,7 @@ class TestEventsResource:
     @patch.object(SecureEventService, 'create', lambda fields, *args, **kwargs: create_event(**fields))
     def test_post(self, client: FlaskClient, token: str):
         with client:
-            payload = dict(title="Sample1", short_description="sjdnfsjdnffnsdf", event_type=EventType[0])
+            payload = dict(title="Sample_event_title", short_description="sjdnfsjdnffnsdf", event_type=EventType[0])
             result: IEvent = client.post(f'/api/{BASE_ROUTE}/',
                                  json=payload,
                                  headers={

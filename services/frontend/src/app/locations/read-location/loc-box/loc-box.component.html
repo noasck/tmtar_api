@@ -1,47 +1,90 @@
-<app-delete-location *ngIf="deleteLoc" (deleteOption)="deleteLocation($event, deleteLoc.id)"
-  [location]="deleteLoc.name"></app-delete-location>
-<app-update-location *ngIf="locationChange" (close)="edit = false; locationChange = undefined"
-  [fetchedLocation]="locationChange"></app-update-location>
+<app-delete-location
+  *ngIf="deleteLoc"
+  (deleteOption)="deleteLocation($event, deleteLoc.id)"
+  [location]="deleteLoc.name"
+></app-delete-location>
+<app-update-location
+  *ngIf="locationChange"
+  (close)="edit = false; locationChange = undefined"
+  [fetchedLocation]="locationChange"
+  [allLocations]="allLocations"
+></app-update-location>
 
 <ul *ngIf="show">
   <div *ngFor="let l of allLocations">
     <li class="locationName" *ngIf="l.root == locationRoot">
       <!-- icon for root -->
       <div class="icon" *ngIf="l.root == null">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2E8B57" class="bi bi-tree-fill"
-          viewBox="0 0 16 16">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="#2E8B57"
+          class="bi bi-tree-fill"
+          viewBox="0 0 16 16"
+        >
           <path
-            d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777l-3-4.5z" />
+            d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777l-3-4.5z"
+          />
         </svg>
       </div>
       <!-- icon for delete -->
       <div class="icon" *ngIf="l.root != null" (click)="deleteLoc = l">
-        <svg class="delete" width="0.7em" height="0.7em" viewBox="0 0 16 16" class="bi bi-trash" fill="#dc3545"
-          xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="delete"
+          width="0.7em"
+          height="0.7em"
+          viewBox="0 0 16 16"
+          class="bi bi-trash"
+          fill="#dc3545"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
-            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-          <path fill-rule="evenodd"
-            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+          />
         </svg>
       </div>
       <!-- icon for edit -->
-      <div class="icon" *ngIf="l.root != null" (click)="locationChange = l; edit = false">
-        <svg width="0.7em" height="0.7em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="#17a2b8"
-          xmlns="http://www.w3.org/2000/svg">
+      <div
+        class="icon"
+        *ngIf="l.root != null"
+        (click)="locationChange = l; edit = false"
+      >
+        <svg
+          width="0.7em"
+          height="0.7em"
+          viewBox="0 0 16 16"
+          class="bi bi-pencil-square"
+          fill="#17a2b8"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
-            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-          <path fill-rule="evenodd"
-            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
         </svg>
       </div>
       <!-- list item -->
-      <a (click)="showLocation(l.id)">{{l.name}}</a>
-
+      <a (click)="showLocation(l.id)">{{ l.name }}</a>
     </li>
-    <app-loc-box *ngIf="l.root == locationRoot && showLocs[l.id]" [show]="showLocs[l.id]" [locationRoot]="places[l.id]"
-      [allLocations]="allLocations"></app-loc-box>
+    <app-loc-box
+      *ngIf="l.root == locationRoot && showLocs[l.id]"
+      [show]="showLocs[l.id]"
+      [locationRoot]="places[l.id]"
+      [allLocations]="allLocations"
+    ></app-loc-box>
   </div>
-
 </ul>
 
-<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

@@ -1,5 +1,5 @@
 <div class="read-locations">
-  <app-create-location *ngIf="create" (close)="create = false"></app-create-location>
+  <app-create-location *ngIf="create" (close)="create = false" [allLocations]="fetchedLocations"></app-create-location>
   <div class="but">
     <button type="button" class="btn btn-primary" (click)="create = true"><a>Create</a></button>
   </div>

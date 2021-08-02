@@ -17,6 +17,8 @@ export class FileComponent implements OnInit {
   fileDel: FileResponse;
   indicator: boolean = false;
 
+  url: string = '';
+
   constructor(
     private fileService: FileService,
     private formBuilder: FormBuilder
@@ -79,8 +81,8 @@ export class FileComponent implements OnInit {
   }
 
   getFileByName(filename) {
+    console.log(this.fileService.getFileByName(filename))
     return this.fileService.getFileByName(filename);
-    //window.location.href = this.fileService.getFileByName(filename)
   }
 
   byField(field) {

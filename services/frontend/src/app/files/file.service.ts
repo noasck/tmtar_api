@@ -7,17 +7,20 @@ import { RepositoryService } from '../shared/services/repository.service';
 export interface FileResponse {
   id: number;
   filename: string;
-  
+
   extention?: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileService {
   ROUTE = 'files/';
 
-  constructor(private repo: RepositoryService, private envUrl: EnvironmentUrlService) { }
+  constructor(
+    private repo: RepositoryService,
+    private envUrl: EnvironmentUrlService
+  ) {}
 
   postFile(data): Observable<FileResponse> {
     return this.repo.create<FileResponse>(this.ROUTE, data);
@@ -28,10 +31,10 @@ export class FileService {
   }
 
   deleteFile(filename): Observable<null> {
-    return this.repo.delete<null>(this.ROUTE + filename)
+    return this.repo.delete<null>(this.ROUTE + filename);
   }
 
-  getFileByName(filename): string {
-    return this.envUrl.apiUrl + '/' + this.ROUTE + filename
+  getFileByName(filename) {
+    return this.envUrl.apiUrl + '/' + this.ROUTE + filename;
   }
 }

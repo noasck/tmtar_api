@@ -88,18 +88,18 @@ export class ReadEventComponent implements OnInit {
 
   setEventForm() {
     this.event = new FormGroup({
-      title: new FormControl(this.fetchedEvent.title, [Validators.required]),
+      title: new FormControl(this.fetchedEvent.title, [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(200),
+      ]),
       event_type: new FormControl(this.fetchedEvent.event_type, [
         Validators.required,
       ]),
       location: new FormControl(this.eventLocation),
-      short_description: new FormControl(this.fetchedEvent.short_description, [
-        Validators.required,
-      ]),
-      description: new FormControl(this.fetchedEvent.description, [
-        Validators.required,
-      ]),
-      active: new FormControl(this.fetchedEvent.active, [Validators.required]),
+      short_description: new FormControl(this.fetchedEvent.short_description),
+      description: new FormControl(this.fetchedEvent.description),
+      active: new FormControl(this.fetchedEvent.active),
       image_file_name: new FormControl(this.fetchedEvent.image_file_name),
     });
 
@@ -157,7 +157,7 @@ export class ReadEventComponent implements OnInit {
       }
     );
 
-    this.src = ''
+    this.src = '';
   }
 
   deleteOldPhoto() {

@@ -21,15 +21,15 @@
             
             <!-- date and location of event -->
             <small *ngIf="event.locationName == 'root'" id="date-loc">
-                {{event.update_date | date:'MMM d, y, h:mm a'}},
+                {{event.update_date | date:'MMM d, y, h:mm a'}} 
                 <i class="fas fa-tree"></i>
             </small>
             <small *ngIf="event.parentLocationName == 'root'" id="date-loc">
-                {{event.update_date | date:'MMM d, y, h:mm a'}}, {{event.locationName}}
+                {{event.update_date | date:'MMM d, y, h:mm a'}} {{event.locationName}}
                 (<i class="fas fa-tree"></i>)
             </small>
             <small *ngIf="event.locationName != 'root' && event.parentLocationName != 'root'"
-                id="date-loc">{{event.update_date | date:'MMM d, y, h:mm a'}},
+                id="date-loc">{{event.update_date | date:'MMM d, y, h:mm a'}} 
                 {{event.locationName}}({{event.parentLocationName}})</small>
 
             <!-- event`s short description and image -->

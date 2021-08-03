@@ -94,14 +94,13 @@ body {
   transition-duration: 0.3;
 }
 
-input,
-textarea {
+input {
   &.formVal.ng-invalid.ng-touched {
     border: 2px solid #d9534f;
   }
-  &.formVal.ng-valid.ng-touched {
+  /* &.formVal.ng-valid.ng-touched {
     border: 1px solid green;
-  }
+  }*/
 }
 
 .fa-tree {
@@ -116,4 +115,3 @@ textarea {
 .active-link {
   color: white;
 }
-

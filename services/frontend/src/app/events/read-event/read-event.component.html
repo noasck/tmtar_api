@@ -11,22 +11,22 @@
         *ngIf="eventLocation.id != 1 && eventLocation.root != 1"
       >
         <small *ngIf="fetchedEvent.update_date"
-          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
-        >
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }}
+        </small>
         {{ eventLocation.name }}({{ eventLocation.parentName }})
       </p>
 
       <p class="locat-date" *ngIf="eventLocation.id == 1">
         <small *ngIf="fetchedEvent.update_date"
-          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
-        >
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }}
+        </small>
         <i class="fas fa-tree"></i>
       </p>
 
       <p class="locat-date" *ngIf="eventLocation.root == 1">
         <small *ngIf="fetchedEvent.update_date"
-          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }},</small
-        >
+          >{{ fetchedEvent.update_date | date: "MMM d, y, h:mm a" }}
+        </small>
         {{ eventLocation.name }}
         (<i class="fas fa-tree"></i>)
       </p>
@@ -55,7 +55,7 @@
       <div class="inl-group row">
         <!--TITLE-->
         <div class="form-group col-7">
-          <label for="title">Title</label>
+          <label for="title">Title*</label>
           <input
             formControlName="title"
             type="text"
@@ -69,12 +69,22 @@
             <small *ngIf="event.get('title').errors.required">
               Field "title" can’t be empty
             </small>
+
+            <small *ngIf="event.get('title').errors.minlength">
+              Length must be greater than
+              {{ event.get("title").errors.minlength.requiredLength }}
+              characters.
+            </small>
+
+            <small *ngIf="event.get('title').errors.maxlength">
+              Length must be less than 200 characters.
+            </small>
           </div>
         </div>
 
         <!-- EVENT TYPE -->
         <div class="form-group col-2">
-          <label for="event-type">Event type</label>
+          <label for="event-type">Event type*</label>
           <select
             class="form-select form-control formVal"
             formControlName="event_type"
@@ -100,7 +110,7 @@
       <div class="inl-group row">
         <!-- LOCATION -->
         <div class="form-group col-7">
-          <label for="location">Location</label>
+          <label for="location">Location*</label>
 
           <input
             class="form-control formVal"
@@ -162,17 +172,6 @@
           class="form-control formVal"
           placeholder="Enter short description"
         ></textarea>
-        <div
-          *ngIf="
-            event.get('short_description').invalid &&
-            event.get('short_description').touched
-          "
-          class="validation"
-        >
-          <small *ngIf="event.get('short_description').errors.required">
-            Field "short description" can’t be empty
-          </small>
-        </div>
       </div>
 
       <!-- FULL DESCRIPTION -->
@@ -184,16 +183,6 @@
           class="form-control formVal"
           placeholder="Enter full description"
         ></textarea>
-        <div
-          *ngIf="
-            event.get('description').invalid && event.get('description').touched
-          "
-          class="validation"
-        >
-          <small *ngIf="event.get('description').errors.required">
-            Field "description" can’t be empty
-          </small>
-        </div>
       </div>
 
       <!-- PICTURE -->

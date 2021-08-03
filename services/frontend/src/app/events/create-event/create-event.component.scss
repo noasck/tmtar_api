@@ -13,10 +13,16 @@
 .form-control-file {
   margin-bottom: 10px;
 }
+
 .picture img {
   height: 200px;
   width: auto;
 }
+
 .buttons {
   justify-content: space-between;
+}
+
+textarea {
+  min-height: 35px;
 }

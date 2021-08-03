@@ -5,12 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { TransferService } from 'src/app/transfer.service';
-import { EventsComponent } from '../events.component';
 import { Event, EventService } from '../events.service';
 import {
   NgxFileDropEntry,
@@ -48,12 +45,16 @@ export class CreateEventComponent implements OnInit {
   ngOnInit(): void {
     //creation form for event
     this.event = new FormGroup({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(200),
+      ]),
       event_type: new FormControl('news', [Validators.required]),
       location: new FormControl([], [Validators.required]),
-      short_description: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      active: new FormControl(true, [Validators.required]),
+      short_description: new FormControl(''),
+      description: new FormControl(''),
+      active: new FormControl(true),
       image_file_name: new FormControl(null),
     });
 

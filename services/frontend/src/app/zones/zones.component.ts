@@ -3,6 +3,7 @@ import { MouseEvent } from '@agm/core';
 import { Zone, ZonesService } from './zones.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location, LocationService } from '../locations/location.service';
+import { FileService } from '../files/file.service';
 
 interface marker {
   latitude: number;
@@ -40,7 +41,8 @@ export class ZonesComponent implements OnInit {
 
   constructor(
     private zoneService: ZonesService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private fileService: FileService
   ) {}
 
   ngOnInit() {
@@ -143,6 +145,10 @@ export class ZonesComponent implements OnInit {
   getZoneLocation(locId) {
     let location = this.allLocations.filter((l) => l.id == locId)[0];
     return location;
+  }
+
+  getFileLink(filename: string) {
+    return this.fileService.getFileByName(filename);
   }
 }
 

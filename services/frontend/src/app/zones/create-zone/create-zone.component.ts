@@ -1,7 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FileSystemDirectoryEntry,
+  FileSystemFileEntry,
+  NgxFileDropEntry,
+} from 'ngx-file-drop';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Zone, ZonesService } from '../zones.service';
 
@@ -19,13 +26,19 @@ export class CreateZoneComponent implements OnInit {
   //search location
   src: string = '';
 
+  picture: FormGroup;
+  url: string;
+  public files: NgxFileDropEntry[] = [];
+
   @Input() fetchedCoordinates: any; // object {lat:  number, lng: number}
   @Output() close = new EventEmitter<void>();
   @Output() create = new EventEmitter<Zone>();
 
   constructor(
     private zoneService: ZonesService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private formBuilder: FormBuilder,
+    private fileService: FileService
   ) {
     this.getLocations();
   }
@@ -53,12 +66,19 @@ export class CreateZoneComponent implements OnInit {
       active: new FormControl(true, [Validators.required]),
       secret: new FormControl(false, [Validators.required]),
       location: new FormControl({}, [Validators.required]),
+      description: new FormControl('', [Validators.maxLength(500)]),
+      preview_image_filename: new FormControl(null),
+      actual_address: new FormControl('', [Validators.required]),
+    });
+
+    this.picture = this.formBuilder.group({
+      avatar: [],
     });
   }
 
   createZone() {
     let z = this.zone.value;
-    let newZone = {
+    let newZone: Zone = {
       title: z.title,
       latitude: z.latitude,
       longitude: z.longitude,
@@ -66,7 +86,13 @@ export class CreateZoneComponent implements OnInit {
       location_id: z.location.id,
       active: z.active,
       secret: z.secret,
+      description: z.description,
+      actual_address: z.actualAddress,
     };
+    if (z.preview_image_filename) {
+      newZone.preview_image_filename = z.preview_image_filename;
+    }
+
     this.zoneService.createZone(newZone).subscribe(
       (res) => {
         this.create.emit(res);
@@ -79,7 +105,7 @@ export class CreateZoneComponent implements OnInit {
     );
 
     this.zone.reset();
-    this.src = ''
+    this.src = '';
   }
 
   getLocations() {
@@ -110,5 +136,48 @@ export class CreateZoneComponent implements OnInit {
 
   displayFn(loc: Location): string {
     return loc && loc.name ? loc.name : '';
+  }
+
+  onFileChange(picture) {
+    if (this.zone.get('preview_image_filename').value) {
+      //if user wants to change picture, but one was picked, delete it from server
+      this.fileService
+        .deleteFile(this.zone.get('preview_image_filename').value)
+        .subscribe(
+          () => {},
+          (error) => {
+            this.errorMessage = error;
+          }
+        );
+    }
+
+    //upload new picture
+    this.picture.get('avatar').setValue(picture);
+    let formData = new FormData();
+    formData.append('file', this.picture.get('avatar').value);
+
+    this.fileService.postFile(formData).subscribe(
+      (res) => {
+        this.zone.get('preview_image_filename').setValue(res.filename);
+        this.url = this.fileService.getFileByName(res.filename);
+      },
+      (error) => {
+        this.errorMessage = error;
+      }
+    );
+  }
+
+  public droppedPicture(files: NgxFileDropEntry[]) {
+    this.files = files;
+    for (const droppedFile of files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          this.onFileChange(file);
+        });
+      } else {
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      }
+    }
   }
 }

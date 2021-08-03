@@ -1,7 +1,19 @@
-.zoneCreate{
-    min-width: 500px;
-    z-index: 10;
+.zoneCreate {
+  min-width: 500px;
+  z-index: 10;
+  overflow: scroll;
+  max-height: 90%;
 }
-.buttons{
-    justify-content: space-between;
+
+.buttons {
+  justify-content: space-between;
+}
+
+textarea {
+  min-height: 35px;
+}
+
+.picture img {
+  height: 150px;
+  width: auto;
 }

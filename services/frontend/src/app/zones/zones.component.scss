@@ -2,11 +2,22 @@
   border-top: 2px solid #0275d8;
   padding-top: 10px;
   position: relative;
-
 }
 
 agm-map {
   height: 600px;
+}
+
+.zoneImg {
+  max-height: 150px;
+  height: 150px;
+  width: auto;
+  float: left;
+  margin: 7px 7px 7px 0;
+}
+.zoneInfo {
+  max-width: 300px;
+  width: 300px;
 }
 
 .creation {

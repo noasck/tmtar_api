@@ -24,9 +24,21 @@
         [markerDraggable]="m.draggable"
         (dragEnd)="markerDragEnd(m, $event)"
       >
-        <!--<agm-info-window>
-          <p>{{m.title}}</p>
-        </agm-info-window>-->
+        <agm-info-window *ngIf="m.description">
+          <h3>{{ m.title }}</h3>
+          <!--<div class="zoneImg" *ngIf="m.preview_image_filename != null">
+            <img src="{{ getFileLink(m.preview_image_filename) }}" alt="??" />
+          </div>-->
+          <p class="zoneInfo">
+            <img
+              class="zoneImg"
+              *ngIf="m.preview_image_filename != null"
+              src="{{ getFileLink(m.preview_image_filename) }}"
+              alt="??"
+            />
+            {{ m.description }}
+          </p>
+        </agm-info-window>
 
         <agm-circle
           [latitude]="m.latitude"

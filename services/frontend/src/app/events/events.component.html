@@ -1,81 +1,136 @@
 <div class="read-events">
-
-    <div class="menu">
-        <div>
-            <button type="button" class="btn btn-primary" routerLink="create/">Create event</button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-            </div>
-            <input [(ngModel)]="searchEvent" type="text" class="form-control search" placeholder="Event title"
-                (input)="searchEventByTitle()">
-        </div>
+  <div class="menu">
+    <div>
+      <button type="button" class="btn btn-primary" routerLink="create/">
+        Create event
+      </button>
     </div>
-
-    <router-outlet></router-outlet>
-
-    <div class="events">
-        <div *ngFor="let event of fetchedEvents" class="event container" [class.disabled]="!event.active">
-            <h2 id="title">{{event.title}}<small id="type">({{event.event_type}})</small></h2>
-            
-            <!-- date and location of event -->
-            <small *ngIf="event.locationName == 'root'" id="date-loc">
-                {{event.update_date | date:'MMM d, y, h:mm a'}} 
-                <i class="fas fa-tree"></i>
-            </small>
-            <small *ngIf="event.parentLocationName == 'root'" id="date-loc">
-                {{event.update_date | date:'MMM d, y, h:mm a'}} {{event.locationName}}
-                (<i class="fas fa-tree"></i>)
-            </small>
-            <small *ngIf="event.locationName != 'root' && event.parentLocationName != 'root'"
-                id="date-loc">{{event.update_date | date:'MMM d, y, h:mm a'}} 
-                {{event.locationName}}({{event.parentLocationName}})</small>
-
-            <!-- event`s short description and image -->
-            <p *ngIf="event.image_file_name" id="short-d">{{event.short_description}}</p>
-            <p *ngIf="!event.image_file_name" id="non-short-d">{{event.short_description}}</p>
-
-            <div class="eventImg" *ngIf="event.image_file_name != null">
-                <img src="{{getFileLink(event.image_file_name)}}" alt="??">
-            </div>
-
-
-            <div class="deleteEvent" (click)="deleteEvent = event">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9534f"
-                    class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
-                </svg>
-            </div>
-            <div class="openEvent">
-                <button [routerLink]="['/events', event.id]" type="button" class="btn btn-primary">Open</button>
-            </div>
-        </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"
+          ><i class="fas fa-search"></i
+        ></span>
+      </div>
+      <input
+        [(ngModel)]="searchEvent"
+        type="text"
+        class="form-control search"
+        placeholder="Event title"
+        (input)="searchEventByTitle()"
+      />
     </div>
+  </div>
 
-    <!--   PAGINATION -->
-    <nav class="pages" *ngIf="!searchEvent && eventCounter>1" aria-label="...">
-        <ul class="pagination pagination-md flex-wrap">
-            <li *ngFor="let p of [].constructor(eventCounter); let i = index" class="page-item">
-                <a class="page-link" (click)="this.getEvents( i+1)">{{i+1}}</a>
-            </li>
-        </ul>
-    </nav>
+  <router-outlet></router-outlet>
 
-    <div class="backdrop" *ngIf="deleteEvent"></div>
+  <div class="events">
+    <div
+      *ngFor="let event of fetchedEvents"
+      class="event container"
+      [class.disabled]="!event.active"
+    >
+      <h2 id="title">
+        {{ event.title }}<small id="type">({{ event.event_type }})</small>
+      </h2>
 
-    <div class="delete" *ngIf="deleteEvent">
-        <p>Are you sure you want to delete event <b>"{{deleteEvent.title}}"</b>?</p>
+      <!-- date and location of event -->
+      <small *ngIf="event.locationName == 'root'" id="date-loc">
+        {{ event.update_date | date: "MMM d, y, h:mm a" }}
+        <i class="fas fa-tree"></i>
+      </small>
 
-        <div class="buttons">
-            <button type="button" class="btn btn-danger" (click)="deleteEventById(deleteEvent.id)">Confirm</button>
-            <button type="button" class="btn btn-success" (click)="deleteEvent = null">Cancel</button>
+      <small *ngIf="event.parentLocationName == 'root'" id="date-loc">
+        {{ event.update_date | date: "MMM d, y, h:mm a" }}
+        {{ event.locationName }} (<i class="fas fa-tree"></i>)
+      </small>
 
-        </div>
+      <small
+        *ngIf="
+          event.locationName != 'root' && event.parentLocationName != 'root'
+        "
+        id="date-loc"
+        >{{ event.update_date | date: "MMM d, y, h:mm a" }}
+        {{ event.locationName }}({{ event.parentLocationName }})</small
+      >
+
+      <!-- event`s short description and image -->
+      <p *ngIf="event.image_file_name" id="short-d">
+        {{ event.short_description }}
+      </p>
+      <p *ngIf="!event.image_file_name" id="non-short-d">
+        {{ event.short_description }}
+      </p>
+
+      <div class="eventImg" *ngIf="event.image_file_name != null">
+        <img src="{{ getFileLink(event.image_file_name) }}" alt="??" />
+      </div>
+
+      <div class="deleteEvent" (click)="deleteEvent = event">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="#d9534f"
+          class="bi bi-x-circle-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+          />
+        </svg>
+      </div>
+      <div class="openEvent">
+        <button
+          [routerLink]="['/events', event.id]"
+          type="button"
+          class="btn btn-primary"
+        >
+          Open
+        </button>
+      </div>
     </div>
+  </div>
 
+  <!--   PAGINATION -->
+  <nav class="pages" *ngIf="!searchEvent && eventCounter > 1" aria-label="...">
+    <ul class="pagination pagination-md flex-wrap">
+      <li
+        *ngFor="let p of [].constructor(eventCounter); let i = index"
+        class="page-item"
+      >
+        <a class="page-link" (click)="this.getEvents(i + 1)">{{ i + 1 }}</a>
+      </li>
+    </ul>
+  </nav>
 
+  <div class="backdrop" *ngIf="deleteEvent"></div>
+
+  <div class="delete" *ngIf="deleteEvent">
+    <p>
+      Are you sure you want to delete event <b>"{{ deleteEvent.title }}"</b>?
+    </p>
+
+    <div class="buttons">
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="deleteEventById(deleteEvent.id)"
+      >
+        Confirm
+      </button>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="deleteEvent = null"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
 </div>
 
-<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

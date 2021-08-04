@@ -5,12 +5,30 @@
     <div class="form-group row">
       <!-- TITLE -->
       <div class="col-8">
-        <label for="title">Title</label>
+        <label for="title">Title*</label>
         <input
           formControlName="title"
           type="text"
           class="form-control formVal"
         />
+
+        <div
+          *ngIf="zone.get('title').invalid && zone.get('title').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="
+              zone.get('title').errors.minlength ||
+              zone.get('title').errors.maxlength
+            "
+          >
+            Length must be between 5 and 200 characters.
+          </small>
+
+          <small *ngIf="zone.get('title').errors.required">
+            Field "title" can’t be empty.
+          </small>
+        </div>
       </div>
       <!-- ACTIVE OR NOT -->
       <div class="col">
@@ -39,7 +57,7 @@
     <!-- COORDINATES -->
     <div class="form-group row">
       <div class="col">
-        <label for="latitude">Latitude</label>
+        <label for="latitude">Latitude*</label>
         <input
           formControlName="latitude"
           type="number"
@@ -49,7 +67,7 @@
       </div>
 
       <div class="col">
-        <label for="longitude">Longitude</label>
+        <label for="longitude">Longitude*</label>
         <input
           formControlName="longitude"
           type="number"
@@ -59,20 +77,36 @@
       </div>
 
       <div class="col">
-        <label for="radius">Radius</label>
+        <label for="radius">Radius*</label>
         <input
           formControlName="radius"
           type="number"
+          min="20"
+          max="2000"
           step="5"
           class="form-control formVal"
         />
+
+        <div
+          *ngIf="zone.get('radius').invalid && zone.get('radius').touched"
+          class="validation">
+          <small
+            *ngIf="
+              zone.get('radius').errors.min || zone.get('radius').errors.max">
+            Zone radius can be only between 20 and 2000 km.
+          </small>
+
+          <small *ngIf="zone.get('radius').errors.required">
+            Field "radius" can’t be empty.
+          </small>
+        </div>
       </div>
     </div>
 
     <!-- LOCATION -->
     <div class="form-group row">
       <div class="col-6">
-        <label for="radius">Location</label>
+        <label for="radius">Location*</label>
         <input
           class="form-control formVal"
           type="text"

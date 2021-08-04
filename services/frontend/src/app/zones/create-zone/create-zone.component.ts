@@ -87,7 +87,7 @@ export class CreateZoneComponent implements OnInit {
       active: z.active,
       secret: z.secret,
       description: z.description,
-      actual_address: z.actualAddress,
+      actual_address: z.actual_address,
     };
     if (z.preview_image_filename) {
       newZone.preview_image_filename = z.preview_image_filename;

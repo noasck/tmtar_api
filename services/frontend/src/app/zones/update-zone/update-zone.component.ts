@@ -1,5 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  FileSystemDirectoryEntry,
+  FileSystemFileEntry,
+  NgxFileDropEntry,
+} from 'ngx-file-drop';
+import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Zone, ZonesService } from '../zones.service';
 
@@ -19,6 +30,10 @@ export class UpdateZoneComponent implements OnInit {
   //search location
   src: string = '';
 
+  picture: FormGroup;
+  url: string;
+  public files: NgxFileDropEntry[] = [];
+
   @Input() fetchedZone: Zone; //zone for update
   @Input() coordinates?: any; // object {lat:  number, lng: number}
   @Output() close = new EventEmitter<void>();
@@ -26,13 +41,18 @@ export class UpdateZoneComponent implements OnInit {
 
   constructor(
     private zoneService: ZonesService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private formBuilder: FormBuilder,
+    private fileService: FileService
   ) {
     this.getLocations();
   }
 
   ngOnInit(): void {
     this.setZoneForm();
+    this.url = this.fetchedZone.preview_image_filename
+      ? this.fileService.getFileByName(this.fetchedZone.preview_image_filename)
+      : '';
   }
 
   setZoneForm() {
@@ -45,15 +65,28 @@ export class UpdateZoneComponent implements OnInit {
         this.coordinates ? this.coordinates.lat : this.fetchedZone.latitude,
         [Validators.required, Validators.pattern(/^\-?\d+((\.|\,)\d+)?$/)]
       ),
-      radius: new FormControl(this.fetchedZone.radius, [Validators.required]),
+      radius: new FormControl(this.fetchedZone.radius, [
+        Validators.required,
+        Validators.min(20),
+        Validators.max(2000),
+      ]),
       title: new FormControl(this.fetchedZone.title, [
         Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(100),
+        Validators.minLength(5),
+        Validators.maxLength(200),
       ]),
-      active: new FormControl(this.fetchedZone.active, [Validators.required]),
-      secret: new FormControl(this.fetchedZone.secret, [Validators.required]),
+      active: new FormControl(this.fetchedZone.active),
+      secret: new FormControl(this.fetchedZone.secret),
       location: new FormControl(this.zoneLocation),
+      description: new FormControl(this.fetchedZone.description, [
+        Validators.maxLength(500),
+      ]),
+      preview_image_filename: new FormControl(null),
+      actual_address: new FormControl(this.fetchedZone.actual_address),
+    });
+
+    this.picture = this.formBuilder.group({
+      avatar: [],
     });
   }
 
@@ -76,7 +109,7 @@ export class UpdateZoneComponent implements OnInit {
           }
         });
 
-        this.setZoneLocation(this.fetchedZone.location_id)
+        this.setZoneLocation(this.fetchedZone.location_id);
       },
       (error) => {
         this.errorMessage = error;
@@ -87,7 +120,7 @@ export class UpdateZoneComponent implements OnInit {
 
   updateZone() {
     let formData = this.zone.value;
-    let update = {
+    let update: Zone = {
       title: formData.title,
       latitude: formData.latitude,
       longitude: formData.longitude,
@@ -97,7 +130,13 @@ export class UpdateZoneComponent implements OnInit {
         : this.fetchedZone.location_id,
       active: formData.active,
       secret: formData.secret,
+      description: formData.description,
+      actual_address: formData.actualAddress,
     };
+
+    if (formData.preview_image_filename) {
+      update.preview_image_filename = formData.preview_image_filename;
+    }
     this.zoneService.updateZone(this.fetchedZone.id, update).subscribe(
       (res) => {
         this.fetchedZone = res;
@@ -109,17 +148,59 @@ export class UpdateZoneComponent implements OnInit {
     );
 
     this.src = '';
-    this.setZoneLocation(this.fetchedZone.location_id)
-
+    this.setZoneLocation(this.fetchedZone.location_id);
   }
 
   displayFn(loc: Location): string {
     return loc && loc.name ? loc.name : '';
   }
 
-  setZoneLocation(id){
+  setZoneLocation(id) {
     this.zoneLocation = this.allLocations.filter(
       (location) => location.id == this.fetchedZone.location_id
     )[0];
+  }
+
+  onFileChange(picture) {
+    if (this.zone.get('preview_image_filename').value) {
+      //if user wants to change picture, but one was picked, delete it from server
+      this.fileService
+        .deleteFile(this.zone.get('preview_image_filename').value)
+        .subscribe(
+          () => {},
+          (error) => {
+            this.errorMessage = error;
+          }
+        );
+    }
+
+    //upload new picture
+    this.picture.get('avatar').setValue(picture);
+    let formData = new FormData();
+    formData.append('file', this.picture.get('avatar').value);
+
+    this.fileService.postFile(formData).subscribe(
+      (res) => {
+        this.zone.get('preview_image_filename').setValue(res.filename);
+        this.url = this.fileService.getFileByName(res.filename);
+      },
+      (error) => {
+        this.errorMessage = error;
+      }
+    );
+  }
+
+  public droppedPicture(files: NgxFileDropEntry[]) {
+    this.files = files;
+    for (const droppedFile of files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          this.onFileChange(file);
+        });
+      } else {
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      }
+    }
   }
 }

@@ -1,7 +1,6 @@
 <div class="backdrop"></div>
 
 <div class="zoneUpdate modalWidow">
-  <p *ngIf="coordinates">COORDINA</p>
   <form [formGroup]="zone" (ngSubmit)="updateZone()">
     <div class="form-group row">
       <!-- TITLE -->
@@ -12,6 +11,24 @@
           type="text"
           class="form-control formVal"
         />
+
+        <div
+          *ngIf="zone.get('title').invalid && zone.get('title').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="
+              zone.get('title').errors.minlength ||
+              zone.get('title').errors.maxlength
+            "
+          >
+            Length must be between 5 and 200 characters.
+          </small>
+
+          <small *ngIf="zone.get('title').errors.required">
+            Field "title" can’t be empty.
+          </small>
+        </div>
       </div>
       <!-- ACTIVE OR NOT -->
       <div class="col">
@@ -67,6 +84,23 @@
           step="0.01"
           class="form-control formVal"
         />
+
+        <div
+          *ngIf="zone.get('radius').invalid && zone.get('radius').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="
+              zone.get('radius').errors.min || zone.get('radius').errors.max
+            "
+          >
+            Zone radius can be only between 20 and 2000 km.
+          </small>
+
+          <small *ngIf="zone.get('radius').errors.required">
+            Field "radius" can’t be empty.
+          </small>
+        </div>
       </div>
     </div>
 
@@ -133,7 +167,7 @@
 
     <!-- ZONE LOCATION -->
     <div class="form-group row" *ngIf="zoneLocation">
-      <div class="col-8">
+      <div class="col-6">
         <label for="radius">Location</label>
 
         <input
@@ -164,6 +198,60 @@
           </mat-option>
         </mat-autocomplete>
       </div>
+
+      <!-- ADDRESS -->
+      <div class="col-6">
+        <label for="address">Actual address</label>
+        <input
+          class="form-control formVal"
+          type="text"
+          formControlName="actual_address"
+        />
+      </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="form-group row">
+      <div class="col">
+        <label for="description">Description</label>
+        <textarea
+          class="form-control formVal"
+          type="text"
+          formControlName="description"
+          placeholder="Enter description"
+        ></textarea>
+
+        <div
+          *ngIf="
+            zone.get('description').invalid && zone.get('description').touched
+          "
+          class="validation"
+        >
+          <small *ngIf="zone.get('description').errors.maxlength">
+            Length must be less than 500 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW PICTURE -->
+    <div class="form-group row">
+      <div class="col form-group picture">
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="droppedPicture($event)"
+        >
+          <ng-template
+            class="words"
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+          >
+            <p (click)="openFileSelector()">change picture(optional)</p>
+          </ng-template>
+        </ngx-file-drop>
+
+        <img *ngIf="url" src="{{ url }}" />
+      </div>
     </div>
 
     <div class="buttons">
@@ -182,4 +270,3 @@
   [error]="errorMessage"
   (close)="errorMessage = ''"
 ></app-errors>
-

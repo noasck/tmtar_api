@@ -89,10 +89,13 @@
 
         <div
           *ngIf="zone.get('radius').invalid && zone.get('radius').touched"
-          class="validation">
+          class="validation"
+        >
           <small
             *ngIf="
-              zone.get('radius').errors.min || zone.get('radius').errors.max">
+              zone.get('radius').errors.min || zone.get('radius').errors.max
+            "
+          >
             Zone radius can be only between 20 and 2000 km.
           </small>
 
@@ -174,7 +177,6 @@
     <div class="form-group row">
       <div class="col form-group picture">
         <ngx-file-drop
-          *ngIf="!url"
           dropZoneLabel="Drop files here"
           (onFileDrop)="droppedPicture($event)"
         >

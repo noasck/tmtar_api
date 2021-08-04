@@ -15,6 +15,9 @@
 -  [x] D — separate development\production auth.
 -  [x] D — fix on delete cascades for all tables
 -  [ ] S — add database **migrations**.
+-  [ ] S — add database switching for production tests.
+-  [ ] S — configure gunicorn start script.
+-  [ ] S — configure logging, node_exporter statistics export.
 -  [ ] M — add production logging [Read more...](https://docs.nginx.com/nginx/admin-guide/monitoring/logging/)
 -  [ ] M — add database backup and cache
 -  [ ] M — add integration tests
@@ -29,6 +32,7 @@
 -  [ ] D — add data volumes protection
 -  [ ] D — add ZoneCenter table
 -  [ ] D — add OpenStreetMap, auto country detect for zones
+-  [ ] D — add Blockchain/FileCoin fork.
 _____________________________________________________
 ## Finish ASAP
 
@@ -51,11 +55,12 @@ _____________________________________________________
 -  [x] service tests
 -  [x] controller
 -  [x] controller tests
+-  [ ] zone /nearby resource
 
 ### File instance:
 -  [ ] controller tests
 
-### Subzone:
+### Objects:
 
 -  [ ] model
 -  [ ] interface
@@ -65,7 +70,7 @@ _____________________________________________________
 -  [ ] service tests
 -  [ ] controller
 -  [ ] controller tests
--  [ ] object relation
--  [ ] object integration tests
+-  [ ] zone relation
+-  [ ] zone integration tests
 
 **Monitoring service** — distinct project on Python. Features: tracking, logs gathering, status\retry tracker, Telegram notifications.

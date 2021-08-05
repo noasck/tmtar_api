@@ -1,12 +1,33 @@
-<div class="read-locations">
-  <app-create-location *ngIf="create" (close)="create = false" [allLocations]="fetchedLocations"></app-create-location>
-  <div class="but">
-    <button type="button" class="btn btn-primary" (click)="create = true"><a>Create</a></button>
-  </div>
+<div class="card shadow mb-4 read-locations">
+  <div class="card-header py-3">
+    <h2 class="m-0 font-weight-bold text-primary float-left">Locations</h2>
 
-  <div class="locView">
-    <app-loc-box [show]="true" [locationRoot]="null" [allLocations]="fetchedLocations"></app-loc-box>
+    <button
+      type="button"
+      class="btn btn-primary float-right"
+      (click)="create = true"
+    >
+      <a>Create</a>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="locView">
+      <app-loc-box
+        [show]="true"
+        [locationRoot]="null"
+        [allLocations]="fetchedLocations"
+      ></app-loc-box>
+    </div>
   </div>
 </div>
 
-<app-errors *ngIf="errorMessage" [error]="errorMessage" (close)="errorMessage = '' "></app-errors>
+<app-create-location
+  *ngIf="create"
+  (close)="create = false"
+  [allLocations]="fetchedLocations"
+></app-create-location>
+<app-errors
+  *ngIf="errorMessage"
+  [error]="errorMessage"
+  (close)="errorMessage = ''"
+></app-errors>

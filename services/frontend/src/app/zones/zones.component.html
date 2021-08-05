@@ -29,7 +29,9 @@
               [markerDraggable]="m.draggable"
               (dragEnd)="markerDragEnd(m, $event)"
             >
-              <agm-info-window *ngIf="m.description || m.preview_image_filename">
+              <agm-info-window
+                *ngIf="m.description || m.preview_image_filename"
+              >
                 <h3>{{ m.title }}</h3>
                 <!--<div class="zoneImg" *ngIf="m.preview_image_filename != null">
           <img src="{{ getFileLink(m.preview_image_filename) }}" alt="??" />

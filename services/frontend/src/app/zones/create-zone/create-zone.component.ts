@@ -6,8 +6,6 @@ import {
   FileSystemFileEntry,
   NgxFileDropEntry,
 } from 'ngx-file-drop';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
 import { Zone, ZonesService } from '../zones.service';
@@ -57,7 +55,11 @@ export class CreateZoneComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^\-?\d+((\.|\,)\d+)?$/),
       ]),
-      radius: new FormControl(null, [Validators.required, Validators.min(20),  Validators.max(2000)]),
+      radius: new FormControl(null, [
+        Validators.required,
+        Validators.min(20),
+        Validators.max(2000),
+      ]),
       title: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -139,17 +141,7 @@ export class CreateZoneComponent implements OnInit {
   }
 
   onFileChange(picture) {
-    if (this.zone.get('preview_image_filename').value) {
-      //if user wants to change picture, but one was picked, delete it from server
-      this.fileService
-        .deleteFile(this.zone.get('preview_image_filename').value)
-        .subscribe(
-          () => {},
-          (error) => {
-            this.errorMessage = error;
-          }
-        );
-    }
+    this.deleteFile();
 
     //upload new picture
     this.picture.get('avatar').setValue(picture);
@@ -178,6 +170,20 @@ export class CreateZoneComponent implements OnInit {
       } else {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
+    }
+  }
+
+  deleteFile() {
+    if (this.zone.get('preview_image_filename').value) {
+      //if user wants to change picture/close form, but one was picked, delete it from server
+      this.fileService
+        .deleteFile(this.zone.get('preview_image_filename').value)
+        .subscribe(
+          () => {},
+          (error) => {
+            this.errorMessage = error;
+          }
+        );
     }
   }
 }

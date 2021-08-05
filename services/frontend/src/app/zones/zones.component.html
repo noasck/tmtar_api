@@ -1,10 +1,17 @@
 <div class="zones">
   <!-- MAP WITH MARKERS -->
   <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h2 class="m-0 font-weight-bold text-primary">Zones</h2>
-    </div>
-    <div class="card-body">
+    <a
+      href="#collapseCardExample"
+      class="d-block card-header py-3"
+      data-toggle="collapse"
+      role="button"
+      aria-expanded="true"
+      aria-controls="collapseCardExample"
+    >
+      <h2 class="m-0 font-weight-bold text-primary">Zones map</h2>
+    </a>
+    <div class="card-body collapse show" id="collapseCardExample">
       <div class="map">
         <agm-map
           [latitude]="latitude"

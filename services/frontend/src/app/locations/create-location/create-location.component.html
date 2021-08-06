@@ -49,6 +49,11 @@
         <small *ngIf="location.get('name').errors.required">
           Field "name" can’t be empty
         </small>
+
+        <small *ngIf="location.get('name').errors.maxlength || location.get('name').errors.minlength">
+          Length must be between 3 and 60 characters.
+        </small>
+
       </div>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="location.invalid">

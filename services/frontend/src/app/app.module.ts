@@ -44,6 +44,8 @@ import { UpdateZoneComponent } from './zones/update-zone/update-zone.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { AutocompletePipe } from './shared/autocomplete.pipe';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,7 @@ import { AutocompletePipe } from './shared/autocomplete.pipe';
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatNativeDateModule,
     TextMaskModule,
     NgxFileDropModule,
     AuthModule.forRoot({
@@ -100,7 +103,8 @@ import { AutocompletePipe } from './shared/autocomplete.pipe';
       libraries: ['places','geometry']
 
     }),
-    AgmJsMarkerClustererModule
+    AgmJsMarkerClustererModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -24,7 +24,11 @@ export class CreateLocationComponent implements OnInit {
   ngOnInit(): void {
     this.location = new FormGroup({
       root: new FormControl([], [Validators.required]),
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(60),
+      ]),
     });
   }
 

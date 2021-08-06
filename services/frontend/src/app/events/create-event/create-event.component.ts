@@ -65,17 +65,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   onFileChange(picture) {
-    if (this.event.get('image_file_name').value) {
-      //if user wants to change picture, but one was picked, delete it from server
-      this.fileService
-        .deleteFile(this.event.get('image_file_name').value)
-        .subscribe(
-          () => {},
-          (error) => {
-            this.errorMessage = error;
-          }
-        );
-    }
+    this.deleteFile();
 
     //upload new picture
     this.picture.get('avatar').setValue(picture);
@@ -104,6 +94,20 @@ export class CreateEventComponent implements OnInit {
       } else {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
+    }
+  }
+
+  deleteFile() {
+    if (this.event.get('image_file_name').value) {
+      //if user wants to change picture, but one was picked, delete it from server
+      this.fileService
+        .deleteFile(this.event.get('image_file_name').value)
+        .subscribe(
+          () => {},
+          (error) => {
+            this.errorMessage = error;
+          }
+        );
     }
   }
 

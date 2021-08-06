@@ -39,12 +39,12 @@ export class EventsComponent implements OnInit {
             this.transferService.setEvents(this.fetchedEvents);
           },
           (error) => {
-            this.fetchedEvents = [];
+            this.errorMessage = error;
           }
         );
       }, 2000);
     } else {
-      this.getEvents(this.page);
+      this.ngOnInit()
     }
   }
 

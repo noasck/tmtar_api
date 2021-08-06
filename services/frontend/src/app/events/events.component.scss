@@ -1,3 +1,102 @@
+.menu {
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+.input-group {
+  max-width: 85%;
+  margin-left: 20px;
+}
+.events {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 30px;
+  justify-content: space-between;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+#title {
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+#date-loc {
+  color: #0275d8;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+.eventImg img {
+  height: 175px;
+  width: auto;
+  max-width: 300px;
+  text-align: center;
+}
+.eventImg {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.openEvent {
+  text-align: right;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+
+.deleteEvent {
+  position: absolute;
+  top: 15px;
+  padding-right: 15px;
+  right: 0;
+  transition: 2.5s;
+}
+
+.deleteEvent svg:hover {
+  transform: scale(1.2);
+}
+
+.delete {
+  max-width: 300px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+router-outlet {
+  z-index: 5;
+}
+
+.pages {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.disabled {
+  opacity: 0.7;
+}
+
+#short-d {
+  height: 100px;
+  overflow: scroll;
+  margin-bottom: 10px;
+  scrollbar-width: none;
+}
+
+
+/*
+OLD CARD 
 .read-events {
   border-top: 2px solid #0275d8;
   padding-top: 10px;
@@ -19,6 +118,18 @@
 }
 ::-webkit-scrollbar {
   display: none;
+}
+#short-d {
+  height: 20%;
+  overflow: scroll;
+  margin-bottom: 5px;
+  scrollbar-width: none;
+}
+#non-short-d {
+  height: 70%;
+  overflow: scroll;
+  margin-bottom: 0;
+  scrollbar-width: none;
 }
 
 .event {
@@ -50,39 +161,30 @@
   scrollbar-width: none;
 }
 
-#short-d {
-  height: 20%;
-  overflow: scroll;
-  margin-bottom: 5px;
-  scrollbar-width: none;
-}
-#non-short-d {
-  height: 70%;
-  overflow: scroll;
-  margin-bottom: 0;
-  scrollbar-width: none;
-}
 .eventImg img {
   height: 175px;
   width: auto;
   max-width: 300px;
-
   text-align: center;
 }
+
 .eventImg {
   text-align: center;
   margin-bottom: 10px;
 }
+
 .openEvent {
   text-align: right;
 }
+
 .deleteEvent {
   position: absolute;
-  top: 20px;
-  padding-right: 20px;
+  top: 15px;
+  padding-right: 15px;
   right: 0;
   transition: 2.5s;
 }
+
 .deleteEvent svg:hover {
   transform: scale(1.2);
 }
@@ -90,6 +192,7 @@
 .delete {
   max-width: 300px;
 }
+
 .buttons {
   display: flex;
   justify-content: space-around;
@@ -114,3 +217,6 @@ input:focus {
 .disabled {
   opacity: 0.7;
 }
+
+
+*/

@@ -152,7 +152,7 @@
       <button type="submit" class="btn btn-primary" [disabled]="event.invalid">
         Create
       </button>
-      <button class="btn btn-primary" [routerLink]="['/events']">Close</button>
+      <button class="btn btn-primary" [routerLink]="['/events']" (click)="deleteFile()">Close</button>
     </div>
   </form>
 </div>

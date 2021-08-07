@@ -3,7 +3,6 @@
   justify-content: flex-start;
 }
 
-
 .input-group {
   max-width: 85%;
   margin-left: 20px;
@@ -12,7 +11,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 30px;
-  justify-content: space-between;
+  justify-items: center;
 }
 ::-webkit-scrollbar {
   display: none;
@@ -94,129 +93,6 @@ input:focus {
   scrollbar-width: none;
 }
 
-
-/*
-OLD CARD 
-.read-events {
-  border-top: 2px solid #0275d8;
-  padding-top: 10px;
-}
-.menu {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 10px;
-}
-.input-group {
-  max-width: 85%;
-  margin-left: 20px;
-}
 .events {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: 30px;
   justify-content: center;
 }
-::-webkit-scrollbar {
-  display: none;
-}
-#short-d {
-  height: 20%;
-  overflow: scroll;
-  margin-bottom: 5px;
-  scrollbar-width: none;
-}
-#non-short-d {
-  height: 70%;
-  overflow: scroll;
-  margin-bottom: 0;
-  scrollbar-width: none;
-}
-
-.event {
-  padding: 20px;
-  border: 3px solid #0275d8;
-  box-shadow: 1px 1px #004079;
-  border-radius: 5px;
-  max-width: 350px;
-  max-height: 400px;
-  min-width: 350px;
-  min-height: 400px;
-  position: relative;
-  margin: 0 auto;
-}
-
-#title {
-  height: 10%;
-  margin-right: 25px;
-  margin-bottom: 0;
-  overflow: scroll;
-  scrollbar-width: none;
-}
-
-#date-loc {
-  color: #0275d8;
-  height: 10%;
-  margin-bottom: 0;
-  overflow: scroll;
-  scrollbar-width: none;
-}
-
-.eventImg img {
-  height: 175px;
-  width: auto;
-  max-width: 300px;
-  text-align: center;
-}
-
-.eventImg {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.openEvent {
-  text-align: right;
-}
-
-.deleteEvent {
-  position: absolute;
-  top: 15px;
-  padding-right: 15px;
-  right: 0;
-  transition: 2.5s;
-}
-
-.deleteEvent svg:hover {
-  transform: scale(1.2);
-}
-
-.delete {
-  max-width: 300px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
-router-outlet {
-  z-index: 5;
-}
-
-.pages {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-}
-
-input:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.disabled {
-  opacity: 0.7;
-}
-
-
-*/

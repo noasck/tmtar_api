@@ -13,7 +13,6 @@ import {
 } from 'ngx-file-drop';
 import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
-import { TransferService } from 'src/app/transfer.service';
 import { Event, EventService } from '../events.service';
 
 @Component({
@@ -43,7 +42,6 @@ export class ReadEventComponent implements OnInit {
     private route: ActivatedRoute,
     private eventService: EventService,
     private fileService: FileService,
-    private transferService: TransferService,
     private locationService: LocationService,
     private formBuilder: FormBuilder
   ) {}
@@ -68,7 +66,6 @@ export class ReadEventComponent implements OnInit {
                 }
               });
               this.setEventLocation(this.fetchedEvent.location_id);
-              this.transferService.setLocations(this.allLocations);
             },
             (error) => {
               this.errorMessage = error;

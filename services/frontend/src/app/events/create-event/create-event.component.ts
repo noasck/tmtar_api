@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { FileService } from 'src/app/files/file.service';
 import { Location, LocationService } from 'src/app/locations/location.service';
-import { TransferService } from 'src/app/transfer.service';
 import { Event, EventService } from '../events.service';
 import {
   NgxFileDropEntry,
@@ -30,10 +29,12 @@ export class CreateEventComponent implements OnInit {
   //search location
   src: string = '';
 
+  @Input() allEvents: Event[];
+  @Output() close = new EventEmitter<void>();
+
   public files: NgxFileDropEntry[] = [];
 
   constructor(
-    private transferService: TransferService,
     private locationService: LocationService,
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -129,7 +130,7 @@ export class CreateEventComponent implements OnInit {
       (res) => {
         let event = res;
         this.eventService.getLocationName(event, event.location_id);
-        this.transferService.fetchedEvents.push(event);
+        this.allEvents.push(res);
       },
       (error) => {
         this.errorMessage = error;
@@ -156,7 +157,6 @@ export class CreateEventComponent implements OnInit {
             this.locationService.getParentName(l);
           }
         });
-        this.transferService.setLocations(this.allLocations);
       },
       (error) => {
         this.errorMessage = error;

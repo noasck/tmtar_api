@@ -14,7 +14,6 @@ import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { CreateLocationComponent } from './locations/create-location/create-location.component';
 import { EventsComponent } from './events/events.component';
 import { ReadEventComponent } from './events/read-event/read-event.component';
-import { CreateEventComponent } from './events/create-event/create-event.component';
 import { ZonesComponent } from './zones/zones.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -53,11 +52,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'events', component: EventsComponent, children: [
-          {
-            path: 'create', component: CreateEventComponent
-          }
-        ]
+        path: 'events', component: EventsComponent
       },
       {
         path: 'events/:id', component: ReadEventComponent

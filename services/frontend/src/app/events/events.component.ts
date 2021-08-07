@@ -1,7 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FileService } from '../files/file.service';
-import { TransferService } from '../transfer.service';
-import { Count, Event, EventService } from './events.service';
+import { Event, EventService } from './events.service';
 
 @Component({
   selector: 'app-events',
@@ -9,6 +8,7 @@ import { Count, Event, EventService } from './events.service';
   styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
+  create: boolean = false
   fetchedEvents: Event[];
   errorMessage: string;
   deleteEvent: Event;
@@ -18,7 +18,6 @@ export class EventsComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private transferService: TransferService,
     private fileService: FileService
   ) {}
 
@@ -36,7 +35,6 @@ export class EventsComponent implements OnInit {
             this.fetchedEvents.map((event) => {
               this.eventService.getLocationName(event, event.location_id);
             });
-            this.transferService.setEvents(this.fetchedEvents);
           },
           (error) => {
             this.errorMessage = error;
@@ -57,7 +55,6 @@ export class EventsComponent implements OnInit {
           this.eventService.getLocationName(event, event.location_id);
         });
         this.fetchedEvents.sort(this.byField('update_date'));
-        this.transferService.setEvents(this.fetchedEvents);
       },
       (error) => {
         this.errorMessage = error;
@@ -83,7 +80,6 @@ export class EventsComponent implements OnInit {
         this.fetchedEvents = this.fetchedEvents.filter(
           (event) => event.id != id
         );
-        this.transferService.setEvents(this.fetchedEvents);
       },
       (error) => {
         this.errorMessage = error;
